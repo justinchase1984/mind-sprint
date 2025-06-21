@@ -1,66 +1,108 @@
+// File: pages/puzzle/[id].tsx
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import Link from 'next/link';
 
+// Phase1: 10 sample puzzles; expand to 20
 const puzzles = [
-  { id:1, question: "Which country hosted the 2020 Summer Olympics?", answer: "japan" },
-  { id:2, question: "Unscramble: BMNAANA", answer: "banana" },
-  { id:3, question: "What is the tallest mountain in the world?", answer: "everest" },
-  { id:4, question: "Who won the FIFA World Cup in 2018?", answer: "france" },
-  { id:5, question: "Which river runs through Paris?", answer: "seine" },
-  { id:6, question: "What year did the Berlin Wall fall?", answer: "1989" },
-  { id:7, question: "Emoji Puzzle: 🦁👑 (Answer is one word)", answer: "kinglion" },
-  { id:8, question: "What is the capital city of Australia?", answer: "canberra" },
-  { id:9, question: "Which movie won Best Picture at the 2020 Oscars?", answer: "parasite" },
-  { id:10, question: "What is 9 x 7?", answer: "63" }
+  { question: 'What comes next in the series: 2, 4, 8, 16, ?', answer: '32' },
+  { question: 'Who won the FIFA World Cup in 2022?', answer: 'argentina' },
+  { question: 'Capital city of Japan?', answer: 'tokyo' },
+  { question: 'Unscramble: TCA', answer: 'cat' },
+  { question: 'Which day comes after Monday?', answer: 'tuesday' },
+  { question: 'What is 5 + 3?', answer: '8' },
+  { question: 'What color is the sky on a clear day?', answer: 'blue' },
+  { question: 'Which animal is known as man’s best friend?', answer: 'dog' },
+  { question: 'How many continents are there on Earth?', answer: '7' },
+  { question: 'Which planet is known as the Red Planet?', answer: 'mars' },
 ];
 
 export default function PuzzlePage() {
   const router = useRouter();
   const { id } = router.query;
-  const index = parseInt(id as string,10) - 1;
+  const index = parseInt(id as string, 10) - 1;
   const puzzle = puzzles[index];
+  const [answer, setAnswer] = useState('');
+
   if (!puzzle) {
-    return <main style={{textAlign:'center',padding:'2rem'}}><h2>🎉 All puzzles done! Come back tomorrow.</h2></main>;
+    return (
+      <>
+        <Head>
+          <title>All puzzles complete | Mind Sprint</title>
+          <meta
+            name="description"
+            content="You’ve finished all puzzles! Come back tomorrow for new challenges."
+          />
+        </Head>
+        <main style={{ textAlign: 'center', padding: '2rem' }}>
+          <h1>🎉 You’ve finished all puzzles!</h1>
+          <Link href="/">
+            <button style={{ marginTop: '20px' }}>Restart</button>
+          </Link>
+        </main>
+      </>
+    );
   }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (answer.trim().toLowerCase() === puzzle.answer.toLowerCase()) {
+      router.push(`/puzzle/${index + 2}`);
+    } else {
+      alert('Try again!');
+      setAnswer('');
+    }
+  };
+
   return (
     <>
       <Head>
-        <title>Puzzle {puzzle.id} | Mind Sprint</title>
+        <title>Puzzle {index + 1} | Mind Sprint</title>
         <meta name="description" content={puzzle.question} />
       </Head>
-      <main style={{textAlign:'center',padding:'2rem'}}>
-        <div id="ad-top">Ad Banner</div>
-        <h2>Puzzle {puzzle.id}</h2>
-        <p>{puzzle.question}</p>
-        <form
-  onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const data = new FormData(form);
-    const ans = (data.get("answer") as string || "").trim().toLowerCase();
-    if (ans === puzzle.answer) {
-      router.push(`/puzzle/${puzzle.id + 1}`);
-    } else {
-      alert("Try again!");
-    }
-  }}
->
-  <input
-    name="answer"
-    required
-    placeholder="Your answer..."
-    style={{ padding: "8px", fontSize: "16px" }}
-  />
-  <button
-    type="submit"
-    style={{ marginLeft: "10px", padding: "8px 16px" }}
-  >
-    Submit
-  </button>
-</form>
+      <main style={{ textAlign: 'center', padding: '2rem' }}>
+        {/* Mid Ad Placeholder */}
+        <div
+          style={{
+            marginBottom: '1rem',
+            height: '90px',
+            background: '#f0f0f0',
+          }}
+        >
+          Ad Banner
+        </div>
 
-        <div id="ad-bottom" style={{marginTop:'1rem'}}>Ad Banner</div>
+        <h2>Puzzle {index + 1}</h2>
+        <p>{puzzle.question}</p>
+        <form onSubmit={handleSubmit}>
+          <input
+            name="answer"
+            value={answer}
+            onChange={(e) => setAnswer(e.target.value)}
+            autoComplete="off"
+            placeholder="Your answer..."
+            style={{ padding: '8px', fontSize: '16px' }}
+            required
+          />
+          <button
+            type="submit"
+            style={{ marginLeft: '10px', padding: '8px 16px' }}
+          >
+            Submit
+          </button>
+        </form>
+
+        {/* Bottom Ad Placeholder */}
+        <div
+          style={{
+            marginTop: '2rem',
+            height: '90px',
+            background: '#f0f0f0',
+          }}
+        >
+          Ad Banner Bottom
+        </div>
       </main>
     </>
   );
