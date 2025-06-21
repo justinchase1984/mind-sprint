@@ -49,15 +49,21 @@ export default function PuzzlePage() {
     );
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (answer.trim().toLowerCase() === puzzle.answer.toLowerCase()) {
-      router.push(`/puzzle/${index + 2}`);
-    } else {
-      alert('Wrong—try again!');
-      setAnswer(''); // clear the input immediately
-    }
-  };
+     const handleSubmit = (e: React.FormEvent) => {
+     e.preventDefault();
+-    if (answer.trim().toLowerCase() === puzzle.answer.toLowerCase()) {
+-      router.push(`/puzzle/${index + 2}`);
+-    } else {
+-      alert('Wrong—try again!');
+-      setAnswer(''); // clear the input immediately
+-    }
++    // Determine if correct (you can store this for scoring later)
++    const isCorrect = answer.trim().toLowerCase() === puzzle.answer.toLowerCase();
++    // TODO: record `isCorrect` in localStorage or your leaderboard logic
++
++    setAnswer('');            // clear input for next puzzle
++    router.push(`/puzzle/${index + 2}`); // always go next
+   };
 
   return (
     <>
