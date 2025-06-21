@@ -33,10 +33,33 @@ export default function PuzzlePage() {
         <div id="ad-top">Ad Banner</div>
         <h2>Puzzle {puzzle.id}</h2>
         <p>{puzzle.question}</p>
-        <form onSubmit={e=>{e.preventDefault();const ans=(e.target.elements.answer.value||"").trim().toLowerCase();if(ans===puzzle.answer){router.push(`/puzzle/${puzzle.id+1}`);}else{alert("Try again!");}}}>
-          <input name="answer" required placeholder="Your answer..." style={{padding:'8px',fontSize:'16px'}}/>
-          <button type="submit" style={{marginLeft:'10px',padding:'8px 16px'}}>Submit</button>
-        </form>
+        <form
+  onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const ans = (data.get("answer") as string || "").trim().toLowerCase();
+    if (ans === puzzle.answer) {
+      router.push(`/puzzle/${puzzle.id + 1}`);
+    } else {
+      alert("Try again!");
+    }
+  }}
+>
+  <input
+    name="answer"
+    required
+    placeholder="Your answer..."
+    style={{ padding: "8px", fontSize: "16px" }}
+  />
+  <button
+    type="submit"
+    style={{ marginLeft: "10px", padding: "8px 16px" }}
+  >
+    Submit
+  </button>
+</form>
+
         <div id="ad-bottom" style={{marginTop:'1rem'}}>Ad Banner</div>
       </main>
     </>
