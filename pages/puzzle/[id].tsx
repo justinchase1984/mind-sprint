@@ -1,7 +1,7 @@
 // File: pages/puzzle/[id].tsx
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import Link from 'next/link';
 
 const puzzles = [
@@ -24,7 +24,7 @@ export default function PuzzlePage() {
   const puzzle = puzzles[index];
   const [answer, setAnswer] = useState('');
 
-  // Reset answer field whenever puzzle index changes
+  // Whenever the puzzle index changes, clear the answer field
   useEffect(() => {
     setAnswer('');
   }, [index]);
@@ -49,21 +49,14 @@ export default function PuzzlePage() {
     );
   }
 
-     const handleSubmit = (e: React.FormEvent) => {
-     e.preventDefault();
--    if (answer.trim().toLowerCase() === puzzle.answer.toLowerCase()) {
--      router.push(`/puzzle/${index + 2}`);
--    } else {
--      alert('Wrong—try again!');
--      setAnswer(''); // clear the input immediately
--    }
-+    // Determine if correct (you can store this for scoring later)
-+    const isCorrect = answer.trim().toLowerCase() === puzzle.answer.toLowerCase();
-+    // TODO: record `isCorrect` in localStorage or your leaderboard logic
-+
-+    setAnswer('');            // clear input for next puzzle
-+    router.push(`/puzzle/${index + 2}`); // always go next
-   };
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const isCorrect = answer.trim().toLowerCase() === puzzle.answer.toLowerCase();
+    // TODO: record `isCorrect` to your scoring logic/localStorage
+
+    // Advance regardless of correctness
+    router.push(`/puzzle/${index + 2}`);
+  };
 
   return (
     <>
@@ -72,7 +65,7 @@ export default function PuzzlePage() {
         <meta name="description" content={puzzle.question} />
       </Head>
       <main style={{ textAlign: 'center', padding: '2rem' }}>
-        {/* Ad placeholder */}
+        {/* Mid Ad Placeholder */}
         <div
           style={{
             marginBottom: '1rem',
