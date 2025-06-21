@@ -1,10 +1,11 @@
 // File: pages/_app.tsx
+import type { AppProps } from 'next/app';
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import '../styles/globals.css';
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [streak, setStreak] = useState(0);
 
