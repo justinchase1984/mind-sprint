@@ -1,10 +1,9 @@
 // File: pages/puzzle/[id].tsx
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-// Phase1: 10 sample puzzles; expand to 20
 const puzzles = [
   { question: 'What comes next in the series: 2, 4, 8, 16, ?', answer: '32' },
   { question: 'Who won the FIFA World Cup in 2022?', answer: 'argentina' },
@@ -24,6 +23,11 @@ export default function PuzzlePage() {
   const index = parseInt(id as string, 10) - 1;
   const puzzle = puzzles[index];
   const [answer, setAnswer] = useState('');
+
+  // Reset answer field whenever puzzle index changes
+  useEffect(() => {
+    setAnswer('');
+  }, [index]);
 
   if (!puzzle) {
     return (
@@ -50,8 +54,8 @@ export default function PuzzlePage() {
     if (answer.trim().toLowerCase() === puzzle.answer.toLowerCase()) {
       router.push(`/puzzle/${index + 2}`);
     } else {
-      alert('Try again!');
-      setAnswer('');
+      alert('Wrong—try again!');
+      setAnswer(''); // clear the input immediately
     }
   };
 
@@ -62,7 +66,7 @@ export default function PuzzlePage() {
         <meta name="description" content={puzzle.question} />
       </Head>
       <main style={{ textAlign: 'center', padding: '2rem' }}>
-        {/* Mid Ad Placeholder */}
+        {/* Ad placeholder */}
         <div
           style={{
             marginBottom: '1rem',
@@ -82,7 +86,7 @@ export default function PuzzlePage() {
             onChange={(e) => setAnswer(e.target.value)}
             autoComplete="off"
             placeholder="Your answer..."
-            style={{ padding: '8px', fontSize: '16px' }}
+            style={{ padding: '8px', fontSize: '16px', width: '200px' }}
             required
           />
           <button
@@ -92,17 +96,6 @@ export default function PuzzlePage() {
             Submit
           </button>
         </form>
-
-        {/* Bottom Ad Placeholder */}
-        <div
-          style={{
-            marginTop: '2rem',
-            height: '90px',
-            background: '#f0f0f0',
-          }}
-        >
-          Ad Banner Bottom
-        </div>
       </main>
     </>
   );
