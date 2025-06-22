@@ -1,22 +1,36 @@
 /* styles/globals.css */
+
+/* reset and fill the viewport */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 .quiz-page {
   display: grid;
+  width: 100%;                   /* span full width */
+  min-height: 100vh;             /* at least full height */
   grid-template-areas:
     "header  header  header"
     "adL     main    adR"
     "footer  footer  footer";
-  grid-template-columns: 150px minmax(300px,600px) 150px;
+  grid-template-columns: 150px minmax(300px,1fr) 150px;
   grid-template-rows: auto 1fr auto;
   gap: 1rem;
-  min-height: 100vh;
 }
+
+/* named grid areas */
 .header { grid-area: header; }
 .adL    { grid-area: adL;    }
-.main   { 
-  grid-area: main; 
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
+.main   {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 .adR    { grid-area: adR;    }
 .footer { grid-area: footer; }
