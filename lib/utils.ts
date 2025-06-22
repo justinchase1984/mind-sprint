@@ -29,7 +29,7 @@ export function getDailyPuzzles(): Puzzle[] {
   const weekday = new Date().getDay()       // 0=Sun…6=Sat
   const idx     = (weekday + 6) % 7         // shift Mon→0…Sun→6
   const pool    = themes[idx]
-  // shuffle if more than 10, then take 10
+  // shuffle if more than 10, then slice
   return pool.length > 10
     ? pool.sort(() => Math.random() - 0.5).slice(0, 10)
     : pool
