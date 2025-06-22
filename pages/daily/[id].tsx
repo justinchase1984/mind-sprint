@@ -1,4 +1,5 @@
 // pages/daily/[id].tsx
+import type { Puzzle } from '../../lib/puzzles'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { FormEvent, useState, useEffect } from 'react'
