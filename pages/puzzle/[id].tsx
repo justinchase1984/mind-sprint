@@ -1,7 +1,7 @@
-// pages/puzzle/[id].tsx
+// File: pages/puzzle/[id].tsx
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { FormEvent, useState } from 'react'
+import { FormEvent, useState, useEffect } from 'react'
 import Link from 'next/link'
 import type { Puzzle } from '../../lib/puzzles'
 import { getStreaks, saveStreaks } from '../../lib/streak'
@@ -12,14 +12,20 @@ export default function PuzzlePage() {
   const puzzles = getDailyPuzzles()
   const idNum   = parseInt((router.query.id as string) || '1', 10)
   const puzzle  = puzzles[idNum - 1]
+
+  // <-- Local state for the current answer
   const [answer, setAnswer] = useState('')
 
+  // <-- Clear the answer input whenever the puzzle number changes
+  useEffect(() => {
+    setAnswer('')
+  }, [idNum])
+
+  // If no puzzle (past #10), show “done”
   if (!puzzle) {
     return (
       <>
-        <Head>
-          <title>All done! | Mind Sprint</title>
-        </Head>
+        <Head><title>All done! | Mind Sprint</title></Head>
         <main style={{ textAlign: 'center', padding: '2rem' }}>
           <h1>🎉 You’ve completed today’s challenge!</h1>
           <Link href="/"><button>Back Home</button></Link>
@@ -28,9 +34,11 @@ export default function PuzzlePage() {
     )
   }
 
+  // Submission handler
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    const isCorrect = answer.trim().toLowerCase() === puzzle.answer.toLowerCase()
+    const isCorrect =
+      answer.trim().toLowerCase() === puzzle.answer.toLowerCase()
     let { current, max } = getStreaks()
     isCorrect ? current++ : (current = 0)
     if (current > max) max = current
