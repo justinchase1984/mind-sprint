@@ -1,20 +1,19 @@
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useState, useEffect, FormEvent } from 'react';
-import Link from 'next/link';
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { FormEvent, useState, useEffect } from 'react'
+import Link from 'next/link'
+import { getStreaks, saveStreaks } from '../../lib/streak'
 
-import { getStreaks, saveStreaks } from '../../lib/streak';
-
-interface Puzzle { question: string; answer: string; }
-const puzzles: Puzzle[] = [ /* your 20 questions here */ ];
+interface Puzzle { question: string; answer: string }
+const puzzles: Puzzle[] = [ /* your 20 questions as before */ ]
 
 export default function PuzzlePage() {
-  const router = useRouter();
-  const idNum = parseInt(router.query.id as string, 10);
-  const puzzle = puzzles[idNum - 1] || null;
-  const [answer, setAnswer] = useState('');
+  const router = useRouter()
+  const idNum = parseInt(router.query.id as string, 10)
+  const puzzle = puzzles[idNum - 1]
+  const [answer, setAnswer] = useState('')
 
-  useEffect(() => setAnswer(''), [idNum]);
+  useEffect(() => setAnswer(''), [idNum])
 
   if (!puzzle) {
     return (
@@ -22,26 +21,26 @@ export default function PuzzlePage() {
         <div className="header"></div>
         <div className="adL"></div>
         <div className="main">
-          <Head><title>Done | Mind Sprint</title></Head>
-          <h1>🎉 All puzzles complete!</h1>
+          <Head><title>All Done | Mind Sprint</title></Head>
+          <h1>🎉 You’ve finished all puzzles!</h1>
           <Link href="/results"><button>See Results</button></Link>
         </div>
         <div className="adR"></div>
         <div className="footer"></div>
       </div>
-    );
+    )
   }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const isCorrect = answer.trim().toLowerCase() === puzzle.answer.toLowerCase();
-    let { current, max } = getStreaks();
-    if (isCorrect) current += 1;
-    else current = 0;
-    if (current > max) max = current;
-    saveStreaks(current, max);
-    router.push(`/puzzle/${idNum + 1}`);
-  };
+    e.preventDefault()
+    const isCorrect = answer.trim().toLowerCase() === puzzle.answer.toLowerCase()
+    let { current, max } = getStreaks()
+    if (isCorrect) current += 1
+    else current = 0
+    if (current > max) max = current
+    saveStreaks(current, max)
+    router.push(`/puzzle/${idNum + 1}`)
+  }
 
   return (
     <div className="quiz-page">
@@ -73,5 +72,5 @@ export default function PuzzlePage() {
         Ad Banner Bottom
       </div>
     </div>
-  );
+  )
 }
