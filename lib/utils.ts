@@ -1,38 +1,7 @@
 // lib/utils.ts
-import { fullPool, Puzzle } from './puzzles';
 
-// Fisher–Yates shuffle
-export function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
-// Quick-play: random N puzzles per session
-export function getSessionPuzzles(count = 10): Puzzle[] {
-  const key = 'sessionPuzzles';
-  const stored = sessionStorage.getItem(key);
-  if (stored) return JSON.parse(stored);
-  const selected = shuffle(fullPool).slice(0, count);
-  sessionStorage.setItem(key, JSON.stringify(selected));
-  return selected;
-}
-
-// Daily-challenge: same N puzzles for everyone today
-export function getDailyPuzzles(count = 10): Puzzle[] {
-  const today = new Date().toISOString().slice(0, 10); // “2025-06-22”
-  const seed = today
-    .split('')
-    .reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 0);
-  const start = seed % (fullPool.length - count);
-  return fullPool.slice(start, start + count);
-}
-// lib/utils.ts (at the bottom)
-
-import {
+import { 
+  Puzzle,
   triviaPool,
   scramblePool,
   logicPool,
@@ -42,7 +11,42 @@ import {
   mixPool,
 } from './puzzles'
 
-const themes = [
+// 1) Combine all theme pools into one full pool for Quick Play
+const fullPool: Puzzle[] = [
+  ...triviaPool,
+  ...scramblePool,
+  ...logicPool,
+  ...rebusPool,
+  ...memoryPool,
+  ...crosswordPool,
+  ...mixPool,
+]
+
+// 2) Fisher–Yates shuffle helper
+export function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
+
+// 3) Quick Play: pick or retrieve 10 random puzzles for this browser session
+export function getSessionPuzzles(count = 10): Puzzle[] {
+  const key = 'sessionPuzzles'
+  const stored = sessionStorage.getItem(key)
+  if (stored) {
+    try { return JSON.parse(stored) as Puzzle[] }
+    catch { /* if parse fails, fall through */ }
+  }
+  const selected = shuffle(fullPool).slice(0, count)
+  sessionStorage.setItem(key, JSON.stringify(selected))
+  return selected
+}
+
+// 4) Daily Challenge: pick 10 puzzles from today's theme pool
+const themes: Puzzle[][] = [
   triviaPool,
   scramblePool,
   logicPool,
@@ -52,15 +56,10 @@ const themes = [
   mixPool,
 ]
 
-/**
- * Returns 10 puzzles for “Daily Challenge” based on the current weekday.
- */
 export function getDailyPuzzles(): Puzzle[] {
-  const weekday = new Date().getDay()          // 0 = Sunday, 1 = Monday, … 6 = Saturday
-  // Shift so Monday → index 0, … Sunday → index 6
-  const idx = (weekday + 6) % 7
-  const pool = themes[idx]
-  // If pool is larger than 10, shuffle and take first 10
+  const weekday = new Date().getDay()        // 0=Sun,1=Mon…6=Sat
+  const idx     = (weekday + 6) % 7          // shift Mon→0 … Sun→6
+  const pool    = themes[idx]
   return pool.length > 10
     ? shuffle(pool).slice(0, 10)
     : pool
