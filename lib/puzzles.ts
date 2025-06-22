@@ -68,9 +68,14 @@ export const scramblePool: Puzzle[] = [
     options: ['carol', 'coral', 'local', 'orcal'],
   },
   {
-    question: 'Unscramble: NOITCARF',
-    answer: 'fraction',
-    options: ['traction', 'fraction', 'friction', 'fiction'],
+    question: 'Unscramble: RLPAETUOT',
+    answer: 'populate',
+    options: ['protect', 'portable', 'populate', 'permeant'],
+  },
+  {
+    question: 'Unscramble: NREPOCHE',
+    answer: 'perchance',
+    options: ['reophone', 'chopper', 'perchance', 'phone rec'],
   },
   {
     question: 'Unscramble: GEOGRAHY',
@@ -98,11 +103,6 @@ export const scramblePool: Puzzle[] = [
     options: ['mouth', 'month', 'thoman', 'tomahn'],
   },
   {
-    question: 'Unscramble: OLCETYAP',
-    answer: 'apoclety',
-    options: ['apoclety', 'octalype', 'pleatocy', 'acceptly'],
-  },
-  {
     question: 'Unscramble: PSLOGIHC',
     answer: 'logistics',
     options: ['logistics', 'psychlog', 'gossipch', 'schlopts'],
@@ -127,9 +127,9 @@ export const logicPool: Puzzle[] = [
     options: ['24', '30', '32', '40'],
   },
   {
-    question: 'Odd one out: red, blue, green, hot?',
-    answer: 'hot',
-    options: ['red', 'blue', 'green', 'hot'],
+    question: 'Odd one out: Mercury, Venus, Mars, Jupiter?',
+    answer: 'jupiter',
+    options: ['venus', 'mars', 'mercury', 'jupiter'],
   },
   {
     question:
@@ -246,9 +246,9 @@ export const memoryPool: Puzzle[] = [
     options: ['7', '2', '4', '6'],
   },
   {
-    question: 'Letters: A–B–C–D–E. What’s 1st?',
-    answer: 'A',
-    options: ['A', 'B', 'C', 'D'],
+    question: 'Which letter completes the pattern? D, G, J, M, ?',
+    answer: 'p',
+    options: ['p', 'k', 'q', 'r'],
   },
   {
     question: 'Shapes: circle–square–triangle–hexagon. What’s 3rd?',
@@ -280,14 +280,14 @@ export const memoryPool: Puzzle[] = [
 // Day-6: Crossword Mini (5 clues)
 export const crosswordPool: Puzzle[] = [
   {
-    question: '1 Across: Opposite of up (4 letters)',
-    answer: 'down',
-    options: ['down', 'up', 'left', 'right'],
+    question: '1 Across: Not horizontal (4 letters)',
+    answer: 'vert',
+    options: ['flat', 'level', 'orthogonal', 'vert'],
   },
   {
     question: '2 Down: Not old (3 letters)',
     answer: 'new',
-    options: ['old', 'new', 'old?', 'won'],
+    options: ['old', 'new', 'won', 'nil'],
   },
   {
     question: '3 Across: Not in (3 letters)',
@@ -300,7 +300,7 @@ export const crosswordPool: Puzzle[] = [
     options: ['bed', 'den', 'cot', 'mat'],
   },
   {
-    question: '5 Across: Negative sign (1 letter)',
+    question: '5 Across: Negative sign (1 character)',
     answer: '-',
     options: ['-', '+', '*', '/'],
   },
