@@ -13,7 +13,10 @@ export default function Home() {
         />
       </Head>
 
-      <div className="header" style={{ background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}>
+      <div
+        className="header"
+        style={{ background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}
+      >
         Ad Banner Top
       </div>
       <div className="adL" style={{ background: '#eee' }}>Ad Left</div>
@@ -29,7 +32,10 @@ export default function Home() {
       </div>
 
       <div className="adR" style={{ background: '#eee' }}>Ad Right</div>
-      <div className="footer" style={{ background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}>
+      <div
+        className="footer"
+        style={{ background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}
+      >
         Ad Banner Bottom
       </div>
     </div>
