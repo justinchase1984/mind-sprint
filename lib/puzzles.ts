@@ -1,48 +1,44 @@
 // lib/puzzles.ts
 export interface Puzzle { question: string; answer: string }
 
-// Day-1 Trivia
+// Day-1 Trivia (fill in 10 good ones)
 export const triviaPool: Puzzle[] = [
   { question: 'Which year did the Berlin Wall fall?', answer: '1989' },
-  { question: 'Which country has won the most FIFA World Cups?', answer: 'brazil' },
-  { question: 'What is the capital of Australia?', answer: 'canberra' },
-  // …add 7 more Trivia puzzles here…
+  { question: 'Who has the most Grand Slam tennis titles (men)?', answer: 'rafael nadal' },
+  /* …8 more medium–hard trivia… */
 ]
 
 // Day-2 Word Scramble
 export const scramblePool: Puzzle[] = [
-  { question: 'Unscramble: TCA', answer: 'cat' },
-  { question: 'Unscramble: LOPUEX', answer: 'explore' },   // corrected answer
-  // …add 8 more scrambles here…
+  { question: 'Unscramble: LRCOANMI', answer: 'clarimon' /* example */ },
+  /* …9 more… */
 ]
 
 // Day-3 Logic
 export const logicPool: Puzzle[] = [
-  { question: 'Which one doesn’t belong: apple, banana, carrot, grape?', answer: 'carrot' },
-  // …add 9 more logic puzzles…
+  { question: 'Which doesn’t belong: circle, square, cube, triangle?', answer: 'cube' },
+  /* …9 more… */
 ]
 
-// Day-4 Picture Rebus
+// Day-4 Rebus
 export const rebusPool: Puzzle[] = [
-  { question: '🐝 + 🔑 = ?', answer: 'be key' },
-  // …add 9 more rebus puzzles…
+  { question: '🐝 + 👢 = ?', answer: 'beetle' },
+  /* …9 more… */
 ]
 
-// Day-5 Memory Test
+// Day-5 Memory
 export const memoryPool: Puzzle[] = [
-  { question: 'Remember this: 2,7,4,9. What is the next number?', answer: '2' },
-  // …add 9 more memory tests…
+  { question: 'Memorize: 5-3-9-1-7. What is the 3rd number?', answer: '9' },
+  /* …9 more… */
 ]
 
-// Day-6 Crossword Mini
+// Day-6 Crossword
 export const crosswordPool: Puzzle[] = [
-  { question: '1 across: Not heavy (4 letters)', answer: 'light' },
-  // …add 4 more crossword clues…
+  { question: '1 Across: Opposite of up (4 letters)', answer: 'down' },
+  /* …4 more… */
 ]
 
-// Day-7 Mixed “Brain Gym”
+// Day-7 Mix
 export const mixPool: Puzzle[] = [
-  // Pick any 10 puzzles from above pools or create new ones
-  { question: 'What is 2 + 2?', answer: '4' },
-  // …add 9 more mix puzzles…
+  /* 10 puzzles drawn from above or new ones */
 ]
