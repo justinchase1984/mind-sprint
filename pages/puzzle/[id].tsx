@@ -1,7 +1,7 @@
 // pages/puzzle/[id].tsx
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { FormEvent, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import type { Puzzle } from '../../lib/puzzles'
 import { getStreaks, saveStreaks } from '../../lib/streak'
@@ -13,14 +13,11 @@ export default function PuzzlePage() {
   const idNum   = parseInt((router.query.id as string) || '1', 10)
   const puzzle  = puzzles[idNum - 1]
 
-  // track selected option
+  // track and clear selection on change
   const [selected, setSelected] = useState<string>('')
+  useEffect(() => setSelected(''), [idNum])
 
-  // clear on puzzle change
-  useEffect(() => {
-    setSelected('')
-  }, [idNum])
-
+  // all done?
   if (!puzzle) {
     return (
       <>
