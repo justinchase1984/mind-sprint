@@ -1,6 +1,6 @@
 // lib/utils.ts
 
-import { 
+import {
   Puzzle,
   triviaPool,
   scramblePool,
@@ -11,7 +11,7 @@ import {
   mixPool,
 } from './puzzles'
 
-// 1) Combine all theme pools into one full pool for Quick Play
+// Combine all pools into one big pool for Quick Play
 const fullPool: Puzzle[] = [
   ...triviaPool,
   ...scramblePool,
@@ -22,7 +22,7 @@ const fullPool: Puzzle[] = [
   ...mixPool,
 ]
 
-// 2) Fisher–Yates shuffle helper
+// Fisher–Yates shuffle (generic)
 export function shuffle<T>(arr: T[]): T[] {
   const a = [...arr]
   for (let i = a.length - 1; i > 0; i--) {
@@ -32,20 +32,20 @@ export function shuffle<T>(arr: T[]): T[] {
   return a
 }
 
-// 3) Quick Play: pick or retrieve 10 random puzzles for this browser session
+// Quick Play: 10 random puzzles per browser session
 export function getSessionPuzzles(count = 10): Puzzle[] {
   const key = 'sessionPuzzles'
   const stored = sessionStorage.getItem(key)
   if (stored) {
     try { return JSON.parse(stored) as Puzzle[] }
-    catch { /* if parse fails, fall through */ }
+    catch { /* ignore parse errors */ }
   }
   const selected = shuffle(fullPool).slice(0, count)
   sessionStorage.setItem(key, JSON.stringify(selected))
   return selected
 }
 
-// 4) Daily Challenge: pick 10 puzzles from today's theme pool
+// Daily Challenge: pick 10 puzzles from today's theme
 const themes: Puzzle[][] = [
   triviaPool,
   scramblePool,
