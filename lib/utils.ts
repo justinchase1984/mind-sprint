@@ -30,3 +30,38 @@ export function getDailyPuzzles(count = 10): Puzzle[] {
   const start = seed % (fullPool.length - count);
   return fullPool.slice(start, start + count);
 }
+// lib/utils.ts (at the bottom)
+
+import {
+  triviaPool,
+  scramblePool,
+  logicPool,
+  rebusPool,
+  memoryPool,
+  crosswordPool,
+  mixPool,
+} from './puzzles'
+
+const themes = [
+  triviaPool,
+  scramblePool,
+  logicPool,
+  rebusPool,
+  memoryPool,
+  crosswordPool,
+  mixPool,
+]
+
+/**
+ * Returns 10 puzzles for “Daily Challenge” based on the current weekday.
+ */
+export function getDailyPuzzles(): Puzzle[] {
+  const weekday = new Date().getDay()          // 0 = Sunday, 1 = Monday, … 6 = Saturday
+  // Shift so Monday → index 0, … Sunday → index 6
+  const idx = (weekday + 6) % 7
+  const pool = themes[idx]
+  // If pool is larger than 10, shuffle and take first 10
+  return pool.length > 10
+    ? shuffle(pool).slice(0, 10)
+    : pool
+}
