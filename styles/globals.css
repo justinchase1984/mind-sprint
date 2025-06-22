@@ -1,20 +1,17 @@
 /* styles/globals.css */
-
-/* Reset some defaults */
-html, body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background: #fafafa;
-  color: #333;
+.quiz-page {
+  display: grid;
+  grid-template-areas:
+    "header  header   header"
+    "ad-left main     ad-right"
+    "footer  footer   footer";
+  grid-template-columns: 150px 1fr 150px;
+  grid-template-rows: auto 1fr auto;
+  gap: 1rem;
+  min-height: 100vh;
 }
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
+.header   { grid-area: header; }
+.ad-left  { grid-area: ad-left; }
+.main     { grid-area: main; display: flex; flex-direction: column; align-items: center; }
+.ad-right { grid-area: ad-right; }
+.footer   { grid-area: footer; }
