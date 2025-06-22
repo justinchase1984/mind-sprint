@@ -30,3 +30,11 @@ export default function Home() {
     </div>
   )
 }
+  <div style={{ marginTop: '10px' }}>
+    <Link href="/daily/1">
+      <button style={{ padding: '8px 16px', fontSize: '16px' }}>
+        Daily Challenge
+      </button>
+    </Link>
+  </div>
+
