@@ -1,13 +1,11 @@
 // File: pages/puzzle/[id].tsx
-import type { Puzzle } from '../../lib/puzzles'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { FormEvent, useState, useEffect } from 'react'
 import Link from 'next/link'
+import type { Puzzle } from '../../lib/puzzles'         // import the shared type
 import { getStreaks, saveStreaks } from '../../lib/streak'
 import { getSessionPuzzles } from '../../lib/utils'
-
-interface Puzzle { question: string; answer: string }
 
 export default function PuzzlePage() {
   const router = useRouter()
@@ -16,17 +14,16 @@ export default function PuzzlePage() {
   const [puzzles, setPuzzles] = useState<Puzzle[]>([])
   const [answer, setAnswer] = useState('')
 
-  // Load 10 random puzzles once the router is ready
+  // Load session puzzles only after Next.js hydration
   useEffect(() => {
     if (!isReady) return
     setPuzzles(getSessionPuzzles(10))
   }, [isReady])
 
-  // Parse the puzzle number from URL
   const idNum = isReady ? parseInt(query.id as string, 10) : NaN
   const puzzle = puzzles[idNum - 1]
 
-  // Clear the answer box whenever we move to a new puzzle
+  // Clear the answer field whenever we move to a new puzzle
   useEffect(() => {
     setAnswer('')
   }, [idNum])
@@ -34,7 +31,7 @@ export default function PuzzlePage() {
   // While loading, render nothing
   if (!isReady || puzzles.length === 0) return null
 
-  // If no more puzzles, show “finished” screen
+  // If we’re past the last puzzle, show the “finished” screen
   if (!puzzle) {
     return (
       <>
@@ -57,8 +54,8 @@ export default function PuzzlePage() {
     )
   }
 
-  // Handle each submit: track streak and always advance
-  const handleSubmit = (e: FormEvent) => {
+  // Submission handler: record streak, always advance
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const isCorrect =
       answer.trim().toLowerCase() === puzzle.answer.toLowerCase()
@@ -72,18 +69,13 @@ export default function PuzzlePage() {
 
   return (
     <div className="quiz-page">
-      {/* Top ad */}
       <div
         className="header"
         style={{ background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}
       >
         Ad Banner Top
       </div>
-
-      {/* Left ad */}
       <div className="adL" style={{ background: '#eee' }}>Ad Left</div>
-
-      {/* Main puzzle content */}
       <div className="main">
         <Head>
           <title>Puzzle {idNum} | Mind Sprint</title>
@@ -101,19 +93,12 @@ export default function PuzzlePage() {
             required
             style={{ padding: '8px', fontSize: '16px', width: '200px' }}
           />
-          <button
-            type="submit"
-            style={{ marginLeft: '10px', padding: '8px 16px' }}
-          >
+          <button type="submit" style={{ marginLeft: '10px', padding: '8px 16px' }}>
             Submit
           </button>
         </form>
       </div>
-
-      {/* Right ad */}
       <div className="adR" style={{ background: '#eee' }}>Ad Right</div>
-
-      {/* Bottom ad */}
       <div
         className="footer"
         style={{ background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}
