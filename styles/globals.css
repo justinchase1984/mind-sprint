@@ -2,16 +2,21 @@
 .quiz-page {
   display: grid;
   grid-template-areas:
-    "header  header   header"
-    "ad-left main     ad-right"
-    "footer  footer   footer";
-  grid-template-columns: 150px 1fr 150px;
+    "header  header  header"
+    "adL     main    adR"
+    "footer  footer  footer";
+  grid-template-columns: 150px minmax(300px,600px) 150px;
   grid-template-rows: auto 1fr auto;
   gap: 1rem;
   min-height: 100vh;
 }
-.header   { grid-area: header; }
-.ad-left  { grid-area: ad-left; }
-.main     { grid-area: main; display: flex; flex-direction: column; align-items: center; }
-.ad-right { grid-area: ad-right; }
-.footer   { grid-area: footer; }
+.header { grid-area: header; }
+.adL    { grid-area: adL;    }
+.main   { 
+  grid-area: main; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+}
+.adR    { grid-area: adR;    }
+.footer { grid-area: footer; }
