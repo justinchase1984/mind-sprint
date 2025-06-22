@@ -6,20 +6,30 @@ import Link from 'next/link'
 import { getStreaks, saveStreaks } from '../../lib/streak'
 import { getSessionPuzzles } from '../../lib/utils'
 
-const puzzles = getSessionPuzzles(10)
+interface Puzzle { question: string; answer: string }
 
 export default function PuzzlePage() {
   const router = useRouter()
   const idNum = parseInt(router.query.id as string, 10)
-  const puzzle = puzzles[idNum - 1]    // will be undefined only if idNum > puzzles.length
+
+  // 1) Hold the puzzles in state, start empty
+  const [puzzles, setPuzzles] = useState<Puzzle[] | null>(null)
   const [answer, setAnswer] = useState('')
 
-  // clear input when moving to a new puzzle
+  // 2) On client only, populate puzzles from sessionStorage
   useEffect(() => {
-    setAnswer('')
-  }, [idNum])
+    // this code runs only in the browser
+    const sessionList = getSessionPuzzles(10)
+    setPuzzles(sessionList)
+  }, [])
 
-  // if past the last puzzle, show the “finished” UI
+  // 3) If puzzles aren’t loaded yet, render nothing (or a loader)
+  if (puzzles === null) {
+    return null
+  }
+
+  const puzzle = puzzles[idNum - 1]
+  // If user is past the last puzzle
   if (!puzzle) {
     return (
       <>
@@ -42,27 +52,20 @@ export default function PuzzlePage() {
     )
   }
 
-  // handle form submission: always advance, track streaks
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const isCorrect =
       answer.trim().toLowerCase() === puzzle.answer.toLowerCase()
     let { current, max } = getStreaks()
-    if (isCorrect) {
-      current += 1
-    } else {
-      current = 0
-    }
-    if (current > max) {
-      max = current
-    }
+    if (isCorrect) current += 1
+    else current = 0
+    if (current > max) max = current
     saveStreaks(current, max)
     router.push(`/puzzle/${idNum + 1}`)
   }
 
   return (
     <div className="quiz-page">
-      {/* Top ad banner */}
       <div
         className="header"
         style={{
@@ -74,9 +77,7 @@ export default function PuzzlePage() {
       >
         Ad Banner Top
       </div>
-      {/* Left ad */}
       <div className="adL" style={{ background: '#eee' }}>Ad Left</div>
-      {/* Main puzzle content */}
       <div className="main">
         <Head>
           <title>Puzzle {idNum} | Mind Sprint</title>
@@ -102,9 +103,7 @@ export default function PuzzlePage() {
           </button>
         </form>
       </div>
-      {/* Right ad */}
       <div className="adR" style={{ background: '#eee' }}>Ad Right</div>
-      {/* Bottom ad banner */}
       <div
         className="footer"
         style={{
