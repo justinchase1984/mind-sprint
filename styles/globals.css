@@ -1,6 +1,5 @@
 /* styles/globals.css */
 
-/* reset and fill the viewport */
 html, body {
   margin: 0;
   padding: 0;
@@ -11,8 +10,8 @@ html, body {
 
 .quiz-page {
   display: grid;
-  width: 100%;                   /* span full width */
-  min-height: 100vh;             /* at least full height */
+  width: 100%;
+  min-height: 100vh;
   grid-template-areas:
     "header  header  header"
     "adL     main    adR"
@@ -22,7 +21,6 @@ html, body {
   gap: 1rem;
 }
 
-/* named grid areas */
 .header { grid-area: header; }
 .adL    { grid-area: adL;    }
 .main   {
