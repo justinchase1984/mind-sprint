@@ -1,6 +1,5 @@
-// File: pages/index.tsx
-import Head from 'next/head';
-import Link from 'next/link';
+import Head from 'next/head'
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -14,15 +13,12 @@ export default function Home() {
       <div className="main">
         <Head>
           <title>Mind Sprint | Daily Brain Teasers</title>
-          <meta
-            name="description"
-            content="Quick puzzles in sports, pop culture, history & more."
-          />
+          <meta name="description" content="Quick puzzles in sports, pop culture & more." />
         </Head>
         <h1>🧠 Mind Sprint</h1>
         <p>One puzzle per page. Rack up your streak. Come back daily!</p>
         <Link href="/puzzle/1">
-          <button style={{padding:'10px 20px',fontSize:16}}>Start Puzzle</button>
+          <button style={{ padding:'10px 20px', fontSize:16 }}>Start Puzzle</button>
         </Link>
       </div>
       <div className="adR" style={{ background:'#eee' }}>
@@ -32,5 +28,5 @@ export default function Home() {
         Ad Banner Bottom
       </div>
     </div>
-  );
+  )
 }
