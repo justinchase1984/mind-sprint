@@ -1,60 +1,30 @@
-// File: pages/index.tsx
 import Head from 'next/head'
 import Link from 'next/link'
 
 export default function Home() {
   return (
     <div className="quiz-page">
-      {/* Top banner */}
-      <div
-        className="header"
-        style={{ background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}
-      >
-        Ad Banner Top
+      <Head>
+        <title>Mind Sprint | Today’s Brain Challenge</title>
+        <meta 
+          name="description" 
+          content="Daily puzzles in trivia, logic, memory, and more—new theme each day!" 
+        />
+      </Head>
+
+      <div className="header" style={{background:'#ddd', height:90, lineHeight:'90px', textAlign:'center'}}>Ad Top</div>
+      <div className="adL" style={{background:'#eee'}}>Ad Left</div>
+
+      <div className="main" style={{textAlign:'center', padding:'2rem'}}>
+        <h1>🧠 Mind Sprint – Daily Challenge</h1>
+        <p>New theme every day: trivia, word scrambles, logic puzzles, and more.</p>
+        <Link href="/puzzle/1">
+          <button style={{padding:'10px 20px', fontSize:16}}>Start Today’s Challenge</button>
+        </Link>
       </div>
 
-      {/* Left ad */}
-      <div className="adL" style={{ background: '#eee' }}>
-        Ad Left
-      </div>
-
-      {/* Main content */}
-      <div className="main">
-        <Head>
-          <title>Mind Sprint | Daily Brain Teasers</title>
-          <meta
-            name="description"
-            content="Quick puzzles in sports, pop culture, history & more. Choose Quick Play or Daily Challenge!"
-          />
-        </Head>
-        <h1>🧠 Mind Sprint</h1>
-        <p>One puzzle per page. Rack up your streak. Come back daily!</p>
-        <div style={{ marginTop: '1rem' }}>
-          <Link href="/puzzle/1">
-            <button style={{ padding: '10px 20px', fontSize: 16 }}>
-              Quick Play
-            </button>
-          </Link>
-          <Link href="/daily/1" style={{ marginLeft: '1rem' }}>
-            <button style={{ padding: '10px 20px', fontSize: 16 }}>
-              Daily Challenge
-            </button>
-          </Link>
-        </div>
-      </div>
-
-      {/* Right ad */}
-      <div className="adR" style={{ background: '#eee' }}>
-        Ad Right
-      </div>
-
-      {/* Bottom banner */}
-      <div
-        className="footer"
-        style={{ background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}
-      >
-        Ad Banner Bottom
-      </div>
+      <div className="adR" style={{background:'#eee'}}>Ad Right</div>
+      <div className="footer" style={{background:'#ddd', height:90, lineHeight:'90px', textAlign:'center'}}>Ad Bottom</div>
     </div>
   )
 }
