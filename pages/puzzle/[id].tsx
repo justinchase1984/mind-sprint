@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState, useEffect, FormEvent } from 'react';
 import Link from 'next/link';
-import '../styles/globals.css';
+import '../../styles/globals.css';
 import { getStreaks, saveStreaks } from '../../lib/streak';
 
 interface Puzzle { question: string; answer: string; }
