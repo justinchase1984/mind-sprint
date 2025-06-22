@@ -68,17 +68,17 @@ export const scramblePool: Puzzle[] = [
     options: ['carol', 'coral', 'local', 'orcal'],
   },
   {
-    question: 'Unscramble: RLPAETUOT',
+    question: 'Unscramble: PUATLPEO',
     answer: 'populate',
     options: ['protect', 'portable', 'populate', 'permeant'],
   },
   {
-    question: 'Unscramble: NREPOCHE',
+    question: 'Unscramble: NREPOCHACE',
     answer: 'perchance',
     options: ['reophone', 'chopper', 'perchance', 'phone rec'],
   },
   {
-    question: 'Unscramble: GEOGRAHY',
+    question: 'Unscramble: HGORYPEAG',
     answer: 'geography',
     options: ['geography', 'hygraego', 'agency', 'orography'],
   },
@@ -88,7 +88,7 @@ export const scramblePool: Puzzle[] = [
     options: ['psychis', 'physics', 'hisscyp', 'shipcys'],
   },
   {
-    question: 'Unscramble: ELIHGRYAP',
+    question: 'Unscramble: HEIRGLYPHO',
     answer: 'hieroglyph',
     options: ['hieroglyph', 'galleryph', 'hyperlight', 'philhgren'],
   },
@@ -103,7 +103,7 @@ export const scramblePool: Puzzle[] = [
     options: ['mouth', 'month', 'thoman', 'tomahn'],
   },
   {
-    question: 'Unscramble: PSLOGIHC',
+    question: 'Unscramble: GICSLOTIS',
     answer: 'logistics',
     options: ['logistics', 'psychlog', 'gossipch', 'schlopts'],
   },
@@ -219,7 +219,7 @@ export const rebusPool: Puzzle[] = [
   {
     question: '☕ + 🍰 = ?',
     answer: 'coffee cake',
-    options: ['coffee cake','cupcake','cheesecake','donut'],
+    options: ['coffee cake', 'cupcake', 'cheesecake', 'donut'],
   },
 ]
 
