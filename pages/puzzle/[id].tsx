@@ -10,26 +10,30 @@ interface Puzzle { question: string; answer: string }
 
 export default function PuzzlePage() {
   const router = useRouter()
-  const idNum = parseInt(router.query.id as string, 10)
+  const { isReady, query } = router
 
-  // 1) Hold the puzzles in state, start empty
-  const [puzzles, setPuzzles] = useState<Puzzle[] | null>(null)
+  const [puzzles, setPuzzles] = useState<Puzzle[]>([])
   const [answer, setAnswer] = useState('')
 
-  // 2) On client only, populate puzzles from sessionStorage
+  // Load 10 random puzzles once the router is ready
   useEffect(() => {
-    // this code runs only in the browser
-    const sessionList = getSessionPuzzles(10)
-    setPuzzles(sessionList)
-  }, [])
+    if (!isReady) return
+    setPuzzles(getSessionPuzzles(10))
+  }, [isReady])
 
-  // 3) If puzzles aren’t loaded yet, render nothing (or a loader)
-  if (puzzles === null) {
-    return null
-  }
-
+  // Parse the puzzle number from URL
+  const idNum = isReady ? parseInt(query.id as string, 10) : NaN
   const puzzle = puzzles[idNum - 1]
-  // If user is past the last puzzle
+
+  // Clear the answer box whenever we move to a new puzzle
+  useEffect(() => {
+    setAnswer('')
+  }, [idNum])
+
+  // While loading, render nothing
+  if (!isReady || puzzles.length === 0) return null
+
+  // If no more puzzles, show “finished” screen
   if (!puzzle) {
     return (
       <>
@@ -52,7 +56,8 @@ export default function PuzzlePage() {
     )
   }
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  // Handle each submit: track streak and always advance
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     const isCorrect =
       answer.trim().toLowerCase() === puzzle.answer.toLowerCase()
@@ -66,18 +71,18 @@ export default function PuzzlePage() {
 
   return (
     <div className="quiz-page">
+      {/* Top ad */}
       <div
         className="header"
-        style={{
-          background: '#ddd',
-          height: 90,
-          textAlign: 'center',
-          lineHeight: '90px',
-        }}
+        style={{ background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}
       >
         Ad Banner Top
       </div>
+
+      {/* Left ad */}
       <div className="adL" style={{ background: '#eee' }}>Ad Left</div>
+
+      {/* Main puzzle content */}
       <div className="main">
         <Head>
           <title>Puzzle {idNum} | Mind Sprint</title>
@@ -103,15 +108,14 @@ export default function PuzzlePage() {
           </button>
         </form>
       </div>
+
+      {/* Right ad */}
       <div className="adR" style={{ background: '#eee' }}>Ad Right</div>
+
+      {/* Bottom ad */}
       <div
         className="footer"
-        style={{
-          background: '#ddd',
-          height: 90,
-          textAlign: 'center',
-          lineHeight: '90px',
-        }}
+        style={{ background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}
       >
         Ad Banner Bottom
       </div>
