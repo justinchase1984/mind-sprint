@@ -22,14 +22,14 @@ const themes: Puzzle[][] = [
 ]
 
 /**
- * Returns today’s 10 puzzles based on weekday:
- * Monday→Day1, … Sunday→Day7
+ * Returns 10 puzzles for the given date,
+ * or today if no date passed in.
  */
-export function getDailyPuzzles(): Puzzle[] {
-  const weekday = new Date().getDay()       // 0=Sun…6=Sat
-  const idx     = (weekday + 6) % 7         // shift Mon→0…Sun→6
+export function getDailyPuzzles(forDate?: Date): Puzzle[] {
+  const d = forDate ?? new Date()
+  const weekday = d.getDay()           // 0=Sun…6=Sat
+  const idx     = (weekday + 6) % 7     // Mon→0…Sun→6
   const pool    = themes[idx]
-  // shuffle if more than 10, then slice
   return pool.length > 10
     ? pool.sort(() => Math.random() - 0.5).slice(0, 10)
     : pool
