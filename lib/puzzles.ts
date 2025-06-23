@@ -15,33 +15,33 @@ export const triviaPool: Puzzle[] = [
   },
   {
     question: 'Who has won the most men’s Grand Slam tennis titles?',
-    answer: 'rafael nadal',
-    options: ['roger federer', 'novak djokovic', 'rafael nadal', 'andy murray'],
+    answer: 'Rafael Nadal',
+    options: ['Roger Federer', 'Novak Djokovic', 'Rafael Nadal', 'Andy Murray'],
   },
   {
     question: 'Which country hosted the 2016 Summer Olympics?',
-    answer: 'brazil',
-    options: ['china', 'russia', 'brazil', 'uk'],
+    answer: 'Brazil',
+    options: ['China', 'Russia', 'Brazil', 'United Kingdom'],
   },
   {
     question: 'What is the capital of Canada?',
-    answer: 'ottawa',
-    options: ['toronto', 'vancouver', 'ottawa', 'montreal'],
+    answer: 'Ottawa',
+    options: ['Toronto', 'Vancouver', 'Ottawa', 'Montreal'],
   },
   {
     question: 'Who painted the Mona Lisa?',
-    answer: 'leonardo da vinci',
-    options: ['michelangelo', 'raphael', 'leonardo da vinci', 'donatello'],
+    answer: 'Leonardo da Vinci',
+    options: ['Michelangelo', 'Raphael', 'Leonardo da Vinci', 'Donatello'],
   },
   {
     question: 'Which planet is known as the Red Planet?',
-    answer: 'mars',
-    options: ['venus', 'jupiter', 'mars', 'saturn'],
+    answer: 'Mars',
+    options: ['Venus', 'Jupiter', 'Mars', 'Saturn'],
   },
   {
     question: 'Who wrote “1984” and “Animal Farm”?',
-    answer: 'george orwell',
-    options: ['aldous huxley', 'ray bradbury', 'george orwell', 'jrr tolkien'],
+    answer: 'George Orwell',
+    options: ['Aldous Huxley', 'Ray Bradbury', 'George Orwell', 'J.R.R. Tolkien'],
   },
   {
     question: 'In which year did the Titanic sink?',
@@ -50,13 +50,13 @@ export const triviaPool: Puzzle[] = [
   },
   {
     question: 'What is the largest ocean on Earth?',
-    answer: 'pacific',
-    options: ['atlantic', 'indian', 'pacific', 'arctic'],
+    answer: 'Pacific',
+    options: ['Atlantic', 'Indian', 'Pacific', 'Arctic'],
   },
   {
     question: 'Who discovered penicillin?',
-    answer: 'alexander fleming',
-    options: ['louis pasteur', 'alexander fleming', 'marie curie', 'robert koch'],
+    answer: 'Alexander Fleming',
+    options: ['Louis Pasteur', 'Alexander Fleming', 'Marie Curie', 'Robert Koch'],
   },
 ]
 
@@ -64,53 +64,53 @@ export const triviaPool: Puzzle[] = [
 export const scramblePool: Puzzle[] = [
   {
     question: 'Unscramble: LRCAO',
-    answer: 'coral',
-    options: ['carol', 'coral', 'local', 'orcal'],
+    answer: 'Coral',
+    options: ['Carol', 'Coral', 'Local', 'Orcal'],
   },
   {
     question: 'Unscramble: PUATLPEO',
-    answer: 'populate',
-    options: ['protect', 'portable', 'populate', 'permeant'],
+    answer: 'Populate',
+    options: ['Protect', 'Portable', 'Populate', 'Permeant'],
   },
   {
     question: 'Unscramble: NREPOCHACE',
-    answer: 'perchance',
-    options: ['reophone', 'chopper', 'perchance', 'phone rec'],
+    answer: 'Perchance',
+    options: ['Reophone', 'Chopper', 'Perchance', 'Phone Rec'],
   },
   {
     question: 'Unscramble: HGORYPEAG',
-    answer: 'geography',
-    options: ['geography', 'hygraego', 'agency', 'orography'],
+    answer: 'Geography',
+    options: ['Geography', 'Hygraego', 'Agency', 'Orography'],
   },
   {
     question: 'Unscramble: YHSCISI',
-    answer: 'physics',
-    options: ['psychis', 'physics', 'hisscyp', 'shipcys'],
+    answer: 'Physics',
+    options: ['Psychis', 'Physics', 'Hisscyp', 'Shipcys'],
   },
   {
     question: 'Unscramble: HEIRGLYPHO',
-    answer: 'hieroglyph',
-    options: ['hieroglyph', 'galleryph', 'hyperlight', 'philhgren'],
+    answer: 'Hieroglyph',
+    options: ['Hieroglyph', 'Galleryph', 'Hyperlight', 'Philhgren'],
   },
   {
     question: 'Unscramble: AERHT',
-    answer: 'earth',
-    options: ['heart', 'earth', 'rathe', 'hater'],
+    answer: 'Earth',
+    options: ['Heart', 'Earth', 'Rathe', 'Hater'],
   },
   {
     question: 'Unscramble: TAHONM',
-    answer: 'month',
-    options: ['mouth', 'month', 'thoman', 'tomahn'],
+    answer: 'Month',
+    options: ['Mouth', 'Month', 'Thoman', 'Tomahn'],
   },
   {
     question: 'Unscramble: GICSLOTIS',
-    answer: 'logistics',
-    options: ['logistics', 'psychlog', 'gossipch', 'schlopts'],
+    answer: 'Logistics',
+    options: ['Logistics', 'Psychlog', 'Gossipch', 'Schlopts'],
   },
   {
     question: 'Unscramble: NISOEP',
-    answer: 'poison',
-    options: ['poison', 'pinose', 'sopine', 'pension'],
+    answer: 'Poison',
+    options: ['Poison', 'Pinose', 'Sopine', 'Pension'],
   },
 ]
 
@@ -118,8 +118,8 @@ export const scramblePool: Puzzle[] = [
 export const logicPool: Puzzle[] = [
   {
     question: 'Which doesn’t belong: circle, square, cube, triangle?',
-    answer: 'cube',
-    options: ['circle', 'square', 'cube', 'triangle'],
+    answer: 'Cube',
+    options: ['Circle', 'Square', 'Cube', 'Triangle'],
   },
   {
     question: 'Next in series: 2, 4, 8, 16, ?',
@@ -128,14 +128,14 @@ export const logicPool: Puzzle[] = [
   },
   {
     question: 'Odd one out: Mercury, Venus, Mars, Jupiter?',
-    answer: 'jupiter',
-    options: ['venus', 'mars', 'mercury', 'jupiter'],
+    answer: 'Jupiter',
+    options: ['Venus', 'Mars', 'Mercury', 'Jupiter'],
   },
   {
     question:
       'If all Blooks are Bloops, and some Bloops are Blimps, are all Blooks Blimps?',
-    answer: 'no',
-    options: ['yes', 'no', 'only some', 'cannot tell'],
+    answer: 'No',
+    options: ['Yes', 'No', 'Only Some', 'Cannot Tell'],
   },
   {
     question: 'Which fits: 13579 → ?, 2468 → 10?',
@@ -144,13 +144,13 @@ export const logicPool: Puzzle[] = [
   },
   {
     question: 'A is older than B; B is older than C. Who’s youngest?',
-    answer: 'c',
-    options: ['a', 'b', 'c', 'cannot tell'],
+    answer: 'C',
+    options: ['A', 'B', 'C', 'Cannot Tell'],
   },
   {
     question: 'If today is Monday, what day is 100 days later?',
-    answer: 'thursday',
-    options: ['wednesday', 'thursday', 'friday', 'tuesday'],
+    answer: 'Thursday',
+    options: ['Wednesday', 'Thursday', 'Friday', 'Tuesday'],
   },
   {
     question: 'Which completes the pattern: ▲ ■ ▲ ■ ?',
@@ -158,14 +158,14 @@ export const logicPool: Puzzle[] = [
     options: ['■', '▲', '◯', '◆'],
   },
   {
-    question: 'Choose the correct maze exit (path B).',
-    answer: 'path b',
-    options: ['path a', 'path b', 'path c', 'path d'],
+    question: 'Choose the correct maze exit (Path B).',
+    answer: 'Path B',
+    options: ['Path A', 'Path B', 'Path C', 'Path D'],
   },
   {
     question: 'Which doesn’t belong: cat, dog, bird, fish, car?',
-    answer: 'car',
-    options: ['cat', 'dog', 'bird', 'car'],
+    answer: 'Car',
+    options: ['Cat', 'Dog', 'Bird', 'Car'],
   },
 ]
 
@@ -173,53 +173,53 @@ export const logicPool: Puzzle[] = [
 export const rebusPool: Puzzle[] = [
   {
     question: '🐝 + 👢 = ?',
-    answer: 'beetle',
-    options: ['beetle', 'beagle', 'buckle', 'beadle'],
+    answer: 'Beetle',
+    options: ['Beetle', 'Beagle', 'Buckle', 'Beadle'],
   },
   {
     question: '🌞 + 🌧️ + ⛄ = ?',
-    answer: 'weather',
-    options: ['whether', 'weather', 'weaver', 'wither'],
+    answer: 'Weather',
+    options: ['Whether', 'Weather', 'Weaver', 'Wither'],
   },
   {
     question: '✈️ + 🚀 = ?',
-    answer: 'air rocket',
-    options: ['air rocket', 'rocket air', 'starship', 'airplane'],
+    answer: 'Air Rocket',
+    options: ['Air Rocket', 'Rocket Air', 'Starship', 'Airplane'],
   },
   {
     question: '🍎 + 📱 = ?',
-    answer: 'apple',
-    options: ['pear', 'apple', 'pineapple', 'snapple'],
+    answer: 'Apple',
+    options: ['Pear', 'Apple', 'Pineapple', 'Snapple'],
   },
   {
     question: '💡 + 🔌 = ?',
-    answer: 'lightbulb',
-    options: ['lightbulb', 'lamp', 'bulb', 'socket'],
+    answer: 'Lightbulb',
+    options: ['Lightbulb', 'Lamp', 'Bulb', 'Socket'],
   },
   {
     question: '👁️ + ❤️ + 🍕 = ?',
-    answer: 'i love pizza',
-    options: ['i love pizza', 'eye heart pie', 'i heart pizza', 'i like pie'],
+    answer: 'I Love Pizza',
+    options: ['I Love Pizza', 'Eye Heart Pie', 'I Heart Pizza', 'I Like Pie'],
   },
   {
     question: '🔒 + 🔑 = ?',
-    answer: 'lock and key',
-    options: ['lock and key', 'key lock', 'unlock', 'padlock'],
+    answer: 'Lock And Key',
+    options: ['Lock And Key', 'Key Lock', 'Unlock', 'Padlock'],
   },
   {
     question: '🐠 + 🍟 = ?',
-    answer: 'fish and chips',
-    options: ['fish and chips', 'chips and fish', 'fish fries', 'seafood'],
+    answer: 'Fish And Chips',
+    options: ['Fish And Chips', 'Chips And Fish', 'Fish Fries', 'Seafood'],
   },
   {
     question: '🏋️ + 🏃 = ?',
-    answer: 'workout',
-    options: ['work out', 'workout', 'gym run', 'sports'],
+    answer: 'Workout',
+    options: ['Work Out', 'Workout', 'Gym Run', 'Sports'],
   },
   {
     question: '☕ + 🍰 = ?',
-    answer: 'coffee cake',
-    options: ['coffee cake', 'cupcake', 'cheesecake', 'donut'],
+    answer: 'Coffee Cake',
+    options: ['Coffee Cake','Cupcake','Cheesecake','Donut'],
   },
 ]
 
@@ -232,13 +232,13 @@ export const memoryPool: Puzzle[] = [
   },
   {
     question: 'Colors: red–blue–green–yellow. What’s 2nd?',
-    answer: 'blue',
-    options: ['red', 'blue', 'green', 'yellow'],
+    answer: 'Blue',
+    options: ['Red', 'Blue', 'Green', 'Yellow'],
   },
   {
     question: 'Animals: cat–dog–bird–fish. What’s 4th?',
-    answer: 'fish',
-    options: ['cat', 'dog', 'bird', 'fish'],
+    answer: 'Fish',
+    options: ['Cat', 'Dog', 'Bird', 'Fish'],
   },
   {
     question: 'Sequence: 7-2-4-6. What’s last?',
@@ -247,18 +247,18 @@ export const memoryPool: Puzzle[] = [
   },
   {
     question: 'Which letter completes the pattern? D, G, J, M, ?',
-    answer: 'p',
-    options: ['p', 'k', 'q', 'r'],
+    answer: 'P',
+    options: ['P', 'K', 'Q', 'R'],
   },
   {
     question: 'Shapes: circle–square–triangle–hexagon. What’s 3rd?',
-    answer: 'triangle',
-    options: ['circle', 'square', 'triangle', 'hexagon'],
+    answer: 'Triangle',
+    options: ['Circle', 'Square', 'Triangle', 'Hexagon'],
   },
   {
     question: 'Celestial: sun–moon–star–cloud. What’s 4th?',
-    answer: 'cloud',
-    options: ['sun', 'moon', 'star', 'cloud'],
+    answer: 'Cloud',
+    options: ['Sun', 'Moon', 'Star', 'Cloud'],
   },
   {
     question: 'Odds: 1-3-5-7-9. What’s 5th?',
@@ -267,13 +267,13 @@ export const memoryPool: Puzzle[] = [
   },
   {
     question: 'Fruits: apple–banana–orange–grape. What’s 2nd?',
-    answer: 'banana',
-    options: ['apple', 'banana', 'orange', 'grape'],
+    answer: 'Banana',
+    options: ['Apple', 'Banana', 'Orange', 'Grape'],
   },
   {
     question: 'Transport: car–bus–train–plane. What’s 3rd?',
-    answer: 'train',
-    options: ['car', 'bus', 'train', 'plane'],
+    answer: 'Train',
+    options: ['Car', 'Bus', 'Train', 'Plane'],
   },
 ]
 
@@ -281,23 +281,23 @@ export const memoryPool: Puzzle[] = [
 export const crosswordPool: Puzzle[] = [
   {
     question: '1 Across: Not horizontal (4 letters)',
-    answer: 'vert',
-    options: ['flat', 'level', 'orthogonal', 'vert'],
+    answer: 'Vert',
+    options: ['Flat', 'Level', 'Orthogonal', 'Vert'],
   },
   {
     question: '2 Down: Not old (3 letters)',
-    answer: 'new',
-    options: ['old', 'new', 'won', 'nil'],
+    answer: 'New',
+    options: ['Old', 'New', 'Won', 'Nil'],
   },
   {
     question: '3 Across: Not in (3 letters)',
-    answer: 'out',
-    options: ['out', 'in', 'off', 'on'],
+    answer: 'Out',
+    options: ['Out', 'In', 'Off', 'On'],
   },
   {
     question: '4 Down: Sleep place (3 letters)',
-    answer: 'bed',
-    options: ['bed', 'den', 'cot', 'mat'],
+    answer: 'Bed',
+    options: ['Bed', 'Den', 'Cot', 'Mat'],
   },
   {
     question: '5 Across: Negative sign (1 character)',
