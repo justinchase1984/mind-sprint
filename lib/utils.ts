@@ -34,3 +34,14 @@ export function getDailyPuzzles(forDate?: Date): Puzzle[] {
     ? pool.sort(() => Math.random() - 0.5).slice(0, 10)
     : pool
 }
+/**
+ * Returns Day-N puzzles (1=Trivia, 2=Scramble, … 7=Mixed).
+ */
+export function getPuzzlesByDayIndex(dayIndex: number): Puzzle[] {
+  // clamp to 1–7
+  const idx = ((dayIndex - 1) % themes.length + themes.length) % themes.length
+  const pool = themes[idx]
+  return pool.length > 10
+    ? pool.sort(() => Math.random() - 0.5).slice(0, 10)
+    : pool
+}
