@@ -76,18 +76,56 @@ export const scramblePool: Puzzle[] = [
 
 // Day-3: Logic Puzzles (10)
 export const logicPool: Puzzle[] = [
-  { question: 'Which doesn’t belong: circle, square, cube, triangle?', answer: 'Cube',    options: ['Circle','Square','Cube','Triangle'] },
-  { question: 'Next in series: 2, 4, 8, 16, ?',                    answer: '32',      options: ['24','30','32','40'] },
-  { question: 'Odd one out: Mercury, Venus, Mars, Jupiter?',      answer: 'Jupiter', options: ['Venus','Mars','Mercury','Jupiter'] },
-  { question: 'If all Blooks are Bloops, and some Bloops are Blimps, are all Blooks Blimps?', 
-                                                                    answer: 'No',      options: ['Yes','No','Only Some','Cannot Tell'] },
-  { question: 'Which fits: 13579 → ?, 2468 → 10?',                answer: '11',      options: ['9','10','11','12'] },
-  { question: 'A is older than B; B is older than C. Who’s youngest?', answer: 'C',   options: ['A','B','C','Cannot Tell'] },
-  { question: 'If today is Monday, what day is 100 days later?',   answer: 'Thursday',options: ['Wednesday','Thursday','Friday','Tuesday'] },
-  { question: 'Which completes the pattern: ▲ ■ ▲ ■ ?',           answer: '▲',       options: ['■','▲','◯','◆'] },
-  // <<< REPLACED: no more “maze” question >>>
-  { question: 'Which number comes next: 5, 11, 17, 23, ?',         answer: '29',      options: ['25','27','29','31'] },
-  { question: 'Which doesn’t belong: cat, dog, bird, fish, car?', answer: 'Car',     options: ['Cat','Dog','Bird','Car'] },
+  {
+    question: 'What global sporting event is held every four years and features thousands of athletes?',
+    answer: 'Olympics',
+    options: ['World Cup', 'Olympics', 'Tour de France', 'Super Bowl'],
+  },
+  {
+    question: 'Which country’s flag is a red circle on a white background?',
+    answer: 'Japan',
+    options: ['Japan', 'Bangladesh', 'Switzerland', 'Monaco'],
+  },
+  {
+    question: 'Who sang the hit song “Rolling in the Deep”?',
+    answer: 'Adele',
+    options: ['Beyoncé', 'Adele', 'Rihanna', 'Taylor Swift'],
+  },
+  {
+    question: 'Which planet has the most moons?',
+    answer: 'Jupiter',
+    options: ['Mars', 'Saturn', 'Jupiter', 'Uranus'],
+  },
+  {
+    question: 'What is the largest country by land area?',
+    answer: 'Russia',
+    options: ['Canada', 'China', 'United States', 'Russia'],
+  },
+  {
+    question: 'Which film won Best Picture at the 2020 Oscars?',
+    answer: 'Parasite',
+    options: ['1917', 'Parasite', 'Joker', 'Once Upon a Time…in Hollywood'],
+  },
+  {
+    question: 'Who is known as the “King of Pop”?',
+    answer: 'Michael Jackson',
+    options: ['Elvis Presley', 'Prince', 'Michael Jackson', 'Freddie Mercury'],
+  },
+  {
+    question: 'Which artist’s 2017 global smash was “Shape of You”?',
+    answer: 'Ed Sheeran',
+    options: ['Justin Bieber', 'Ed Sheeran', 'Bruno Mars', 'Shawn Mendes'],
+  },
+  {
+    question: 'Which nation lifted the 2018 FIFA World Cup trophy?',
+    answer: 'France',
+    options: ['Croatia', 'Brazil', 'France', 'Germany'],
+  },
+  {
+    question: 'Who directed Christopher Nolan’s film “Inception”?',
+    answer: 'Christopher Nolan',
+    options: ['Steven Spielberg', 'Christopher Nolan', 'James Cameron', 'Ridley Scott'],
+  },
 ]
 
 // Day-4: Picture Rebus (10)
