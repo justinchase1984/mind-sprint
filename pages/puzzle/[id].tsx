@@ -11,64 +11,60 @@ export default function PuzzlePage() {
   const router = useRouter()
   const { query } = router
 
-  // 1) If ?previewDay=N is present, load that Day N
+  // 1) If ?previewDay=N, load Day N directly
   const previewDay = query.previewDay
     ? parseInt(query.previewDay as string, 10)
     : NaN
 
-  // 2) Else if ?tomorrow=1, preview tomorrow
+  // 2) Else if ?tomorrow=1 (and no previewDay), preview tomorrow
   const tomorrowMode = isNaN(previewDay) && query.tomorrow === '1'
 
-  // Select puzzle set
+  // Pick the right puzzle set
   let puzzles: Puzzle[]
   if (!isNaN(previewDay)) {
     puzzles = getPuzzlesByDayIndex(previewDay)
   } else {
-    const pickDate = tomorrowMode
+    const dateToUse = tomorrowMode
       ? new Date(Date.now() + 24 * 60 * 60 * 1000)
       : undefined
-    puzzles = getDailyPuzzles(pickDate)
+    puzzles = getDailyPuzzles(dateToUse)
   }
 
   const idNum  = parseInt((query.id as string) || '1', 10)
   const puzzle = puzzles[idNum - 1]
 
-  // Compute which “Day” to display
+  // Figure out which “Day” number we’re on
   const displayDay = !isNaN(previewDay)
     ? previewDay
     : ((new Date().getDay() + 6) % 7) + (tomorrowMode ? 2 : 1)
 
-  // Reset daily score at puzzle #1
+  // Reset the daily score at the start
   useEffect(() => {
     if (idNum === 1) sessionStorage.setItem('dailyCorrect', '0')
   }, [idNum])
 
-  // Clear selection (not used but resets state)
+  // Clear any leftover selection
   const [, setSel] = useState('')
   useEffect(() => setSel(''), [idNum])
 
-  // If no puzzle found → show results
+  // If we've run out of puzzles, show the results screen
   if (!puzzle) {
     const score = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
     const passed = score >= 8
 
     return (
       <>
-        <Head>
-          <title>Your Results | Mind Sprint</title>
-        </Head>
+        <Head><title>Your Results | Mind Sprint</title></Head>
         <main style={{ textAlign: 'center', padding: '2rem' }}>
           <h1>🎉 You’ve completed Day {displayDay} Challenge!</h1>
           <p style={{ fontSize: '1.2rem' }}>
             You scored <strong>{score}/{puzzles.length}</strong>
           </p>
 
-          {/* Only show “Start Tomorrow’s” if passed & not previewing */}
+          {/* Only show “Tomorrow’s” if they passed and aren’t in previewDay */}
           {passed && isNaN(previewDay) && !tomorrowMode ? (
             <>
-              <p style={{ color: 'green' }}>
-                Congrats—you’ve unlocked tomorrow’s challenge!
-              </p>
+              <p style={{ color: 'green' }}>Congrats—you’ve unlocked tomorrow’s challenge!</p>
               <Link href="/puzzle/1?tomorrow=1">
                 <button style={{ margin: '0.5rem', padding: '8px 16px' }}>
                   Start Tomorrow’s Challenge
@@ -76,22 +72,18 @@ export default function PuzzlePage() {
               </Link>
             </>
           ) : !passed ? (
-            <p style={{ color: 'red' }}>
-              You need 8/10 to unlock tomorrow. Try again tomorrow!
-            </p>
+            <p style={{ color: 'red' }}>You need 8/10 to unlock tomorrow. Try again tomorrow!</p>
           ) : null}
 
           <Link href="/">
-            <button style={{ marginTop: '1rem', padding: '8px 16px' }}>
-              Back Home
-            </button>
+            <button style={{ marginTop: '1rem', padding: '8px 16px' }}>Back Home</button>
           </Link>
         </main>
       </>
     )
   }
 
-  // User clicked an answer
+  // Handle an answer click
   const handleAnswer = (choice: string) => {
     const isCorrect = choice === puzzle.answer
 
@@ -102,12 +94,12 @@ export default function PuzzlePage() {
     if (current > max) max = current
     saveStreaks(current, max)
 
-    // Update daily correct count
+    // Update daily score
     let cnt = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
     if (isCorrect) cnt++
     sessionStorage.setItem('dailyCorrect', cnt.toString())
 
-    // Advance to next puzzle, preserving preview flag
+    // Advance, preserving the correct flag
     const flag = !isNaN(previewDay)
       ? `?previewDay=${previewDay}`
       : tomorrowMode
@@ -118,10 +110,7 @@ export default function PuzzlePage() {
 
   return (
     <div className="quiz-page">
-      <div
-        className="header"
-        style={{ background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}
-      >
+      <div className="header" style={{ background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}>
         Ad Banner Top
       </div>
       <div className="adL" style={{ background: '#eee' }}>Ad Left</div>
@@ -152,10 +141,7 @@ export default function PuzzlePage() {
         ))}
       </div>
       <div className="adR" style={{ background: '#eee' }}>Ad Right</div>
-      <div
-        className="footer"
-        style={{ background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}
-      >
+      <div className="footer" style={{ background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}>
         Ad Banner Bottom
       </div>
     </div>
