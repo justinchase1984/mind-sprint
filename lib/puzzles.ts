@@ -128,18 +128,58 @@ export const logicPool: Puzzle[] = [
   },
 ]
 
-// Day-4: Picture Rebus (10)
+// Day-4: Picture Rebus (10 improved puzzles)
 export const rebusPool: Puzzle[] = [
-  { question: '🐝 + 👢 = ?',       answer: 'Beetle',         options: ['Beetle','Beagle','Buckle','Beadle'] },
-  { question: '🌞 + 🌧️ + ⛄ = ?',   answer: 'Weather',        options: ['Whether','Weather','Weaver','Wither'] },
-  { question: '✈️ + 🚀 = ?',       answer: 'Air Rocket',     options: ['Air Rocket','Rocket Air','Starship','Airplane'] },
-  { question: '🍎 + 📱 = ?',       answer: 'Apple',          options: ['Pear','Apple','Pineapple','Snapple'] },
-  { question: '💡 + 🔌 = ?',       answer: 'Lightbulb',      options: ['Lightbulb','Lamp','Bulb','Socket'] },
-  { question: '👁️ + ❤️ + 🍕 = ?', answer: 'I Love Pizza',   options: ['I Love Pizza','Eye Heart Pie','I Heart Pizza','I Like Pie'] },
-  { question: '🔒 + 🔑 = ?',       answer: 'Lock And Key',   options: ['Lock And Key','Key Lock','Unlock','Padlock'] },
-  { question: '🐠 + 🍟 = ?',       answer: 'Fish And Chips', options: ['Fish And Chips','Chips And Fish','Fish Fries','Seafood'] },
-  { question: '🏋️ + 🏃 = ?',       answer: 'Workout',        options: ['Work Out','Workout','Gym Run','Sports'] },
-  { question: '☕ + 🍰 = ?',       answer: 'Coffee Cake',    options: ['Coffee Cake','Cupcake','Cheesecake','Donut'] },
+  {
+    question: '🔥 + 🐝 = ?',
+    answer: 'Firefly',
+    options: ['Firefly', 'Fire Bee', 'Flyfire', 'Bee Fire'],
+  },
+  {
+    question: '🌞 + 🌻 = ?',
+    answer: 'Sunflower',
+    options: ['Sunshine', 'Sunflower', 'Flower Power', 'Sunny Day'],
+  },
+  {
+    question: '🌙 + 💡 = ?',
+    answer: 'Moonlight',
+    options: ['Moonbeam', 'Starlight', 'Moonlight', 'Night Lamp'],
+  },
+  {
+    question: '🎩 + 🐰 = ?',
+    answer: 'Magic Trick',
+    options: ['Rabbit Hole', 'Magic Trick', 'Odd Trick', 'Hat Trick'],
+  },
+  {
+    question: '🎂 + 🎉 = ?',
+    answer: 'Birthday Party',
+    options: ['Birthday Cakes', 'Party Time', 'Birthday Party', 'Cake Celebration'],
+  },
+  {
+    question: '📚 + 🐛 = ?',
+    answer: 'Bookworm',
+    options: ['Bookstore', 'Bookworm', 'Library Bug', 'Reading Bug'],
+  },
+  {
+    question: '🚀 + 🔬 = ?',
+    answer: 'Rocket Science',
+    options: ['Rocket Ship', 'Space Science', 'Rocket Science', 'Astro Research'],
+  },
+  {
+    question: '🌅 + 🐦 = ?',
+    answer: 'Early Bird',
+    options: ['Sunrise', 'Early Bird', 'Morning Bird', 'Birdsong'],
+  },
+  {
+    question: '🍎 + 🥧 = ?',
+    answer: 'Apple Pie',
+    options: ['Apple Tart', 'Pie Chart', 'Apple Pie', 'Core Dessert'],
+  },
+  {
+    question: '⚽ + 🥅 = ?',
+    answer: 'Goal',
+    options: ['Goal', 'Goalpost', 'Soccer Ball', 'Net'],
+  },
 ]
 
 // Day-5: Memory Test (10)
