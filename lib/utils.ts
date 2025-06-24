@@ -1,5 +1,4 @@
 // lib/utils.ts
-
 import type { Puzzle } from './puzzles'
 import {
   triviaPool,
@@ -11,23 +10,23 @@ import {
   mixPool,
 } from './puzzles'
 
-// Your 7-day rotation of puzzle pools:
+// 7‐day rotation
 const themes: Puzzle[][] = [
-  triviaPool,     // Day 1
-  scramblePool,   // Day 2
-  logicPool,      // Day 3
-  rebusPool,      // Day 4
-  memoryPool,     // Day 5
-  crosswordPool,  // Day 6
-  mixPool,        // Day 7
+  triviaPool,
+  scramblePool,
+  logicPool,
+  rebusPool,
+  memoryPool,
+  crosswordPool,
+  mixPool,
 ]
 
 /**
- * Returns today’s (or tomorrow’s if `forDate` passed) 10 puzzles.
+ * Get today’s (or tomorrow’s if you pass a date) 10 puzzles.
  */
 export function getDailyPuzzles(forDate?: Date): Puzzle[] {
   const d = forDate ?? new Date()
-  const idx = ((d.getDay() + 6) % 7)       // shift Monday→0 … Sunday→6
+  const idx = (d.getDay() + 6) % 7    // Monday→0 … Sunday→6
   const pool = themes[idx]
   return pool.length > 10
     ? pool.sort(() => Math.random() - 0.5).slice(0, 10)
@@ -35,10 +34,9 @@ export function getDailyPuzzles(forDate?: Date): Puzzle[] {
 }
 
 /**
- * Returns Day-N puzzles directly (1-based index 1…7).
+ * Get Day-N puzzles directly (1=Day1, … ,7=Day7).
  */
 export function getPuzzlesByDayIndex(dayIndex: number): Puzzle[] {
-  // normalize into 0…6
   const idx = ((dayIndex - 1) % themes.length + themes.length) % themes.length
   const pool = themes[idx]
   return pool.length > 10
