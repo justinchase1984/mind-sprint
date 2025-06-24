@@ -11,34 +11,35 @@ import {
   mixPool,
 } from './puzzles'
 
+// Your 7 theme pools in order:
 const themes: Puzzle[][] = [
-  triviaPool,
-  scramblePool,
-  logicPool,
-  rebusPool,
-  memoryPool,
-  crosswordPool,
-  mixPool,
+  triviaPool,     // Day 1
+  scramblePool,   // Day 2
+  logicPool,      // Day 3
+  rebusPool,      // Day 4
+  memoryPool,     // Day 5
+  crosswordPool,  // Day 6
+  mixPool,        // Day 7
 ]
 
 /**
- * Returns 10 puzzles for the given date,
- * or today if no date passed in.
+ * Returns today’s (or tomorrow’s if forDate passed) 10 puzzles.
  */
 export function getDailyPuzzles(forDate?: Date): Puzzle[] {
   const d = forDate ?? new Date()
   const weekday = d.getDay()           // 0=Sun…6=Sat
-  const idx     = (weekday + 6) % 7     // Mon→0…Sun→6
+  const idx     = (weekday + 6) % 7    // shift Mon→0…Sun→6
   const pool    = themes[idx]
   return pool.length > 10
     ? pool.sort(() => Math.random() - 0.5).slice(0, 10)
     : pool
 }
+
 /**
- * Returns Day-N puzzles (1=Trivia, 2=Scramble, … 7=Mixed).
+ * Returns the 10 puzzles for Day-N (1=trivia, 2=scramble…7=mix).
  */
 export function getPuzzlesByDayIndex(dayIndex: number): Puzzle[] {
-  // clamp to 1–7
+  // normalize into 1…7
   const idx = ((dayIndex - 1) % themes.length + themes.length) % themes.length
   const pool = themes[idx]
   return pool.length > 10
