@@ -5,35 +5,47 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import type { Puzzle } from '../../lib/puzzles'
 import { getStreaks, saveStreaks } from '../../lib/streak'
-import { getDailyPuzzles } from '../../lib/utils'
+import { getDailyPuzzles, getPuzzlesByDayIndex } from '../../lib/utils'
 
 export default function PuzzlePage() {
   const router = useRouter()
   const { query } = router
 
-  // Are we previewing tomorrow’s challenge?
-  const tomorrowMode = query.tomorrow === '1'
-  const pickDate = tomorrowMode
-    ? new Date(Date.now() + 24 * 60 * 60 * 1000)
-    : undefined
+  // 1) previewDay=n → load Day n directly
+  const previewDay = query.previewDay
+    ? parseInt(query.previewDay as string, 10)
+    : NaN
 
-  const puzzles = getDailyPuzzles(pickDate)
-  const idNum   = parseInt((query.id as string) || '1', 10)
-  const puzzle  = puzzles[idNum - 1]
+  // 2) tomorrowMode if ?tomorrow=1 and no previewDay
+  const tomorrowMode = isNaN(previewDay) && query.tomorrow === '1'
 
-  // Reset daily score at the start of any run
+  // pick puzzles accordingly
+  let puzzles: Puzzle[]
+  if (!isNaN(previewDay)) {
+    puzzles = getPuzzlesByDayIndex(previewDay)
+  } else {
+    const pickDate = tomorrowMode
+      ? new Date(Date.now() + 24 * 60 * 60 * 1000)
+      : undefined
+    puzzles = getDailyPuzzles(pickDate)
+  }
+
+  const idNum  = parseInt((query.id as string) || '1', 10)
+  const puzzle = puzzles[idNum - 1]
+
+  // reset daily score at puzzle #1
   useEffect(() => {
     if (idNum === 1) sessionStorage.setItem('dailyCorrect', '0')
   }, [idNum])
 
-  // Simple state clear on puzzle change
+  // clear selection state
   const [, setSel] = useState('')
   useEffect(() => setSel(''), [idNum])
 
-  // If past the last puzzle → show results
+  // if no puzzle left → show results
   if (!puzzle) {
     const score = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
-    const pass  = score >= 8
+    const passed = score >= 8
 
     return (
       <>
@@ -43,16 +55,19 @@ export default function PuzzlePage() {
         <main style={{ textAlign: 'center', padding: '2rem' }}>
           <h1>
             🎉 You’ve completed{' '}
-            {tomorrowMode ? "Tomorrow’s" : "Today’s"} challenge!
+            { !isNaN(previewDay)
+              ? `Day ${previewDay} Preview`
+              : tomorrowMode
+              ? "Tomorrow’s"
+              : "Today’s"
+            } challenge!
           </h1>
           <p style={{ fontSize: '1.2rem' }}>
             You scored <strong>{score}/{puzzles.length}</strong>
           </p>
 
-          {/* Only show preview link if:
-              • you passed, and
-              • you are NOT already in preview mode */}
-          {pass && !tomorrowMode && (
+          {/* Tomorrow’s unlock only if passed and not in previewDay mode */}
+          {passed && isNaN(previewDay) && !tomorrowMode && (
             <>
               <p style={{ color: 'green' }}>
                 Congrats—you’ve unlocked tomorrow’s challenge!
@@ -65,8 +80,7 @@ export default function PuzzlePage() {
             </>
           )}
 
-          {/* If you didn’t pass or you’re in preview, no preview link */}
-          {!pass && (
+          {!passed && (
             <p style={{ color: 'red' }}>
               You need 8/10 to unlock tomorrow. Try again tomorrow!
             </p>
@@ -82,28 +96,31 @@ export default function PuzzlePage() {
     )
   }
 
-  // Handle each answer click
+  // handle answer tap
   const handleAnswer = (choice: string) => {
     const isCorrect = choice === puzzle.answer
-    // Update streak
+
+    // update streak
     let { current, max } = getStreaks()
-    if (isCorrect) current++ 
-    else current = 0
+    if (isCorrect) current++ else current = 0
     if (current > max) max = current
     saveStreaks(current, max)
 
-    // Update daily score
+    // update daily score
     let count = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
     if (isCorrect) count++
     sessionStorage.setItem('dailyCorrect', count.toString())
 
-    // Advance, preserving tomorrow flag on preview
-    router.push(
-      `/puzzle/${idNum + 1}${tomorrowMode ? '?tomorrow=1' : ''}`
-    )
+    // advance, preserving preview flags
+    const flag = !isNaN(previewDay)
+      ? `?previewDay=${previewDay}`
+      : tomorrowMode
+      ? '?tomorrow=1'
+      : ''
+    router.push(`/puzzle/${idNum + 1}${flag}`)
   }
 
-  // Render the puzzle
+  // render puzzle
   return (
     <div className="quiz-page">
       <div
@@ -125,7 +142,6 @@ export default function PuzzlePage() {
         </Head>
         <h2>Puzzle {idNum}</h2>
         <p>{puzzle.question}</p>
-
         {puzzle.options.map((opt) => (
           <button
             key={opt}
