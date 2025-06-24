@@ -11,15 +11,15 @@ export default function PuzzlePage() {
   const router = useRouter()
   const { query } = router
 
-  // 1) previewDay=n → load Day n directly
+  // previewDay=n → test specific day
   const previewDay = query.previewDay
     ? parseInt(query.previewDay as string, 10)
     : NaN
 
-  // 2) tomorrowMode if ?tomorrow=1 and no previewDay
+  // tomorrowMode → ?tomorrow=1 and no previewDay
   const tomorrowMode = isNaN(previewDay) && query.tomorrow === '1'
 
-  // pick puzzles accordingly
+  // pick the right set
   let puzzles: Puzzle[]
   if (!isNaN(previewDay)) {
     puzzles = getPuzzlesByDayIndex(previewDay)
@@ -33,16 +33,20 @@ export default function PuzzlePage() {
   const idNum  = parseInt((query.id as string) || '1', 10)
   const puzzle = puzzles[idNum - 1]
 
-  // reset daily score at puzzle #1
+  // reset dailyCorrect on first puzzle
   useEffect(() => {
-    if (idNum === 1) sessionStorage.setItem('dailyCorrect', '0')
+    if (idNum === 1) {
+      sessionStorage.setItem('dailyCorrect', '0')
+    }
   }, [idNum])
 
   // clear selection state
   const [, setSel] = useState('')
-  useEffect(() => setSel(''), [idNum])
+  useEffect(() => {
+    setSel('')
+  }, [idNum])
 
-  // if no puzzle left → show results
+  // no more puzzles → show results
   if (!puzzle) {
     const score = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
     const passed = score >= 8
@@ -55,19 +59,18 @@ export default function PuzzlePage() {
         <main style={{ textAlign: 'center', padding: '2rem' }}>
           <h1>
             🎉 You’ve completed{' '}
-            { !isNaN(previewDay)
+            {!isNaN(previewDay)
               ? `Day ${previewDay} Preview`
               : tomorrowMode
               ? "Tomorrow’s"
-              : "Today’s"
-            } challenge!
+              : "Today’s"}{' '}
+            challenge!
           </h1>
           <p style={{ fontSize: '1.2rem' }}>
             You scored <strong>{score}/{puzzles.length}</strong>
           </p>
 
-          {/* Tomorrow’s unlock only if passed and not in previewDay mode */}
-          {passed && isNaN(previewDay) && !tomorrowMode && (
+          {passed && isNaN(previewDay) && !tomorrowMode ? (
             <>
               <p style={{ color: 'green' }}>
                 Congrats—you’ve unlocked tomorrow’s challenge!
@@ -78,13 +81,11 @@ export default function PuzzlePage() {
                 </button>
               </Link>
             </>
-          )}
-
-          {!passed && (
+          ) : !passed ? (
             <p style={{ color: 'red' }}>
               You need 8/10 to unlock tomorrow. Try again tomorrow!
             </p>
-          )}
+          ) : null}
 
           <Link href="/">
             <button style={{ marginTop: '1rem', padding: '8px 16px' }}>
@@ -96,19 +97,27 @@ export default function PuzzlePage() {
     )
   }
 
-  // handle answer tap
+  // handle an answer choice
   const handleAnswer = (choice: string) => {
     const isCorrect = choice === puzzle.answer
 
     // update streak
     let { current, max } = getStreaks()
-    if (isCorrect) current++ else current = 0
-    if (current > max) max = current
+    if (isCorrect) {
+      current++
+    } else {
+      current = 0
+    }
+    if (current > max) {
+      max = current
+    }
     saveStreaks(current, max)
 
     // update daily score
     let count = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
-    if (isCorrect) count++
+    if (isCorrect) {
+      count++
+    }
     sessionStorage.setItem('dailyCorrect', count.toString())
 
     // advance, preserving preview flags
@@ -120,7 +129,6 @@ export default function PuzzlePage() {
     router.push(`/puzzle/${idNum + 1}${flag}`)
   }
 
-  // render puzzle
   return (
     <div className="quiz-page">
       <div
@@ -135,6 +143,7 @@ export default function PuzzlePage() {
         Ad Banner Top
       </div>
       <div className="adL" style={{ background: '#eee' }}>Ad Left</div>
+
       <div className="main" style={{ textAlign: 'center', padding: '2rem' }}>
         <Head>
           <title>Puzzle {idNum} | Mind Sprint</title>
@@ -142,6 +151,7 @@ export default function PuzzlePage() {
         </Head>
         <h2>Puzzle {idNum}</h2>
         <p>{puzzle.question}</p>
+
         {puzzle.options.map((opt) => (
           <button
             key={opt}
@@ -161,6 +171,7 @@ export default function PuzzlePage() {
           </button>
         ))}
       </div>
+
       <div className="adR" style={{ background: '#eee' }}>Ad Right</div>
       <div
         className="footer"
