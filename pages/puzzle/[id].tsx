@@ -11,15 +11,15 @@ export default function PuzzlePage() {
   const router = useRouter()
   const { query } = router
 
-  // 1) previewDay ? e.g. ?previewDay=4
+  // 1) If ?previewDay=N is present, load that Day N
   const previewDay = query.previewDay
     ? parseInt(query.previewDay as string, 10)
     : NaN
 
-  // 2) tomorrowMode if ?tomorrow=1 and no previewDay
+  // 2) Else if ?tomorrow=1, preview tomorrow
   const tomorrowMode = isNaN(previewDay) && query.tomorrow === '1'
 
-  // Choose the correct puzzle set
+  // Select puzzle set
   let puzzles: Puzzle[]
   if (!isNaN(previewDay)) {
     puzzles = getPuzzlesByDayIndex(previewDay)
@@ -33,21 +33,21 @@ export default function PuzzlePage() {
   const idNum  = parseInt((query.id as string) || '1', 10)
   const puzzle = puzzles[idNum - 1]
 
-  // Determine which “Day” to display
+  // Compute which “Day” to display
   const displayDay = !isNaN(previewDay)
     ? previewDay
     : ((new Date().getDay() + 6) % 7) + (tomorrowMode ? 2 : 1)
 
-  // Reset dailyCorrect at puzzle #1
+  // Reset daily score at puzzle #1
   useEffect(() => {
     if (idNum === 1) sessionStorage.setItem('dailyCorrect', '0')
   }, [idNum])
 
-  // Clear selection (unused but keeps hooks happy)
+  // Clear selection (not used but resets state)
   const [, setSel] = useState('')
   useEffect(() => setSel(''), [idNum])
 
-  // If out of puzzles → Results screen
+  // If no puzzle found → show results
   if (!puzzle) {
     const score = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
     const passed = score >= 8
@@ -63,7 +63,7 @@ export default function PuzzlePage() {
             You scored <strong>{score}/{puzzles.length}</strong>
           </p>
 
-          {/* Only show tomorrow’s unlock if you passed and aren’t already previewing */}
+          {/* Only show “Start Tomorrow’s” if passed & not previewing */}
           {passed && isNaN(previewDay) && !tomorrowMode ? (
             <>
               <p style={{ color: 'green' }}>
@@ -91,30 +91,23 @@ export default function PuzzlePage() {
     )
   }
 
-  // Handle answer click
+  // User clicked an answer
   const handleAnswer = (choice: string) => {
     const isCorrect = choice === puzzle.answer
 
     // Update streak
     let { current, max } = getStreaks()
-    if (isCorrect) {
-      current++
-    } else {
-      current = 0
-    }
-    if (current > max) {
-      max = current
-    }
+    if (isCorrect) current++ 
+    else current = 0
+    if (current > max) max = current
     saveStreaks(current, max)
 
-    // Update daily score
+    // Update daily correct count
     let cnt = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
-    if (isCorrect) {
-      cnt++
-    }
+    if (isCorrect) cnt++
     sessionStorage.setItem('dailyCorrect', cnt.toString())
 
-    // Advance, preserving preview flags
+    // Advance to next puzzle, preserving preview flag
     const flag = !isNaN(previewDay)
       ? `?previewDay=${previewDay}`
       : tomorrowMode
@@ -127,12 +120,7 @@ export default function PuzzlePage() {
     <div className="quiz-page">
       <div
         className="header"
-        style={{
-          background: '#ddd',
-          height: 90,
-          textAlign: 'center',
-          lineHeight: '90px',
-        }}
+        style={{ background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}
       >
         Ad Banner Top
       </div>
@@ -166,12 +154,7 @@ export default function PuzzlePage() {
       <div className="adR" style={{ background: '#eee' }}>Ad Right</div>
       <div
         className="footer"
-        style={{
-          background: '#ddd',
-          height: 90,
-          textAlign: 'center',
-          lineHeight: '90px',
-        }}
+        style={{ background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}
       >
         Ad Banner Bottom
       </div>
