@@ -11,6 +11,7 @@ import {
   mixPool,
 } from './puzzles'
 
+// Your 7-day rotation of puzzle pools:
 const themes: Puzzle[][] = [
   triviaPool,     // Day 1
   scramblePool,   // Day 2
@@ -22,11 +23,11 @@ const themes: Puzzle[][] = [
 ]
 
 /**
- * Get today’s (or tomorrow’s if date passed) 10 puzzles.
+ * Returns today’s (or tomorrow’s if `forDate` passed) 10 puzzles.
  */
 export function getDailyPuzzles(forDate?: Date): Puzzle[] {
   const d = forDate ?? new Date()
-  const idx = ((d.getDay() + 6) % 7)          // Mon→0 … Sun→6
+  const idx = ((d.getDay() + 6) % 7)       // shift Monday→0 … Sunday→6
   const pool = themes[idx]
   return pool.length > 10
     ? pool.sort(() => Math.random() - 0.5).slice(0, 10)
@@ -34,10 +35,10 @@ export function getDailyPuzzles(forDate?: Date): Puzzle[] {
 }
 
 /**
- * Get Day-N puzzles directly (1-based index).
+ * Returns Day-N puzzles directly (1-based index 1…7).
  */
 export function getPuzzlesByDayIndex(dayIndex: number): Puzzle[] {
-  // normalize dayIndex into 1…7
+  // normalize into 0…6
   const idx = ((dayIndex - 1) % themes.length + themes.length) % themes.length
   const pool = themes[idx]
   return pool.length > 10
