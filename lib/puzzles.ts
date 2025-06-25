@@ -184,26 +184,110 @@ export const rebusPool: Puzzle[] = [
 
 // Day-5: Memory Test (10)
 export const memoryPool: Puzzle[] = [
-  { question: 'Memorize: 5-3-9-1-7. What is the 3rd number?',      answer: '9',       options: ['5','3','9','1'] },
-  { question: 'Colors: red–blue–green–yellow. What’s 2nd?',       answer: 'Blue',    options: ['Red','Blue','Green','Yellow'] },
-  { question: 'Animals: cat–dog–bird–fish. What’s 4th?',          answer: 'Fish',    options: ['Cat','Dog','Bird','Fish'] },
-  { question: 'Sequence: 7-2-4-6. What’s last?',                 answer: '6',       options: ['7','2','4','6'] },
-  { question: 'Which letter completes the pattern? D, G, J, M, ?',answer: 'P',       options: ['P','K','Q','R'] },
-  { question: 'Shapes: circle–square–triangle–hexagon. What’s 3rd?', 
-                                                                    answer: 'Triangle',options: ['Circle','Square','Triangle','Hexagon'] },
-  { question: 'Celestial: sun–moon–star–cloud. What’s 4th?',      answer: 'Cloud',   options: ['Sun','Moon','Star','Cloud'] },
-  { question: 'Odds: 1-3-5-7-9. What’s 5th?',                    answer: '9',       options: ['1','3','5','9'] },
-  { question: 'Fruits: apple–banana–orange–grape. What’s 2nd?',    answer: 'Banana',  options: ['Apple','Banana','Orange','Grape'] },
-  { question: 'Transport: car–bus–train–plane. What’s 3rd?',      answer: 'Train',   options: ['Car','Bus','Train','Plane'] },
+  {
+    question: '🔢 You’ll see a sequence of 5 digits. What was the 3rd number?',
+    answer: '7',
+    options: ['5','7','3','9'],
+  },
+  {
+    question: '🌈 You’ll see 4 colors in order. Which was 2nd?',
+    answer: 'Blue',
+    options: ['Red','Blue','Green','Yellow'],
+  },
+  {
+    question: '🦁 You’ll see 5 animals flash. Which was shown last?',
+    answer: 'Elephant',
+    options: ['Lion','Tiger','Bear','Elephant'],
+  },
+  {
+    question: '🔣 You’ll see 6 letters briefly. Which was 4th?',
+    answer: 'D',
+    options: ['A','C','D','F'],
+  },
+  {
+    question: '⏰ You’ll see 5 times on screen. What was the first time shown?',
+    answer: '3:15',
+    options: ['2:45','3:15','4:00','2:30'],
+  },
+  {
+    question: '🍎 You’ll see 4 fruits. Which was 3rd?',
+    answer: 'Orange',
+    options: ['Apple','Banana','Orange','Grape'],
+  },
+  {
+    question: '🚗 You’ll see 4 car brands. Which was shown 2nd?',
+    answer: 'BMW',
+    options: ['Ford','BMW','Toyota','Honda'],
+  },
+  {
+    question: '🔢 You’ll see 5 numbers. What was the 5th number?',
+    answer: '42',
+    options: ['23','42','11','37'],
+  },
+  {
+    question: '⭐ You’ll see 4 shapes. Which was 1st?',
+    answer: 'Circle',
+    options: ['Circle','Square','Triangle','Hexagon'],
+  },
+  {
+    question: '🎵 You’ll hear 3 notes. Which note was in the middle?',
+    answer: 'E',
+    options: ['C','E','G','A'],
+  },
 ]
 
-// Day-6: Crossword Mini (5 clues)
+// Day-6: Mini “Crossword” Clues (10)
 export const crosswordPool: Puzzle[] = [
-  { question: '1 Across: Not horizontal (4 letters)',      answer: 'Vert', options: ['Flat','Level','Orthogonal','Vert'] },
-  { question: '2 Down: Not old (3 letters)',               answer: 'New',  options: ['Old','New','Won','Nil'] },
-  { question: '3 Across: Not in (3 letters)',              answer: 'Out',  options: ['Out','In','Off','On'] },
-  { question: '4 Down: Sleep place (3 letters)',           answer: 'Bed',  options: ['Bed','Den','Cot','Mat'] },
-  { question: '5 Across: Negative sign (1 character)',     answer: '-',    options: ['-','+','*','/'] },
+  {
+    question: 'Not horizontal (8 letters)',
+    answer: 'Vertical',
+    options: ['Vertical','Parallel','Lateral','Diagonal'],
+  },
+  {
+    question: 'Sleep place for baby (3 letters)',
+    answer: 'Crib',
+    options: ['Bed','Crib','Cot','Pod'],
+  },
+  {
+    question: 'Color of the sky (5 letters)',
+    answer: 'Blue',
+    options: ['Green','Black','Blue','White'],
+  },
+  {
+    question: 'Opposite of empty (4 letters)',
+    answer: 'Full',
+    options: ['Void','Full','Many','Many'],
+  },
+  {
+    question: 'Prefix meaning “two” (2 letters)',
+    answer: 'Bi',
+    options: ['Di','Bi','Tri','Pi'],
+  },
+  {
+    question: 'Not old (3 letters)',
+    answer: 'New',
+    options: ['Old','New','Aged','Ancient'],
+  },
+  {
+    question: 'Group of wolves (6 letters)',
+    answer: 'Pack',
+    options: ['Pride','Herd','Pack','Flock'],
+  },
+  {
+    question: 'Five-sided shape (7 letters)',
+    answer: 'Pentagon',
+    options: ['Hexagon','Pentagon','Heptagon','Octagon'],
+  },
+  {
+    question: 'Opposite of rough (6 letters)',
+    answer: 'Smooth',
+    options: ['Jagged','Smooth','Rocky','Gravel'],
+  },
+  {
+    question: 'Word for “quickly” (5 letters)',
+    answer: 'Swift',
+    options: ['Swift','Slowly','Sudden','Speedy'],
+  },
 ]
 
 // Day-7: Brain Gym Mix (10 varied)
