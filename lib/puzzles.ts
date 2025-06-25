@@ -62,16 +62,16 @@ export const triviaPool: Puzzle[] = [
 
 // Day-2: Word Scramble (10 items)
 export const scramblePool: Puzzle[] = [
-  { question: 'Unscramble: LRCAO',    answer: 'Coral',      options: ['Carol','Coral','Local','Orcal'] },
-  { question: 'Unscramble: PUATLPEO', answer: 'Populate',   options: ['Protect','Portable','Populate','Permeant'] },
-  { question: 'Unscramble: RPEHANCEC',answer: 'Perchance',  options: ['Reophone','Chopper','Perchance','Phone Rec'] },
-  { question: 'Unscramble: HGORYPEAG',answer: 'Geography',  options: ['Geography','Hygraego','Agency','Orography'] },
-  { question: 'Unscramble: YPSCHIS',  answer: 'Physics',    options: ['Psychis','Physics','Hisscyp','Shipcys'] },
-  { question: 'Unscramble: HEIRGLYPHO',answer: 'Hieroglyph',options: ['Hieroglyph','Galleryph','Hyperlight','Philhgren'] },
-  { question: 'Unscramble: AERHT',    answer: 'Earth',      options: ['Heart','Earth','Rathe','Hater'] },
-  { question: 'Unscramble: TMNOH',    answer: 'Month',      options: ['Mouth','Month','Thoman','Tomahn'] },
-  { question: 'Unscramble: GICSLOTIS',answer: 'Logistics',  options: ['Logistics','Psychlog','Gossipch','Schlopts'] },
-  { question: 'Unscramble: OSIPON',   answer: 'Poison',     options: ['Poison','Pinose','Sopine','Pension'] },
+  { question: 'Unscramble: LRCAO',     answer: 'Coral',      options: ['Carol','Coral','Local','Orcal'] },
+  { question: 'Unscramble: PUATLPEO',  answer: 'Populate',   options: ['Protect','Portable','Populate','Permeant'] },
+  { question: 'Unscramble: RPEHANCEC', answer: 'Perchance',  options: ['Reophone','Chopper','Perchance','Phone Rec'] },
+  { question: 'Unscramble: HGORYPEAG', answer: 'Geography',  options: ['Geography','Hygraego','Agency','Orography'] },
+  { question: 'Unscramble: YPSCHIS',   answer: 'Physics',    options: ['Psychis','Physics','Hisscyp','Shipcys'] },
+  { question: 'Unscramble: HEIRGLYPHO',answer: 'Hieroglyph', options: ['Hieroglyph','Galleryph','Hyperlight','Philhgren'] },
+  { question: 'Unscramble: AERHT',     answer: 'Earth',      options: ['Heart','Earth','Rathe','Hater'] },
+  { question: 'Unscramble: TMNOH',     answer: 'Month',      options: ['Mouth','Month','Thoman','Tomahn'] },
+  { question: 'Unscramble: GICSLOTIS', answer: 'Logistics',  options: ['Logistics','Psychlog','Gossipch','Schlopts'] },
+  { question: 'Unscramble: OSIPON',    answer: 'Poison',     options: ['Poison','Pinose','Sopine','Pension'] },
 ]
 
 // Day-3: Logic Puzzles (10)
@@ -128,9 +128,38 @@ export const logicPool: Puzzle[] = [
   },
 ]
 
-// (Your existing Day-4, Day-5 & Day-6 pools go here unmodified)
+// Day-4: Picture Rebus (10)
+export const rebusPool: Puzzle[] = [
+  { question: '🔥 + 🐝 = ?', answer: 'Firefly',       options: ['Firefly','Fire Bee','Flyfire','Bee Fire'] },
+  { question: '🌞 + 🌻 = ?', answer: 'Sunflower',     options: ['Sunshine','Sunflower','Flower Power','Sunny Day'] },
+  { question: '🌙 + 💡 = ?', answer: 'Moonlight',     options: ['Moonbeam','Starlight','Moonlight','Night Lamp'] },
+  { question: '🎩 + 🐰 = ?', answer: 'Magic Trick',   options: ['Rabbit Hole','Magic Trick','Odd Trick','Hat Trick'] },
+  { question: '🎂 + 🎉 = ?', answer: 'Birthday Party',options: ['Birthday Cakes','Party Time','Birthday Party','Cake Celebration'] },
+  { question: '📚 + 🐛 = ?', answer: 'Bookworm',      options: ['Bookstore','Bookworm','Library Bug','Reading Bug'] },
+  { question: '🚀 + 🔬 = ?', answer: 'Rocket Science',options: ['Rocket Ship','Space Science','Rocket Science','Astro Research'] },
+  { question: '🌅 + 🐦 = ?', answer: 'Early Bird',    options: ['Sunrise','Early Bird','Morning Bird','Birdsong'] },
+  { question: '🍎 + 🥧 = ?', answer: 'Apple Pie',     options: ['Apple Tart','Pie Chart','Apple Pie','Core Dessert'] },
+  { question: '⚽ + 🥅 = ?', answer: 'Goal',          options: ['Goal','Goalpost','Soccer Ball','Net'] },
+]
 
-// Day-7: Riddle Day (10 static brain-teasers)
+// Day-5: Memory (placeholder, logic in code)
+export const memoryPool: Puzzle[] = []
+
+// Day-6: Mini Crossword Clues (10)
+export const crosswordPool: Puzzle[] = [
+  { question: 'Not horizontal (8 letters)',       answer: 'Vertical',   options: ['Vertical','Parallel','Lateral','Diagonal'] },
+  { question: 'Sleep place for baby (4 letters)', answer: 'Crib',       options: ['Bed','Crib','Cot','Pod'] },
+  { question: 'Color of the sky (4 letters)',     answer: 'Blue',       options: ['Green','Black','Blue','White'] },
+  { question: 'Opposite of empty (4 letters)',    answer: 'Full',       options: ['Void','Full','Many','Sparse'] },
+  { question: 'Prefix meaning “two” (2 letters)', answer: 'Bi',         options: ['Di','Bi','Tri','Pi'] },
+  { question: 'Group of wolves (4 letters)',      answer: 'Pack',       options: ['Pride','Herd','Pack','Flock'] },
+  { question: 'Five-sided shape (8 letters)',     answer: 'Pentagon',   options: ['Hexagon','Pentagon','Heptagon','Octagon'] },
+  { question: 'Opposite of rough (6 letters)',    answer: 'Smooth',     options: ['Jagged','Smooth','Rocky','Gravel'] },
+  { question: 'Word for “quickly” (5 letters)',   answer: 'Swift',      options: ['Swift','Slowly','Sudden','Speedy'] },
+  { question: 'Not old (3 letters)',              answer: 'New',        options: ['Old','New','Aged','Ancient'] },
+]
+
+// Day-7: Riddle Day (10)
 export const mixPool: Puzzle[] = [
   {
     question: 'I speak without a mouth and hear without ears. I have nobody, but I come alive with wind. What am I?',
