@@ -290,16 +290,21 @@ export const crosswordPool: Puzzle[] = [
   },
 ]
 
-// Day-7: Brain Gym Mix (10 varied)
-export const mixPool: Puzzle[] = [
-  triviaPool[0],
-  scramblePool[1],
-  logicPool[2],
-  rebusPool[3],
-  memoryPool[4],
-  crosswordPool[0],
-  triviaPool[1],
-  scramblePool[2],
-  logicPool[3],
-  rebusPool[4],
+// Add this Riddle pool (10 brain-teasers)
+export const riddlePool: Puzzle[] = [
+  {
+    question: 'I have keys but no locks. I have space but no room. You can enter but can’t go outside. What am I?',
+    answer: 'Keyboard',
+    options: ['Piano','Map','Keyboard','Computer'],
+  },
+  {
+    question: 'What flies without wings?',
+    answer: 'Time',
+    options: ['Bird','Plane','Time','Air'],
+  },
+  // …8 more riddles…
 ]
+
+// Then, replace your Day 7 mixPool:
+export const mixPool: Puzzle[] = riddlePool
+
