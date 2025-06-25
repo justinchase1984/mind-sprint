@@ -128,183 +128,58 @@ export const logicPool: Puzzle[] = [
   },
 ]
 
-// Day-4: Picture Rebus (10 improved puzzles)
-export const rebusPool: Puzzle[] = [
+// (Your existing Day-4, Day-5 & Day-6 pools go here unmodified)
+
+// Day-7: Riddle Day (10 static brain-teasers)
+export const mixPool: Puzzle[] = [
   {
-    question: '🔥 + 🐝 = ?',
-    answer: 'Firefly',
-    options: ['Firefly', 'Fire Bee', 'Flyfire', 'Bee Fire'],
+    question: 'I speak without a mouth and hear without ears. I have nobody, but I come alive with wind. What am I?',
+    answer: 'Echo',
+    options: ['Echo', 'Shadow', 'Whistle', 'Wind'],
   },
   {
-    question: '🌞 + 🌻 = ?',
-    answer: 'Sunflower',
-    options: ['Sunshine', 'Sunflower', 'Flower Power', 'Sunny Day'],
+    question: 'You measure my life in hours and I serve you by expiring. I’m quick when I’m thin and slow when I’m fat. What am I?',
+    answer: 'Candle',
+    options: ['Candle', 'Clock', 'Shadow', 'Hair'],
   },
   {
-    question: '🌙 + 💡 = ?',
-    answer: 'Moonlight',
-    options: ['Moonbeam', 'Starlight', 'Moonlight', 'Night Lamp'],
+    question: 'I have cities, but no houses; forests, but no trees; and water, but no fish. What am I?',
+    answer: 'Map',
+    options: ['Map', 'Book', 'Painting', 'Dream'],
   },
   {
-    question: '🎩 + 🐰 = ?',
-    answer: 'Magic Trick',
-    options: ['Rabbit Hole', 'Magic Trick', 'Odd Trick', 'Hat Trick'],
+    question: 'What can you hold in your left hand but not in your right?',
+    answer: 'Your Right Elbow',
+    options: ['Your Right Elbow', 'Your Left Elbow', 'Your Breath', 'Your Tongue'],
   },
   {
-    question: '🎂 + 🎉 = ?',
-    answer: 'Birthday Party',
-    options: ['Birthday Cakes', 'Party Time', 'Birthday Party', 'Cake Celebration'],
+    question: 'What gets wetter the more it dries?',
+    answer: 'Towel',
+    options: ['Towel', 'Sponge', 'Water', 'Soap'],
   },
   {
-    question: '📚 + 🐛 = ?',
-    answer: 'Bookworm',
-    options: ['Bookstore', 'Bookworm', 'Library Bug', 'Reading Bug'],
+    question: 'What has one eye, but can’t see?',
+    answer: 'Needle',
+    options: ['Needle', 'Hurricane', 'Potato', 'Blizzard'],
   },
   {
-    question: '🚀 + 🔬 = ?',
-    answer: 'Rocket Science',
-    options: ['Rocket Ship', 'Space Science', 'Rocket Science', 'Astro Research'],
+    question: 'What has keys but can’t open locks?',
+    answer: 'Piano',
+    options: ['Piano', 'Keyboard', 'Map', 'Code'],
   },
   {
-    question: '🌅 + 🐦 = ?',
-    answer: 'Early Bird',
-    options: ['Sunrise', 'Early Bird', 'Morning Bird', 'Birdsong'],
+    question: 'The more of this there is, the less you see. What is it?',
+    answer: 'Darkness',
+    options: ['Fog', 'Darkness', 'Light', 'Dust'],
   },
   {
-    question: '🍎 + 🥧 = ?',
-    answer: 'Apple Pie',
-    options: ['Apple Tart', 'Pie Chart', 'Apple Pie', 'Core Dessert'],
+    question: 'I’m light as a feather, yet the strongest person can’t hold me for five minutes. What am I?',
+    answer: 'Breath',
+    options: ['Breath', 'Air', 'Water', 'Shadow'],
   },
   {
-    question: '⚽ + 🥅 = ?',
-    answer: 'Goal',
-    options: ['Goal', 'Goalpost', 'Soccer Ball', 'Net'],
+    question: 'I have a heart that doesn’t beat. What am I?',
+    answer: 'Artichoke',
+    options: ['Artichoke', 'Stone', 'Tree', 'Robot'],
   },
 ]
-
-// Day-5: Memory Test (10)
-export const memoryPool: Puzzle[] = [
-  {
-    question: '🔢 You’ll see a sequence of 5 digits. What was the 3rd number?',
-    answer: '7',
-    options: ['5','7','3','9'],
-  },
-  {
-    question: '🌈 You’ll see 4 colors in order. Which was 2nd?',
-    answer: 'Blue',
-    options: ['Red','Blue','Green','Yellow'],
-  },
-  {
-    question: '🦁 You’ll see 5 animals flash. Which was shown last?',
-    answer: 'Elephant',
-    options: ['Lion','Tiger','Bear','Elephant'],
-  },
-  {
-    question: '🔣 You’ll see 6 letters briefly. Which was 4th?',
-    answer: 'D',
-    options: ['A','C','D','F'],
-  },
-  {
-    question: '⏰ You’ll see 5 times on screen. What was the first time shown?',
-    answer: '3:15',
-    options: ['2:45','3:15','4:00','2:30'],
-  },
-  {
-    question: '🍎 You’ll see 4 fruits. Which was 3rd?',
-    answer: 'Orange',
-    options: ['Apple','Banana','Orange','Grape'],
-  },
-  {
-    question: '🚗 You’ll see 4 car brands. Which was shown 2nd?',
-    answer: 'BMW',
-    options: ['Ford','BMW','Toyota','Honda'],
-  },
-  {
-    question: '🔢 You’ll see 5 numbers. What was the 5th number?',
-    answer: '42',
-    options: ['23','42','11','37'],
-  },
-  {
-    question: '⭐ You’ll see 4 shapes. Which was 1st?',
-    answer: 'Circle',
-    options: ['Circle','Square','Triangle','Hexagon'],
-  },
-  {
-    question: '🎵 You’ll hear 3 notes. Which note was in the middle?',
-    answer: 'E',
-    options: ['C','E','G','A'],
-  },
-]
-
-// Day-6: Mini “Crossword” Clues (10)
-export const crosswordPool: Puzzle[] = [
-  {
-    question: 'Not horizontal (8 letters)',
-    answer: 'Vertical',
-    options: ['Vertical','Parallel','Lateral','Diagonal'],
-  },
-  {
-    question: 'Sleep place for baby (3 letters)',
-    answer: 'Crib',
-    options: ['Bed','Crib','Cot','Pod'],
-  },
-  {
-    question: 'Color of the sky (5 letters)',
-    answer: 'Blue',
-    options: ['Green','Black','Blue','White'],
-  },
-  {
-    question: 'Opposite of empty (4 letters)',
-    answer: 'Full',
-    options: ['Void','Full','Many','Many'],
-  },
-  {
-    question: 'Prefix meaning “two” (2 letters)',
-    answer: 'Bi',
-    options: ['Di','Bi','Tri','Pi'],
-  },
-  {
-    question: 'Not old (3 letters)',
-    answer: 'New',
-    options: ['Old','New','Aged','Ancient'],
-  },
-  {
-    question: 'Group of wolves (6 letters)',
-    answer: 'Pack',
-    options: ['Pride','Herd','Pack','Flock'],
-  },
-  {
-    question: 'Five-sided shape (7 letters)',
-    answer: 'Pentagon',
-    options: ['Hexagon','Pentagon','Heptagon','Octagon'],
-  },
-  {
-    question: 'Opposite of rough (6 letters)',
-    answer: 'Smooth',
-    options: ['Jagged','Smooth','Rocky','Gravel'],
-  },
-  {
-    question: 'Word for “quickly” (5 letters)',
-    answer: 'Swift',
-    options: ['Swift','Slowly','Sudden','Speedy'],
-  },
-]
-
-// Add this Riddle pool (10 brain-teasers)
-export const riddlePool: Puzzle[] = [
-  {
-    question: 'I have keys but no locks. I have space but no room. You can enter but can’t go outside. What am I?',
-    answer: 'Keyboard',
-    options: ['Piano','Map','Keyboard','Computer'],
-  },
-  {
-    question: 'What flies without wings?',
-    answer: 'Time',
-    options: ['Bird','Plane','Time','Air'],
-  },
-  // …8 more riddles…
-]
-
-// Then, replace your Day 7 mixPool:
-export const mixPool: Puzzle[] = riddlePool
-
