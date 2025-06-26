@@ -89,10 +89,15 @@ export default function PuzzlePage() {
     if (current > max) max = current
     saveStreaks(current, max)
 
-    // daily score
-    let cnt = parseInt(sessionStorage.getItem('dailyCorrect')||'0',10)
-    if (isCorrect) cnt++
-    sessionStorage.setItem('dailyCorrect', cnt.toString())
+    // daily score (only count correct once per puzzle)
+const key = `day${displayDay}_q${idNum}`
+const already = sessionStorage.getItem(key)
+let cnt = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
+if (isCorrect && !already) {
+  cnt++
+  sessionStorage.setItem(key, '1')
+}
+sessionStorage.setItem('dailyCorrect', cnt.toString())
 
     // next URL flag
     const flag = !isNaN(previewDay)
