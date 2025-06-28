@@ -13,27 +13,39 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="quiz-page">
+    <div className="quiz-page" style={{ display: 'grid', gridTemplateColumns: '1fr 3fr 1fr', minHeight: '100vh' }}>
       <Head>
-        <title>Mind Sprint</title>
-        <meta
-          name="description"
-          content="Choose your unlocked challenge and go!"
-        />
+        <title>🧠 Mind Sprint</title>
+        <meta name="description" content="Daily puzzles: trivia, scramble, logic, memory... unlock by scoring 8/10!" />
       </Head>
 
-      <div style={{ textAlign: 'center', padding: '2rem' }}>
+      {/* Top Banner spans center */}
+      <div style={{ gridColumn: '1 / -1', background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}>
+        Ad Banner Top
+      </div>
+
+      {/* Left ad */}
+      <div style={{ background: '#eee' }}>Ad Left</div>
+
+      {/* Main content */}
+      <main style={{ textAlign: 'center', padding: '2rem' }}>
         <h1>🧠 Mind Sprint</h1>
         <p>Select one of your unlocked challenges:</p>
         {[...Array(unlocked)].map((_, i) => (
           <Link key={i} href={`/puzzle/${i + 1}`}>
-            <button
-              style={{ margin: '0.5rem', padding: '10px 20px', fontSize: 16 }}
-            >
+            <button style={{ margin: '0.5rem', padding: '10px 20px', fontSize: 16 }}>
               Challenge {i + 1}
             </button>
           </Link>
         ))}
+      </main>
+
+      {/* Right ad */}
+      <div style={{ background: '#eee' }}>Ad Right</div>
+
+      {/* Bottom banner spans center */}
+      <div style={{ gridColumn: '1 / -1', background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}>
+        Ad Banner Bottom
       </div>
     </div>
   )
