@@ -12,6 +12,7 @@ export default class MyDocument extends Document {
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA4_ID}`}
           />
           <script
+            // initialize GA4
             dangerouslySetInnerHTML={{
               __html: `
                 window.dataLayer = window.dataLayer || [];
@@ -25,16 +26,11 @@ export default class MyDocument extends Document {
           />
 
           {/* Google AdSense */}
--         <script
--           async
--           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9372563823272898"
--           crossorigin="anonymous"
--         ></script>
-+         <script
-+           async
-+           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9372563823272898"
-+           crossOrigin="anonymous"
-+         ></script>
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9372563823272898"
+            crossOrigin="anonymous"
+          ></script>
         </Head>
         <body>
           <Main />
