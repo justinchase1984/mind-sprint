@@ -13,14 +13,32 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="quiz-page" style={{ display: 'grid', gridTemplateColumns: '1fr 3fr 1fr', minHeight: '100vh' }}>
+    <div
+      className="quiz-page"
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr 3fr 1fr',
+        minHeight: '100vh'
+      }}
+    >
       <Head>
         <title>🧠 Mind Sprint</title>
-        <meta name="description" content="Daily puzzles: trivia, scramble, logic, memory... unlock by scoring 8/10!" />
+        <meta
+          name="description"
+          content="Daily puzzles: trivia, scramble, logic, memory... unlock by scoring 8/10!"
+        />
       </Head>
 
-      {/* Top Banner spans center */}
-      <div style={{ gridColumn: '1 / -1', background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}>
+      {/* Top banner spans full width */}
+      <div
+        style={{
+          gridColumn: '1 / -1',
+          background: '#ddd',
+          height: 90,
+          textAlign: 'center',
+          lineHeight: '90px'
+        }}
+      >
         Ad Banner Top
       </div>
 
@@ -30,10 +48,19 @@ export default function Home() {
       {/* Main content */}
       <main style={{ textAlign: 'center', padding: '2rem' }}>
         <h1>🧠 Mind Sprint</h1>
-        <p>Select one of your unlocked challenges:</p>
+        <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
+          Start your Mind Sprint challenges:
+        </p>
         {[...Array(unlocked)].map((_, i) => (
           <Link key={i} href={`/puzzle/${i + 1}`}>
-            <button style={{ margin: '0.5rem', padding: '10px 20px', fontSize: 16 }}>
+            <button
+              style={{
+                display: 'block',
+                margin: '0.5rem auto',
+                padding: '10px 20px',
+                fontSize: 16
+              }}
+            >
               Challenge {i + 1}
             </button>
           </Link>
@@ -43,8 +70,16 @@ export default function Home() {
       {/* Right ad */}
       <div style={{ background: '#eee' }}>Ad Right</div>
 
-      {/* Bottom banner spans center */}
-      <div style={{ gridColumn: '1 / -1', background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}>
+      {/* Bottom banner spans full width */}
+      <div
+        style={{
+          gridColumn: '1 / -1',
+          background: '#ddd',
+          height: 90,
+          textAlign: 'center',
+          lineHeight: '90px'
+        }}
+      >
         Ad Banner Bottom
       </div>
     </div>
