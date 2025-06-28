@@ -6,12 +6,11 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          {/* Load the GA4 library */}
+          {/* Google Analytics */}
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA4_ID}`}
           />
-          {/* Initialize GA4 */}
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -24,9 +23,18 @@ export default class MyDocument extends Document {
               `,
             }}
           />
-          
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9372563823272898"
-     crossorigin="anonymous"></script>
+
+          {/* Google AdSense */}
+-         <script
+-           async
+-           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9372563823272898"
+-           crossorigin="anonymous"
+-         ></script>
++         <script
++           async
++           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9372563823272898"
++           crossOrigin="anonymous"
++         ></script>
         </Head>
         <body>
           <Main />
