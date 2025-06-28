@@ -1,4 +1,3 @@
-// pages/index.tsx
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -41,17 +40,3 @@ export default function Home() {
     </div>
   )
 }
-{/* —————— Day-N Preview Links —————— */}
-<section style={{ textAlign: 'center', marginTop: '2rem' }}>
-  <h2>Quick Preview Any Day</h2>
-  <div style={{ display: 'inline-block', textAlign: 'left' }}>
-    {[1,2,3,4,5,6,7].map((day) => (
-      <div key={day} style={{ margin: '0.25rem 0' }}>
-        <Link href={`/puzzle/1?previewDay=${day}`}>
-          <a>🔹 Preview Day {day}</a>
-        </Link>
-      </div>
-    ))}
-  </div>
-</section>
-{/* —————————————————————————————————— */}
