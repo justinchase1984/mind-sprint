@@ -5,7 +5,7 @@ import { useEffect, useState, useMemo, FormEvent } from 'react'
 import Link from 'next/link'
 import type { Puzzle } from '../../lib/puzzles'
 import { getStreaks, saveStreaks } from '../../lib/streak'
-import { getDailyPuzzles, getPuzzlesByDayIndex } from '../../lib/utils'
+import { getDailyPuzzles } from '../../lib/utils'
 
 // Helper to render ordinals: 1 → "1st", 2 → "2nd", etc.
 function ordinal(n: number): string {
@@ -19,41 +19,36 @@ export default function PuzzlePage() {
   const router = useRouter()
   const { query } = router
 
-  // previewDay / tomorrow flags
-  const previewDay = query.previewDay ? +query.previewDay : NaN
-  const tomorrowMode = isNaN(previewDay) && query.tomorrow === '1'
+  // === Remove previewDay logic ===
+  // const previewDay = query.previewDay ? +query.previewDay : NaN
 
-  // pick your 10 puzzles (or more)
-  let puzzles: Puzzle[] = []
-  if (!isNaN(previewDay)) {
-    puzzles = getPuzzlesByDayIndex(previewDay)
-  } else {
-    const pickDate = tomorrowMode
-      ? new Date(Date.now() + 24*60*60*1000)
-      : undefined
-    puzzles = getDailyPuzzles(pickDate)
-  }
+  // keep tomorrow-mode logic
+  const tomorrowMode = query.tomorrow === '1'
 
-  const idNum  = parseInt((query.id as string) || '1', 10)
+  // pick your 10 puzzles (or more) based on today or tomorrow
+  const pickDate = tomorrowMode
+    ? new Date(Date.now() + 24 * 60 * 60 * 1000)
+    : undefined
+  const puzzles: Puzzle[] = getDailyPuzzles(pickDate)
+
+  // puzzle index
+  const idNum = parseInt((query.id as string) || '1', 10)
   const puzzle = puzzles[idNum - 1]
 
-  // detect Day number
-  const displayDay = !isNaN(previewDay)
-    ? previewDay
-    : ((new Date().getDay()+6)%7) + (tomorrowMode ? 2 : 1)
+  // determine Day number (1–7)
+  const todayIndex = ((new Date().getDay() + 6) % 7) + 1
+  const displayDay = tomorrowMode ? todayIndex + 1 : todayIndex
 
   // reset daily score on puzzle #1
   useEffect(() => {
-    if (idNum === 1) sessionStorage.setItem('dailyCorrect','0')
+    if (idNum === 1) sessionStorage.setItem('dailyCorrect', '0')
   }, [idNum])
 
   // ==== Day 5 Memory Challenge logic ====
   const isMemoryDay = displayDay === 5
-
-  // always treat Day 5 as 10 puzzles
   const total = isMemoryDay ? 10 : puzzles.length
 
-  // flash‐sequence
+  // flash‐sequence for Day 5
   const flashSeq = useMemo<string[]>(() => {
     if (!isMemoryDay) return []
     return Array.from({ length: 5 }, () =>
@@ -78,7 +73,9 @@ export default function PuzzlePage() {
 
   // clear input each puzzle
   const [userAns, setUserAns] = useState('')
-  useEffect(() => { setUserAns('') }, [idNum])
+  useEffect(() => {
+    setUserAns('')
+  }, [idNum])
 
   // unified after‐answer handler
   function afterAnswer(isCorrect: boolean) {
@@ -90,22 +87,18 @@ export default function PuzzlePage() {
     saveStreaks(current, max)
 
     // daily score (only count correct once per puzzle)
-const key = `day${displayDay}_q${idNum}`
-const already = sessionStorage.getItem(key)
-let cnt = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
-if (isCorrect && !already) {
-  cnt++
-  sessionStorage.setItem(key, '1')
-}
-sessionStorage.setItem('dailyCorrect', cnt.toString())
+    const key = `day${displayDay}_q${idNum}`
+    const already = sessionStorage.getItem(key)
+    let cnt = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
+    if (isCorrect && !already) {
+      cnt++
+      sessionStorage.setItem(key, '1')
+    }
+    sessionStorage.setItem('dailyCorrect', cnt.toString())
 
-    // next URL flag
-    const flag = !isNaN(previewDay)
-      ? `?previewDay=${previewDay}`
-      : tomorrowMode
-      ? '?tomorrow=1'
-      : ''
-    router.push(`/puzzle/${idNum+1}${flag}`)
+    // build “tomorrow” flag only
+    const flag = tomorrowMode ? '?tomorrow=1' : ''
+    router.push(`/puzzle/${idNum + 1}${flag}`)
   }
 
   // Day 5 form submit
@@ -116,25 +109,39 @@ sessionStorage.setItem('dailyCorrect', cnt.toString())
 
   // ======= Results =======
   if (idNum > total) {
-    const score = parseInt(sessionStorage.getItem('dailyCorrect')||'0',10)
+    const score = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
     const passed = score >= 8
     return (
       <>
-        <Head><title>Your Results | Mind Sprint</title></Head>
-        <main style={{textAlign:'center',padding:'2rem'}}>
+        <Head>
+          <title>Your Results | Mind Sprint</title>
+        </Head>
+        <main style={{ textAlign: 'center', padding: '2rem' }}>
           <h1>🎉 You’ve completed Day {displayDay} Challenge!</h1>
-          <p style={{fontSize:'1.2rem'}}>You scored <strong>{score}/{total}</strong></p>
-          {passed && isNaN(previewDay) && !tomorrowMode ? (
+          <p style={{ fontSize: '1.2rem' }}>
+            You scored <strong>{score}/{total}</strong>
+          </p>
+          {passed && !tomorrowMode ? (
             <>
-              <p style={{color:'green'}}>Congrats—you’ve unlocked tomorrow’s challenge!</p>
+              <p style={{ color: 'green' }}>
+                Congrats—you’ve unlocked tomorrow’s challenge!
+              </p>
               <Link href="/puzzle/1?tomorrow=1">
-                <button style={{margin:'0.5rem',padding:'8px 16px'}}>Start Tomorrow’s Challenge</button>
+                <button style={{ margin: '0.5rem', padding: '8px 16px' }}>
+                  Start Tomorrow’s Challenge
+                </button>
               </Link>
             </>
           ) : !passed ? (
-            <p style={{color:'red'}}>You need 8/10 to unlock tomorrow. Try again tomorrow!</p>
+            <p style={{ color: 'red' }}>
+              You need 8/10 to unlock tomorrow. Try again tomorrow!
+            </p>
           ) : null}
-          <Link href="/"><button style={{marginTop:'1rem',padding:'8px 16px'}}>Back Home</button></Link>
+          <Link href="/">
+            <button style={{ marginTop: '1rem', padding: '8px 16px' }}>
+              Back Home
+            </button>
+          </Link>
         </main>
       </>
     )
@@ -144,37 +151,45 @@ sessionStorage.setItem('dailyCorrect', cnt.toString())
   if (isMemoryDay) {
     if (showFlash) {
       return (
-        <div style={{textAlign:'center',padding:'2rem',fontSize:'2rem'}}>
+        <div style={{ textAlign: 'center', padding: '2rem', fontSize: '2rem' }}>
           {flashSeq.join(' – ')}
         </div>
       )
     }
-    // question screen
+    // memory question screen
     return (
       <div className="quiz-page">
-        <div className="header" style={{background:'#ddd',height:90,textAlign:'center',lineHeight:'90px'}}>Ad Banner Top</div>
-        <div className="adL" style={{background:'#eee'}}>Ad Left</div>
-        <div className="main" style={{textAlign:'center',padding:'2rem'}}>
-          <Head><title>Day 5 – Memory Challenge</title></Head>
+        <div className="header" style={{ background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}>
+          Ad Banner Top
+        </div>
+        <div className="adL" style={{ background: '#eee' }}>Ad Left</div>
+        <div className="main" style={{ textAlign: 'center', padding: '2rem' }}>
+          <Head>
+            <title>Day 5 – Memory Challenge</title>
+          </Head>
           <h2>Day 5 Challenge</h2>
-          <p style={{marginBottom:'1rem'}}>
-            What was the <strong>{ordinal(askIndex+1)}</strong> number you saw?
+          <p style={{ marginBottom: '1rem' }}>
+            What was the <strong>{ordinal(askIndex + 1)}</strong> number you saw?
           </p>
           <form onSubmit={handleMemorySubmit}>
             <input
               type="text"
               value={userAns}
-              onChange={e=>setUserAns(e.target.value)}
+              onChange={e => setUserAns(e.target.value)}
               placeholder="Type the number..."
               autoComplete="off"
-              style={{padding:'8px',fontSize:16,width:150}}
+              style={{ padding: '8px', fontSize: 16, width: 150 }}
               required
             />
-            <button type="submit" style={{marginLeft:10,padding:'8px 16px'}}>Submit</button>
+            <button type="submit" style={{ marginLeft: 10, padding: '8px 16px' }}>
+              Submit
+            </button>
           </form>
         </div>
-        <div className="adR" style={{background:'#eee'}}>Ad Right</div>
-        <div className="footer" style={{background:'#ddd',height:90,textAlign:'center',lineHeight:'90px'}}>Ad Banner Bottom</div>
+        <div className="adR" style={{ background: '#eee' }}>Ad Right</div>
+        <div className="footer" style={{ background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}>
+          Ad Banner Bottom
+        </div>
       </div>
     )
   }
@@ -182,31 +197,40 @@ sessionStorage.setItem('dailyCorrect', cnt.toString())
   // ======= All other days: MCQ =======
   return (
     <div className="quiz-page">
-      <div className="header" style={{background:'#ddd',height:90,textAlign:'center',lineHeight:'90px'}}>Ad Banner Top</div>
-      <div className="adL" style={{background:'#eee'}}>Ad Left</div>
-      <div className="main" style={{textAlign:'center',padding:'2rem'}}>
+      <div className="header" style={{ background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}>
+        Ad Banner Top
+      </div>
+      <div className="adL" style={{ background: '#eee' }}>Ad Left</div>
+      <div className="main" style={{ textAlign: 'center', padding: '2rem' }}>
         <Head>
           <title>Day {displayDay} – Puzzle {idNum}</title>
-          <meta name="description" content={puzzle?.question||''}/>
+          <meta name="description" content={puzzle?.question || ''} />
         </Head>
         <h2>Day {displayDay} Challenge</h2>
         <p>{puzzle?.question}</p>
-        {puzzle?.options.map(opt=>(
+        {puzzle?.options.map(opt => (
           <button
             key={opt}
-            onClick={()=>afterAnswer(opt===puzzle.answer)}
+            onClick={() => afterAnswer(opt === puzzle.answer)}
             style={{
-              display:'block',margin:'10px auto',padding:'10px 20px',
-              width:'80%',background:'#f0f0f0',border:'1px solid #ccc',
-              borderRadius:4,cursor:'pointer'
+              display: 'block',
+              margin: '10px auto',
+              padding: '10px 20px',
+              width: '80%',
+              background: '#f0f0f0',
+              border: '1px solid #ccc',
+              borderRadius: 4,
+              cursor: 'pointer'
             }}
           >
             {opt}
           </button>
         ))}
       </div>
-      <div className="adR" style={{background:'#eee'}}>Ad Right</div>
-      <div className="footer" style={{background:'#ddd',height:90,textAlign:'center',lineHeight:'90px'}}>Ad Banner Bottom</div>
+      <div className="adR" style={{ background: '#eee' }}>Ad Right</div>
+      <div className="footer" style={{ background: '#ddd', height: 90, textAlign: 'center', lineHeight: '90px' }}>
+        Ad Banner Bottom
+      </div>
     </div>
   )
 }
