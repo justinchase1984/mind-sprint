@@ -1,87 +1,47 @@
 // pages/index.tsx
 import Head from 'next/head'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 
 export default function Home() {
-  const [unlocked, setUnlocked] = useState(1)
-
-  useEffect(() => {
-    // read how many Challenges they’ve unlocked (1–7)
-    const val = parseInt(localStorage.getItem('unlockedChallenge') || '1', 10)
-    setUnlocked(Math.min(Math.max(val, 1), 7))
-  }, [])
-
   return (
     <div
-      className="quiz-page"
       style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr 3fr 1fr',
-        minHeight: '100vh'
+        background: '#fff',
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '2rem',
+        textAlign: 'center',
       }}
     >
       <Head>
         <title>🧠 Mind Sprint</title>
         <meta
           name="description"
-          content="Daily puzzles: trivia, scramble, logic, memory... unlock by scoring 8/10!"
+          content="Start your Mind Sprint challenges—one question per page, 7 challenges to unlock the bonus!"
         />
       </Head>
 
-      {/* Top banner spans full width */}
-      <div
-        style={{
-          gridColumn: '1 / -1',
-          background: '#ddd',
-          height: 90,
-          textAlign: 'center',
-          lineHeight: '90px'
-        }}
-      >
-        Ad Banner Top
-      </div>
-
-      {/* Left ad */}
-      <div style={{ background: '#eee' }}>Ad Left</div>
-
-      {/* Main content */}
-      <main style={{ textAlign: 'center', padding: '2rem' }}>
-        <h1>🧠 Mind Sprint</h1>
-        <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>
-          Start your Mind Sprint challenges:
-        </p>
-        {[...Array(unlocked)].map((_, i) => (
-          <Link key={i} href={`/puzzle/${i + 1}`}>
-            <button
-              style={{
-                display: 'block',
-                margin: '0.5rem auto',
-                padding: '10px 20px',
-                fontSize: 16
-              }}
-            >
-              Challenge {i + 1}
-            </button>
-          </Link>
-        ))}
-      </main>
-
-      {/* Right ad */}
-      <div style={{ background: '#eee' }}>Ad Right</div>
-
-      {/* Bottom banner spans full width */}
-      <div
-        style={{
-          gridColumn: '1 / -1',
-          background: '#ddd',
-          height: 90,
-          textAlign: 'center',
-          lineHeight: '90px'
-        }}
-      >
-        Ad Banner Bottom
-      </div>
+      <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>🧠 Mind Sprint</h1>
+      <p style={{ fontSize: '1.1rem', marginBottom: '2rem' }}>
+        Start your Mind Sprint challenges:
+      </p>
+      <Link href="/puzzle/1">
+        <button
+          style={{
+            padding: '12px 24px',
+            fontSize: '1rem',
+            cursor: 'pointer',
+            borderRadius: '4px',
+            border: '1px solid #ccc',
+            background: '#f9f9f9',
+          }}
+        >
+          Get Started
+        </button>
+      </Link>
     </div>
   )
 }
