@@ -103,7 +103,7 @@ export default function PuzzlePage() {
         display: 'grid',
         gridTemplateRows: 'auto 1fr auto',
         gridTemplateColumns: '1fr minmax(0, 800px) 1fr',
-        rowGap: '1rem',          // ← adds vertical spacing
+        rowGap: '1rem',
         minHeight: '100vh',
         background: '#fff',
       }}
@@ -117,7 +117,7 @@ export default function PuzzlePage() {
       </Head>
 
       {/* Ad Slot: Top */}
-      <div id="ad-top" style={{ gridColumn: '1 / -1', padding: '1rem 0' }} />
+      <div id="ad-top" style={{ gridColumn: '1 / -1' }} />
 
       {/* Ad Slot: Left */}
       <div id="ad-left" />
@@ -132,18 +132,36 @@ export default function PuzzlePage() {
               10
             )
             const passed = score >= 8
-            if (passed && challengeIndex < 7) {
+
+            // AFTER CHALLENGE 7: week-complete page
+            if (challengeIndex === 7) {
+              return (
+                <>
+                  <h1>🎉 You’ve completed all 7 challenges!</h1>
+                  <p>You scored <strong>{score}/{total}</strong></p>
+                  <button
+                    onClick={() => router.push('/')}
+                    style={{ margin: '1rem', padding: '8px 16px' }}
+                  >
+                    Go Back To Start
+                  </button>
+                  {/* TODO: insert email-capture form here when ready */}
+                </>
+              )
+            }
+
+            // CHALLENGES 1–6: normal results
+            if (passed) {
               localStorage.setItem(
                 'unlockedChallenge',
                 String(challengeIndex + 1)
               )
             }
+
             return (
               <>
                 <h1>🎉 You’ve completed Challenge {challengeIndex}!</h1>
                 <p>You scored <strong>{score}/{total}</strong></p>
-
-                {/* ← side-by-side buttons container */}
                 <div
                   style={{
                     display: 'flex',
@@ -232,7 +250,7 @@ export default function PuzzlePage() {
       <div id="ad-right" />
 
       {/* Ad Slot: Bottom */}
-      <div id="ad-bottom" style={{ gridColumn: '1 / -1', padding: '1rem 0' }} />
+      <div id="ad-bottom" style={{ gridColumn: '1 / -1' }} />
     </div>
   )
 }
