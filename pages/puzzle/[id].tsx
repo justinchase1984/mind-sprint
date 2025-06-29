@@ -70,6 +70,17 @@ export default function PuzzlePage() {
 
   // 7) After‐answer handler
   function afterAnswer(isCorrect: boolean) {
+    // **DEBUG LOG** to help you see what's happening
+    console.log({
+      challenge: challengeIndex,
+      questionId: idNum,
+      chosenCorrect: isCorrect,
+      rawAnswer: puzzle.answer,
+      todayScore: sessionStorage.getItem('dailyCorrect'),
+      flagKey: `challenge${challengeIndex}_q${idNum}`,
+      alreadyFlag: sessionStorage.getItem(`challenge${challengeIndex}_q${idNum}`)
+    })
+
     // Streak logic
     let { current, max } = getStreaks()
     if (isCorrect) current += 1
@@ -91,18 +102,19 @@ export default function PuzzlePage() {
     router.push(`/puzzle/${idNum + 1}?challenge=${challengeIndex}`)
   }
 
+  // Memory‐day form submit
   const handleMemorySubmit = (e: FormEvent) => {
     e.preventDefault()
     afterAnswer(userAns.trim() === flashSeq[askIndex])
   }
 
-  // ————— WRAP EVERYTHING IN A 3×3 GRID —————
+  // Layout grid
   return (
     <div
       style={{
         display: 'grid',
         gridTemplateRows: 'auto 1fr auto',
-        gridTemplateColumns: '1fr minmax(0, 800px) 1fr',
+        gridTemplateColumns: '1fr minmax(0,800px) 1fr',
         rowGap: '1rem',
         minHeight: '100vh',
         background: '#fff',
@@ -116,75 +128,48 @@ export default function PuzzlePage() {
         </title>
       </Head>
 
-      {/* Ad Slot: Top */}
-      <div id="ad-top" style={{ gridColumn: '1 / -1' }} />
+      {/* (ad slot top) */}
+      <div style={{ gridColumn: '1 / -1' }} />
 
-      {/* Ad Slot: Left */}
-      <div id="ad-left" />
+      {/* (ad slot left) */}
+      <div />
 
-      {/* Center Column */}
+      {/* center content */}
       <main style={{ padding: '2rem 0', textAlign: 'center' }}>
         {idNum > total ? (
-          // ——— Results Screen ———
+          // —— Results screen —— 
           (() => {
             const score = parseInt(
               sessionStorage.getItem('dailyCorrect') || '0',
               10
             )
             const passed = score >= 8
-
-            // AFTER CHALLENGE 7: week-complete page
-            if (challengeIndex === 7) {
-              return (
-                <>
-                  <h1>🎉 You’ve completed all 7 challenges!</h1>
-                  <p>You scored <strong>{score}/{total}</strong></p>
-                  <button
-                    onClick={() => router.push('/')}
-                    style={{ margin: '1rem', padding: '8px 16px' }}
-                  >
-                    Go Back To Start
-                  </button>
-                  {/* TODO: insert email-capture form here when ready */}
-                </>
-              )
-            }
-
-            // CHALLENGES 1–6: normal results
-            if (passed) {
+            if (passed && challengeIndex < 7) {
               localStorage.setItem(
                 'unlockedChallenge',
                 String(challengeIndex + 1)
               )
             }
-
             return (
               <>
                 <h1>🎉 You’ve completed Challenge {challengeIndex}!</h1>
                 <p>You scored <strong>{score}/{total}</strong></p>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    gap: '1rem',
-                    marginTop: '1.5rem',
-                  }}
-                >
+                <div style={{ display:'flex', gap: '1rem', justifyContent:'center', marginTop:'1rem' }}>
                   {passed ? (
                     <Link href={`/puzzle/1?challenge=${challengeIndex + 1}`}>
-                      <button style={{ padding: '8px 16px' }}>
+                      <button style={{ padding:'8px 16px' }}>
                         Start Challenge {challengeIndex + 1}
                       </button>
                     </Link>
                   ) : (
                     <Link href={`/puzzle/1?challenge=${challengeIndex}`}>
-                      <button style={{ padding: '8px 16px' }}>
+                      <button style={{ padding:'8px 16px' }}>
                         You scored {score}/{total}. Try Again
                       </button>
                     </Link>
                   )}
                   <Link href="/">
-                    <button style={{ padding: '8px 16px' }}>
+                    <button style={{ padding:'8px 16px' }}>
                       Back to Home
                     </button>
                   </Link>
@@ -193,64 +178,64 @@ export default function PuzzlePage() {
             )
           })()
         ) : isMemoryDay ? (
-          // ——— Day 5 Memory UI ———
+          // —— Memory Day UI ——
           showFlash ? (
-            <div style={{ fontSize: '2rem' }}>
+            <div style={{ fontSize:'2rem' }}>
               {flashSeq.join(' – ')}
             </div>
           ) : (
             <>
               <h2>Challenge 5</h2>
-              <p>
-                What was the <strong>{ordinal(askIndex + 1)}</strong> number you saw?
-              </p>
+              <p>What was the <strong>{ordinal(askIndex+1)}</strong> number you saw?</p>
               <form onSubmit={handleMemorySubmit}>
                 <input
                   type="text"
                   value={userAns}
                   onChange={e => setUserAns(e.target.value)}
                   placeholder="Type the number…"
-                  style={{ padding: '8px', fontSize: 16 }}
+                  style={{ padding:'8px', fontSize:16 }}
                   required
                 />
-                <button
-                  type="submit"
-                  style={{ marginLeft: 10, padding: '8px 16px' }}
-                >
+                <button type="submit" style={{ marginLeft:10, padding:'8px 16px' }}>
                   Submit
                 </button>
               </form>
             </>
           )
         ) : (
-          // ——— All Other MCQs ———
+          // —— All other MCQs ——
           <>
             <h2>Challenge {challengeIndex}</h2>
             <p>{puzzle.question}</p>
-            {puzzle.options.map(opt => (
-              <button
-                key={opt}
-                onClick={() => afterAnswer(opt === puzzle.answer)}
-                style={{
-                  display: 'block',
-                  margin: '8px auto',
-                  padding: '10px 20px',
-                  width: '80%',
-                  cursor: 'pointer',
-                }}
-              >
-                {opt}
-              </button>
-            ))}
+            {puzzle.options.map(opt => {
+              // lowercase both for a bulletproof match
+              const picked = opt.trim().toLowerCase()
+              const correct = puzzle.answer.trim().toLowerCase()
+              return (
+                <button
+                  key={opt}
+                  onClick={() => afterAnswer(picked === correct)}
+                  style={{
+                    display:'block',
+                    margin:'8px auto',
+                    padding:'10px 20px',
+                    width:'80%',
+                    cursor:'pointer',
+                  }}
+                >
+                  {opt}
+                </button>
+              )
+            })}
           </>
         )}
       </main>
 
-      {/* Ad Slot: Right */}
-      <div id="ad-right" />
+      {/* (ad slot right) */}
+      <div />
 
-      {/* Ad Slot: Bottom */}
-      <div id="ad-bottom" style={{ gridColumn: '1 / -1' }} />
+      {/* (ad slot bottom) */}
+      <div style={{ gridColumn: '1 / -1' }} />
     </div>
   )
 }
