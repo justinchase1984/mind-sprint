@@ -38,12 +38,10 @@ export default function PuzzlePage() {
   // 4) On the very first question, reset everything:
   useEffect(() => {
     if (idNum === 1) {
-      // reset daily correct count
       sessionStorage.setItem('dailyCorrect', '0')
-      // clear each per-question flag for this challenge
-      puzzles.forEach((_p, idx) => {
+      puzzles.forEach((_p, idx) =>
         sessionStorage.removeItem(`challenge${challengeIndex}_q${idx + 1}`)
-      })
+      )
     }
   }, [idNum, challengeIndex, puzzles])
 
@@ -51,7 +49,7 @@ export default function PuzzlePage() {
   const isMemoryDay = challengeIndex === 5
   const total = isMemoryDay ? 10 : puzzles.length
 
-  // 6) Flash sequence & ask index
+  // 6) Flash sequence & ask index for memory day
   const flashSeq = useMemo<string[]>(() => {
     if (!isMemoryDay) return []
     return Array.from({ length: 5 }, () =>
@@ -78,14 +76,14 @@ export default function PuzzlePage() {
 
   // 8) Unified after-answer handler
   function afterAnswer(isCorrect: boolean) {
-    // streak logic
+    // Streak logic
     let { current, max } = getStreaks()
     if (isCorrect) current += 1
     else current = 0
     if (current > max) max = current
     saveStreaks(current, max)
 
-    // daily score (once-per-question)
+    // Daily score (once-per-question)
     const key = `challenge${challengeIndex}_q${idNum}`
     const already = sessionStorage.getItem(key)
     let cnt = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
@@ -95,11 +93,11 @@ export default function PuzzlePage() {
     }
     sessionStorage.setItem('dailyCorrect', cnt.toString())
 
-    // navigate forward
+    // Navigate forward
     router.push(`/puzzle/${idNum + 1}?challenge=${challengeIndex}`)
   }
 
-  // memory-day form handler
+  // Memory-day form handler
   const handleMemorySubmit = (e: FormEvent) => {
     e.preventDefault()
     afterAnswer(userAns.trim() === flashSeq[askIndex])
@@ -120,7 +118,9 @@ export default function PuzzlePage() {
       <Head>
         <title>
           {idNum > total
-            ? `Results | Challenge ${challengeIndex}`
+            ? challengeIndex === 7
+              ? 'All Done! | Mind Sprint'
+              : `Results | Challenge ${challengeIndex}`
             : `Challenge ${challengeIndex} – Puzzle ${idNum}`}
         </title>
       </Head>
@@ -140,6 +140,34 @@ export default function PuzzlePage() {
               sessionStorage.getItem('dailyCorrect') || '0',
               10
             )
+            // After Challenge 7: show completion + email capture
+            if (challengeIndex === 7) {
+              return (
+                <>
+                  <h1>🎉 You’ve completed all 7 challenges!</h1>
+                  <p>You scored <strong>{score}/{total}</strong></p>
+                  <button
+                    onClick={() => router.push('/')}
+                    style={{ margin: '1rem', padding: '8px 16px' }}
+                  >
+                    Go Back To Start
+                  </button>
+                  <div style={{ marginTop: '2rem', maxWidth: 400, margin: 'auto' }}>
+                    <p>Enter your email to claim your bonus reward:</p>
+                    <input
+                      type="email"
+                      placeholder="you@example.com"
+                      style={{ width: '100%', padding: '8px', fontSize: '1rem' }}
+                    />
+                    <button style={{ marginTop: '0.5rem', padding: '8px 16px' }}>
+                      Submit
+                    </button>
+                  </div>
+                </>
+              )
+            }
+
+            // Challenges 1–6: normal results
             const passed = score >= 8
             if (passed && challengeIndex < 7) {
               localStorage.setItem(
