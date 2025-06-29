@@ -1,29 +1,16 @@
 // pages/index.tsx
 import Head from 'next/head'
-import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 export default function Home() {
-  const router = useRouter()
-
-  const handleStart = () => {
-    // Always reset progress and start at Challenge 1
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('unlockedChallenge', '1')
-    }
-    router.push('/puzzle/1?challenge=1')
-  }
-
   return (
     <div
       style={{
-        background: '#fff',
+        display: 'grid',
+        gridTemplateRows: 'auto 1fr auto',
+        gridTemplateColumns: '1fr minmax(0, 800px) 1fr',
         minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: '2rem',
-        textAlign: 'center',
+        background: '#fff',
       }}
     >
       <Head>
@@ -34,24 +21,42 @@ export default function Home() {
         />
       </Head>
 
-      <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>🧠 Mind Sprint</h1>
-      <p style={{ fontSize: '1.1rem', marginBottom: '2rem' }}>
-        Start your Mind Sprint challenges:
-      </p>
+      {/* Ad: Top */}
+      <div id="ad-top" style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '1rem' }} />
 
-      <button
-        onClick={handleStart}
+      {/* Ad: Left */}
+      <div id="ad-left" />
+
+      {/* Main Content */}
+      <main
         style={{
-          padding: '12px 24px',
-          fontSize: '1rem',
-          cursor: 'pointer',
-          borderRadius: '4px',
-          border: '1px solid #ccc',
-          background: '#f9f9f9',
+          padding: '2rem',
+          textAlign: 'center',
         }}
       >
-        Get Started
-      </button>
+        <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>🧠 Mind Sprint</h1>
+        <p style={{ fontSize: '1.1rem', marginBottom: '2rem' }}>
+          Start your Mind Sprint challenges:
+        </p>
+        <Link href="/puzzle/1">
+          <button
+            style={{
+              padding: '10px 20px',
+              fontSize: '1rem',
+              cursor: 'pointer',
+              borderRadius: 4,
+            }}
+          >
+            Get Started
+          </button>
+        </Link>
+      </main>
+
+      {/* Ad: Right */}
+      <div id="ad-right" />
+
+      {/* Ad: Bottom */}
+      <div id="ad-bottom" style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '1rem' }} />
     </div>
   )
 }
