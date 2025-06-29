@@ -19,7 +19,7 @@ export default function PuzzlePage() {
   const router = useRouter()
   const { query } = router
 
-  // 1) Which challenge (1–7)?
+  // 1) Pick the challenge (1–7)
   const challengeIndex = (() => {
     const q = query.challenge as string | undefined
     if (q && !isNaN(+q)) return +q
@@ -28,19 +28,19 @@ export default function PuzzlePage() {
     return 1
   })()
 
-  // 2) Load that challenge’s 10 puzzles
+  // 2) Load that challenge’s puzzles
   const puzzles: Puzzle[] = getPuzzlesByDayIndex(challengeIndex)
 
-  // 3) Which question within it (1–10)?
+  // 3) Which question (1–10)?
   const idNum = parseInt((query.id as string) || '1', 10)
   const puzzle = puzzles[idNum - 1]
 
-  // 4) Reset daily score at start
+  // 4) Reset daily score at start of each challenge
   useEffect(() => {
     if (idNum === 1) sessionStorage.setItem('dailyCorrect', '0')
   }, [idNum])
 
-  // 5) Memory Day logic for challengeIndex===5:
+  // 5) Memory day logic (challengeIndex===5)
   const isMemoryDay = challengeIndex === 5
   const total = isMemoryDay ? 10 : puzzles.length
 
@@ -64,19 +64,20 @@ export default function PuzzlePage() {
     return () => clearTimeout(t)
   }, [idNum, isMemoryDay])
 
-  // 6) Input state & clear on new page
+  // 6) Answer state + clear on each new puzzle
   const [userAns, setUserAns] = useState('')
   useEffect(() => setUserAns(''), [idNum])
 
-  // 7) After‐answer handler (streak + score + nav)
+  // 7) After‐answer handler
   function afterAnswer(isCorrect: boolean) {
+    // Streak logic
     let { current, max } = getStreaks()
     if (isCorrect) current += 1
     else current = 0
     if (current > max) max = current
     saveStreaks(current, max)
 
-    // dailyCorrect
+    // Daily score (once per puzzle)
     const key = `challenge${challengeIndex}_q${idNum}`
     const already = sessionStorage.getItem(key)
     let cnt = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
@@ -86,7 +87,7 @@ export default function PuzzlePage() {
     }
     sessionStorage.setItem('dailyCorrect', cnt.toString())
 
-    // next
+    // Navigate to next
     router.push(`/puzzle/${idNum + 1}?challenge=${challengeIndex}`)
   }
 
@@ -95,13 +96,14 @@ export default function PuzzlePage() {
     afterAnswer(userAns.trim() === flashSeq[askIndex])
   }
 
-  // ———————— GRID WRAPPER ————————
+  // ————— WRAP EVERYTHING IN A 3×3 GRID —————
   return (
     <div
       style={{
         display: 'grid',
         gridTemplateRows: 'auto 1fr auto',
         gridTemplateColumns: '1fr minmax(0, 800px) 1fr',
+        rowGap: '1rem',          // ← adds vertical spacing
         minHeight: '100vh',
         background: '#fff',
       }}
@@ -109,19 +111,19 @@ export default function PuzzlePage() {
       <Head>
         <title>
           {idNum > total
-            ? 'Results | Mind Sprint'
+            ? `Results | Challenge ${challengeIndex}`
             : `Challenge ${challengeIndex} – Puzzle ${idNum}`}
         </title>
       </Head>
 
-      {/* Ad Top */}
-      <div id="ad-top" style={{ gridColumn: '1 / -1', padding: '1rem' }} />
+      {/* Ad Slot: Top */}
+      <div id="ad-top" style={{ gridColumn: '1 / -1', padding: '1rem 0' }} />
 
-      {/* Ad Left */}
+      {/* Ad Slot: Left */}
       <div id="ad-left" />
 
-      {/* Center Content */}
-      <main style={{ padding: '2rem', textAlign: 'center' }}>
+      {/* Center Column */}
+      <main style={{ padding: '2rem 0', textAlign: 'center' }}>
         {idNum > total ? (
           // ——— Results Screen ———
           (() => {
@@ -139,30 +141,36 @@ export default function PuzzlePage() {
             return (
               <>
                 <h1>🎉 You’ve completed Challenge {challengeIndex}!</h1>
-                <p>
-                  You scored <strong>{score}/{total}</strong>
-                </p>
-                {passed ? (
-                  <Link
-                    href={`/puzzle/1?challenge=${challengeIndex + 1}`}
-                  >
-                    <button style={{ margin: '1rem', padding: '8px 16px' }}>
-                      Start Challenge {challengeIndex + 1}
+                <p>You scored <strong>{score}/{total}</strong></p>
+
+                {/* ← side-by-side buttons container */}
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    gap: '1rem',
+                    marginTop: '1.5rem',
+                  }}
+                >
+                  {passed ? (
+                    <Link href={`/puzzle/1?challenge=${challengeIndex + 1}`}>
+                      <button style={{ padding: '8px 16px' }}>
+                        Start Challenge {challengeIndex + 1}
+                      </button>
+                    </Link>
+                  ) : (
+                    <Link href={`/puzzle/1?challenge=${challengeIndex}`}>
+                      <button style={{ padding: '8px 16px' }}>
+                        You scored {score}/{total}. Try Again
+                      </button>
+                    </Link>
+                  )}
+                  <Link href="/">
+                    <button style={{ padding: '8px 16px' }}>
+                      Back to Home
                     </button>
                   </Link>
-                ) : (
-                  <Link href={`/puzzle/1?challenge=${challengeIndex}`}>
-                    <button style={{ margin: '1rem', padding: '8px 16px' }}>
-                      You scored {score}/{total}. Try Again
-                    </button>
-                  </Link>
-                )}
-                <br />
-                <Link href="/">
-                  <button style={{ marginTop: '1rem', padding: '8px 16px' }}>
-                    Back to Home
-                  </button>
-                </Link>
+                </div>
               </>
             )
           })()
@@ -176,8 +184,7 @@ export default function PuzzlePage() {
             <>
               <h2>Challenge 5</h2>
               <p>
-                What was the <strong>{ordinal(askIndex + 1)}</strong> number you
-                saw?
+                What was the <strong>{ordinal(askIndex + 1)}</strong> number you saw?
               </p>
               <form onSubmit={handleMemorySubmit}>
                 <input
@@ -221,11 +228,11 @@ export default function PuzzlePage() {
         )}
       </main>
 
-      {/* Ad Right */}
+      {/* Ad Slot: Right */}
       <div id="ad-right" />
 
-      {/* Ad Bottom */}
-      <div id="ad-bottom" style={{ gridColumn: '1 / -1', padding: '1rem' }} />
+      {/* Ad Slot: Bottom */}
+      <div id="ad-bottom" style={{ gridColumn: '1 / -1', padding: '1rem 0' }} />
     </div>
   )
 }
