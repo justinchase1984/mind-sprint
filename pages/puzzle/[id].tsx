@@ -7,7 +7,7 @@ import type { Puzzle } from '../../lib/puzzles'
 import { getStreaks, saveStreaks } from '../../lib/streak'
 import { getPuzzlesByDayIndex } from '../../lib/utils'
 
-// Helper to render 1st, 2nd, 3rd…
+// Helper for "1st", "2nd", etc.
 function ordinal(n: number): string {
   if (n % 10 === 1 && n % 100 !== 11) return `${n}st`
   if (n % 10 === 2 && n % 100 !== 12) return `${n}nd`
@@ -19,7 +19,7 @@ export default function PuzzlePage() {
   const router = useRouter()
   const { query } = router
 
-  // --- Which challenge number (1–7) ---
+  // 1) Which challenge (1–7)?
   const challengeIndex = (() => {
     const q = query.challenge as string | undefined
     if (q && !isNaN(+q)) return +q
@@ -28,19 +28,19 @@ export default function PuzzlePage() {
     return 1
   })()
 
-  // --- Load that challenge’s puzzles ---
+  // 2) Load that challenge’s 10 puzzles
   const puzzles: Puzzle[] = getPuzzlesByDayIndex(challengeIndex)
 
-  // --- Which question in that challenge (1–10) ---
+  // 3) Which question within it (1–10)?
   const idNum = parseInt((query.id as string) || '1', 10)
   const puzzle = puzzles[idNum - 1]
 
-  // --- Reset score at start ---
+  // 4) Reset daily score at start
   useEffect(() => {
     if (idNum === 1) sessionStorage.setItem('dailyCorrect', '0')
   }, [idNum])
 
-  // --- Memory‐day logic (challenge 5) ---
+  // 5) Memory Day logic for challengeIndex===5:
   const isMemoryDay = challengeIndex === 5
   const total = isMemoryDay ? 10 : puzzles.length
 
@@ -64,20 +64,19 @@ export default function PuzzlePage() {
     return () => clearTimeout(t)
   }, [idNum, isMemoryDay])
 
-  // --- Input state & clear on new puzzle ---
+  // 6) Input state & clear on new page
   const [userAns, setUserAns] = useState('')
   useEffect(() => setUserAns(''), [idNum])
 
-  // --- After‐answer handler ---
+  // 7) After‐answer handler (streak + score + nav)
   function afterAnswer(isCorrect: boolean) {
-    // streak
     let { current, max } = getStreaks()
     if (isCorrect) current += 1
     else current = 0
     if (current > max) max = current
     saveStreaks(current, max)
 
-    // daily correct count (once per question)
+    // dailyCorrect
     const key = `challenge${challengeIndex}_q${idNum}`
     const already = sessionStorage.getItem(key)
     let cnt = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
@@ -87,7 +86,7 @@ export default function PuzzlePage() {
     }
     sessionStorage.setItem('dailyCorrect', cnt.toString())
 
-    // next question (preserve ?challenge)
+    // next
     router.push(`/puzzle/${idNum + 1}?challenge=${challengeIndex}`)
   }
 
@@ -96,99 +95,137 @@ export default function PuzzlePage() {
     afterAnswer(userAns.trim() === flashSeq[askIndex])
   }
 
-  // ===== Results screen =====
-  if (idNum > total) {
-    const score = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
-    const passed = score >= 8
-    if (passed && challengeIndex < 7) {
-      localStorage.setItem(
-        'unlockedChallenge',
-        String(challengeIndex + 1)
-      )
-    }
-    return (
-      <>
-        <Head><title>Your Results | Mind Sprint</title></Head>
-        <main style={{ padding: '2rem', textAlign: 'center' }}>
-          <h1>🎉 You’ve completed Challenge {challengeIndex}!</h1>
-          <p>You scored <strong>{score}/{total}</strong></p>
-          {passed ? (
-            <Link href={`/puzzle/1?challenge=${challengeIndex + 1}`}>
-              <button style={{ margin: '1rem', padding: '8px 16px' }}>
-                Start Challenge {challengeIndex + 1}
-              </button>
-            </Link>
-          ) : (
-            <Link href={`/puzzle/1?challenge=${challengeIndex}`}>
-              <button style={{ margin: '1rem', padding: '8px 16px' }}>
-                You scored {score}/{total}. Try Again
-              </button>
-            </Link>
-          )}
-          <br/>
-          <Link href="/"><button style={{ marginTop: '1rem', padding: '8px 16px' }}>
-            Back to Home
-          </button></Link>
-        </main>
-      </>
-    )
-  }
-
-  // ===== Memory‐day UI =====
-  if (isMemoryDay) {
-    if (showFlash) {
-      return (
-        <div style={{ padding: '2rem', textAlign: 'center', fontSize: '2rem' }}>
-          {flashSeq.join(' – ')}
-        </div>
-      )
-    }
-    return (
-      <main style={{ padding: '2rem', textAlign: 'center' }}>
-        <Head><title>Challenge 5 – Memory</title></Head>
-        <h2>Challenge 5</h2>
-        <p>What was the <strong>{ordinal(askIndex + 1)}</strong> number you saw?</p>
-        <form onSubmit={handleMemorySubmit}>
-          <input
-            type="text"
-            value={userAns}
-            onChange={e => setUserAns(e.target.value)}
-            placeholder="Type the number..."
-            style={{ padding: '8px', fontSize: 16 }}
-            required
-          />
-          <button type="submit" style={{ marginLeft: 10, padding: '8px 16px' }}>
-            Submit
-          </button>
-        </form>
-      </main>
-    )
-  }
-
-  // ===== MCQ for all other challenges =====
+  // ———————— GRID WRAPPER ————————
   return (
-    <main style={{ padding: '2rem', textAlign: 'center' }}>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateRows: 'auto 1fr auto',
+        gridTemplateColumns: '1fr minmax(0, 800px) 1fr',
+        minHeight: '100vh',
+        background: '#fff',
+      }}
+    >
       <Head>
-        <title>Challenge {challengeIndex} – Puzzle {idNum}</title>
-        <meta name="description" content={puzzle.question} />
+        <title>
+          {idNum > total
+            ? 'Results | Mind Sprint'
+            : `Challenge ${challengeIndex} – Puzzle ${idNum}`}
+        </title>
       </Head>
-      <h2>Challenge {challengeIndex}</h2>
-      <p>{puzzle.question}</p>
-      {puzzle.options.map(opt => (
-        <button
-          key={opt}
-          onClick={() => afterAnswer(opt === puzzle.answer)}
-          style={{
-            display: 'block',
-            margin: '8px auto',
-            padding: '10px 20px',
-            width: '80%',
-            cursor: 'pointer'
-          }}
-        >
-          {opt}
-        </button>
-      ))}
-    </main>
+
+      {/* Ad Top */}
+      <div id="ad-top" style={{ gridColumn: '1 / -1', padding: '1rem' }} />
+
+      {/* Ad Left */}
+      <div id="ad-left" />
+
+      {/* Center Content */}
+      <main style={{ padding: '2rem', textAlign: 'center' }}>
+        {idNum > total ? (
+          // ——— Results Screen ———
+          (() => {
+            const score = parseInt(
+              sessionStorage.getItem('dailyCorrect') || '0',
+              10
+            )
+            const passed = score >= 8
+            if (passed && challengeIndex < 7) {
+              localStorage.setItem(
+                'unlockedChallenge',
+                String(challengeIndex + 1)
+              )
+            }
+            return (
+              <>
+                <h1>🎉 You’ve completed Challenge {challengeIndex}!</h1>
+                <p>
+                  You scored <strong>{score}/{total}</strong>
+                </p>
+                {passed ? (
+                  <Link
+                    href={`/puzzle/1?challenge=${challengeIndex + 1}`}
+                  >
+                    <button style={{ margin: '1rem', padding: '8px 16px' }}>
+                      Start Challenge {challengeIndex + 1}
+                    </button>
+                  </Link>
+                ) : (
+                  <Link href={`/puzzle/1?challenge=${challengeIndex}`}>
+                    <button style={{ margin: '1rem', padding: '8px 16px' }}>
+                      You scored {score}/{total}. Try Again
+                    </button>
+                  </Link>
+                )}
+                <br />
+                <Link href="/">
+                  <button style={{ marginTop: '1rem', padding: '8px 16px' }}>
+                    Back to Home
+                  </button>
+                </Link>
+              </>
+            )
+          })()
+        ) : isMemoryDay ? (
+          // ——— Day 5 Memory UI ———
+          showFlash ? (
+            <div style={{ fontSize: '2rem' }}>
+              {flashSeq.join(' – ')}
+            </div>
+          ) : (
+            <>
+              <h2>Challenge 5</h2>
+              <p>
+                What was the <strong>{ordinal(askIndex + 1)}</strong> number you
+                saw?
+              </p>
+              <form onSubmit={handleMemorySubmit}>
+                <input
+                  type="text"
+                  value={userAns}
+                  onChange={e => setUserAns(e.target.value)}
+                  placeholder="Type the number…"
+                  style={{ padding: '8px', fontSize: 16 }}
+                  required
+                />
+                <button
+                  type="submit"
+                  style={{ marginLeft: 10, padding: '8px 16px' }}
+                >
+                  Submit
+                </button>
+              </form>
+            </>
+          )
+        ) : (
+          // ——— All Other MCQs ———
+          <>
+            <h2>Challenge {challengeIndex}</h2>
+            <p>{puzzle.question}</p>
+            {puzzle.options.map(opt => (
+              <button
+                key={opt}
+                onClick={() => afterAnswer(opt === puzzle.answer)}
+                style={{
+                  display: 'block',
+                  margin: '8px auto',
+                  padding: '10px 20px',
+                  width: '80%',
+                  cursor: 'pointer',
+                }}
+              >
+                {opt}
+              </button>
+            ))}
+          </>
+        )}
+      </main>
+
+      {/* Ad Right */}
+      <div id="ad-right" />
+
+      {/* Ad Bottom */}
+      <div id="ad-bottom" style={{ gridColumn: '1 / -1', padding: '1rem' }} />
+    </div>
   )
 }
