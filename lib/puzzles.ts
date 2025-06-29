@@ -15,7 +15,7 @@ export const triviaPool: Puzzle[] = [
   },
   {
     question: 'Who has won the most men’s Grand Slam tennis titles?',
-    answer: 'Rafael Nadal',
+    answer: 'Novak Djokovic',
     options: ['Roger Federer', 'Novak Djokovic', 'Rafael Nadal', 'Andy Murray'],
   },
   {
