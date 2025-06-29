@@ -1,8 +1,18 @@
 // pages/index.tsx
 import Head from 'next/head'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export default function Home() {
+  const router = useRouter()
+
+  const handleStart = () => {
+    // Always reset progress and start at Challenge 1
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('unlockedChallenge', '1')
+    }
+    router.push('/puzzle/1?challenge=1')
+  }
+
   return (
     <div
       style={{
@@ -28,20 +38,20 @@ export default function Home() {
       <p style={{ fontSize: '1.1rem', marginBottom: '2rem' }}>
         Start your Mind Sprint challenges:
       </p>
-      <Link href="/puzzle/1">
-        <button
-          style={{
-            padding: '12px 24px',
-            fontSize: '1rem',
-            cursor: 'pointer',
-            borderRadius: '4px',
-            border: '1px solid #ccc',
-            background: '#f9f9f9',
-          }}
-        >
-          Get Started
-        </button>
-      </Link>
+
+      <button
+        onClick={handleStart}
+        style={{
+          padding: '12px 24px',
+          fontSize: '1rem',
+          cursor: 'pointer',
+          borderRadius: '4px',
+          border: '1px solid #ccc',
+          background: '#f9f9f9',
+        }}
+      >
+        Get Started
+      </button>
     </div>
   )
 }
