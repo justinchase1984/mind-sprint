@@ -38,7 +38,7 @@ export default function Home() {
         <p style={{ fontSize: '1.1rem', marginBottom: '2rem' }}>
           Start your Mind Sprint challenges:
         </p>
-        <Link href="/puzzle/1">
+        <Link href="/puzzle/1?challenge=1">
           <button
             style={{
               padding: '10px 20px',
