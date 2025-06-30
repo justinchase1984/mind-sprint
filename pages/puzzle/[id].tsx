@@ -1,5 +1,6 @@
 // pages/puzzle/[id].tsx
 import Head from 'next/head'
+import Script from 'next/script'
 import { useRouter } from 'next/router'
 import { useEffect, useState, useMemo, FormEvent } from 'react'
 import Link from 'next/link'
@@ -45,7 +46,7 @@ export default function PuzzlePage() {
     }
   }, [idNum, challengeIndex, puzzles])
 
-  // 5) Memory-day detection
+  // 5) Memory‐day detection
   const isMemoryDay = challengeIndex === 5
   const total = isMemoryDay ? 10 : puzzles.length
 
@@ -74,16 +75,16 @@ export default function PuzzlePage() {
   const [userAns, setUserAns] = useState('')
   useEffect(() => setUserAns(''), [idNum])
 
-  // 8) Unified after-answer handler
+  // 8) Unified after‐answer handler
   function afterAnswer(isCorrect: boolean) {
-    // Streak logic
+    // streak logic
     let { current, max } = getStreaks()
     if (isCorrect) current += 1
     else current = 0
     if (current > max) max = current
     saveStreaks(current, max)
 
-    // Daily score (once-per-question)
+    // daily score (once per puzzle)
     const key = `challenge${challengeIndex}_q${idNum}`
     const already = sessionStorage.getItem(key)
     let cnt = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
@@ -93,17 +94,17 @@ export default function PuzzlePage() {
     }
     sessionStorage.setItem('dailyCorrect', cnt.toString())
 
-    // Navigate forward
+    // navigate forward
     router.push(`/puzzle/${idNum + 1}?challenge=${challengeIndex}`)
   }
 
-  // Memory-day form handler
+  // memory‐day form handler
   const handleMemorySubmit = (e: FormEvent) => {
     e.preventDefault()
     afterAnswer(userAns.trim() === flashSeq[askIndex])
   }
 
-  // —— layout using a simple 3×3 grid —— 
+  // ——— layout using a simple 3×3 grid ———
   return (
     <div
       style={{
@@ -140,7 +141,8 @@ export default function PuzzlePage() {
               sessionStorage.getItem('dailyCorrect') || '0',
               10
             )
-            // After Challenge 7: show completion + email capture
+
+            // —— After Challenge 7: special bonus & AWeber form
             if (challengeIndex === 7) {
               return (
                 <>
@@ -152,22 +154,28 @@ export default function PuzzlePage() {
                   >
                     Go Back To Start
                   </button>
-                  <div style={{ marginTop: '2rem', maxWidth: 400, margin: 'auto' }}>
-                    <p>Enter your email to claim your bonus reward:</p>
-                    <input
-                      type="email"
-                      placeholder="you@example.com"
-                      style={{ width: '100%', padding: '8px', fontSize: '1rem' }}
-                    />
-                    <button style={{ marginTop: '0.5rem', padding: '8px 16px' }}>
-                      Submit
-                    </button>
-                  </div>
+
+                  {/* ——— AWeber embed ——— */}
+                  <div className="AW-Form-317058051" />
+                  <Script
+                    id="aweber-wjs-4jn9xv4az"
+                    strategy="afterInteractive"
+                    dangerouslySetInnerHTML={{
+                      __html: `(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//forms.aweber.com/form/51/317058051.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, "script", "aweber-wjs-4jn9xv4az"));`,
+                    }}
+                  />
+                  {/* ———————————————— */}
                 </>
               )
             }
 
-            // Challenges 1–6: normal results
+            // —— Normal results for Challenges 1–6
             const passed = score >= 8
             if (passed && challengeIndex < 7) {
               localStorage.setItem(
