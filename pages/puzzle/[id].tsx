@@ -158,17 +158,8 @@ export default function PuzzlePage() {
                   {/* ——— AWeber embed ——— */}
                   <div className="AW-Form-317058051" />
                   <Script
-                    id="aweber-wjs-4jn9xv4az"
                     strategy="afterInteractive"
-                    dangerouslySetInnerHTML={{
-                      __html: `(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//forms.aweber.com/form/51/317058051.js";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, "script", "aweber-wjs-4jn9xv4az"));`,
-                    }}
+                    src="//forms.aweber.com/form/51/317058051.js"
                   />
                   {/* ———————————————— */}
                 </>
