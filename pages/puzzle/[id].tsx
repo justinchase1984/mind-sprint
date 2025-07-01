@@ -1,6 +1,5 @@
 // pages/puzzle/[id].tsx
 import Head from 'next/head'
-import Script from 'next/script'
 import { useRouter } from 'next/router'
 import { useEffect, useState, useMemo, FormEvent } from 'react'
 import Link from 'next/link'
@@ -8,7 +7,7 @@ import type { Puzzle } from '../../lib/puzzles'
 import { getStreaks, saveStreaks } from '../../lib/streak'
 import { getPuzzlesByDayIndex } from '../../lib/utils'
 
-// Helper for “1st” “2nd” etc.
+// Helper for “1st”, “2nd”, etc.
 function ordinal(n: number): string {
   if (n % 10 === 1 && n % 100 !== 11) return `${n}st`
   if (n % 10 === 2 && n % 100 !== 12) return `${n}nd`
@@ -100,7 +99,6 @@ export default function PuzzlePage() {
     afterAnswer(userAns.trim() === flashSeq[askIndex])
   }
 
-  // Render!
   return (
     <div
       style={{
@@ -138,7 +136,7 @@ export default function PuzzlePage() {
               10
             )
 
-            // —— Special Challenge 7 flow with AWeber embed ——
+            // —— Special Challenge 7 flow with raw-HTML AWeber form ——
             if (challengeIndex === 7) {
               return (
                 <>
@@ -146,17 +144,41 @@ export default function PuzzlePage() {
                   <p>You scored <strong>{score}/{total}</strong></p>
                   <p>Enter your email below to claim your bonus reward:</p>
 
-                  {/* ← your AWeber form placeholder */}
-                  <div className="AW-Form-317058051" />
+                  {/* ——— RAW-HTML AWeber FORM ———
+                       Replace everything inside this <form>…</form> with
+                       the exact form HTML AWeber gave you (hidden fields, list IDs, etc.)
+                  */}
+                  <form
+                    method="post"
+                    action="https://www.aweber.com/scripts/addlead.pl"
+                    style={{ margin: '1.5rem auto', maxWidth: 400, textAlign: 'left' }}
+                  >
+                    {/* ↓ Paste AWeber's hidden inputs & fields here ↓ */}
 
-                  {/* ← loads the AWeber snippet */}
-                  <Script
-                    id="aweber-wjs-4jn9xv4az"
-                    strategy="afterInteractive"
-                    dangerouslySetInnerHTML={{
-                      __html: `(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="//forms.aweber.com/form/51/317058051.js";fjs.parentNode.insertBefore(js,fjs);}(document,"script","aweber-wjs-4jn9xv4az"));`,
-                    }}
-                  />
+                    <div style={{ marginBottom: '0.5rem' }}>
+                      <label htmlFor="awf_field-317058051_email">Email:</label>
+                      <input
+                        id="awf_field-317058051_email"
+                        type="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        required
+                        style={{ width: '100%', padding: '8px', marginTop: '4px' }}
+                      />
+                    </div>
+
+                    <button type="submit" style={{ padding: '8px 16px' }}>
+                      Claim Reward
+                    </button>
+                  </form>
+                  {/* ——————————————————————————————— */}
+
+                  <button
+                    onClick={() => router.push('/')}
+                    style={{ marginTop: '2rem', padding: '8px 16px' }}
+                  >
+                    Go Back To Start
+                  </button>
                 </>
               )
             }
@@ -182,9 +204,7 @@ export default function PuzzlePage() {
                   }}
                 >
                   {passed ? (
-                    <Link
-                      href={`/puzzle/1?challenge=${challengeIndex + 1}`}
-                    >
+                    <Link href={`/puzzle/1?challenge=${challengeIndex + 1}`}>
                       <button style={{ padding: '8px 16px' }}>
                         Start Challenge {challengeIndex + 1}
                       </button>
