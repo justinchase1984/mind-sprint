@@ -104,7 +104,6 @@ export default function PuzzlePage() {
     afterAnswer(userAns.trim() === flashSeq[askIndex])
   }
 
-  // ——— layout using a simple 3×3 grid ———
   return (
     <div
       style={{
@@ -126,13 +125,13 @@ export default function PuzzlePage() {
         </title>
       </Head>
 
-      {/* top slot (ads go here) */}
+      {/* top ad slot */}
       <div style={{ gridColumn: '1 / -1' }} />
 
-      {/* left slot */}
+      {/* left ad slot */}
       <div />
 
-      {/* center content */}
+      {/* main content */}
       <main style={{ padding: '2rem 0', textAlign: 'center' }}>
         {idNum > total ? (
           // —— Results screen —— 
@@ -142,21 +141,18 @@ export default function PuzzlePage() {
               10
             )
 
-            // —— After Challenge 7: special bonus & AWeber form
+            // —— After Challenge 7: show embed + fallback —— 
             if (challengeIndex === 7) {
               return (
                 <>
                   <h1>🎉 Congratulations! You’ve completed all 7 challenges!</h1>
                   <p>You scored <strong>{score}/{total}</strong></p>
-
-                  <p style={{ marginTop: '1rem', fontSize: '1.1rem' }}>
-                    Enter your email below to claim your bonus reward:
-                  </p>
+                  <p>Enter your email below to claim your bonus reward:</p>
 
                   {/* AWeber embed placeholder */}
                   <div className="AW-Form-317058051" />
 
-                  {/* Load AWeber script */}
+                  {/* AWeber loader */}
                   <Script
                     id="aweber-wjs-4jn9xv4az"
                     strategy="afterInteractive"
@@ -171,10 +167,29 @@ export default function PuzzlePage() {
                     }}
                   />
 
-                  {/* Back-to-start button */}
+                  {/* Fallback simple form (in case AWeber script is blocked) */}
+                  <form
+                    action="https://www.aweber.com/scripts/ia.r"
+                    method="post"
+                    target="_blank"
+                    style={{ marginTop: '1rem', maxWidth: 400, margin: '1rem auto' }}
+                  >
+                    <input type="hidden" name="listname" value="YOUR_LIST_NAME_HERE" />
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="you@example.com"
+                      required
+                      style={{ padding: '8px', width: '70%' }}
+                    />
+                    <button type="submit" style={{ padding: '8px 16px', marginLeft: '0.5rem' }}>
+                      Claim Reward
+                    </button>
+                  </form>
+
                   <button
                     onClick={() => router.push('/')}
-                    style={{ display: 'block', margin: '2rem auto', padding: '8px 16px' }}
+                    style={{ marginTop: '2rem', padding: '8px 16px' }}
                   >
                     Go Back To Start
                   </button>
@@ -182,7 +197,7 @@ export default function PuzzlePage() {
               )
             }
 
-            // —— Normal results for Challenges 1–6
+            // —— Results for Challenges 1–6 —— 
             const passed = score >= 8
             if (passed && challengeIndex < 7) {
               localStorage.setItem(
@@ -194,14 +209,7 @@ export default function PuzzlePage() {
               <>
                 <h1>🎉 You’ve completed Challenge {challengeIndex}!</h1>
                 <p>You scored <strong>{score}/{total}</strong></p>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    gap: '1rem',
-                    marginTop: '1rem',
-                  }}
-                >
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1rem' }}>
                   {passed ? (
                     <Link href={`/puzzle/1?challenge=${challengeIndex + 1}`}>
                       <button style={{ padding: '8px 16px' }}>
@@ -216,9 +224,7 @@ export default function PuzzlePage() {
                     </Link>
                   )}
                   <Link href="/">
-                    <button style={{ padding: '8px 16px' }}>
-                      Back to Home
-                    </button>
+                    <button style={{ padding: '8px 16px' }}>Back to Home</button>
                   </Link>
                 </div>
               </>
@@ -238,15 +244,12 @@ export default function PuzzlePage() {
                 <input
                   type="text"
                   value={userAns}
-                  onChange={e => setUserAns(e.target.value)}
+                  onChange={(e) => setUserAns(e.target.value)}
                   placeholder="Type the number…"
                   style={{ padding: '8px', fontSize: 16 }}
                   required
                 />
-                <button
-                  type="submit"
-                  style={{ marginLeft: 10, padding: '8px 16px' }}
-                >
+                <button type="submit" style={{ marginLeft: 10, padding: '8px 16px' }}>
                   Submit
                 </button>
               </form>
@@ -257,33 +260,29 @@ export default function PuzzlePage() {
           <>
             <h2>Challenge {challengeIndex}</h2>
             <p>{puzzle.question}</p>
-            {puzzle.options.map(opt => {
-              const picked = opt.trim().toLowerCase()
-              const correct = puzzle.answer.trim().toLowerCase()
-              return (
-                <button
-                  key={opt}
-                  onClick={() => afterAnswer(picked === correct)}
-                  style={{
-                    display: 'block',
-                    margin: '8px auto',
-                    padding: '10px 20px',
-                    width: '80%',
-                    cursor: 'pointer',
-                  }}
-                >
-                  {opt}
-                </button>
-              )
-            })}
+            {puzzle.options.map((opt) => (
+              <button
+                key={opt}
+                onClick={() => afterAnswer(opt.trim().toLowerCase() === puzzle.answer.trim().toLowerCase())}
+                style={{
+                  display: 'block',
+                  margin: '8px auto',
+                  padding: '10px 20px',
+                  width: '80%',
+                  cursor: 'pointer',
+                }}
+              >
+                {opt}
+              </button>
+            ))}
           </>
         )}
       </main>
 
-      {/* right slot */}
+      {/* right ad slot */}
       <div />
 
-      {/* bottom slot */}
+      {/* bottom ad slot */}
       <div style={{ gridColumn: '1 / -1' }} />
     </div>
   )
