@@ -20,7 +20,7 @@ export default function PuzzlePage() {
   const router = useRouter()
   const { query } = router
 
-  // 1) Which challenge (1–7)?
+  // 1) Which challenge (1–7)?  
   const challengeIndex = (() => {
     const q = query.challenge as string | undefined
     if (q && !isNaN(+q)) return +q
@@ -29,14 +29,14 @@ export default function PuzzlePage() {
     return 1
   })()
 
-  // 2) Load that challenge’s puzzles
+  // 2) Load that challenge’s puzzles  
   const puzzles: Puzzle[] = getPuzzlesByDayIndex(challengeIndex)
 
-  // 3) Which question ID (1–10)?
+  // 3) Which question ID (1–10)?  
   const idNum = parseInt((query.id as string) || '1', 10)
   const puzzle = puzzles[idNum - 1]
 
-  // 4) On the very first question, reset everything:
+  // 4) On the very first question, reset everything:  
   useEffect(() => {
     if (idNum === 1) {
       sessionStorage.setItem('dailyCorrect', '0')
@@ -46,11 +46,11 @@ export default function PuzzlePage() {
     }
   }, [idNum, challengeIndex, puzzles])
 
-  // 5) Memory-day detection
+  // 5) Memory-day detection  
   const isMemoryDay = challengeIndex === 5
   const total = isMemoryDay ? 10 : puzzles.length
 
-  // 6) Flash sequence & ask index for memory day
+  // 6) Flash sequence & ask index for memory day  
   const flashSeq = useMemo<string[]>(() => {
     if (!isMemoryDay) return []
     return Array.from({ length: 5 }, () =>
@@ -71,11 +71,11 @@ export default function PuzzlePage() {
     return () => clearTimeout(t)
   }, [idNum, isMemoryDay])
 
-  // 7) Answer input state
+  // 7) Answer input state  
   const [userAns, setUserAns] = useState('')
   useEffect(() => setUserAns(''), [idNum])
 
-  // 8) Unified after-answer handler
+  // 8) Unified after-answer handler  
   function afterAnswer(isCorrect: boolean) {
     // streak logic
     let { current, max } = getStreaks()
@@ -98,12 +98,13 @@ export default function PuzzlePage() {
     router.push(`/puzzle/${idNum + 1}?challenge=${challengeIndex}`)
   }
 
-  // memory-day form handler
+  // memory-day form handler  
   const handleMemorySubmit = (e: FormEvent) => {
     e.preventDefault()
     afterAnswer(userAns.trim() === flashSeq[askIndex])
   }
 
+  // —— layout using a simple 3×3 grid ——  
   return (
     <div
       style={{
@@ -125,34 +126,37 @@ export default function PuzzlePage() {
         </title>
       </Head>
 
-      {/* top ad slot */}
+      {/* top slot (ads go here) */}
       <div style={{ gridColumn: '1 / -1' }} />
 
-      {/* left ad slot */}
+      {/* left slot */}
       <div />
 
-      {/* main content */}
+      {/* center content */}
       <main style={{ padding: '2rem 0', textAlign: 'center' }}>
         {idNum > total ? (
-          // —— Results screen —— 
+          // —— Results screen ——  
           (() => {
             const score = parseInt(
               sessionStorage.getItem('dailyCorrect') || '0',
               10
             )
 
-            // —— After Challenge 7: show embed + fallback —— 
+            // —— After Challenge 7: special bonus & AWeber form  
             if (challengeIndex === 7) {
               return (
                 <>
+                  {/* ← Your new Congratulations message: */}
                   <h1>🎉 Congratulations! You’ve completed all 7 challenges!</h1>
                   <p>You scored <strong>{score}/{total}</strong></p>
                   <p>Enter your email below to claim your bonus reward:</p>
 
-                  {/* AWeber embed placeholder */}
-                  <div className="AW-Form-317058051" />
+                  {/* ← Fallback form if script hasn’t loaded yet */}
+                  <div className="AW-Form-317058051"
+                       style={{ maxWidth: 400, margin: '1rem auto' }}
+                  />
 
-                  {/* AWeber loader */}
+                  {/* ← AWeber’s JS loader — only fires on real domain */}
                   <Script
                     id="aweber-wjs-4jn9xv4az"
                     strategy="afterInteractive"
@@ -167,29 +171,10 @@ export default function PuzzlePage() {
                     }}
                   />
 
-                  {/* Fallback simple form (in case AWeber script is blocked) */}
-                  <form
-                    action="https://www.aweber.com/scripts/ia.r"
-                    method="post"
-                    target="_blank"
-                    style={{ marginTop: '1rem', maxWidth: 400, margin: '1rem auto' }}
-                  >
-                    <input type="hidden" name="listname" value="YOUR_LIST_NAME_HERE" />
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="you@example.com"
-                      required
-                      style={{ padding: '8px', width: '70%' }}
-                    />
-                    <button type="submit" style={{ padding: '8px 16px', marginLeft: '0.5rem' }}>
-                      Claim Reward
-                    </button>
-                  </form>
-
+                  {/* ← “Go Back to Start” under the form */}
                   <button
                     onClick={() => router.push('/')}
-                    style={{ marginTop: '2rem', padding: '8px 16px' }}
+                    style={{ marginTop: '1.5rem', padding: '8px 16px' }}
                   >
                     Go Back To Start
                   </button>
@@ -197,7 +182,7 @@ export default function PuzzlePage() {
               )
             }
 
-            // —— Results for Challenges 1–6 —— 
+            // —— Normal results for Challenges 1–6  
             const passed = score >= 8
             if (passed && challengeIndex < 7) {
               localStorage.setItem(
@@ -209,7 +194,14 @@ export default function PuzzlePage() {
               <>
                 <h1>🎉 You’ve completed Challenge {challengeIndex}!</h1>
                 <p>You scored <strong>{score}/{total}</strong></p>
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1rem' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    gap: '1rem',
+                    marginTop: '1rem',
+                  }}
+                >
                   {passed ? (
                     <Link href={`/puzzle/1?challenge=${challengeIndex + 1}`}>
                       <button style={{ padding: '8px 16px' }}>
@@ -224,14 +216,16 @@ export default function PuzzlePage() {
                     </Link>
                   )}
                   <Link href="/">
-                    <button style={{ padding: '8px 16px' }}>Back to Home</button>
+                    <button style={{ padding: '8px 16px' }}>
+                      Back to Home
+                    </button>
                   </Link>
                 </div>
               </>
             )
           })()
         ) : isMemoryDay ? (
-          // —— Memory day UI —— 
+          // —— Memory day UI ——  
           showFlash ? (
             <div style={{ fontSize: '2rem' }}>{flashSeq.join(' – ')}</div>
           ) : (
@@ -244,45 +238,52 @@ export default function PuzzlePage() {
                 <input
                   type="text"
                   value={userAns}
-                  onChange={(e) => setUserAns(e.target.value)}
+                  onChange={e => setUserAns(e.target.value)}
                   placeholder="Type the number…"
                   style={{ padding: '8px', fontSize: 16 }}
                   required
                 />
-                <button type="submit" style={{ marginLeft: 10, padding: '8px 16px' }}>
+                <button
+                  type="submit"
+                  style={{ marginLeft: 10, padding: '8px 16px' }}
+                >
                   Submit
                 </button>
               </form>
             </>
           )
         ) : (
-          // —— All other MCQs —— 
+          // —— All other MCQs ——  
           <>
             <h2>Challenge {challengeIndex}</h2>
             <p>{puzzle.question}</p>
-            {puzzle.options.map((opt) => (
-              <button
-                key={opt}
-                onClick={() => afterAnswer(opt.trim().toLowerCase() === puzzle.answer.trim().toLowerCase())}
-                style={{
-                  display: 'block',
-                  margin: '8px auto',
-                  padding: '10px 20px',
-                  width: '80%',
-                  cursor: 'pointer',
-                }}
-              >
-                {opt}
-              </button>
-            ))}
+            {puzzle.options.map(opt => {
+              const picked = opt.trim().toLowerCase()
+              const correct = puzzle.answer.trim().toLowerCase()
+              return (
+                <button
+                  key={opt}
+                  onClick={() => afterAnswer(picked === correct)}
+                  style={{
+                    display: 'block',
+                    margin: '8px auto',
+                    padding: '10px 20px',
+                    width: '80%',
+                    cursor: 'pointer',
+                  }}
+                >
+                  {opt}
+                </button>
+              )
+            })}
           </>
         )}
       </main>
 
-      {/* right ad slot */}
+      {/* right slot */}
       <div />
 
-      {/* bottom ad slot */}
+      {/* bottom slot */}
       <div style={{ gridColumn: '1 / -1' }} />
     </div>
   )
