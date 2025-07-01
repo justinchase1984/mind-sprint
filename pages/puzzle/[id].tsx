@@ -73,7 +73,7 @@ export default function PuzzlePage() {
   const [userAns, setUserAns] = useState('')
   useEffect(() => setUserAns(''), [idNum])
 
-  // 7) Common after-answer handler (streak + daily score + nav)
+  // 7) Common after-answer handler
   function afterAnswer(isCorrect: boolean) {
     let { current, max } = getStreaks()
     if (isCorrect) current += 1
@@ -144,34 +144,53 @@ export default function PuzzlePage() {
                   <p>You scored <strong>{score}/{total}</strong></p>
                   <p>Enter your email below to claim your bonus reward:</p>
 
-                  {/* ——— RAW-HTML AWeber FORM ———
-                       Replace everything inside this <form>…</form> with
-                       the exact form HTML AWeber gave you (hidden fields, list IDs, etc.)
-                  */}
                   <form
                     method="post"
                     action="https://www.aweber.com/scripts/addlead.pl"
-                    style={{ margin: '1.5rem auto', maxWidth: 400, textAlign: 'left' }}
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'flex-end',
+                      gap: '0.5rem',
+                      margin: '1.5rem auto',
+                      maxWidth: 400,
+                    }}
                   >
-                    {/* ↓ Paste AWeber's hidden inputs & fields here ↓ */}
+                    {/* ——— Paste your AWeber hidden fields here ——— */}
+                    {/* <input type="hidden" name="listname" value="YOUR_LIST_ID" /> */}
+                    {/* <input type="hidden" name="redirect" value="YOUR_THANK_YOU_URL" /> */}
+                    {/* …etc… */}
 
-                    <div style={{ marginBottom: '0.5rem' }}>
-                      <label htmlFor="awf_field-317058051_email">Email:</label>
-                      <input
-                        id="awf_field-317058051_email"
-                        type="email"
-                        name="email"
-                        placeholder="you@example.com"
-                        required
-                        style={{ width: '100%', padding: '8px', marginTop: '4px' }}
-                      />
-                    </div>
-
-                    <button type="submit" style={{ padding: '8px 16px' }}>
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="you@example.com"
+                      required
+                      style={{
+                        flex: 1,
+                        padding: '8px 12px',
+                        fontSize: '1rem',
+                        border: '1px solid #ccc',
+                        borderRadius: '4px 0 0 4px',
+                        outline: 'none',
+                      }}
+                    />
+                    <button
+                      type="submit"
+                      style={{
+                        padding: '8px 16px',
+                        fontSize: '1rem',
+                        border: '1px solid #ccc',
+                        borderLeft: 'none',
+                        borderRadius: '0 4px 4px 0',
+                        background: '#0077cc',
+                        color: '#fff',
+                        cursor: 'pointer',
+                      }}
+                    >
                       Claim Reward
                     </button>
                   </form>
-                  {/* ——————————————————————————————— */}
 
                   <button
                     onClick={() => router.push('/')}
@@ -228,7 +247,9 @@ export default function PuzzlePage() {
         ) : isMemoryDay ? (
           // —— Memory Day UI ——
           showFlash ? (
-            <div style={{ fontSize: '2rem' }}>{flashSeq.join(' – ')}</div>
+            <div style={{ textAlign: 'center', fontSize: '2rem' }}>
+              {flashSeq.join(' – ')}
+            </div>
           ) : (
             <>
               <h2>Challenge 5</h2>
