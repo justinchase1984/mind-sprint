@@ -46,7 +46,7 @@ export default function PuzzlePage() {
     }
   }, [idNum, challengeIndex, puzzles])
 
-  // 5) Memory‐day detection
+  // 5) Memory-day detection
   const isMemoryDay = challengeIndex === 5
   const total = isMemoryDay ? 10 : puzzles.length
 
@@ -75,7 +75,7 @@ export default function PuzzlePage() {
   const [userAns, setUserAns] = useState('')
   useEffect(() => setUserAns(''), [idNum])
 
-  // 8) Unified after‐answer handler
+  // 8) Unified after-answer handler
   function afterAnswer(isCorrect: boolean) {
     // streak logic
     let { current, max } = getStreaks()
@@ -98,7 +98,7 @@ export default function PuzzlePage() {
     router.push(`/puzzle/${idNum + 1}?challenge=${challengeIndex}`)
   }
 
-  // memory‐day form handler
+  // memory-day form handler
   const handleMemorySubmit = (e: FormEvent) => {
     e.preventDefault()
     afterAnswer(userAns.trim() === flashSeq[askIndex])
@@ -146,22 +146,38 @@ export default function PuzzlePage() {
             if (challengeIndex === 7) {
               return (
                 <>
-                  <h1>🎉 You’ve completed all 7 challenges!</h1>
+                  <h1>🎉 Congratulations! You’ve completed all 7 challenges!</h1>
                   <p>You scored <strong>{score}/{total}</strong></p>
+
+                  <p style={{ marginTop: '1rem', fontSize: '1.1rem' }}>
+                    Enter your email below to claim your bonus reward:
+                  </p>
+
+                  {/* AWeber embed placeholder */}
+                  <div className="AW-Form-317058051" />
+
+                  {/* Load AWeber script */}
+                  <Script
+                    id="aweber-wjs-4jn9xv4az"
+                    strategy="afterInteractive"
+                    dangerouslySetInnerHTML={{
+                      __html: `(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//forms.aweber.com/form/51/317058051.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, "script", "aweber-wjs-4jn9xv4az"));`,
+                    }}
+                  />
+
+                  {/* Back-to-start button */}
                   <button
                     onClick={() => router.push('/')}
-                    style={{ margin: '1rem', padding: '8px 16px' }}
+                    style={{ display: 'block', margin: '2rem auto', padding: '8px 16px' }}
                   >
                     Go Back To Start
                   </button>
-
-                  {/* ——— AWeber embed ——— */}
-                  <div className="AW-Form-317058051" />
-                  <Script
-                    strategy="afterInteractive"
-                    src="//forms.aweber.com/form/51/317058051.js"
-                  />
-                  {/* ———————————————— */}
                 </>
               )
             }
