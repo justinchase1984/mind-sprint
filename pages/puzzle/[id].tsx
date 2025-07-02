@@ -144,53 +144,69 @@ export default function PuzzlePage() {
                   <p>You scored <strong>{score}/{total}</strong></p>
                   <p>Enter your email below to claim your bonus reward:</p>
 
-                  <form
-                    method="post"
-                    action="https://www.aweber.com/scripts/addlead.pl"
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'flex-end',
-                      gap: '0.5rem',
-                      margin: '1.5rem auto',
-                      maxWidth: 400,
-                    }}
-                  >
-                    {/* ——— Paste your AWeber hidden fields here ——— */}
-                    {/* <input type="hidden" name="listname" value="YOUR_LIST_ID" /> */}
-                    {/* <input type="hidden" name="redirect" value="YOUR_THANK_YOU_URL" /> */}
-                    {/* …etc… */}
-
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="you@example.com"
-                      required
-                      style={{
-                        flex: 1,
-                        padding: '8px 12px',
-                        fontSize: '1rem',
-                        border: '1px solid #ccc',
-                        borderRadius: '4px 0 0 4px',
-                        outline: 'none',
-                      }}
-                    />
-                    <button
-                      type="submit"
-                      style={{
-                        padding: '8px 16px',
-                        fontSize: '1rem',
-                        border: '1px solid #ccc',
-                        borderLeft: 'none',
-                        borderRadius: '0 4px 4px 0',
-                        background: '#0077cc',
-                        color: '#fff',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      Claim Reward
-                    </button>
-                  </form>
+                  {/* ——— RAW-HTML AWeber FORM BEGINS ——— */}
+                  {/* everything from your snippet goes here */}
+                  <div
+                    dangerouslySetInnerHTML={{ __html: `
+<!-- AWeber Web Form Generator 3.0.1 -->
+<style type="text/css">
+/* … all your <style> rules … */
+#af-form-317058051 { border-radius:6px!important; … }
+</style>
+<form method="post" class="af-form-wrapper" accept-charset="UTF-8"
+      action="https://www.aweber.com/scripts/addlead.pl"  >
+  <div style="display: none;">
+    <input type="hidden" name="meta_web_form_id" value="317058051" />
+    <input type="hidden" name="meta_split_id" value="" />
+    <input type="hidden" name="listname" value="awlist6897043" />
+    <input type="hidden" name="redirect"
+           value="https://www.aweber.com/thankyou-coi.htm?m=text"
+           id="redirect_560f2719cf1ee1d3e782cd68a4a8f571" />
+    <input type="hidden" name="meta_adtracking"
+           value="Mind_Sprint__Opt-In_Form" />
+    <input type="hidden" name="meta_message" value="1" />
+    <input type="hidden" name="meta_required" value="email" />
+    <input type="hidden" name="meta_tooltip" value="" />
+  </div>
+  <div id="af-form-317058051" class="af-form">
+    <div id="af-header-317058051" class="af-header">
+      <div class="bodyText"><p>&nbsp;</p></div>
+    </div>
+    <div id="af-body-317058051" class="af-body af-standards">
+      <div class="af-element">
+        <label class="previewLabel" for="awf_field-118187999">Email:</label>
+        <div class="af-textWrap">
+          <input class="text" id="awf_field-118187999" type="email"
+                 name="email" value="" tabindex="500"
+                 onfocus=" if (this.value == '') { this.value = ''; }"
+                 onblur="if (this.value == '') { this.value='';}"/>
+        </div>
+        <div class="af-clear"></div>
+      </div>
+      <div class="af-element buttonContainer">
+        <input name="submit" class="submit" type="submit" value="Submit" tabindex="501"/>
+        <div class="af-clear"></div>
+      </div>
+      <div class="af-element privacyPolicy" style="text-align:center">
+        <p>We respect your
+          <a title="Privacy Policy"
+             href="https://www.aweber.com/permission.htm"
+             target="_blank" rel="nofollow">
+            email privacy
+          </a>
+        </p>
+        <div class="af-clear"></div>
+      </div>
+    </div>
+  </div>
+  <div style="display:none;">
+    <img src="https://forms.aweber.com/form/displays.htm?id=zIzsDKwcDKyM" alt="" />
+  </div>
+</form>
+<!-- /AWeber Web Form Generator 3.0.1 -->
+                    ` }}
+                  />
+                  {/* ——— RAW-HTML AWeber FORM ENDS ——— */}
 
                   <button
                     onClick={() => router.push('/')}
