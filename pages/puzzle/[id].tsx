@@ -73,7 +73,7 @@ export default function PuzzlePage() {
   const [userAns, setUserAns] = useState('')
   useEffect(() => setUserAns(''), [idNum])
 
-  // 7) Common after-answer handler (streak + daily score + nav)
+  // 7) Common after-answer handler
   function afterAnswer(isCorrect: boolean) {
     let { current, max } = getStreaks()
     if (isCorrect) current += 1
@@ -136,7 +136,7 @@ export default function PuzzlePage() {
               10
             )
 
-            // —— Special Challenge 7 flow with single-step AWeber form ——
+            // —— Special Challenge 7 flow w/ AWeber redirect to /thanks ——
             if (challengeIndex === 7) {
               return (
                 <>
@@ -149,34 +149,28 @@ export default function PuzzlePage() {
                     action="https://www.aweber.com/scripts/addlead.pl"
                     style={{
                       display: 'flex',
-                      gap: '0.5rem',
-                      alignItems: 'center',
                       justifyContent: 'center',
+                      alignItems: 'flex-end',
+                      gap: '0.5rem',
                       margin: '1.5rem auto',
-                      maxWidth: 480,
+                      maxWidth: 400,
                     }}
                   >
-                    {/* ——— REQUIRED HIDDEN FIELDS ——— */}
-                    <input
-                      type="hidden"
-                      name="meta_web_form_id"
-                      value="317058051"
-                    />
-                    <input
-                      type="hidden"
-                      name="listname"
-                      value="awlist6897043"
-                    />
+                    {/* ← AWeber hidden fields */}
+                    <input type="hidden" name="meta_web_form_id" value="317058051" />
+                    <input type="hidden" name="meta_split_id"     value="" />
+                    <input type="hidden" name="listname"          value="awlist6897043" />
                     <input
                       type="hidden"
                       name="redirect"
                       value="https://www.dailymindsprint.com/thanks"
+                      id="redirect_560f2719cf1ee1d3e782cd68a4a8f571"
                     />
-                    {/* skip double-opt-in confirmation */}
-                    <input type="hidden" name="meta_message" value="0" />
-                    <input type="hidden" name="meta_required" value="email" />
+                    <input type="hidden" name="meta_adtracking"    value="Mind_Sprint__Opt-In_Form" />
+                    <input type="hidden" name="meta_message"       value="1" />
+                    <input type="hidden" name="meta_required"      value="email" />
+                    <input type="hidden" name="meta_tooltip"       value="" />
 
-                    {/* ——— VISIBLE EMAIL + BUTTON ——— */}
                     <input
                       type="email"
                       name="email"
@@ -184,7 +178,7 @@ export default function PuzzlePage() {
                       required
                       style={{
                         flex: 1,
-                        padding: '0.75rem 1rem',
+                        padding: '8px 12px',
                         fontSize: '1rem',
                         border: '1px solid #ccc',
                         borderRadius: '4px 0 0 4px',
@@ -194,25 +188,19 @@ export default function PuzzlePage() {
                     <button
                       type="submit"
                       style={{
-                        padding: '0.75rem 1.5rem',
+                        padding: '8px 16px',
                         fontSize: '1rem',
+                        border: '1px solid #ccc',
+                        borderLeft: 'none',
+                        borderRadius: '0 4px 4px 0',
                         background: '#0077cc',
                         color: '#fff',
-                        border: 'none',
-                        borderRadius: '0 4px 4px 0',
                         cursor: 'pointer',
                       }}
                     >
-                      Claim
+                      Claim Reward
                     </button>
                   </form>
-
-                  <button
-                    onClick={() => router.push('/')}
-                    style={{ marginTop: '2rem', padding: '8px 16px' }}
-                  >
-                    Go Back To Start
-                  </button>
                 </>
               )
             }
@@ -262,7 +250,9 @@ export default function PuzzlePage() {
         ) : isMemoryDay ? (
           // —— Memory Day UI ——
           showFlash ? (
-            <div style={{ fontSize: '2rem' }}>{flashSeq.join(' – ')}</div>
+            <div style={{ textAlign: 'center', fontSize: '2rem' }}>
+              {flashSeq.join(' – ')}
+            </div>
           ) : (
             <>
               <h2>Challenge 5</h2>
