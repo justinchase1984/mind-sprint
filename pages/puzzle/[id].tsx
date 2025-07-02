@@ -73,7 +73,7 @@ export default function PuzzlePage() {
   const [userAns, setUserAns] = useState('')
   useEffect(() => setUserAns(''), [idNum])
 
-  // 7) Common after-answer handler (streak + score + nav)
+  // 7) Common after-answer handler (streak + daily score + nav)
   function afterAnswer(isCorrect: boolean) {
     let { current, max } = getStreaks()
     if (isCorrect) current += 1
@@ -93,7 +93,7 @@ export default function PuzzlePage() {
     router.push(`/puzzle/${idNum + 1}?challenge=${challengeIndex}`)
   }
 
-  // 8) Memory-day form handler
+  // 8) Memory-day submit
   const handleMemorySubmit = (e: FormEvent) => {
     e.preventDefault()
     afterAnswer(userAns.trim() === flashSeq[askIndex])
@@ -129,14 +129,14 @@ export default function PuzzlePage() {
       {/* Center content */}
       <main style={{ padding: '2rem 0', textAlign: 'center' }}>
         {idNum > total ? (
-          // —— Results screen ——
+          // —— Results screen —— 
           (() => {
             const score = parseInt(
               sessionStorage.getItem('dailyCorrect') || '0',
               10
             )
 
-            // —— Special Challenge 7: email capture card ——
+            // —— Special Challenge 7 flow with single-step AWeber form ——
             if (challengeIndex === 7) {
               return (
                 <>
@@ -144,95 +144,72 @@ export default function PuzzlePage() {
                   <p>You scored <strong>{score}/{total}</strong></p>
                   <p>Enter your email below to claim your bonus reward:</p>
 
-                  {/* —— card wrapper —— */}
-                  <div
+                  <form
+                    method="post"
+                    action="https://www.aweber.com/scripts/addlead.pl"
                     style={{
+                      display: 'flex',
+                      gap: '0.5rem',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       margin: '1.5rem auto',
                       maxWidth: 480,
-                      padding: '1.5rem',
-                      background: '#fff',
-                      borderRadius: 8,
-                      boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                      textAlign: 'left',
                     }}
                   >
-                    {/* —— form row —— */}
-                    <form
-                      method="post"
-                      action="https://www.aweber.com/scripts/addlead.pl"
+                    {/* ——— REQUIRED HIDDEN FIELDS ——— */}
+                    <input
+                      type="hidden"
+                      name="meta_web_form_id"
+                      value="317058051"
+                    />
+                    <input
+                      type="hidden"
+                      name="listname"
+                      value="awlist6897043"
+                    />
+                    <input
+                      type="hidden"
+                      name="redirect"
+                      value="https://www.dailymindsprint.com/thanks"
+                    />
+                    {/* skip double-opt-in confirmation */}
+                    <input type="hidden" name="meta_message" value="0" />
+                    <input type="hidden" name="meta_required" value="email" />
+
+                    {/* ——— VISIBLE EMAIL + BUTTON ——— */}
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="you@example.com"
+                      required
                       style={{
-                        display: 'flex',
-                        gap: '0.5rem',
-                        alignItems: 'center',
+                        flex: 1,
+                        padding: '0.75rem 1rem',
+                        fontSize: '1rem',
+                        border: '1px solid #ccc',
+                        borderRadius: '4px 0 0 4px',
+                        outline: 'none',
+                      }}
+                    />
+                    <button
+                      type="submit"
+                      style={{
+                        padding: '0.75rem 1.5rem',
+                        fontSize: '1rem',
+                        background: '#0077cc',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: '0 4px 4px 0',
+                        cursor: 'pointer',
                       }}
                     >
-                      {/* ——— hidden inputs from AWeber ——— */}
-                      <input type="hidden" name="meta_web_form_id" value="317058051"/>
-                      <input type="hidden" name="listname" value="awlist6897043"/>
-                      <input type="hidden"
-                             name="redirect"
-                             value="https://www.aweber.com/thankyou-coi.htm?m=text"/>
-                      {/* …any other hidden fields AWeber gave you… */}
+                      Claim
+                    </button>
+                  </form>
 
-                      {/* —— email field —— */}
-                      <input
-                        type="email"
-                        name="email"
-                        placeholder="you@example.com"
-                        required
-                        style={{
-                          flex: 1,
-                          padding: '0.75rem 1rem',
-                          fontSize: '1rem',
-                          border: '1px solid #ccc',
-                          borderRadius: '4px',
-                          outline: 'none',
-                        }}
-                      />
-
-                      {/* —— submit button —— */}
-                      <button
-                        type="submit"
-                        style={{
-                          padding: '0.75rem 1.5rem',
-                          fontSize: '1rem',
-                          background: '#0077cc',
-                          color: '#fff',
-                          border: 'none',
-                          borderRadius: '4px',
-                          cursor: 'pointer',
-                        }}
-                      >
-                        Claim
-                      </button>
-                    </form>
-
-                    {/* —— privacy notice —— */}
-                    <p style={{ marginTop: '1rem', fontSize: '0.875rem', color: '#666' }}>
-                      We respect your{' '}
-                      <a
-                        href="https://www.aweber.com/permission.htm"
-                        target="_blank"
-                        rel="noopener"
-                        style={{ color: '#0077cc' }}
-                      >
-                        email privacy
-                      </a>.
-                    </p>
-                  </div>
-
-                  {/* —— back to start —— */}
                   <button
                     onClick={() => router.push('/')}
-                    style={{
-                      marginTop: '1rem',
-                      padding: '0.75rem 1.5rem',
-                      fontSize: '1rem',
-                      border: '1px solid #ccc',
-                      borderRadius: 4,
-                      background: '#fff',
-                      cursor: 'pointer',
-                    }}
+                    style={{ marginTop: '2rem', padding: '8px 16px' }}
                   >
                     Go Back To Start
                   </button>
@@ -285,9 +262,7 @@ export default function PuzzlePage() {
         ) : isMemoryDay ? (
           // —— Memory Day UI ——
           showFlash ? (
-            <div style={{ textAlign: 'center', fontSize: '2rem' }}>
-              {flashSeq.join(' – ')}
-            </div>
+            <div style={{ fontSize: '2rem' }}>{flashSeq.join(' – ')}</div>
           ) : (
             <>
               <h2>Challenge 5</h2>
