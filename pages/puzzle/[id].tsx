@@ -73,7 +73,7 @@ export default function PuzzlePage() {
   const [userAns, setUserAns] = useState('')
   useEffect(() => setUserAns(''), [idNum])
 
-  // 7) Common after-answer handler
+  // 7) Unified after-answer handler
   function afterAnswer(isCorrect: boolean) {
     let { current, max } = getStreaks()
     if (isCorrect) current += 1
@@ -136,7 +136,7 @@ export default function PuzzlePage() {
               10
             )
 
-            // —— Special Challenge 7 flow w/ AWeber redirect to /thanks ——
+            // —— Special flow for Challenge 7: show AWeber form and redirect to /bonus/thank-you
             if (challengeIndex === 7) {
               return (
                 <>
@@ -156,20 +156,16 @@ export default function PuzzlePage() {
                       maxWidth: 400,
                     }}
                   >
-                    {/* ← AWeber hidden fields */}
-                    <input type="hidden" name="meta_web_form_id" value="317058051" />
-                    <input type="hidden" name="meta_split_id"     value="" />
-                    <input type="hidden" name="listname"          value="awlist6897043" />
+                    {/* ——— AWeber required hidden fields ——— */}
+                    <input type="hidden" name="meta_web_form_id"    value="317058051" />
+                    <input type="hidden" name="listname"            value="awlist6897043" />
                     <input
                       type="hidden"
                       name="redirect"
-                      value="https://www.dailymindsprint.com/thanks"
-                      id="redirect_560f2719cf1ee1d3e782cd68a4a8f571"
+                      value="https://www.dailymindsprint.com/bonus/thank-you"
                     />
-                    <input type="hidden" name="meta_adtracking"    value="Mind_Sprint__Opt-In_Form" />
-                    <input type="hidden" name="meta_message"       value="1" />
                     <input type="hidden" name="meta_required"      value="email" />
-                    <input type="hidden" name="meta_tooltip"       value="" />
+                    {/* ——————————————————————————————— */}
 
                     <input
                       type="email"
@@ -250,9 +246,7 @@ export default function PuzzlePage() {
         ) : isMemoryDay ? (
           // —— Memory Day UI ——
           showFlash ? (
-            <div style={{ textAlign: 'center', fontSize: '2rem' }}>
-              {flashSeq.join(' – ')}
-            </div>
+            <div style={{ fontSize: '2rem' }}>{flashSeq.join(' – ')}</div>
           ) : (
             <>
               <h2>Challenge 5</h2>
