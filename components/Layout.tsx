@@ -9,27 +9,26 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <>
-      {/* Optional: keep any existing header/nav above */}
       <main style={{ minHeight: '80vh' }}>
         {children}
       </main>
 
       <footer
         style={{
-          borderTop: '4px solid hotpink',    // ← super visible for testing
-          backgroundColor: '#fffbf0',       // ← light highlight
+          borderTop: '1px solid #eee',    // thinner, light border
+          backgroundColor: 'transparent', // no highlight
           textAlign: 'center',
           padding: '2rem 0',
           width: '100%',
         }}
       >
         <Link href="/about">
-          <a style={{ marginRight: '1rem', fontWeight: 'bold' }}>
+          <a style={{ marginRight: '1rem', fontWeight: 'normal' }}>
             About
           </a>
         </Link>
         <Link href="/privacy">
-          <a style={{ fontWeight: 'bold' }}>
+          <a style={{ fontWeight: 'normal' }}>
             Privacy Policy
           </a>
         </Link>
