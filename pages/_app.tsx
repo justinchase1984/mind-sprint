@@ -1,7 +1,7 @@
 // pages/_app.tsx
-import '../styles/globals.css'               // or wherever your globals live
+import '../styles/globals.css'         // adjust path if your globals live elsewhere
 import type { AppProps } from 'next/app'
-import Layout from '../components/Layout'    // ← this path must point to your Layout.tsx
+import Layout from '../components/Layout'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
