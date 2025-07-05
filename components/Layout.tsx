@@ -9,16 +9,30 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <>
-      {/* Your existing header/nav can stay here if you have one */}
-      <main style={{ minHeight: '80vh' }}>{children}</main>
-      <footer style={{
-        textAlign: 'center',
-        padding: '2rem 0',
-        borderTop: '1px solid #eee',
-      }}>
-        <Link href="/about">About</Link>
-        {' | '}
-        <Link href="/privacy">Privacy Policy</Link>
+      {/* Optional: keep any existing header/nav above */}
+      <main style={{ minHeight: '80vh' }}>
+        {children}
+      </main>
+
+      <footer
+        style={{
+          borderTop: '4px solid hotpink',    // ← super visible for testing
+          backgroundColor: '#fffbf0',       // ← light highlight
+          textAlign: 'center',
+          padding: '2rem 0',
+          width: '100%',
+        }}
+      >
+        <Link href="/about">
+          <a style={{ marginRight: '1rem', fontWeight: 'bold' }}>
+            About
+          </a>
+        </Link>
+        <Link href="/privacy">
+          <a style={{ fontWeight: 'bold' }}>
+            Privacy Policy
+          </a>
+        </Link>
       </footer>
     </>
   )
