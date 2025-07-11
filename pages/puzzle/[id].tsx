@@ -312,6 +312,17 @@ export default function PuzzlePage() {
 
       {/* Bottom ad slot */}
       <div style={{ gridColumn: '1 / -1' }} />
+      
+      <p
+  style={{
+    fontSize: '0.875rem',
+    color: '#666',
+    marginTop: '2rem',
+    textAlign: 'center',
+  }}
+>
+  Disclaimer: Mind Sprint puzzles are for entertainment only.
+</p>
 
       {/* Disclaimer */}
       <p
