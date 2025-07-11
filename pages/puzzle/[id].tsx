@@ -7,7 +7,7 @@ import type { Puzzle } from '../../lib/puzzles'
 import { getStreaks, saveStreaks } from '../../lib/streak'
 import { getPuzzlesByDayIndex } from '../../lib/utils'
 
-// Helper for “1st”, “2nd”, etc.
+// Helper for "1st", "2nd", etc.
 function ordinal(n: number): string {
   if (n % 10 === 1 && n % 100 !== 11) return `${n}st`
   if (n % 10 === 2 && n % 100 !== 12) return `${n}nd`
@@ -19,7 +19,7 @@ function ordinal(n: number): string {
 const DID_YOU_KNOW: { [key: number]: string } = {
   1: 'Did you know: The world’s first crossword puzzle appeared in 1913?',
   2: 'Did you know: The hardest Sudoku ever solved took over 550 man-hours?',
-  // …add more entries for each puzzle ID you want
+  // …add more entries for each puzzle ID as needed
 }
 
 export default function PuzzlePage() {
@@ -100,7 +100,7 @@ export default function PuzzlePage() {
     router.push(`/puzzle/${idNum + 1}?challenge=${challengeIndex}`)
   }
 
-  // 8) Memory-day submit
+  // 8) Memory-day submit handler
   const handleMemorySubmit = (e: FormEvent) => {
     e.preventDefault()
     afterAnswer(userAns.trim() === flashSeq[askIndex])
@@ -133,7 +133,7 @@ export default function PuzzlePage() {
       {/* Left ad slot */}
       <div />
 
-      {/* Center content */}
+      {/* Main content */}
       <main style={{ padding: '2rem 0', textAlign: 'center' }}>
         {idNum > total ? (
           // —— Results screen ——
@@ -143,14 +143,12 @@ export default function PuzzlePage() {
               10
             )
 
-            // —— Special flow for Challenge 7: AWeber form ——
+            // —— Challenge 7 special flow ——
             if (challengeIndex === 7) {
               return (
                 <>
                   <h1>🎉 Congratulations! You’ve completed all 7 challenges!</h1>
-                  <p>
-                    You scored <strong>{score}/{total}</strong>
-                  </p>
+                  <p>You scored <strong>{score}/{total}</strong></p>
                   <p>Enter your email below to claim your bonus reward:</p>
                   <form
                     method="post"
@@ -217,9 +215,7 @@ export default function PuzzlePage() {
             return (
               <>
                 <h1>🎉 You’ve completed Challenge {challengeIndex}!</h1>
-                <p>
-                  You scored <strong>{score}/{total}</strong>
-                </p>
+                <p>You scored <strong>{score}/{total}</strong></p>
                 <div
                   style={{
                     display: 'flex',
@@ -242,9 +238,7 @@ export default function PuzzlePage() {
                     </Link>
                   )}
                   <Link href="/">
-                    <button style={{ padding: '8px 16px' }}>
-                      Back to Home
-                    </button>
+                    <button style={{ padding: '8px 16px' }}>Back to Home</button>
                   </Link>
                 </div>
               </>
@@ -269,10 +263,7 @@ export default function PuzzlePage() {
                   required
                   style={{ padding: '8px', fontSize: 16 }}
                 />
-                <button
-                  type="submit"
-                  style={{ marginLeft: 10, padding: '8px 16px' }}
-                >
+                <button type="submit" style={{ marginLeft: 10, padding: '8px 16px' }}>
                   Submit
                 </button>
               </form>
@@ -283,11 +274,6 @@ export default function PuzzlePage() {
           <>
             <h2>Challenge {challengeIndex}</h2>
             <p>{puzzle?.question}</p>
-            {DID_YOU_KNOW[idNum] && (
-              <p style={{ fontStyle: 'italic', margin: '1rem 0' }}>
-                {DID_YOU_KNOW[idNum]}
-              </p>
-            )}
             {puzzle?.options.map((opt) => (
               <button
                 key={opt}
@@ -303,6 +289,13 @@ export default function PuzzlePage() {
                 {opt}
               </button>
             ))}
+
+            {/* Moved “Did you know?” below answers */}
+            {DID_YOU_KNOW[idNum] && (
+              <p style={{ fontStyle: 'italic', margin: '1rem 0' }}>
+                {DID_YOU_KNOW[idNum]}
+              </p>
+            )}
           </>
         )}
       </main>
@@ -312,25 +305,14 @@ export default function PuzzlePage() {
 
       {/* Bottom ad slot */}
       <div style={{ gridColumn: '1 / -1' }} />
-      
-      <p
-  style={{
-    fontSize: '0.875rem',
-    color: '#666',
-    marginTop: '2rem',
-    textAlign: 'center',
-  }}
->
-  Disclaimer: Mind Sprint puzzles are for entertainment only.
-</p>
 
       {/* Disclaimer */}
       <p
         style={{
           fontSize: '0.875rem',
           color: '#666',
-          margin: '1rem auto',
-          gridColumn: '2',
+          margin: '2rem auto',
+          textAlign: 'center',
         }}
       >
         Disclaimer: Mind Sprint puzzles are for entertainment only.
