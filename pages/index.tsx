@@ -17,7 +17,7 @@ export default function Home() {
         <title>🧠 Mind Sprint</title>
         <meta
           name="description"
-          content="Start your Mind Sprint challenges—one question per page, 7 challenges to unlock the bonus!"
+          content="7 quick puzzles, one question per page—go at your own pace, track your streak, and unlock the bonus."
         />
       </Head>
 
@@ -35,12 +35,12 @@ export default function Home() {
         }}
       >
         <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>🧠 Mind Sprint</h1>
-        <p style={{ maxWidth: 600, margin: '1rem auto', fontSize: '1.1rem' }}>
-          Mind Sprint delivers a single, daily brain-teaser—one question per page. Sharpen your wits, build your streak, and come back tomorrow for a fresh challenge!
-        </p>
+
+        {/* ← Updated tagline below */}
         <p style={{ fontSize: '1.1rem', marginBottom: '2rem' }}>
-          Start your Mind Sprint challenges:
+          7 quick puzzles, one question per page—go at your own pace, track your streak, and unlock the bonus.
         </p>
+
         <Link href="/puzzle/1?challenge=1">
           <button
             style={{
