@@ -15,6 +15,13 @@ function ordinal(n: number): string {
   return `${n}th`
 }
 
+// “Did you know?” facts keyed by puzzle ID
+const DID_YOU_KNOW: { [key: number]: string } = {
+  1: 'Did you know: The world’s first crossword puzzle appeared in 1913?',
+  2: 'Did you know: The hardest Sudoku ever solved took over 550 man-hours?',
+  // …add more entries for each puzzle ID you want
+}
+
 export default function PuzzlePage() {
   const router = useRouter()
   const { query } = router
@@ -129,21 +136,22 @@ export default function PuzzlePage() {
       {/* Center content */}
       <main style={{ padding: '2rem 0', textAlign: 'center' }}>
         {idNum > total ? (
-          // —— Results screen —— 
+          // —— Results screen ——
           (() => {
             const score = parseInt(
               sessionStorage.getItem('dailyCorrect') || '0',
               10
             )
 
-            // —— Special flow for Challenge 7: show AWeber form and redirect to /bonus/thank-you
+            // —— Special flow for Challenge 7: AWeber form ——
             if (challengeIndex === 7) {
               return (
                 <>
                   <h1>🎉 Congratulations! You’ve completed all 7 challenges!</h1>
-                  <p>You scored <strong>{score}/{total}</strong></p>
+                  <p>
+                    You scored <strong>{score}/{total}</strong>
+                  </p>
                   <p>Enter your email below to claim your bonus reward:</p>
-
                   <form
                     method="post"
                     action="https://www.aweber.com/scripts/addlead.pl"
@@ -156,17 +164,14 @@ export default function PuzzlePage() {
                       maxWidth: 400,
                     }}
                   >
-                    {/* ——— AWeber required hidden fields ——— */}
-                    <input type="hidden" name="meta_web_form_id"    value="317058051" />
-                    <input type="hidden" name="listname"            value="awlist6897043" />
+                    <input type="hidden" name="meta_web_form_id" value="317058051" />
+                    <input type="hidden" name="listname" value="awlist6897043" />
                     <input
                       type="hidden"
                       name="redirect"
                       value="https://www.dailymindsprint.com/bonus/thank-you"
                     />
-                    <input type="hidden" name="meta_required"      value="email" />
-                    {/* ——————————————————————————————— */}
-
+                    <input type="hidden" name="meta_required" value="email" />
                     <input
                       type="email"
                       name="email"
@@ -212,7 +217,9 @@ export default function PuzzlePage() {
             return (
               <>
                 <h1>🎉 You’ve completed Challenge {challengeIndex}!</h1>
-                <p>You scored <strong>{score}/{total}</strong></p>
+                <p>
+                  You scored <strong>{score}/{total}</strong>
+                </p>
                 <div
                   style={{
                     display: 'flex',
@@ -259,8 +266,8 @@ export default function PuzzlePage() {
                   value={userAns}
                   onChange={(e) => setUserAns(e.target.value)}
                   placeholder="Type the number…"
-                  style={{ padding: '8px', fontSize: 16 }}
                   required
+                  style={{ padding: '8px', fontSize: 16 }}
                 />
                 <button
                   type="submit"
@@ -276,6 +283,11 @@ export default function PuzzlePage() {
           <>
             <h2>Challenge {challengeIndex}</h2>
             <p>{puzzle?.question}</p>
+            {DID_YOU_KNOW[idNum] && (
+              <p style={{ fontStyle: 'italic', margin: '1rem 0' }}>
+                {DID_YOU_KNOW[idNum]}
+              </p>
+            )}
             {puzzle?.options.map((opt) => (
               <button
                 key={opt}
@@ -300,6 +312,18 @@ export default function PuzzlePage() {
 
       {/* Bottom ad slot */}
       <div style={{ gridColumn: '1 / -1' }} />
+
+      {/* Disclaimer */}
+      <p
+        style={{
+          fontSize: '0.875rem',
+          color: '#666',
+          margin: '1rem auto',
+          gridColumn: '2',
+        }}
+      >
+        Disclaimer: Mind Sprint puzzles are for entertainment only.
+      </p>
     </div>
   )
 }
