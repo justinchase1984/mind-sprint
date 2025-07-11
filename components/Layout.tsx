@@ -15,8 +15,8 @@ export default function Layout({ children }: LayoutProps) {
         {children}
       </main>
       <footer style={{
-        borderTop: '1px solid #eee',    // thin, light border
-        backgroundColor: 'transparent', // no highlight
+        borderTop: '1px solid #eee',
+        backgroundColor: 'transparent',
         textAlign: 'center',
         padding: '2rem 0',
         width: '100%',
@@ -36,4 +36,3 @@ export default function Layout({ children }: LayoutProps) {
     </>
   )
 }
-
