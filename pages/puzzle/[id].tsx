@@ -306,13 +306,14 @@ export default function PuzzlePage() {
       {/* Bottom ad slot */}
       <div style={{ gridColumn: '1 / -1' }} />
 
-      {/* Disclaimer */}
+      {/* Single centered disclaimer */}
       <p
         style={{
           fontSize: '0.875rem',
           color: '#666',
-          margin: '2rem auto',
+          gridColumn: '1 / -1',
           textAlign: 'center',
+          margin: '2rem 0',
         }}
       >
         Disclaimer: Mind Sprint puzzles are for entertainment only.
