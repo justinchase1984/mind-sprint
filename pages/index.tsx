@@ -35,12 +35,15 @@ export default function Home() {
         }}
       >
         <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>🧠 Mind Sprint</h1>
-
-        {/* ← Updated tagline below */}
-        <p style={{ fontSize: '1.1rem', marginBottom: '2rem' }}>
+        <p
+          style={{
+            fontSize: '1.1rem',
+            margin: '0 auto 2rem',
+            maxWidth: '600px',
+          }}
+        >
           7 quick puzzles, one question per page—go at your own pace, track your streak, and unlock the bonus.
         </p>
-
         <Link href="/puzzle/1?challenge=1">
           <button
             style={{
