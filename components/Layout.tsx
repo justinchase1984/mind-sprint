@@ -19,7 +19,7 @@ export default function Layout({ children }: LayoutProps) {
         />
       </Head>
 
-      {/* HEADER with emoji + text logo */}
+      {/* HEADER with black emoji+text logo */}
       <header
         style={{
           display: 'flex',
@@ -30,17 +30,17 @@ export default function Layout({ children }: LayoutProps) {
         }}
       >
         <Link href="/" passHref>
-+      <a
-+        style={{
-+          fontSize: '1.25rem',
-+          fontWeight: 600,
-+          textDecoration: 'none',
-+          color: '#000',         // force black text
-+        }}
-+      >
-+        🧠 Mind Sprint
-+      </a>
-+    </Link>
+          <a
+            style={{
+              fontSize: '1.25rem',
+              fontWeight: 600,
+              textDecoration: 'none',
+              color: '#000',        // <-- black text
+            }}
+          >
+            🧠 Mind Sprint
+          </a>
+        </Link>
       </header>
 
       {/* Top ad slot */}
@@ -61,7 +61,14 @@ export default function Layout({ children }: LayoutProps) {
       </div>
 
       {/* MAIN CONTENT */}
-      <main style={{ minHeight: '80vh', maxWidth: 800, margin: '0 auto', padding: '0 1rem' }}>
+      <main
+        style={{
+          minHeight: '80vh',
+          maxWidth: 800,
+          margin: '0 auto',
+          padding: '0 1rem',
+        }}
+      >
         {children}
       </main>
 
