@@ -11,7 +11,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <>
       <Head>
-        {/* Google AdSense loader */}
+        {/* Google AdSense loader script */}
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9372563823272898"
@@ -22,12 +22,8 @@ export default function Layout({ children }: LayoutProps) {
       {/* Top Banner Ad */}
       <div
         id="ad-top"
-        style={{
-          textAlign: 'center',
-          padding: '1rem',
-        }}
+        style={{ textAlign: 'center', padding: '1rem' }}
       >
-        {/* MindSprint_TopBanner_Responsive */}
         <ins
           className="adsbygoogle"
           style={{ display: 'block' }}
@@ -37,35 +33,47 @@ export default function Layout({ children }: LayoutProps) {
           data-full-width-responsive="true"
         />
         <script
-          // Push the ad
           dangerouslySetInnerHTML={{
-            __html: `(adsbygoogle = window.adsbygoogle || []).push({});`,
+            __html: '(adsbygoogle = window.adsbygoogle || []).push({});',
           }}
         />
       </div>
 
+      {/* Global Navigation (visible on every page) */}
+      <nav style={{ textAlign: 'center', padding: '1rem' }}>
+        <Link href="/about">
+          <a style={{ margin: '0 1rem' }}>About</a>
+        </Link>
+        <Link href="/privacy">
+          <a style={{ margin: '0 1rem' }}>Privacy Policy</a>
+        </Link>
+        <Link href="/contact">
+          <a style={{ margin: '0 1rem' }}>Contact</a>
+        </Link>
+      </nav>
+
+      {/* Page Content */}
       <main style={{ minHeight: '80vh' }}>
         {children}
       </main>
 
+      {/* Footer Links (optional, repeats nav for extra visibility) */}
       <footer
         style={{
           borderTop: '1px solid #eee',
           backgroundColor: 'transparent',
           textAlign: 'center',
           padding: '2rem 0',
-          width: '100%',
         }}
       >
         <Link href="/about">
-          <a style={{ marginRight: '1rem', fontWeight: 'normal' }}>
-            About
-          </a>
+          <a style={{ margin: '0 1rem' }}>About</a>
         </Link>
         <Link href="/privacy">
-          <a style={{ fontWeight: 'normal' }}>
-            Privacy Policy
-          </a>
+          <a style={{ margin: '0 1rem' }}>Privacy Policy</a>
+        </Link>
+        <Link href="/contact">
+          <a style={{ margin: '0 1rem' }}>Contact</a>
         </Link>
       </footer>
     </>
