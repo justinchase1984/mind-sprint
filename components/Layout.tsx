@@ -1,6 +1,7 @@
 // components/Layout.tsx
 import React, { ReactNode } from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
 
 interface LayoutProps {
   children: ReactNode
@@ -18,6 +19,27 @@ export default function Layout({ children }: LayoutProps) {
         />
       </Head>
 
+      {/* Header: only logo */}
+      <header
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '1rem 0',
+          borderBottom: '1px solid #eee',
+        }}
+      >
+        <Link href="/">
+          <a>
+            <img
+              src="/mind-sprint-logo.png"
+              alt="Mind Sprint"
+              style={{ height: 40 }}
+            />
+          </a>
+        </Link>
+      </header>
+
       {/* Top Banner Ad */}
       <div
         id="ad-top"
@@ -30,16 +52,16 @@ export default function Layout({ children }: LayoutProps) {
           data-ad-slot="6887362961"
           data-ad-format="auto"
           data-full-width-responsive="true"
-        ></ins>
+        />
         <script
           dangerouslySetInnerHTML={{
-            __html: '(adsbygoogle = window.adsbygoogle || []).push({});',
+            __html: `(adsbygoogle = window.adsbygoogle || []).push({});`,
           }}
         />
       </div>
 
-      {/* Page Content */}
-      <main style={{ minHeight: '80vh' }}>
+      {/* Main content */}
+      <main style={{ minHeight: '80vh', maxWidth: 800, margin: '0 auto', padding: '0 1rem' }}>
         {children}
       </main>
 
