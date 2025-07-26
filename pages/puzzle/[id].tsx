@@ -18,8 +18,8 @@ function ordinal(n: number): string {
 // “Did you know?” facts keyed by puzzle ID
 const DID_YOU_KNOW: { [key: number]: string } = {
   1: 'Did you know: The world’s first crossword puzzle appeared in 1913?',
-  2: 'Did you know: The hardest Sudoku ever solved took over 550 man-hours?',
-  // …add more entries for each puzzle ID as needed
+  2: 'Did you know: The hardest Sudoku ever solved took over 550 man‑hours?',
+  // …add more entries as needed
 }
 
 export default function PuzzlePage() {
@@ -121,7 +121,7 @@ export default function PuzzlePage() {
         <title>
           {idNum > total
             ? challengeIndex === 7
-              ? 'All Done! | Mind Sprint'
+              ? 'All Done! | Mind Sprint'
               : `Results | Challenge ${challengeIndex}`
             : `Challenge ${challengeIndex} – Puzzle ${idNum}`}
         </title>
@@ -305,15 +305,6 @@ export default function PuzzlePage() {
 
       {/* Bottom ad slot */}
       <div style={{ gridColumn: '1 / -1' }} />
-
-      {/* Single centered disclaimer */}
-      <p
-        style={{
-          fontSize: '0.875rem',
-          color: '#666',
-          gridColumn: '1 / -1',
-          textAlign: 'center',
-          margin: '2rem 0',
-        }}
-    
+    </div>
+  )
 }
