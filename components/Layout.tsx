@@ -11,6 +11,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <>
       <Head>
+        {/* Google AdSense loader */}
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9372563823272898"
@@ -18,7 +19,7 @@ export default function Layout({ children }: LayoutProps) {
         />
       </Head>
 
-      {/* HEADER */}
+      {/* HEADER with emoji + text logo */}
       <header
         style={{
           display: 'flex',
@@ -29,17 +30,20 @@ export default function Layout({ children }: LayoutProps) {
         }}
       >
         <Link href="/" passHref>
-          <a>
-            <img
-              src="/mind-sprint-logo.png"
-              alt="Mind Sprint"
-              style={{ width: 140, height: 'auto', display: 'block' }}
-            />
+          <a
+            style={{
+              fontSize: '1.25rem',
+              fontWeight: 600,
+              textDecoration: 'none',
+              color: 'inherit',
+            }}
+          >
+            🧠 Mind Sprint
           </a>
         </Link>
       </header>
 
-      {/* ADSENSE BANNER */}
+      {/* Top ad slot */}
       <div id="ad-top" style={{ textAlign: 'center', padding: '1rem 0' }}>
         <ins
           className="adsbygoogle"
