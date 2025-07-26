@@ -2,6 +2,7 @@
 import React, { ReactNode } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
 
 interface LayoutProps {
   children: ReactNode
@@ -11,7 +12,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <>
       <Head>
-        {/* AdSense loader script */}
+        {/* AdSense loader */}
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9372563823272898"
@@ -19,7 +20,7 @@ export default function Layout({ children }: LayoutProps) {
         />
       </Head>
 
-      {/* Header: only logo */}
+      {/* Header with centered logo */}
       <header
         style={{
           display: 'flex',
@@ -30,11 +31,13 @@ export default function Layout({ children }: LayoutProps) {
         }}
       >
         <Link href="/">
-          <a>
-            <img
-              src="/mind-sprint-logo.png"
+          <a style={{ display: 'inline-block' }}>
+            <Image
+              src="/logo.png"      // <- place your brain+Mind Sprint PNG as public/logo.png
               alt="Mind Sprint"
-              style={{ height: 40 }}
+              width={200}         // adjust to your logo’s width
+              height={50}         // adjust to your logo’s height
+              priority            // loads immediately
             />
           </a>
         </Link>
@@ -73,12 +76,16 @@ export default function Layout({ children }: LayoutProps) {
           padding: '2rem 0',
         }}
       >
-        <a href="/about" style={{ margin: '0 1rem', color: '#0070f3' }}>
-          About
-        </a>
-        <a href="/privacy" style={{ margin: '0 1rem', color: '#0070f3' }}>
-          Privacy Policy
-        </a>
+        <Link href="/about">
+          <a style={{ margin: '0 1rem', color: '#0070f3' }}>
+            About
+          </a>
+        </Link>
+        <Link href="/privacy">
+          <a style={{ margin: '0 1rem', color: '#0070f3' }}>
+            Privacy Policy
+          </a>
+        </Link>
       </footer>
     </>
   )
