@@ -30,17 +30,17 @@ export default function Layout({ children }: LayoutProps) {
         }}
       >
         <Link href="/" passHref>
-          <a
-            style={{
-              fontSize: '1.25rem',
-              fontWeight: 600,
-              textDecoration: 'none',
-              color: 'inherit',
-            }}
-          >
-            🧠 Mind Sprint
-          </a>
-        </Link>
++      <a
++        style={{
++          fontSize: '1.25rem',
++          fontWeight: 600,
++          textDecoration: 'none',
++          color: '#000',         // force black text
++        }}
++      >
++        🧠 Mind Sprint
++      </a>
++    </Link>
       </header>
 
       {/* Top ad slot */}
