@@ -31,12 +31,12 @@ export default function Layout({ children }: LayoutProps) {
         }}
       >
         <Link href="/">
-          <a style={{ display: 'inline-block' }}>
+          <a>
             <Image
-              src="/mind-sprint-logo-clean.png"   // <- put your final cleaned logo here
-              alt="Mind Sprint"
-              width={200}
-              height={50}
+              src="/mind-sprint-logo.png"   // <- must match file in /public exactly
+              alt="Mind Sprint"
+              width={140}                  // adjust to your logo dimensions
+              height={32}
               priority
             />
           </a>
@@ -44,10 +44,7 @@ export default function Layout({ children }: LayoutProps) {
       </header>
 
       {/* ADSENSE BANNER */}
-      <div
-        id="ad-top"
-        style={{ textAlign: 'center', padding: '1rem 0' }}
-      >
+      <div id="ad-top" style={{ textAlign: 'center', padding: '1rem 0' }}>
         <ins
           className="adsbygoogle"
           style={{ display: 'block' }}
@@ -63,7 +60,7 @@ export default function Layout({ children }: LayoutProps) {
         />
       </div>
 
-      {/* MAIN CONTENT */}
+      {/* MAIN */}
       <main style={{ minHeight: '80vh', maxWidth: 800, margin: '0 auto', padding: '0 1rem' }}>
         {children}
       </main>
