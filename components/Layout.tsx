@@ -1,7 +1,6 @@
 // components/Layout.tsx
 import React, { ReactNode } from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
 
 interface LayoutProps {
   children: ReactNode
@@ -11,46 +10,13 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <>
       <Head>
-        {/* Google AdSense loader */}
+        {/* AdSense loader script */}
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9372563823272898"
           crossOrigin="anonymous"
         />
       </Head>
-
-      {/* Header: logo + Archive/About/Privacy */}
-      <header
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: '1rem',
-          maxWidth: 900,
-          margin: '0 auto',
-        }}
-      >
-        {/* Logo */}
-        <Link href="/">
-          <a style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-            {/* Replace src with your actual logo file */}
-            <img src="/mind-sprint-logo.png" alt="Mind Sprint" height={32} />
-          </a>
-        </Link>
-
-        {/* Top nav */}
-        <nav>
-          <Link href="/archive">
-            <a style={{ margin: '0 1rem' }}>Archive</a>
-          </Link>
-          <Link href="/about">
-            <a style={{ margin: '0 1rem' }}>About</a>
-          </Link>
-          <Link href="/privacy">
-            <a style={{ margin: '0 1rem' }}>Privacy</a>
-          </Link>
-        </nav>
-      </header>
 
       {/* Top Banner Ad */}
       <div
@@ -64,7 +30,7 @@ export default function Layout({ children }: LayoutProps) {
           data-ad-slot="6887362961"
           data-ad-format="auto"
           data-full-width-responsive="true"
-        />
+        ></ins>
         <script
           dangerouslySetInnerHTML={{
             __html: '(adsbygoogle = window.adsbygoogle || []).push({});',
@@ -72,8 +38,8 @@ export default function Layout({ children }: LayoutProps) {
         />
       </div>
 
-      {/* Main content */}
-      <main style={{ minHeight: '80vh', maxWidth: 900, margin: '0 auto', padding: '0 1rem' }}>
+      {/* Page Content */}
+      <main style={{ minHeight: '80vh' }}>
         {children}
       </main>
 
@@ -85,12 +51,12 @@ export default function Layout({ children }: LayoutProps) {
           padding: '2rem 0',
         }}
       >
-        <Link href="/about">
-          <a style={{ margin: '0 1rem' }}>About</a>
-        </Link>
-        <Link href="/privacy">
-          <a style={{ margin: '0 1rem' }}>Privacy Policy</a>
-        </Link>
+        <a href="/about" style={{ margin: '0 1rem', color: '#0070f3' }}>
+          About
+        </a>
+        <a href="/privacy" style={{ margin: '0 1rem', color: '#0070f3' }}>
+          Privacy Policy
+        </a>
       </footer>
     </>
   )
