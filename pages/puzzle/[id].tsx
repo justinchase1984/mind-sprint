@@ -315,9 +315,6 @@ export default function PuzzlePage() {
           textAlign: 'center',
           margin: '2rem 0',
         }}
-      >
-        Disclaimer: Mind Sprint puzzles are for entertainment only.
-      </p>
-    </div>
+    
   )
 }
