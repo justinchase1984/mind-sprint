@@ -20,7 +20,7 @@ export default function Layout({ children }: LayoutProps) {
         />
       </Head>
 
-      {/* Header with centered logo */}
+      {/* HEADER */}
       <header
         style={{
           display: 'flex',
@@ -33,17 +33,17 @@ export default function Layout({ children }: LayoutProps) {
         <Link href="/">
           <a style={{ display: 'inline-block' }}>
             <Image
-              src="/logo.png"      // <- place your brain+Mind Sprint PNG as public/logo.png
-              alt="Mind Sprint"
-              width={200}         // adjust to your logo’s width
-              height={50}         // adjust to your logo’s height
-              priority            // loads immediately
+              src="/mind-sprint-logo-clean.png"   // <- put your final cleaned logo here
+              alt="Mind Sprint"
+              width={200}
+              height={50}
+              priority
             />
           </a>
         </Link>
       </header>
 
-      {/* Top Banner Ad */}
+      {/* ADSENSE BANNER */}
       <div
         id="ad-top"
         style={{ textAlign: 'center', padding: '1rem 0' }}
@@ -63,12 +63,12 @@ export default function Layout({ children }: LayoutProps) {
         />
       </div>
 
-      {/* Main content */}
+      {/* MAIN CONTENT */}
       <main style={{ minHeight: '80vh', maxWidth: 800, margin: '0 auto', padding: '0 1rem' }}>
         {children}
       </main>
 
-      {/* Footer: only About & Privacy */}
+      {/* FOOTER */}
       <footer
         style={{
           borderTop: '1px solid #eee',
@@ -77,14 +77,10 @@ export default function Layout({ children }: LayoutProps) {
         }}
       >
         <Link href="/about">
-          <a style={{ margin: '0 1rem', color: '#0070f3' }}>
-            About
-          </a>
+          <a style={{ margin: '0 1rem', color: '#0070f3' }}>About</a>
         </Link>
         <Link href="/privacy">
-          <a style={{ margin: '0 1rem', color: '#0070f3' }}>
-            Privacy Policy
-          </a>
+          <a style={{ margin: '0 1rem', color: '#0070f3' }}>Privacy Policy</a>
         </Link>
       </footer>
     </>
