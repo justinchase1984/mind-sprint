@@ -11,7 +11,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <>
       <Head>
-        {/* Google AdSense loader script */}
+        {/* Google AdSense loader */}
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9372563823272898"
@@ -19,10 +19,43 @@ export default function Layout({ children }: LayoutProps) {
         />
       </Head>
 
+      {/* Header: logo + Archive/About/Privacy */}
+      <header
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '1rem',
+          maxWidth: 900,
+          margin: '0 auto',
+        }}
+      >
+        {/* Logo */}
+        <Link href="/">
+          <a style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+            {/* Replace src with your actual logo file */}
+            <img src="/mind-sprint-logo.png" alt="Mind Sprint" height={32} />
+          </a>
+        </Link>
+
+        {/* Top nav */}
+        <nav>
+          <Link href="/archive">
+            <a style={{ margin: '0 1rem' }}>Archive</a>
+          </Link>
+          <Link href="/about">
+            <a style={{ margin: '0 1rem' }}>About</a>
+          </Link>
+          <Link href="/privacy">
+            <a style={{ margin: '0 1rem' }}>Privacy</a>
+          </Link>
+        </nav>
+      </header>
+
       {/* Top Banner Ad */}
       <div
         id="ad-top"
-        style={{ textAlign: 'center', padding: '1rem' }}
+        style={{ textAlign: 'center', padding: '1rem 0' }}
       >
         <ins
           className="adsbygoogle"
@@ -39,29 +72,15 @@ export default function Layout({ children }: LayoutProps) {
         />
       </div>
 
-      {/* Global Navigation (visible on every page) */}
-      <nav style={{ textAlign: 'center', padding: '1rem' }}>
-        <Link href="/about">
-          <a style={{ margin: '0 1rem' }}>About</a>
-        </Link>
-        <Link href="/privacy">
-          <a style={{ margin: '0 1rem' }}>Privacy Policy</a>
-        </Link>
-        <Link href="/contact">
-          <a style={{ margin: '0 1rem' }}>Contact</a>
-        </Link>
-      </nav>
-
-      {/* Page Content */}
-      <main style={{ minHeight: '80vh' }}>
+      {/* Main content */}
+      <main style={{ minHeight: '80vh', maxWidth: 900, margin: '0 auto', padding: '0 1rem' }}>
         {children}
       </main>
 
-      {/* Footer Links (optional, repeats nav for extra visibility) */}
+      {/* Footer: only About & Privacy */}
       <footer
         style={{
           borderTop: '1px solid #eee',
-          backgroundColor: 'transparent',
           textAlign: 'center',
           padding: '2rem 0',
         }}
@@ -71,9 +90,6 @@ export default function Layout({ children }: LayoutProps) {
         </Link>
         <Link href="/privacy">
           <a style={{ margin: '0 1rem' }}>Privacy Policy</a>
-        </Link>
-        <Link href="/contact">
-          <a style={{ margin: '0 1rem' }}>Contact</a>
         </Link>
       </footer>
     </>
