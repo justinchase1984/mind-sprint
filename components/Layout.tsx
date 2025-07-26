@@ -2,7 +2,6 @@
 import React, { ReactNode } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
 
 interface LayoutProps {
   children: ReactNode
@@ -12,7 +11,6 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <>
       <Head>
-        {/* AdSense loader */}
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9372563823272898"
@@ -30,14 +28,12 @@ export default function Layout({ children }: LayoutProps) {
           borderBottom: '1px solid #eee',
         }}
       >
-        <Link href="/">
+        <Link href="/" passHref>
           <a>
-            <Image
-              src="/mind-sprint-logo.png"   // <- must match file in /public exactly
+            <img
+              src="/mind-sprint-logo.png"
               alt="Mind Sprint"
-              width={140}                  // adjust to your logo dimensions
-              height={32}
-              priority
+              style={{ width: 140, height: 'auto', display: 'block' }}
             />
           </a>
         </Link>
@@ -60,7 +56,7 @@ export default function Layout({ children }: LayoutProps) {
         />
       </div>
 
-      {/* MAIN */}
+      {/* MAIN CONTENT */}
       <main style={{ minHeight: '80vh', maxWidth: 800, margin: '0 auto', padding: '0 1rem' }}>
         {children}
       </main>
