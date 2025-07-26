@@ -316,5 +316,4 @@ export default function PuzzlePage() {
           margin: '2rem 0',
         }}
     
-  )
 }
