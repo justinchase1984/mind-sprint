@@ -1,6 +1,5 @@
 // pages/about.tsx
 import Head from 'next/head'
-import Link from 'next/link'
 
 export default function About() {
   return (
@@ -13,7 +12,7 @@ export default function About() {
         />
       </Head>
 
-      <main style={{ maxWidth: 800, margin: '2rem auto', padding: '0 1rem' }}>
+      <div style={{ maxWidth: 600, margin: '2rem auto', padding: '0 1rem' }}>
         <h1>About Mind Sprint</h1>
         <p>
           Mind Sprint is a daily micro‑puzzle game designed to challenge your
@@ -24,36 +23,12 @@ export default function About() {
 
         <h2>Contact Us</h2>
         <p>
-          Have questions, feedback, or just want to say hi? We’d love to hear
-          from you:
+          Got questions or feedback? Email us at{' '}
+          <a href="mailto:hello@dailymindsprint.com">
+            hello@dailymindsprint.com
+          </a>.
         </p>
-        <ul>
-          <li>
-            Email:{' '}
-            <a href="mailto:hello@dailymindsprint.com">
-              hello@dailymindsprint.com
-            </a>
-          </li>
-          <li>
-            Twitter:{' '}
-            <a
-              href="https://twitter.com/dailymindsprint"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              @dailymindsprint
-            </a>
-          </li>
-        </ul>
-
-        <p style={{ marginTop: '2rem' }}>
-          Or visit our&nbsp;
-          <Link href="/privacy">
-            <a>Privacy Policy</a>
-          </Link>
-          &nbsp;page to learn how we handle your data.
-        </p>
-      </main>
+      </div>
     </>
   )
 }
