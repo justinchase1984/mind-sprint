@@ -1,90 +1,84 @@
 // components/Layout.tsx
 import React, { ReactNode } from 'react'
-import Head from 'next/head'
 import Link from 'next/link'
 
 interface LayoutProps {
   children: ReactNode
+  hideHeader?: boolean
 }
 
-export default function Layout({ children }: LayoutProps) {
+export default function Layout({ children, hideHeader }: LayoutProps) {
   return (
     <>
-      <Head>
-        {/* Google AdSense loader */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9372563823272898"
-          crossOrigin="anonymous"
-        />
-      </Head>
-
-      {/* HEADER with black emoji+text logo */}
-      <header
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: '1rem 0',
-          borderBottom: '1px solid #eee',
-        }}
-      >
-        <Link href="/" passHref>
-          <a
-            style={{
-              fontSize: '1.25rem',
-              fontWeight: 600,
-              textDecoration: 'none',
-              color: '#000',        // <-- black text
-            }}
-          >
-            🧠 Mind Sprint
-          </a>
-        </Link>
-      </header>
-
-      {/* Top ad slot */}
-      <div id="ad-top" style={{ textAlign: 'center', padding: '1rem 0' }}>
-        <ins
-          className="adsbygoogle"
-          style={{ display: 'block' }}
-          data-ad-client="ca-pub-9372563823272898"
-          data-ad-slot="6887362961"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(adsbygoogle = window.adsbygoogle || []).push({});`,
+      {/* Header (can be hidden) */}
+      {!hideHeader && (
+        <header
+          style={{
+            borderBottom: '1px solid #eee',
+            padding: '0.5rem 1rem',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
           }}
-        />
-      </div>
+        >
+          <div>
+            <Link href="/" legacyBehavior>
+              <a
+                style={{
+                  fontSize: '1.25rem',
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                  color: '#000',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                }}
+              >
+                <span style={{ lineHeight: 1 }}>🧠</span>
+                <span>Mind Sprint</span>
+              </a>
+            </Link>
+          </div>
+          <nav style={{ display: 'flex', gap: '1rem' }}>
+            <Link href="/archive" legacyBehavior>
+              <a style={{ textDecoration: 'none', fontSize: '0.9rem' }}>Archive</a>
+            </Link>
+            <Link href="/about" legacyBehavior>
+              <a style={{ textDecoration: 'none', fontSize: '0.9rem' }}>About</a>
+            </Link>
+            <Link href="/privacy" legacyBehavior>
+              <a style={{ textDecoration: 'none', fontSize: '0.9rem' }}>Privacy</a>
+            </Link>
+          </nav>
+        </header>
+      )}
 
-      {/* MAIN CONTENT */}
       <main
         style={{
           minHeight: '80vh',
-          maxWidth: 800,
-          margin: '0 auto',
-          padding: '0 1rem',
+          paddingTop: hideHeader ? '1rem' : '2rem',
         }}
       >
         {children}
       </main>
 
-      {/* FOOTER */}
       <footer
         style={{
           borderTop: '1px solid #eee',
+          backgroundColor: 'transparent',
           textAlign: 'center',
           padding: '2rem 0',
+          width: '100%',
+          fontSize: '0.9rem',
         }}
       >
-        <Link href="/about">
-          <a style={{ margin: '0 1rem', color: '#0070f3' }}>About</a>
+        <Link href="/about" legacyBehavior>
+          <a style={{ marginRight: '1rem', fontWeight: 'normal', textDecoration: 'none' }}>
+            About
+          </a>
         </Link>
-        <Link href="/privacy">
-          <a style={{ margin: '0 1rem', color: '#0070f3' }}>Privacy Policy</a>
+        <Link href="/privacy" legacyBehavior>
+          <a style={{ fontWeight: 'normal', textDecoration: 'none' }}>Privacy Policy</a>
         </Link>
       </footer>
     </>
