@@ -1,11 +1,10 @@
 // pages/index.tsx
 import Head from 'next/head'
 import Link from 'next/link'
-import Layout from '../components/Layout'
 
 export default function Home() {
   return (
-    <Layout hideHeader>
+    <>
       <Head>
         <title>🧠 Mind Sprint</title>
         <meta
@@ -65,6 +64,6 @@ export default function Home() {
           </button>
         </Link>
       </div>
-    </Layout>
+    </>
   )
 }
