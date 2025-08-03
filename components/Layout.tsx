@@ -57,28 +57,18 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
       <footer
         style={{
           borderTop: '1px solid #eee',
-          backgroundColor: 'transparent',
           textAlign: 'center',
           padding: '2rem 0',
-          width: '100%',
           fontSize: '0.9rem',
         }}
       >
         <Link href="/about" legacyBehavior>
-          <a
-            style={{
-              marginRight: '1rem',
-              textDecoration: 'none',
-              color: '#5f21b7',
-            }}
-          >
+          <a style={{ marginRight: '1rem', textDecoration: 'none', color: '#5f21b7' }}>
             About
           </a>
         </Link>
         <Link href="/privacy" legacyBehavior>
-          <a style={{ textDecoration: 'none', color: '#5f21b7' }}>
-            Privacy Policy
-          </a>
+          <a style={{ textDecoration: 'none', color: '#5f21b7' }}>Privacy Policy</a>
         </Link>
       </footer>
     </>
