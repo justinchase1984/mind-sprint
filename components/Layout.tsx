@@ -65,7 +65,14 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
         }}
       >
         <Link href="/about" legacyBehavior>
-          <a style={{ marginRight: '1rem', fontWeight: 'normal', textDecoration: 'none', color: '#5f21b7' }}>
+          <a
+            style={{
+              marginRight: '1rem',
+              fontWeight: 'normal',
+              textDecoration: 'none',
+              color: '#5f21b7',
+            }}
+          >
             About
           </a>
         </Link>
