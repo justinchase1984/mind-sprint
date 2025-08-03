@@ -14,8 +14,8 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
 
   return (
     <>
-      {/* Header: hidden only if hideHeader is true */}
-      {!hideHeader && (
+      {/* Header: show unless told to hide or we're on homepage */}
+      {!hideHeader && !isHomePage && (
         <header
           style={{
             display: 'flex',
@@ -43,10 +43,9 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
               </a>
             </Link>
           </div>
+
+          {/* ✅ Removed Archive link here */}
           <nav style={{ display: 'flex', gap: '1rem' }}>
-            <Link href="/archive" legacyBehavior>
-              <a style={{ textDecoration: 'none', color: '#000' }}>Archive</a>
-            </Link>
             <Link href="/about" legacyBehavior>
               <a style={{ textDecoration: 'none', color: '#000' }}>About</a>
             </Link>
@@ -60,7 +59,7 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
       {/* Main content */}
       <main style={{ minHeight: '80vh' }}>{children}</main>
 
-      {/* Footer: always shown ONCE on all pages */}
+      {/* Footer always visible */}
       <footer
         style={{
           borderTop: '1px solid #eee',
