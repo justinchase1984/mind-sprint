@@ -10,6 +10,7 @@ interface LayoutProps {
 export default function Layout({ children, hideHeader = false }: LayoutProps) {
   return (
     <>
+      {/* HEADER */}
       {!hideHeader && (
         <header
           style={{
@@ -21,23 +22,21 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
             fontSize: '0.9rem',
           }}
         >
-          <div>
-            <Link href="/" passHref>
-              <a
-                style={{
-                  fontSize: '1.1rem',
-                  fontWeight: 600,
-                  textDecoration: 'none',
-                  color: '#000',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 6,
-                }}
-              >
-                <span style={{ fontSize: '1rem' }}>🧠</span> Mind Sprint
-              </a>
-            </Link>
-          </div>
+          <Link href="/" passHref>
+            <a
+              style={{
+                fontSize: '1.1rem',
+                fontWeight: 600,
+                textDecoration: 'none',
+                color: '#000',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
+              }}
+            >
+              <span style={{ fontSize: '1rem' }}>🧠</span> Mind Sprint
+            </a>
+          </Link>
           <nav style={{ display: 'flex', gap: '1rem' }}>
             <Link href="/archive" legacyBehavior>
               <a style={{ textDecoration: 'none', color: '#5f21b7' }}>Archive</a>
@@ -52,32 +51,25 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
         </header>
       )}
 
+      {/* MAIN CONTENT */}
       <main style={{ minHeight: '80vh' }}>{children}</main>
 
+      {/* FOOTER (only here!) */}
       <footer
         style={{
           borderTop: '1px solid #eee',
-          backgroundColor: 'transparent',
           textAlign: 'center',
           padding: '2rem 0',
-          width: '100%',
           fontSize: '0.9rem',
         }}
       >
         <Link href="/about" legacyBehavior>
-          <a
-            style={{
-              marginRight: '1rem',
-              fontWeight: 'normal',
-              textDecoration: 'none',
-              color: '#5f21b7',
-            }}
-          >
+          <a style={{ marginRight: '1rem', textDecoration: 'none', color: '#5f21b7' }}>
             About
           </a>
         </Link>
         <Link href="/privacy" legacyBehavior>
-          <a style={{ fontWeight: 'normal', textDecoration: 'none', color: '#5f21b7' }}>
+          <a style={{ textDecoration: 'none', color: '#5f21b7' }}>
             Privacy Policy
           </a>
         </Link>
