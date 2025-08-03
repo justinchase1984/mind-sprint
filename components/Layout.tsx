@@ -1,6 +1,7 @@
 // components/Layout.tsx
 import React, { ReactNode } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 interface LayoutProps {
   children: ReactNode
@@ -8,9 +9,12 @@ interface LayoutProps {
 }
 
 export default function Layout({ children, hideHeader = false }: LayoutProps) {
+  const router = useRouter()
+  const isHomePage = router.pathname === '/'
+
   return (
     <>
-      {!hideHeader && (
+      {!hideHeader && !isHomePage && (
         <header
           style={{
             display: 'flex',
@@ -54,23 +58,25 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
 
       <main style={{ minHeight: '80vh' }}>{children}</main>
 
-      <footer
-        style={{
-          borderTop: '1px solid #eee',
-          textAlign: 'center',
-          padding: '2rem 0',
-          fontSize: '0.9rem',
-        }}
-      >
-        <Link href="/about" legacyBehavior>
-          <a style={{ marginRight: '1rem', textDecoration: 'none', color: '#5f21b7' }}>
-            About
-          </a>
-        </Link>
-        <Link href="/privacy" legacyBehavior>
-          <a style={{ textDecoration: 'none', color: '#5f21b7' }}>Privacy Policy</a>
-        </Link>
-      </footer>
+      {!isHomePage && (
+        <footer
+          style={{
+            borderTop: '1px solid #eee',
+            textAlign: 'center',
+            padding: '2rem 0',
+            fontSize: '0.9rem',
+          }}
+        >
+          <Link href="/about" legacyBehavior>
+            <a style={{ marginRight: '1rem', textDecoration: 'none', color: '#5f21b7' }}>
+              About
+            </a>
+          </Link>
+          <Link href="/privacy" legacyBehavior>
+            <a style={{ textDecoration: 'none', color: '#5f21b7' }}>Privacy Policy</a>
+          </Link>
+        </footer>
+      )}
     </>
   )
 }
