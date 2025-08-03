@@ -14,6 +14,7 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
 
   return (
     <>
+      {/* Header: show unless told to hide or we're on homepage */}
       {!hideHeader && !isHomePage && (
         <header
           style={{
@@ -56,27 +57,27 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
         </header>
       )}
 
+      {/* Main content */}
       <main style={{ minHeight: '80vh' }}>{children}</main>
 
-      {!isHomePage && (
-        <footer
-          style={{
-            borderTop: '1px solid #eee',
-            textAlign: 'center',
-            padding: '2rem 0',
-            fontSize: '0.9rem',
-          }}
-        >
-          <Link href="/about" legacyBehavior>
-            <a style={{ marginRight: '1rem', textDecoration: 'none', color: '#000' }}>
-              About
-            </a>
-          </Link>
-          <Link href="/privacy" legacyBehavior>
-            <a style={{ textDecoration: 'none', color: '#000' }}>Privacy Policy</a>
-          </Link>
-        </footer>
-      )}
+      {/* ✅ Footer always visible on ALL pages */}
+      <footer
+        style={{
+          borderTop: '1px solid #eee',
+          textAlign: 'center',
+          padding: '2rem 0',
+          fontSize: '0.9rem',
+        }}
+      >
+        <Link href="/about" legacyBehavior>
+          <a style={{ marginRight: '1rem', textDecoration: 'none', color: '#000' }}>
+            About
+          </a>
+        </Link>
+        <Link href="/privacy" legacyBehavior>
+          <a style={{ textDecoration: 'none', color: '#000' }}>Privacy Policy</a>
+        </Link>
+      </footer>
     </>
   )
 }
