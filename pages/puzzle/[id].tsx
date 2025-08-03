@@ -15,18 +15,15 @@ function ordinal(n: number): string {
   return `${n}th`
 }
 
-// “Did you know?” facts keyed by puzzle ID
 const DID_YOU_KNOW: { [key: number]: string } = {
   1: 'Did you know: The world’s first crossword puzzle appeared in 1913?',
   2: 'Did you know: The hardest Sudoku ever solved took over 550 man‑hours?',
-  // …add more entries as needed
 }
 
 export default function PuzzlePage() {
   const router = useRouter()
   const { query } = router
 
-  // 1) Which challenge (1–7)?
   const challengeIndex = (() => {
     const q = query.challenge as string | undefined
     if (q && !isNaN(+q)) return +q
@@ -35,14 +32,10 @@ export default function PuzzlePage() {
     return 1
   })()
 
-  // 2) Load puzzles for that challenge
   const puzzles: Puzzle[] = getPuzzlesByDayIndex(challengeIndex)
-
-  // 3) Which question (1–10)?
   const idNum = parseInt((query.id as string) || '1', 10)
   const puzzle = puzzles[idNum - 1]
 
-  // 4) On first question of each challenge, reset session
   useEffect(() => {
     if (idNum === 1) {
       sessionStorage.setItem('dailyCorrect', '0')
@@ -52,7 +45,6 @@ export default function PuzzlePage() {
     }
   }, [idNum, challengeIndex, puzzles])
 
-  // 5) Day 5 memory logic
   const isMemoryDay = challengeIndex === 5
   const total = isMemoryDay ? 10 : puzzles.length
 
@@ -76,11 +68,9 @@ export default function PuzzlePage() {
     return () => clearTimeout(t)
   }, [idNum, isMemoryDay])
 
-  // 6) Answer state
   const [userAns, setUserAns] = useState('')
   useEffect(() => setUserAns(''), [idNum])
 
-  // 7) Unified after-answer handler
   function afterAnswer(isCorrect: boolean) {
     let { current, max } = getStreaks()
     if (isCorrect) current += 1
@@ -100,11 +90,22 @@ export default function PuzzlePage() {
     router.push(`/puzzle/${idNum + 1}?challenge=${challengeIndex}`)
   }
 
-  // 8) Memory-day submit handler
   const handleMemorySubmit = (e: FormEvent) => {
     e.preventDefault()
     afterAnswer(userAns.trim() === flashSeq[askIndex])
   }
+
+  // 👉 AdSense inject logic
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        // @ts-ignore
+        (window.adsbygoogle = window.adsbygoogle || []).push({})
+      } catch (e) {
+        console.error('AdSense error', e)
+      }
+    }
+  }, [])
 
   return (
     <div
@@ -127,23 +128,25 @@ export default function PuzzlePage() {
         </title>
       </Head>
 
-      {/* Top ad slot */}
-      <div style={{ gridColumn: '1 / -1' }} />
+      {/* ✅ Top Ad Slot (visible placement) */}
+      <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '1rem 0' }}>
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          data-ad-client="ca-pub-9372563823272898"
+          data-ad-slot="6887362961"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+      </div>
 
-      {/* Left ad slot */}
+      {/* Left gutter */}
       <div />
 
-      {/* Main content */}
       <main style={{ padding: '2rem 0', textAlign: 'center' }}>
         {idNum > total ? (
-          // —— Results screen ——
           (() => {
-            const score = parseInt(
-              sessionStorage.getItem('dailyCorrect') || '0',
-              10
-            )
-
-            // —— Challenge 7 special flow ——
+            const score = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
             if (challengeIndex === 7) {
               return (
                 <>
@@ -204,37 +207,23 @@ export default function PuzzlePage() {
               )
             }
 
-            // —— Normal results for Challenges 1–6 ——
             const passed = score >= 8
             if (passed && challengeIndex < 7) {
-              localStorage.setItem(
-                'unlockedChallenge',
-                String(challengeIndex + 1)
-              )
+              localStorage.setItem('unlockedChallenge', String(challengeIndex + 1))
             }
+
             return (
               <>
                 <h1>🎉 You’ve completed Challenge {challengeIndex}!</h1>
                 <p>You scored <strong>{score}/{total}</strong></p>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    gap: '1rem',
-                    marginTop: '1rem',
-                  }}
-                >
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1rem' }}>
                   {passed ? (
                     <Link href={`/puzzle/1?challenge=${challengeIndex + 1}`}>
-                      <button style={{ padding: '8px 16px' }}>
-                        Start Challenge {challengeIndex + 1}
-                      </button>
+                      <button style={{ padding: '8px 16px' }}>Start Challenge {challengeIndex + 1}</button>
                     </Link>
                   ) : (
                     <Link href={`/puzzle/1?challenge=${challengeIndex}`}>
-                      <button style={{ padding: '8px 16px' }}>
-                        You scored {score}/{total}. Try Again
-                      </button>
+                      <button style={{ padding: '8px 16px' }}>You scored {score}/{total}. Try Again</button>
                     </Link>
                   )}
                   <Link href="/">
@@ -245,15 +234,12 @@ export default function PuzzlePage() {
             )
           })()
         ) : isMemoryDay ? (
-          // —— Memory Day UI ——
           showFlash ? (
             <div style={{ fontSize: '2rem' }}>{flashSeq.join(' – ')}</div>
           ) : (
             <>
               <h2>Challenge 5</h2>
-              <p>
-                What was the <strong>{ordinal(askIndex + 1)}</strong> number you saw?
-              </p>
+              <p>What was the <strong>{ordinal(askIndex + 1)}</strong> number you saw?</p>
               <form onSubmit={handleMemorySubmit}>
                 <input
                   type="text"
@@ -270,7 +256,6 @@ export default function PuzzlePage() {
             </>
           )
         ) : (
-          // —— All other MCQs ——
           <>
             <h2>Challenge {challengeIndex}</h2>
             <p>{puzzle?.question}</p>
@@ -289,8 +274,6 @@ export default function PuzzlePage() {
                 {opt}
               </button>
             ))}
-
-            {/* Moved “Did you know?” below answers */}
             {DID_YOU_KNOW[idNum] && (
               <p style={{ fontStyle: 'italic', margin: '1rem 0' }}>
                 {DID_YOU_KNOW[idNum]}
@@ -300,11 +283,8 @@ export default function PuzzlePage() {
         )}
       </main>
 
-      {/* Right ad slot */}
-      <div />
-
-      {/* Bottom ad slot */}
-      <div style={{ gridColumn: '1 / -1' }} />
+      <div /> {/* Right gutter */}
+      <div style={{ gridColumn: '1 / -1' }} /> {/* Bottom row */}
     </div>
   )
 }
