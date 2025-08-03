@@ -44,13 +44,13 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
           </div>
           <nav style={{ display: 'flex', gap: '1rem' }}>
             <Link href="/archive" legacyBehavior>
-              <a style={{ textDecoration: 'none', color: '#5f21b7' }}>Archive</a>
+              <a style={{ textDecoration: 'none', color: '#000' }}>Archive</a>
             </Link>
             <Link href="/about" legacyBehavior>
-              <a style={{ textDecoration: 'none', color: '#5f21b7' }}>About</a>
+              <a style={{ textDecoration: 'none', color: '#000' }}>About</a>
             </Link>
             <Link href="/privacy" legacyBehavior>
-              <a style={{ textDecoration: 'none', color: '#5f21b7' }}>Privacy</a>
+              <a style={{ textDecoration: 'none', color: '#000' }}>Privacy</a>
             </Link>
           </nav>
         </header>
@@ -68,12 +68,12 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
           }}
         >
           <Link href="/about" legacyBehavior>
-            <a style={{ marginRight: '1rem', textDecoration: 'none', color: '#5f21b7' }}>
+            <a style={{ marginRight: '1rem', textDecoration: 'none', color: '#000' }}>
               About
             </a>
           </Link>
           <Link href="/privacy" legacyBehavior>
-            <a style={{ textDecoration: 'none', color: '#5f21b7' }}>Privacy Policy</a>
+            <a style={{ textDecoration: 'none', color: '#000' }}>Privacy Policy</a>
           </Link>
         </footer>
       )}
