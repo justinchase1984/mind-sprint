@@ -20,9 +20,9 @@ export default function Home() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          minHeight: 'calc(100vh - 220px)', // Reduced height for higher positioning
+          minHeight: 'calc(100vh - 220px)',
           textAlign: 'center',
-          padding: '1rem 1rem 0', // Less top padding
+          padding: '1rem 1rem 0',
         }}
       >
         <h1
