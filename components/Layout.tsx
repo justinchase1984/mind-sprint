@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef } from 'react'
+import React, { ReactNode } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -10,22 +10,11 @@ interface LayoutProps {
 export default function Layout({ children, hideHeader = false }: LayoutProps) {
   const router = useRouter()
   const isHomePage = router.pathname === '/'
-  const footerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    // Automatically remove any duplicate footer elements
-    const footers = document.querySelectorAll('footer')
-    if (footers.length > 1) {
-      footers.forEach((footer, idx) => {
-        if (idx > 0) footer.remove()
-      })
-    }
-  }, [])
 
   return (
     <>
-      {/* Header: only show if not explicitly hidden and not on homepage */}
-      {!hideHeader && !isHomePage && (
+      {/* Header: only show if not explicitly hidden */}
+      {!hideHeader && (
         <header
           style={{
             display: 'flex',
@@ -70,9 +59,8 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
       {/* Main content */}
       <main style={{ minHeight: '80vh' }}>{children}</main>
 
-      {/* Footer - now shown on ALL pages including homepage, with dupe protection */}
+      {/* Always show footer, including on homepage — but only once */}
       <footer
-        ref={footerRef}
         style={{
           borderTop: '1px solid #eee',
           textAlign: 'center',
