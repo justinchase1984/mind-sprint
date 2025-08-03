@@ -14,7 +14,7 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
 
   return (
     <>
-      {/* Header: show unless told to hide or we're on homepage */}
+      {/* Header */}
       {!hideHeader && !isHomePage && (
         <header
           style={{
@@ -44,8 +44,8 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
             </Link>
           </div>
 
-          {/* ✅ Removed Archive link here */}
           <nav style={{ display: 'flex', gap: '1rem' }}>
+            {/* ✅ Archive removed */}
             <Link href="/about" legacyBehavior>
               <a style={{ textDecoration: 'none', color: '#000' }}>About</a>
             </Link>
@@ -59,7 +59,7 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
       {/* Main content */}
       <main style={{ minHeight: '80vh' }}>{children}</main>
 
-      {/* Footer always visible */}
+      {/* ✅ Footer centered and constrained */}
       <footer
         style={{
           borderTop: '1px solid #eee',
@@ -68,14 +68,16 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
           fontSize: '0.9rem',
         }}
       >
-        <Link href="/about" legacyBehavior>
-          <a style={{ marginRight: '1rem', textDecoration: 'none', color: '#000' }}>
-            About
-          </a>
-        </Link>
-        <Link href="/privacy" legacyBehavior>
-          <a style={{ textDecoration: 'none', color: '#000' }}>Privacy Policy</a>
-        </Link>
+        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+          <Link href="/about" legacyBehavior>
+            <a style={{ marginRight: '1rem', textDecoration: 'none', color: '#000' }}>
+              About
+            </a>
+          </Link>
+          <Link href="/privacy" legacyBehavior>
+            <a style={{ textDecoration: 'none', color: '#000' }}>Privacy Policy</a>
+          </Link>
+        </div>
       </footer>
     </>
   )
