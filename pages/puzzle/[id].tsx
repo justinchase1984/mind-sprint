@@ -1,4 +1,3 @@
-// pages/puzzle/[id].tsx
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState, useMemo, FormEvent } from 'react'
@@ -108,12 +107,13 @@ export default function PuzzlePage() {
   return (
     <div
       style={{
-        display: 'grid',
-        gridTemplateRows: 'auto 1fr auto',
-        gridTemplateColumns: '1fr minmax(0,800px) 1fr',
-        rowGap: '1rem',
-        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
         background: '#fff',
+        minHeight: '100vh',
+        paddingTop: '1rem',
+        paddingBottom: '2rem',
       }}
     >
       <Head>
@@ -126,8 +126,8 @@ export default function PuzzlePage() {
         </title>
       </Head>
 
-      {/* ✅ Top Ad (min padding to keep layout tight) */}
-      <div style={{ gridColumn: '1 / -1', textAlign: 'center', paddingTop: '0.5rem' }}>
+      {/* ✅ Top Ad */}
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <ins
           className="adsbygoogle"
           style={{ display: 'block' }}
@@ -138,10 +138,8 @@ export default function PuzzlePage() {
         ></ins>
       </div>
 
-      {/* Left gutter */}
-      <div />
-
-      <main style={{ paddingTop: '1rem', textAlign: 'center' }}>
+      {/* Main content */}
+      <main style={{ width: '100%', maxWidth: 800, padding: '1rem', textAlign: 'center' }}>
         {idNum > total ? (
           (() => {
             const score = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
@@ -165,11 +163,7 @@ export default function PuzzlePage() {
                   >
                     <input type="hidden" name="meta_web_form_id" value="317058051" />
                     <input type="hidden" name="listname" value="awlist6897043" />
-                    <input
-                      type="hidden"
-                      name="redirect"
-                      value="https://www.dailymindsprint.com/bonus/thank-you"
-                    />
+                    <input type="hidden" name="redirect" value="https://www.dailymindsprint.com/bonus/thank-you" />
                     <input type="hidden" name="meta_required" value="email" />
                     <input
                       type="email"
@@ -280,12 +274,6 @@ export default function PuzzlePage() {
           </>
         )}
       </main>
-
-      {/* Right gutter */}
-      <div />
-
-      {/* Bottom gutter */}
-      <div style={{ gridColumn: '1 / -1' }} />
     </div>
   )
 }
