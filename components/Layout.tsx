@@ -1,3 +1,4 @@
+// components/Layout.tsx
 import React, { ReactNode } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -13,7 +14,7 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
 
   return (
     <>
-      {/* Header: only show if not explicitly hidden */}
+      {/* Header: hidden only if hideHeader is true */}
       {!hideHeader && (
         <header
           style={{
@@ -59,14 +60,13 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
       {/* Main content */}
       <main style={{ minHeight: '80vh' }}>{children}</main>
 
-      {/* Always show footer, including on homepage — but only once */}
+      {/* Footer: always shown ONCE on all pages */}
       <footer
         style={{
           borderTop: '1px solid #eee',
           textAlign: 'center',
           padding: '2rem 0',
           fontSize: '0.9rem',
-          color: '#000',
         }}
       >
         <Link href="/about" legacyBehavior>
