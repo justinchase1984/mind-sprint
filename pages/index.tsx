@@ -38,9 +38,9 @@ export default function Home() {
             margin: 0,
           }}
         >
-          What is Mind Sprint? It’s a bite-sized trivia & brain challenge platform. Solve 7 quick puzzles—each on
-          its own page—at your own pace. Keep your streak alive and unlock a bonus when you complete all 7. No login
-          required, just tap and play.
+          What is Mind Sprint? It’s a bite-sized trivia & brain challenge platform. Solve 7 quick puzzles—each on its own
+          page—at your own pace. Keep your streak alive and unlock a bonus when you complete all 7. No login required,
+          just tap and play.
         </p>
 
         <Link href="/puzzle/1?challenge=1" legacyBehavior>
