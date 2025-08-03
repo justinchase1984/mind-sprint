@@ -4,18 +4,18 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateRows: 'auto 1fr auto',
-        gridTemplateColumns: '1fr minmax(0, 800px) 1fr',
-        minHeight: '100vh',
-        background: '#fff',
-      }}
-    >
-      <Head>
-        <title>🧠 Mind Sprint</title>
-        <meta
+    <h1
+  style={{
+    fontSize: '2rem',
+    marginBottom: '0.25rem',
+    lineHeight: 1.1,
+    fontWeight: 600,
+    minHeight: '2.5rem', // reserves space so it doesn't jump
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif',
+  }}
+>
+  🧠 Mind Sprint
+</h1>
           name="description"
           content="7 quick puzzles, one question per page—go at your own pace, track your streak, and unlock the bonus."
         />
