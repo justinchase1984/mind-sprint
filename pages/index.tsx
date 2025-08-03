@@ -28,17 +28,10 @@ export default function Home() {
         <h1 style={{ fontSize: '2rem', margin: 0, display: 'flex', alignItems: 'center', gap: 6 }}>
           <span style={{ fontSize: '1.5rem' }}>🧠</span> Mind Sprint
         </h1>
-        <p
-          style={{
-            fontSize: '1rem',
-            maxWidth: 600,
-            lineHeight: 1.3,
-            margin: 0,
-          }}
-        >
-          What is Mind Sprint? It’s a bite-sized trivia & brain challenge platform. Solve 7 quick puzzles—each on its own
-          page—at your own pace. Keep your streak alive and unlock a bonus when you complete all 7. No login required,
-          just tap and play.
+        <p style={{ fontSize: '1rem', maxWidth: 600, lineHeight: 1.3, margin: 0 }}>
+          What is Mind Sprint? It’s a bite-sized trivia & brain challenge platform. Solve 7 quick puzzles—each on its
+          own page—at your own pace. Keep your streak alive and unlock a bonus when you complete all 7. No login
+          required, just tap and play.
         </p>
         <Link href="/puzzle/1?challenge=1" legacyBehavior>
           <button
