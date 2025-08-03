@@ -1,5 +1,4 @@
-// components/Layout.tsx
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -11,10 +10,21 @@ interface LayoutProps {
 export default function Layout({ children, hideHeader = false }: LayoutProps) {
   const router = useRouter()
   const isHomePage = router.pathname === '/'
+  const footerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // Automatically remove any duplicate footer elements
+    const footers = document.querySelectorAll('footer')
+    if (footers.length > 1) {
+      footers.forEach((footer, idx) => {
+        if (idx > 0) footer.remove()
+      })
+    }
+  }, [])
 
   return (
     <>
-      {/* Header: show unless told to hide or we're on homepage */}
+      {/* Header: only show if not explicitly hidden and not on homepage */}
       {!hideHeader && !isHomePage && (
         <header
           style={{
@@ -60,27 +70,26 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
       {/* Main content */}
       <main style={{ minHeight: '80vh' }}>{children}</main>
 
-      {/* ✅ Footer – show only once, always */}
-      {!document.querySelector('footer[data-main-footer]') && (
-        <footer
-          data-main-footer
-          style={{
-            borderTop: '1px solid #eee',
-            textAlign: 'center',
-            padding: '2rem 0',
-            fontSize: '0.9rem',
-          }}
-        >
-          <Link href="/about" legacyBehavior>
-            <a style={{ marginRight: '1rem', textDecoration: 'none', color: '#000' }}>
-              About
-            </a>
-          </Link>
-          <Link href="/privacy" legacyBehavior>
-            <a style={{ textDecoration: 'none', color: '#000' }}>Privacy Policy</a>
-          </Link>
-        </footer>
-      )}
+      {/* Footer - now shown on ALL pages including homepage, with dupe protection */}
+      <footer
+        ref={footerRef}
+        style={{
+          borderTop: '1px solid #eee',
+          textAlign: 'center',
+          padding: '2rem 0',
+          fontSize: '0.9rem',
+          color: '#000',
+        }}
+      >
+        <Link href="/about" legacyBehavior>
+          <a style={{ marginRight: '1rem', textDecoration: 'none', color: '#000' }}>
+            About
+          </a>
+        </Link>
+        <Link href="/privacy" legacyBehavior>
+          <a style={{ textDecoration: 'none', color: '#000' }}>Privacy Policy</a>
+        </Link>
+      </footer>
     </>
   )
 }
