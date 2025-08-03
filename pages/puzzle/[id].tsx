@@ -7,7 +7,6 @@ import type { Puzzle } from '../../lib/puzzles'
 import { getStreaks, saveStreaks } from '../../lib/streak'
 import { getPuzzlesByDayIndex } from '../../lib/utils'
 
-// Helper for "1st", "2nd", etc.
 function ordinal(n: number): string {
   if (n % 10 === 1 && n % 100 !== 11) return `${n}st`
   if (n % 10 === 2 && n % 100 !== 12) return `${n}nd`
@@ -95,7 +94,6 @@ export default function PuzzlePage() {
     afterAnswer(userAns.trim() === flashSeq[askIndex])
   }
 
-  // 👉 AdSense inject logic
   useEffect(() => {
     if (typeof window !== 'undefined') {
       try {
@@ -128,8 +126,8 @@ export default function PuzzlePage() {
         </title>
       </Head>
 
-      {/* ✅ Top Ad Slot (visible placement) */}
-      <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '1rem 0' }}>
+      {/* ✅ Top Ad (min padding to keep layout tight) */}
+      <div style={{ gridColumn: '1 / -1', textAlign: 'center', paddingTop: '0.5rem' }}>
         <ins
           className="adsbygoogle"
           style={{ display: 'block' }}
@@ -143,7 +141,7 @@ export default function PuzzlePage() {
       {/* Left gutter */}
       <div />
 
-      <main style={{ padding: '2rem 0', textAlign: 'center' }}>
+      <main style={{ paddingTop: '1rem', textAlign: 'center' }}>
         {idNum > total ? (
           (() => {
             const score = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
@@ -283,8 +281,11 @@ export default function PuzzlePage() {
         )}
       </main>
 
-      <div /> {/* Right gutter */}
-      <div style={{ gridColumn: '1 / -1' }} /> {/* Bottom row */}
+      {/* Right gutter */}
+      <div />
+
+      {/* Bottom gutter */}
+      <div style={{ gridColumn: '1 / -1' }} />
     </div>
   )
 }
