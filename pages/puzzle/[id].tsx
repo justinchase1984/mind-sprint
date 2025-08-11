@@ -7,7 +7,6 @@ import type { Puzzle } from '../../lib/puzzles'
 import { getStreaks, saveStreaks } from '../../lib/streak'
 import { getPuzzlesByDayIndex } from '../../lib/utils'
 
-// Helper for "1st", "2nd", etc.
 function ordinal(n: number): string {
   if (n % 10 === 1 && n % 100 !== 11) return `${n}st`
   if (n % 10 === 2 && n % 100 !== 12) return `${n}nd`
@@ -19,7 +18,6 @@ export default function PuzzlePage() {
   const router = useRouter()
   const { query } = router
 
-  // 1) Which challenge (1–7)?
   const challengeIndex = (() => {
     const q = query.challenge as string | undefined
     if (q && !isNaN(+q)) return +q
@@ -28,14 +26,10 @@ export default function PuzzlePage() {
     return 1
   })()
 
-  // 2) Load puzzles for that challenge
   const puzzles: Puzzle[] = getPuzzlesByDayIndex(challengeIndex)
-
-  // 3) Which question (1–10)?
   const idNum = parseInt((query.id as string) || '1', 10)
   const puzzle = puzzles[idNum - 1]
 
-  // 4) On first question of each challenge, reset session
   useEffect(() => {
     if (idNum === 1) {
       sessionStorage.setItem('dailyCorrect', '0')
@@ -45,7 +39,6 @@ export default function PuzzlePage() {
     }
   }, [idNum, challengeIndex, puzzles])
 
-  // 5) Day 5 memory logic
   const isMemoryDay = challengeIndex === 5
   const total = isMemoryDay ? 10 : puzzles.length
 
@@ -69,11 +62,9 @@ export default function PuzzlePage() {
     return () => clearTimeout(t)
   }, [idNum, isMemoryDay])
 
-  // 6) Answer state
   const [userAns, setUserAns] = useState('')
   useEffect(() => setUserAns(''), [idNum])
 
-  // 7) Unified after-answer handler
   function afterAnswer(isCorrect: boolean) {
     let { current, max } = getStreaks()
     if (isCorrect) current += 1
@@ -93,14 +84,11 @@ export default function PuzzlePage() {
     router.push(`/puzzle/${idNum + 1}?challenge=${challengeIndex}`)
   }
 
-  // 8) Memory-day submit handler
   const handleMemorySubmit = (e: FormEvent) => {
     e.preventDefault()
     afterAnswer(userAns.trim() === flashSeq[askIndex])
   }
 
-  // If you still have AdSense on the page, this pushes the ad render.
-  // If you've removed AdSense (e.g., moving to Ezoic), you can delete this effect.
   useEffect(() => {
     if (typeof window !== 'undefined') {
       try {
@@ -134,7 +122,7 @@ export default function PuzzlePage() {
         </title>
       </Head>
 
-      {/* ✅ Top Ad (remove if you’re not using AdSense) */}
+      {/* ✅ Top Ad */}
       <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
         <ins
           className="adsbygoogle"
@@ -182,7 +170,7 @@ export default function PuzzlePage() {
                         flex: 1,
                         padding: '8px 12px',
                         fontSize: '1rem',
-                        border: '1px solid '#ccc',
+                        border: '1px solid #ccc',
                         borderRadius: '4px 0 0 4px',
                         outline: 'none',
                       }}
@@ -274,7 +262,6 @@ export default function PuzzlePage() {
                 {opt}
               </button>
             ))}
-            {/* Trivia fact removed on purpose */}
           </>
         )}
       </main>
