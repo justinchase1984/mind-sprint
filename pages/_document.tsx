@@ -4,15 +4,14 @@ import Document, { Html, Head, Main, NextScript } from 'next/document'
 export default class MyDocument extends Document {
   render() {
     return (
-      <Html>
+      <Html lang="en">
         <Head>
-          {/* Google Analytics */}
+          {/* Google Analytics (keep if you use GA4) */}
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA4_ID}`}
           />
           <script
-            // initialize GA4
             dangerouslySetInnerHTML={{
               __html: `
                 window.dataLayer = window.dataLayer || [];
@@ -25,12 +24,10 @@ export default class MyDocument extends Document {
             }}
           />
 
-          {/* Google AdSense */}
-          <script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9372563823272898"
-            crossOrigin="anonymous"
-          ></script>
+          {/* NOTE: AdSense loader REMOVED on purpose
+              If you ever go back to AdSense, re-add:
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX" crossOrigin="anonymous"></script>
+          */}
         </Head>
         <body>
           <Main />
