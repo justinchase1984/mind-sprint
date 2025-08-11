@@ -1,3 +1,4 @@
+// pages/puzzle/[id].tsx
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState, useMemo, FormEvent } from 'react'
@@ -15,13 +16,15 @@ function ordinal(n: number): string {
 
 const DID_YOU_KNOW: { [key: number]: string } = {
   1: 'Did you know: The world’s first crossword puzzle appeared in 1913?',
-  2: 'Did you know: The hardest Sudoku ever solved took over 550 man‑hours?',
+  2: 'Did you know: The hardest Sudoku ever solved took over 550 man-hours?',
+  // …add more entries as needed
 }
 
 export default function PuzzlePage() {
   const router = useRouter()
   const { query } = router
 
+  // 1) Which challenge (1–7)?
   const challengeIndex = (() => {
     const q = query.challenge as string | undefined
     if (q && !isNaN(+q)) return +q
@@ -30,10 +33,14 @@ export default function PuzzlePage() {
     return 1
   })()
 
+  // 2) Load puzzles for that challenge
   const puzzles: Puzzle[] = getPuzzlesByDayIndex(challengeIndex)
+
+  // 3) Which question (1–10)?
   const idNum = parseInt((query.id as string) || '1', 10)
   const puzzle = puzzles[idNum - 1]
 
+  // 4) On first question of each challenge, reset session
   useEffect(() => {
     if (idNum === 1) {
       sessionStorage.setItem('dailyCorrect', '0')
@@ -43,6 +50,7 @@ export default function PuzzlePage() {
     }
   }, [idNum, challengeIndex, puzzles])
 
+  // 5) Day 5 memory logic
   const isMemoryDay = challengeIndex === 5
   const total = isMemoryDay ? 10 : puzzles.length
 
@@ -66,9 +74,11 @@ export default function PuzzlePage() {
     return () => clearTimeout(t)
   }, [idNum, isMemoryDay])
 
+  // 6) Answer state
   const [userAns, setUserAns] = useState('')
   useEffect(() => setUserAns(''), [idNum])
 
+  // 7) Unified after-answer handler
   function afterAnswer(isCorrect: boolean) {
     let { current, max } = getStreaks()
     if (isCorrect) current += 1
@@ -88,21 +98,11 @@ export default function PuzzlePage() {
     router.push(`/puzzle/${idNum + 1}?challenge=${challengeIndex}`)
   }
 
+  // 8) Memory-day submit handler
   const handleMemorySubmit = (e: FormEvent) => {
     e.preventDefault()
     afterAnswer(userAns.trim() === flashSeq[askIndex])
   }
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        // @ts-ignore
-        (window.adsbygoogle = window.adsbygoogle || []).push({})
-      } catch (e) {
-        console.error('AdSense error', e)
-      }
-    }
-  }, [])
 
   return (
     <div
@@ -120,23 +120,16 @@ export default function PuzzlePage() {
         <title>
           {idNum > total
             ? challengeIndex === 7
-              ? 'All Done! | Mind Sprint'
+              ? 'All Done! | Mind Sprint'
               : `Results | Challenge ${challengeIndex}`
             : `Challenge ${challengeIndex} – Puzzle ${idNum}`}
         </title>
       </Head>
 
-      {/* ✅ Top Ad */}
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <ins
-          className="adsbygoogle"
-          style={{ display: 'block' }}
-          data-ad-client="ca-pub-9372563823272898"
-          data-ad-slot="6887362961"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        ></ins>
-      </div>
+      {/* Top Ad spot — AdSense removed. Add Ezoic placeholder here later if desired:
+          <div id="ezoic-pub-ad-placeholder-100" />
+      */}
+      <div style={{ height: 0 }} />
 
       {/* Main content */}
       <main style={{ width: '100%', maxWidth: 800, padding: '1rem', textAlign: 'center' }}>
@@ -163,7 +156,11 @@ export default function PuzzlePage() {
                   >
                     <input type="hidden" name="meta_web_form_id" value="317058051" />
                     <input type="hidden" name="listname" value="awlist6897043" />
-                    <input type="hidden" name="redirect" value="https://www.dailymindsprint.com/bonus/thank-you" />
+                    <input
+                      type="hidden"
+                      name="redirect"
+                      value="https://www.dailymindsprint.com/bonus/thank-you"
+                    />
                     <input type="hidden" name="meta_required" value="email" />
                     <input
                       type="email"
