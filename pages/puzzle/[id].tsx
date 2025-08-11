@@ -7,17 +7,12 @@ import type { Puzzle } from '../../lib/puzzles'
 import { getStreaks, saveStreaks } from '../../lib/streak'
 import { getPuzzlesByDayIndex } from '../../lib/utils'
 
+// Helper for "1st", "2nd", etc.
 function ordinal(n: number): string {
   if (n % 10 === 1 && n % 100 !== 11) return `${n}st`
   if (n % 10 === 2 && n % 100 !== 12) return `${n}nd`
   if (n % 10 === 3 && n % 100 !== 13) return `${n}rd`
   return `${n}th`
-}
-
-const DID_YOU_KNOW: { [key: number]: string } = {
-  1: 'Did you know: The world’s first crossword puzzle appeared in 1913?',
-  2: 'Did you know: The hardest Sudoku ever solved took over 550 man-hours?',
-  // …add more entries as needed
 }
 
 export default function PuzzlePage() {
@@ -104,6 +99,19 @@ export default function PuzzlePage() {
     afterAnswer(userAns.trim() === flashSeq[askIndex])
   }
 
+  // If you still have AdSense on the page, this pushes the ad render.
+  // If you've removed AdSense (e.g., moving to Ezoic), you can delete this effect.
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        // @ts-ignore
+        (window.adsbygoogle = window.adsbygoogle || []).push({})
+      } catch (e) {
+        console.error('AdSense error', e)
+      }
+    }
+  }, [])
+
   return (
     <div
       style={{
@@ -126,10 +134,17 @@ export default function PuzzlePage() {
         </title>
       </Head>
 
-      {/* Top Ad spot — AdSense removed. Add Ezoic placeholder here later if desired:
-          <div id="ezoic-pub-ad-placeholder-100" />
-      */}
-      <div style={{ height: 0 }} />
+      {/* ✅ Top Ad (remove if you’re not using AdSense) */}
+      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          data-ad-client="ca-pub-9372563823272898"
+          data-ad-slot="6887362961"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+      </div>
 
       {/* Main content */}
       <main style={{ width: '100%', maxWidth: 800, padding: '1rem', textAlign: 'center' }}>
@@ -156,11 +171,7 @@ export default function PuzzlePage() {
                   >
                     <input type="hidden" name="meta_web_form_id" value="317058051" />
                     <input type="hidden" name="listname" value="awlist6897043" />
-                    <input
-                      type="hidden"
-                      name="redirect"
-                      value="https://www.dailymindsprint.com/bonus/thank-you"
-                    />
+                    <input type="hidden" name="redirect" value="https://www.dailymindsprint.com/bonus/thank-you" />
                     <input type="hidden" name="meta_required" value="email" />
                     <input
                       type="email"
@@ -171,7 +182,7 @@ export default function PuzzlePage() {
                         flex: 1,
                         padding: '8px 12px',
                         fontSize: '1rem',
-                        border: '1px solid #ccc',
+                        border: '1px solid '#ccc',
                         borderRadius: '4px 0 0 4px',
                         outline: 'none',
                       }}
@@ -263,11 +274,7 @@ export default function PuzzlePage() {
                 {opt}
               </button>
             ))}
-            {DID_YOU_KNOW[idNum] && (
-              <p style={{ fontStyle: 'italic', margin: '1rem 0' }}>
-                {DID_YOU_KNOW[idNum]}
-              </p>
-            )}
+            {/* Trivia fact removed on purpose */}
           </>
         )}
       </main>
