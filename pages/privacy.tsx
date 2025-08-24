@@ -112,20 +112,22 @@ export default function Privacy() {
         <a href="/about">About</a> page for contact details.
       </p>
 
-      {/* 🔽 NEW SECTION REQUIRED BY EZOIC */}
+      {/* ── EZOIC REQUIRED DISCLOSURE ───────────────────────── */}
       <h2>Ezoic Disclosure</h2>
       <p>
         This site uses Ezoic for ad services. You can view Ezoic’s privacy policy and
         cookie usage here:{' '}
         <a
-          href="http://g.ezoic.net/privacy/dailymindsprint.com"
+          href="https://g.ezoic.net/privacy/dailymindsprint.com"
           target="_blank"
           rel="noopener noreferrer"
         >
           Ezoic Privacy Policy
         </a>.
       </p>
-      <span id="ezoic-privacy-policy-embed"></span>
+      <div style={{ fontSize: '0.9rem', color: '#444' }}>
+        <span id="ezoic-privacy-policy-embed"></span>
+      </div>
     </main>
   );
 }
