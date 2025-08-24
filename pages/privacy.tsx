@@ -111,6 +111,21 @@ export default function Privacy() {
         Questions about this policy? Visit our{' '}
         <a href="/about">About</a> page for contact details.
       </p>
+
+      {/* 🔽 NEW SECTION REQUIRED BY EZOIC */}
+      <h2>Ezoic Disclosure</h2>
+      <p>
+        This site uses Ezoic for ad services. You can view Ezoic’s privacy policy and
+        cookie usage here:{' '}
+        <a
+          href="http://g.ezoic.net/privacy/dailymindsprint.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Ezoic Privacy Policy
+        </a>.
+      </p>
+      <span id="ezoic-privacy-policy-embed"></span>
     </main>
   );
 }
