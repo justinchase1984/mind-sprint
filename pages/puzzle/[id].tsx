@@ -89,16 +89,10 @@ export default function PuzzlePage() {
     afterAnswer(userAns.trim() === flashSeq[askIndex])
   }
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        // @ts-ignore
-        (window.adsbygoogle = window.adsbygoogle || []).push({})
-      } catch (e) {
-        console.error('AdSense error', e)
-      }
-    }
-  }, [])
+  // 🚫 Removed old AdSense push useEffect (no mixed networks with Ezoic)
+
+  // Helper: are we on a results screen?
+  const isResults = idNum > total
 
   return (
     <div
@@ -114,7 +108,7 @@ export default function PuzzlePage() {
     >
       <Head>
         <title>
-          {idNum > total
+          {isResults
             ? challengeIndex === 7
               ? 'All Done! | Mind Sprint'
               : `Results | Challenge ${challengeIndex}`
@@ -122,28 +116,26 @@ export default function PuzzlePage() {
         </title>
       </Head>
 
-      {/* ✅ Top Ad */}
-      <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-        <ins
-          className="adsbygoogle"
-          style={{ display: 'block' }}
-          data-ad-client="ca-pub-9372563823272898"
-          data-ad-slot="6887362961"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        ></ins>
-      </div>
+      {/* ✅ Ezoic placeholder – TOP of puzzle (only when not on results) */}
+      {!isResults && (
+        <div style={{ textAlign: 'center', marginBottom: '1rem', width: '100%' }}>
+          <div id="ezoic-pub-ad-placeholder-100" />
+        </div>
+      )}
 
       {/* Main content */}
       <main style={{ width: '100%', maxWidth: 800, padding: '1rem', textAlign: 'center' }}>
-        {idNum > total ? (
+        {isResults ? (
           (() => {
             const score = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
             if (challengeIndex === 7) {
+              // 🚫 Do not place ads on the AWeber results page
               return (
                 <>
                   <h1>🎉 Congratulations! You’ve completed all 7 challenges!</h1>
-                  <p>You scored <strong>{score}/{total}</strong></p>
+                  <p>
+                    You scored <strong>{score}/{total}</strong>
+                  </p>
                   <p>Enter your email below to claim your bonus reward:</p>
                   <form
                     method="post"
@@ -203,15 +195,28 @@ export default function PuzzlePage() {
             return (
               <>
                 <h1>🎉 You’ve completed Challenge {challengeIndex}!</h1>
-                <p>You scored <strong>{score}/{total}</strong></p>
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1rem' }}>
+                <p>
+                  You scored <strong>{score}/{total}</strong>
+                </p>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    gap: '1rem',
+                    marginTop: '1rem',
+                  }}
+                >
                   {passed ? (
                     <Link href={`/puzzle/1?challenge=${challengeIndex + 1}`}>
-                      <button style={{ padding: '8px 16px' }}>Start Challenge {challengeIndex + 1}</button>
+                      <button style={{ padding: '8px 16px' }}>
+                        Start Challenge {challengeIndex + 1}
+                      </button>
                     </Link>
                   ) : (
                     <Link href={`/puzzle/1?challenge=${challengeIndex}`}>
-                      <button style={{ padding: '8px 16px' }}>You scored {score}/{total}. Try Again</button>
+                      <button style={{ padding: '8px 16px' }}>
+                        You scored {score}/{total}. Try Again
+                      </button>
                     </Link>
                   )}
                   <Link href="/">
@@ -227,7 +232,9 @@ export default function PuzzlePage() {
           ) : (
             <>
               <h2>Challenge 5</h2>
-              <p>What was the <strong>{ordinal(askIndex + 1)}</strong> number you saw?</p>
+              <p>
+                What was the <strong>{ordinal(askIndex + 1)}</strong> number you saw?
+              </p>
               <form onSubmit={handleMemorySubmit}>
                 <input
                   type="text"
@@ -241,12 +248,16 @@ export default function PuzzlePage() {
                   Submit
                 </button>
               </form>
+
+              {/* ✅ Ezoic placeholder – MID (memory view) */}
+              <div id="ezoic-pub-ad-placeholder-101" style={{ margin: '1rem 0' }} />
             </>
           )
         ) : (
           <>
             <h2>Challenge {challengeIndex}</h2>
             <p>{puzzle?.question}</p>
+
             {puzzle?.options.map((opt) => (
               <button
                 key={opt}
@@ -262,7 +273,15 @@ export default function PuzzlePage() {
                 {opt}
               </button>
             ))}
+
+            {/* ✅ Ezoic placeholder – UNDER answers (regular puzzles) */}
+            <div id="ezoic-pub-ad-placeholder-101" style={{ margin: '1rem 0' }} />
           </>
+        )}
+
+        {/* ✅ Ezoic placeholder – BOTTOM of puzzle (not on results) */}
+        {!isResults && (
+          <div id="ezoic-pub-ad-placeholder-102" style={{ marginTop: '1rem' }} />
         )}
       </main>
     </div>
