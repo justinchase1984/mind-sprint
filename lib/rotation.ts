@@ -127,8 +127,63 @@ const EXTRA_SETS: Record<number, Puzzle[][]> = {
     ],
   ],
 
+  3: [
+    // Challenge 3 — Set B (Celebrity / Pop Culture)
+    [
+      {
+        question: "Which actor plays Iron Man in the Marvel Cinematic Universe?",
+        options: ["Robert Downey Jr.", "Chris Evans", "Chris Hemsworth", "Mark Ruffalo"],
+        answer: "Robert Downey Jr."
+      },
+      {
+        question: "Taylor Swift won her first Grammy Award for which album?",
+        options: ["Fearless", "Red", "1989", "Speak Now"],
+        answer: "Fearless"
+      },
+      {
+        question: "Which actor starred as Jack Dawson in Titanic?",
+        options: ["Leonardo DiCaprio", "Brad Pitt", "Johnny Depp", "Matt Damon"],
+        answer: "Leonardo DiCaprio"
+      },
+      {
+        question: "Which singer is known as 'The Queen of Pop'?",
+        options: ["Madonna", "Beyoncé", "Lady Gaga", "Mariah Carey"],
+        answer: "Madonna"
+      },
+      {
+        question: "Which actor voices Woody in the Toy Story movies?",
+        options: ["Tom Hanks", "Tim Allen", "Robin Williams", "Billy Crystal"],
+        answer: "Tom Hanks"
+      },
+      {
+        question: "Which singer is known for the hit song 'Rolling in the Deep'?",
+        options: ["Adele", "Beyoncé", "Lady Gaga", "Katy Perry"],
+        answer: "Adele"
+      },
+      {
+        question: "In the TV show Friends, what is the name of Ross and Monica’s dog in a flashback episode?",
+        options: ["Marcel", "Clunkers", "Chi-Chi", "LaPooh"],
+        answer: "Chi-Chi"
+      },
+      {
+        question: "Which actor famously said 'I’ll be back' in The Terminator?",
+        options: ["Sylvester Stallone", "Arnold Schwarzenegger", "Bruce Willis", "Harrison Ford"],
+        answer: "Arnold Schwarzenegger"
+      },
+      {
+        question: "Which band is known for the hit song 'Bohemian Rhapsody'?",
+        options: ["The Beatles", "Queen", "Pink Floyd", "Led Zeppelin"],
+        answer: "Queen"
+      },
+      {
+        question: "Which actor played the character Jack Sparrow in the Pirates of the Caribbean series?",
+        options: ["Johnny Depp", "Orlando Bloom", "Keira Knightley", "Geoffrey Rush"],
+        answer: "Johnny Depp"
+      }
+    ]
+  ],
+
   // Add future sets as you create them, e.g.:
-  // 3: [ [ /* Challenge 3 – Set B (Logic & Patterns) */ ] ],
   // 4: [ [ /* Challenge 4 – Set B (Numbers & Math) */ ] ],
   // 5: [ [ /* Challenge 5 – Set B (Memory) */ ] ],
   // 6: [ [ /* Challenge 6 – Set B (Science & Nature) */ ] ],
