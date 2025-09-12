@@ -5,7 +5,8 @@ import { useEffect, useState, useMemo, FormEvent } from 'react'
 import Link from 'next/link'
 import type { Puzzle } from '../../lib/puzzles'
 import { getStreaks, saveStreaks } from '../../lib/streak'
-import { getPuzzlesByDayIndex } from '../../lib/utils'
+// ⬇️ NEW: use the rotating puzzles helper
+import { getRotatingPuzzlesByChallenge } from '../../lib/rotation'
 
 function ordinal(n: number): string {
   if (n % 10 === 1 && n % 100 !== 11) return `${n}st`
@@ -26,7 +27,8 @@ export default function PuzzlePage() {
     return 1
   })()
 
-  const puzzles: Puzzle[] = getPuzzlesByDayIndex(challengeIndex)
+  // ⬇️ UPDATED: get weekly-rotated puzzles
+  const puzzles: Puzzle[] = getRotatingPuzzlesByChallenge(challengeIndex)
   const idNum = parseInt((query.id as string) || '1', 10)
   const puzzle = puzzles[idNum - 1]
 
@@ -88,8 +90,6 @@ export default function PuzzlePage() {
     e.preventDefault()
     afterAnswer(userAns.trim() === flashSeq[askIndex])
   }
-
-  // 🚫 Removed old AdSense push useEffect (no mixed networks with Ezoic)
 
   // Helper: are we on a results screen?
   const isResults = idNum > total
