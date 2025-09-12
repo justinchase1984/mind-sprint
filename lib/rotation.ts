@@ -65,8 +65,69 @@ const EXTRA_SETS: Record<number, Puzzle[][]> = {
       },
     ],
   ],
+
+  2: [
+    // Challenge 2 — Set B (Words & Language, on-theme, balanced, no repeats)
+    [
+      {
+        question: 'What is the meaning of the word “ephemeral”?',
+        options: ['Lasting a very short time', 'Extremely large', 'Hidden or secret', 'Brightly colored'],
+        answer: 'Lasting a very short time',
+      },
+      {
+        question: 'Which author wrote “Pride and Prejudice”?',
+        options: ['Charlotte Brontë', 'Jane Austen', 'Emily Dickinson', 'Mary Shelley'],
+        answer: 'Jane Austen',
+      },
+      {
+        question: 'In English grammar, which of the following is a conjunction?',
+        options: ['Quickly', 'Because', 'Book', 'Happiness'],
+        answer: 'Because',
+      },
+      {
+        question: 'The word “karaoke” originated from which language?',
+        options: ['Korean', 'Chinese', 'Japanese', 'Thai'],
+        answer: 'Japanese',
+      },
+      {
+        question: 'What is a palindrome?',
+        options: [
+          'A word that rhymes with another',
+          'A word spelled the same backward and forward',
+          'A word with two meanings',
+          'A word that describes sound',
+        ],
+        answer: 'A word spelled the same backward and forward',
+      },
+      {
+        question: 'Which Shakespeare play contains the line “To be, or not to be, that is the question”?',
+        options: ['Macbeth', 'Hamlet', 'Othello', 'King Lear'],
+        answer: 'Hamlet',
+      },
+      {
+        question: 'What is the correct term for a word that has the opposite meaning of another word?',
+        options: ['Synonym', 'Antonym', 'Homonym', 'Acronym'],
+        answer: 'Antonym',
+      },
+      {
+        question: 'The word “quarantine” originally referred to how many days of isolation?',
+        options: ['10', '20', '30', '40'],
+        answer: '40',
+      },
+      {
+        question: 'Which language has the most native speakers worldwide?',
+        options: ['English', 'Mandarin Chinese', 'Spanish', 'Hindi'],
+        answer: 'Mandarin Chinese',
+      },
+      {
+        question: 'What is the term for a word formed by combining parts of two other words, like “brunch”?',
+        options: ['Compound word', 'Acronym', 'Blend', 'Anagram'],
+        answer: 'Blend',
+      },
+    ],
+  ],
+
   // Add future sets as you create them, e.g.:
-  // 2: [ [ /* Challenge 2 – Set B (Words & Language) */ ] ],
   // 3: [ [ /* Challenge 3 – Set B (Logic & Patterns) */ ] ],
   // 4: [ [ /* Challenge 4 – Set B (Numbers & Math) */ ] ],
   // 5: [ [ /* Challenge 5 – Set B (Memory) */ ] ],
