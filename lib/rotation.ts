@@ -183,8 +183,63 @@ const EXTRA_SETS: Record<number, Puzzle[][]> = {
     ]
   ],
 
+  4: [
+    // Challenge 4 — Set B (History)
+    [
+      {
+        question: 'Which ancient civilization built the city of Babylon?',
+        options: ['Sumerians', 'Babylonians', 'Assyrians', 'Persians'],
+        answer: 'Babylonians',
+      },
+      {
+        question: 'Who was the first emperor of Rome?',
+        options: ['Julius Caesar', 'Augustus', 'Nero', 'Tiberius'],
+        answer: 'Augustus',
+      },
+      {
+        question: 'The fall of the Berlin Wall occurred in which year?',
+        options: ['1987', '1988', '1989', '1990'],
+        answer: '1989',
+      },
+      {
+        question: 'Which empire was ruled by Genghis Khan?',
+        options: ['Roman Empire', 'Ottoman Empire', 'Mongol Empire', 'Persian Empire'],
+        answer: 'Mongol Empire',
+      },
+      {
+        question: 'The Magna Carta was signed in which country?',
+        options: ['France', 'Germany', 'England', 'Spain'],
+        answer: 'England',
+      },
+      {
+        question: 'What was the name of the ship that carried the Pilgrims to North America in 1620?',
+        options: ['Santa Maria', 'Mayflower', 'Beagle', 'Endeavour'],
+        answer: 'Mayflower',
+      },
+      {
+        question: 'Who was the first woman to win a Nobel Prize?',
+        options: ['Marie Curie', 'Florence Nightingale', 'Ada Lovelace', 'Mother Teresa'],
+        answer: 'Marie Curie',
+      },
+      {
+        question: 'The Cold War was primarily a conflict between which two superpowers?',
+        options: ['USA and Germany', 'USA and USSR', 'USA and China', 'USA and Japan'],
+        answer: 'USA and USSR',
+      },
+      {
+        question: 'Which ancient structure was built as a tomb for Pharaoh Khufu?',
+        options: ['Great Sphinx', 'Valley of the Kings', 'Great Pyramid of Giza', 'Temple of Karnak'],
+        answer: 'Great Pyramid of Giza',
+      },
+      {
+        question: 'Who was the British Prime Minister during most of World War II?',
+        options: ['Winston Churchill', 'Neville Chamberlain', 'Clement Attlee', 'Anthony Eden'],
+        answer: 'Winston Churchill',
+      },
+    ],
+  ],
+
   // Add future sets as you create them, e.g.:
-  // 4: [ [ /* Challenge 4 – Set B (Numbers & Math) */ ] ],
   // 5: [ [ /* Challenge 5 – Set B (Memory) */ ] ],
   // 6: [ [ /* Challenge 6 – Set B (Science & Nature) */ ] ],
   // 7: [ [ /* Challenge 7 – Set B (Culture & History) */ ] ],
