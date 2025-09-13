@@ -74,6 +74,62 @@ const EXTRA_SETS: Record<number, Puzzle[][]> = {
     ],
   ],
 
+  6: [
+    // Challenge 6 — Set B (Science & Nature)
+    [
+      {
+        question: 'Which gas makes up the largest proportion of Earth’s atmosphere?',
+        options: ['Oxygen', 'Nitrogen', 'Carbon Dioxide', 'Argon'],
+        answer: 'Nitrogen',
+      },
+      {
+        question: 'Which organelle is primarily responsible for producing ATP in eukaryotic cells?',
+        options: ['Nucleus', 'Mitochondrion', 'Ribosome', 'Golgi apparatus'],
+        answer: 'Mitochondrion',
+      },
+      {
+        question: 'What is the hardest naturally occurring substance on Earth?',
+        options: ['Quartz', 'Corundum', 'Diamond', 'Topaz'],
+        answer: 'Diamond',
+      },
+      {
+        question: 'Which pigment allows plants to capture light energy for photosynthesis?',
+        options: ['Melanin', 'Chlorophyll', 'Carotene', 'Hemoglobin'],
+        answer: 'Chlorophyll',
+      },
+      {
+        question: 'Earth’s tectonic plates move atop which semi-plastic layer of the mantle?',
+        options: ['Lithosphere', 'Asthenosphere', 'Mesosphere', 'Outer core'],
+        answer: 'Asthenosphere',
+      },
+      {
+        question: 'What is the closest star to Earth after the Sun?',
+        options: ['Alpha Centauri A', 'Sirius', 'Proxima Centauri', 'Barnard’s Star'],
+        answer: 'Proxima Centauri',
+      },
+      {
+        question: 'Which vitamin can be synthesized in human skin when exposed to sunlight?',
+        options: ['Vitamin A', 'Vitamin B12', 'Vitamin C', 'Vitamin D'],
+        answer: 'Vitamin D',
+      },
+      {
+        question: 'Which biome is characterized by permanently frozen subsoil (permafrost)?',
+        options: ['Savanna', 'Tundra', 'Temperate forest', 'Desert'],
+        answer: 'Tundra',
+      },
+      {
+        question: 'Which element is the fundamental basis of most organic molecules?',
+        options: ['Nitrogen', 'Oxygen', 'Carbon', 'Phosphorus'],
+        answer: 'Carbon',
+      },
+      {
+        question: 'What is the largest living structure on Earth, visible from space?',
+        options: ['Amazon Rainforest', 'Great Barrier Reef', 'Sahara Dune Fields', 'Greenland Ice Sheet'],
+        answer: 'Great Barrier Reef',
+      },
+    ],
+  ],
+
   // Note: Challenge 5 (Memory) uses a dedicated weekly variant below instead of Q&A sets.
 };
 
