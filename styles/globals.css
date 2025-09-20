@@ -1,35 +1,96 @@
 /* styles/globals.css */
 
+/* ------------- */
+/* Base & tokens */
+/* ------------- */
+:root {
+  --bg: #ffffff;
+  --text: #111111;
+  --muted: #555555;
+  --border: #eaeaea;
+  --accent: #0ea5e9; /* soft, friendly blue */
+}
+
 html, body {
-  margin: 0;
   padding: 0;
-  width: 100vw;
-  height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.quiz-page {
-  display: grid;
+* {
+  box-sizing: border-box;
+}
+
+/* Headings just a touch bolder/clearer */
+h1, h2, h3 {
+  line-height: 1.25;
+  letter-spacing: 0.2px;
+  margin-top: 0;
+}
+
+/* Subtle page container (you already center content with inline styles;
+   this class is here for future use if you want it) */
+.ms-container {
   width: 100%;
-  min-height: 100vh;
-  grid-template-areas:
-    "header  header  header"
-    "adL     main    adR"
-    "footer  footer  footer";
-  grid-template-columns: 150px minmax(300px,1fr) 150px;
-  grid-template-rows: auto 1fr auto;
-  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
-.header { grid-area: header; }
-.adL    { grid-area: adL;    }
-.main   {
-  grid-area: main;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-}
-.adR    { grid-area: adR;    }
-.footer { grid-area: footer; }
+/* ------------- */
+/* Buttons       */
+/* ------------- */
 
+.ms-btn {
+  display: block;
+  width: 100%;
+  max-width: 720px;
+  margin: 8px auto;
+  padding: 12px 16px;
+  font-size: 16px;
+  line-height: 1.25;
+  border: 1px solid var(--border);
+  background: #f7f7f7;
+  color: var(--text);
+  border-radius: 8px;           /* subtle rounding */
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease, transform 80ms ease;
+}
+
+.ms-btn:hover {
+  background: #f0f8ff;          /* whisper of accent on hover */
+  border-color: var(--accent);
+}
+
+.ms-btn:active {
+  transform: translateY(0.5px);
+}
+
+.ms-btn--primary {
+  background: #0f172a;          /* near-black for strong CTAs */
+  color: #ffffff;
+  border-color: #0f172a;
+}
+
+.ms-btn--primary:hover {
+  background: #111827;
+  border-color: #111827;
+}
+
+/* For small facts under questions */
+.ms-fact {
+  font-style: italic;
+  color: var(--muted);
+  margin: 1rem 0;
+}
+
+/* Keep links black and minimal (per your baseline rules) */
+a {
+  color: inherit;
+  text-decoration: none;
+}
