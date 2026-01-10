@@ -98,20 +98,21 @@ a {
 }
 
 /* ----------------------------------- */
-/* New subtle hover underline for nav  */
+/* Navigation hover underline (subtle) */
 /* ----------------------------------- */
 .ms-navlink {
   position: relative;
+  padding-bottom: 2px;
 }
 
 .ms-navlink::after {
   content: '';
   position: absolute;
   left: 0;
-  bottom: -2px;
+  bottom: 0;
   width: 0%;
   height: 2px;
-  background: #000;
+  background: var(--text);
   transition: width 0.2s ease;
 }
 
