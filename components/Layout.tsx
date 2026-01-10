@@ -10,7 +10,6 @@ interface LayoutProps {
 export default function Layout({ children, hideHeader = false }: LayoutProps) {
   return (
     <>
-      {/* ✅ Header always shows unless explicitly hidden */}
       {!hideHeader && (
         <header
           style={{
@@ -44,6 +43,9 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
             <Link href="/brain-training" legacyBehavior>
               <a style={{ textDecoration: 'none', color: '#000' }}>Brain Training</a>
             </Link>
+            <Link href="/faq" legacyBehavior>
+              <a style={{ textDecoration: 'none', color: '#000' }}>FAQ</a>
+            </Link>
             <Link href="/about" legacyBehavior>
               <a style={{ textDecoration: 'none', color: '#000' }}>About</a>
             </Link>
@@ -54,10 +56,8 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
         </header>
       )}
 
-      {/* Main content */}
       <main style={{ minHeight: '80vh' }}>{children}</main>
 
-      {/* ✅ Centered footer */}
       <footer
         style={{
           borderTop: '1px solid #eee',
@@ -72,13 +72,16 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
               Brain Training
             </a>
           </Link>
-
+          <Link href="/faq" legacyBehavior>
+            <a style={{ marginRight: '1rem', textDecoration: 'none', color: '#000' }}>
+              FAQ
+            </a>
+          </Link>
           <Link href="/about" legacyBehavior>
             <a style={{ marginRight: '1rem', textDecoration: 'none', color: '#000' }}>
               About
             </a>
           </Link>
-
           <Link href="/privacy" legacyBehavior>
             <a style={{ textDecoration: 'none', color: '#000' }}>Privacy Policy</a>
           </Link>
