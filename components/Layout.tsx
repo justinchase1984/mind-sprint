@@ -22,7 +22,7 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
           }}
         >
           <div>
-            <Link href="/" passHref legacyBehavior>
+            <Link href="/" legacyBehavior>
               <a
                 style={{
                   fontSize: '1.1rem',
@@ -39,18 +39,18 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
             </Link>
           </div>
 
-          <nav style={{ display: 'flex', gap: '1rem' }}>
+          <nav style={{ display: 'flex', gap: '1.25rem' }}>
             <Link href="/brain-training" legacyBehavior>
-              <a style={{ textDecoration: 'none', color: '#000' }}>Brain Training</a>
+              <a className="ms-navlink">Brain Training</a>
             </Link>
             <Link href="/faq" legacyBehavior>
-              <a style={{ textDecoration: 'none', color: '#000' }}>FAQ</a>
+              <a className="ms-navlink">FAQ</a>
             </Link>
             <Link href="/about" legacyBehavior>
-              <a style={{ textDecoration: 'none', color: '#000' }}>About</a>
+              <a className="ms-navlink">About</a>
             </Link>
             <Link href="/privacy" legacyBehavior>
-              <a style={{ textDecoration: 'none', color: '#000' }}>Privacy</a>
+              <a className="ms-navlink">Privacy</a>
             </Link>
           </nav>
         </header>
@@ -66,24 +66,18 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
           fontSize: '0.9rem',
         }}
       >
-        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '600px', margin: '0 auto', display: 'flex', gap: '1.25rem', justifyContent: 'center' }}>
           <Link href="/brain-training" legacyBehavior>
-            <a style={{ marginRight: '1rem', textDecoration: 'none', color: '#000' }}>
-              Brain Training
-            </a>
+            <a className="ms-navlink">Brain Training</a>
           </Link>
           <Link href="/faq" legacyBehavior>
-            <a style={{ marginRight: '1rem', textDecoration: 'none', color: '#000' }}>
-              FAQ
-            </a>
+            <a className="ms-navlink">FAQ</a>
           </Link>
           <Link href="/about" legacyBehavior>
-            <a style={{ marginRight: '1rem', textDecoration: 'none', color: '#000' }}>
-              About
-            </a>
+            <a className="ms-navlink">About</a>
           </Link>
           <Link href="/privacy" legacyBehavior>
-            <a style={{ textDecoration: 'none', color: '#000' }}>Privacy Policy</a>
+            <a className="ms-navlink">Privacy Policy</a>
           </Link>
         </div>
       </footer>
