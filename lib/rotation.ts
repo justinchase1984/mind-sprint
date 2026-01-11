@@ -1,6 +1,6 @@
 // lib/rotation.ts
-import type { Puzzle } from './puzzles';
-import { getPuzzlesByDayIndex } from './utils';
+import type { Puzzle } from './puzzles'
+import { getPuzzlesByDayIndex } from './utils'
 
 /**
  * Add complete 10-question sets per challenge here.
@@ -11,7 +11,7 @@ import { getPuzzlesByDayIndex } from './utils';
  */
 const EXTRA_SETS: Record<number, Puzzle[][]> = {
   1: [
-    // Challenge 1 — Set B (General Knowledge)
+    // Challenge 1 — Set B (General Knowledge, no repeats, balanced difficulty)
     [
       {
         question: 'Which ancient civilization built Machu Picchu?',
@@ -34,7 +34,8 @@ const EXTRA_SETS: Record<number, Puzzle[][]> = {
         answer: 'Liver',
       },
       {
-        question: 'Which chemical element has the highest electrical conductivity at room temperature?',
+        question:
+          'Which chemical element has the highest electrical conductivity at room temperature?',
         options: ['Copper', 'Silver', 'Gold', 'Aluminum'],
         answer: 'Silver',
       },
@@ -64,7 +65,8 @@ const EXTRA_SETS: Record<number, Puzzle[][]> = {
         answer: 'Antonio Vivaldi',
       },
       {
-        question: 'Which scientist popularized the theory of evolution by natural selection in “On the Origin of Species”?',
+        question:
+          'Which scientist popularized the theory of evolution by natural selection in “On the Origin of Species”?',
         options: ['Gregor Mendel', 'Charles Darwin', 'Alfred Russel Wallace', 'Louis Pasteur'],
         answer: 'Charles Darwin',
       },
@@ -72,7 +74,7 @@ const EXTRA_SETS: Record<number, Puzzle[][]> = {
   ],
 
   2: [
-    // Challenge 2 — Set B (Words & Language)
+    // Challenge 2 — Set B (Words & Language, on-theme, balanced, no repeats)
     [
       {
         question: 'What is the meaning of the word “ephemeral”?',
@@ -133,7 +135,7 @@ const EXTRA_SETS: Record<number, Puzzle[][]> = {
   ],
 
   3: [
-    // Challenge 3 — Set B (Celebrity & Pop Culture)
+    // Challenge 3 — Set B (Celebrity & Pop Culture, balanced, not time-sensitive)
     [
       {
         question: 'Which actor plays Iron Man in the Marvel Cinematic Universe?',
@@ -141,193 +143,72 @@ const EXTRA_SETS: Record<number, Puzzle[][]> = {
         answer: 'Robert Downey Jr.',
       },
       {
-        question: 'Taylor Swift won her first Grammy Award for which album?',
-        options: ['Fearless', 'Red', '1989', 'Speak Now'],
-        answer: 'Fearless',
-      },
-      {
         question: 'Which actor starred as Jack Dawson in Titanic?',
         options: ['Leonardo DiCaprio', 'Brad Pitt', 'Johnny Depp', 'Matt Damon'],
         answer: 'Leonardo DiCaprio',
       },
       {
-        question: "Which singer is known as 'The Queen of Pop'?",
+        question: 'Taylor Swift won her first Grammy Award for which album?',
+        options: ['Fearless', 'Red', '1989', 'Speak Now'],
+        answer: 'Fearless',
+      },
+      {
+        question: "Which singer is widely known as the 'Queen of Pop'?",
         options: ['Madonna', 'Beyoncé', 'Lady Gaga', 'Mariah Carey'],
         answer: 'Madonna',
       },
       {
-        question: 'Which actor voices Woody in the Toy Story movies?',
-        options: ['Tom Hanks', 'Tim Allen', 'Robin Williams', 'Billy Crystal'],
-        answer: 'Tom Hanks',
-      },
-      {
-        question: 'Which singer is known for the hit song Rolling in the Deep?',
-        options: ['Adele', 'Beyoncé', 'Lady Gaga', 'Katy Perry'],
-        answer: 'Adele',
-      },
-      {
-        question: 'In the TV show Friends, what is the name of Ross and Monica’s dog in a flashback episode?',
-        options: ['Marcel', 'Clunkers', 'Chi-Chi', 'LaPooh'],
-        answer: 'Chi-Chi',
-      },
-      {
-        question: 'Which actor famously said “I’ll be back” in The Terminator?',
-        options: ['Sylvester Stallone', 'Arnold Schwarzenegger', 'Bruce Willis', 'Harrison Ford'],
-        answer: 'Arnold Schwarzenegger',
-      },
-      {
-        question: 'Which band is known for the hit song Bohemian Rhapsody?',
-        options: ['The Beatles', 'Queen', 'Pink Floyd', 'Led Zeppelin'],
+        question: 'Which band released the song “Bohemian Rhapsody”?',
+        options: ['Queen', 'The Beatles', 'Led Zeppelin', 'Pink Floyd'],
         answer: 'Queen',
       },
       {
-        question: 'Which actor played the character Jack Sparrow in the Pirates of the Caribbean series?',
-        options: ['Johnny Depp', 'Orlando Bloom', 'Keira Knightley', 'Geoffrey Rush'],
-        answer: 'Johnny Depp',
+        question: 'Who played Hermione Granger in the Harry Potter film series?',
+        options: ['Emma Watson', 'Keira Knightley', 'Natalie Portman', 'Anne Hathaway'],
+        answer: 'Emma Watson',
+      },
+      {
+        question: 'Which singer released the best-selling album “Thriller”?',
+        options: ['Michael Jackson', 'Prince', 'Elton John', 'David Bowie'],
+        answer: 'Michael Jackson',
+      },
+      {
+        question: 'Which TV series features Ross, Rachel, Monica, Chandler, Joey, and Phoebe?',
+        options: ['Friends', 'Seinfeld', 'The Office', 'How I Met Your Mother'],
+        answer: 'Friends',
+      },
+      {
+        question: 'Who voices Woody in the Toy Story films?',
+        options: ['Tom Hanks', 'Tim Allen', 'Robin Williams', 'Will Ferrell'],
+        answer: 'Tom Hanks',
+      },
+      {
+        question: 'Which film franchise is associated with the quote “May the Force be with you”?',
+        options: ['Star Wars', 'Star Trek', 'The Matrix', 'Lord of the Rings'],
+        answer: 'Star Wars',
       },
     ],
   ],
 
-  4: [
-    // Challenge 4 — Set B (History)
-    [
-      {
-        question: 'Which ancient civilization built the city of Babylon?',
-        options: ['Sumerians', 'Babylonians', 'Assyrians', 'Persians'],
-        answer: 'Babylonians',
-      },
-      {
-        question: 'Who was the first emperor of Rome?',
-        options: ['Julius Caesar', 'Augustus', 'Nero', 'Tiberius'],
-        answer: 'Augustus',
-      },
-      {
-        question: 'The fall of the Berlin Wall occurred in which year?',
-        options: ['1987', '1988', '1989', '1990'],
-        answer: '1989',
-      },
-      {
-        question: 'Which empire was ruled by Genghis Khan?',
-        options: ['Roman Empire', 'Ottoman Empire', 'Mongol Empire', 'Persian Empire'],
-        answer: 'Mongol Empire',
-      },
-      {
-        question: 'The Magna Carta was signed in which country?',
-        options: ['France', 'Germany', 'England', 'Spain'],
-        answer: 'England',
-      },
-      {
-        question: 'What was the name of the ship that carried the Pilgrims to North America in 1620?',
-        options: ['Santa Maria', 'Mayflower', 'Beagle', 'Endeavour'],
-        answer: 'Mayflower',
-      },
-      {
-        question: 'Who was the first woman to win a Nobel Prize?',
-        options: ['Marie Curie', 'Florence Nightingale', 'Ada Lovelace', 'Mother Teresa'],
-        answer: 'Marie Curie',
-      },
-      {
-        question: 'The Cold War was primarily a conflict between which two superpowers?',
-        options: ['USA and Germany', 'USA and USSR', 'USA and China', 'USA and Japan'],
-        answer: 'USA and USSR',
-      },
-      {
-        question: 'Which ancient structure was built as a tomb for Pharaoh Khufu?',
-        options: ['Great Sphinx', 'Valley of the Kings', 'Great Pyramid of Giza', 'Temple of Karnak'],
-        answer: 'Great Pyramid of Giza',
-      },
-      {
-        question: 'Who was the British Prime Minister during most of World War II?',
-        options: ['Winston Churchill', 'Neville Chamberlain', 'Clement Attlee', 'Anthony Eden'],
-        answer: 'Winston Churchill',
-      },
-    ],
-  ],
-
-  7: [
-    // Challenge 7 — Set B (Culture & History)
-    [
-      {
-        question: 'Which ancient wonder was located in the city of Alexandria?',
-        options: ['Hanging Gardens', 'Colossus', 'Lighthouse', 'Parthenon'],
-        answer: 'Lighthouse',
-      },
-      {
-        question: 'Which painter created the work “The Starry Night”?',
-        options: ['Pablo Picasso', 'Vincent van Gogh', 'Claude Monet', 'Salvador Dalí'],
-        answer: 'Vincent van Gogh',
-      },
-      {
-        question: 'In which country did the Olympic Games originate?',
-        options: ['Italy', 'Greece', 'Egypt', 'Turkey'],
-        answer: 'Greece',
-      },
-      {
-        question: 'The Great Fire of London occurred in which year?',
-        options: ['1556', '1666', '1776', '1888'],
-        answer: '1666',
-      },
-      {
-        question: 'Which composer is famous for his “Fifth Symphony” and went deaf later in life?',
-        options: [
-          'Johann Sebastian Bach',
-          'Wolfgang Amadeus Mozart',
-          'Ludwig van Beethoven',
-          'Franz Schubert',
-        ],
-        answer: 'Ludwig van Beethoven',
-      },
-      {
-        question: "The cuisine dish 'sushi' originated in which country?",
-        options: ['China', 'Japan', 'Korea', 'Thailand'],
-        answer: 'Japan',
-      },
-      {
-        question: 'Which empire built the famous road network that included the Appian Way?',
-        options: ['Greek Empire', 'Roman Empire', 'Persian Empire', 'Byzantine Empire'],
-        answer: 'Roman Empire',
-      },
-      {
-        question: 'The novel “One Hundred Years of Solitude” was written by which author?',
-        options: [
-          'Gabriel García Márquez',
-          'Pablo Neruda',
-          'Jorge Luis Borges',
-          'Mario Vargas Llosa',
-        ],
-        answer: 'Gabriel García Márquez',
-      },
-      {
-        question: 'Which cultural movement was associated with jazz music and poetry in 1920s Harlem?',
-        options: [
-          'Harlem Renaissance',
-          'Beat Generation',
-          'Roaring Twenties',
-          'Art Deco Movement',
-        ],
-        answer: 'Harlem Renaissance',
-      },
-      {
-        question: 'Which country is home to the historic site Machu Picchu?',
-        options: ['Mexico', 'Peru', 'Chile', 'Guatemala'],
-        answer: 'Peru',
-      },
-    ],
-  ],
-};
+  // Add future sets as you create them:
+  // 4: [ [ /* Challenge 4 – Set B */ ] ],
+  // 5: [ [ /* Challenge 5 – Set B */ ] ],
+  // 6: [ [ /* Challenge 6 – Set B */ ] ],
+  // 7: [ [ /* Challenge 7 – Set B */ ] ],
+}
 
 /** Return UTC midnight for a given date (avoids timezone drift). */
 function toUtcMidnight(date: Date): number {
-  return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+  return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())
 }
 
-const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+const WEEK_MS = 7 * 24 * 60 * 60 * 1000
 // Anchor on a Monday (keep constant for stable rotation across time):
-const EPOCH_UTC_MS = Date.UTC(2025, 0, 6); // 2025-01-06 (Mon) UTC
+const EPOCH_UTC_MS = Date.UTC(2025, 0, 6) // 2025-01-06 (Mon) UTC
 
 /** Positive modulo. */
 function posMod(n: number, m: number): number {
-  return ((n % m) + m) % m;
+  return ((n % m) + m) % m
 }
 
 /**
@@ -341,22 +222,24 @@ export function getRotatingPuzzlesByChallenge(
   challengeIndex: number,
   today: Date = new Date()
 ): Puzzle[] {
-  const baseline = getPuzzlesByDayIndex(challengeIndex) || [];
-  const extraSets = EXTRA_SETS[challengeIndex] || [];
-  const weeksSinceEpoch = Math.floor((toUtcMidnight(today) - EPOCH_UTC_MS) / WEEK_MS);
+  const baseline = getPuzzlesByDayIndex(challengeIndex) || []
+  const extraSets = EXTRA_SETS[challengeIndex] || []
+  const weeksSinceEpoch = Math.floor((toUtcMidnight(today) - EPOCH_UTC_MS) / WEEK_MS)
 
-  if (!baseline.length && !extraSets.length) return [];
+  if (!baseline.length && !extraSets.length) return []
 
   if (extraSets.length === 0) {
-    const shiftBy = posMod(weeksSinceEpoch, Math.max(1, baseline.length));
+    // No extra sets yet → rotate baseline ORDER weekly (non-mutating).
+    const shiftBy = posMod(weeksSinceEpoch, Math.max(1, baseline.length))
     return baseline.length > 0
       ? [...baseline.slice(shiftBy), ...baseline.slice(0, shiftBy)]
-      : baseline;
+      : baseline
   }
 
+  // With extra sets → rotate across baseline + all extra full sets
   const candidateSets: Puzzle[][] = [baseline, ...extraSets].filter(
     (set) => Array.isArray(set) && set.length > 0
-  );
-  const pick = posMod(weeksSinceEpoch, candidateSets.length);
-  return candidateSets[pick];
+  )
+  const pick = posMod(weeksSinceEpoch, candidateSets.length)
+  return candidateSets[pick]
 }
