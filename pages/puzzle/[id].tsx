@@ -15,38 +15,44 @@ function ordinal(n: number): string {
   return `${n}th`
 }
 
-// ✅ Challenge intros (static by challenge number; does not conflict with rotating question sets)
 const CHALLENGE_INTROS: Record<
   number,
-  { title: string; blurb: string }
+  { title: string; subtitle: string }
 > = {
   1: {
-    title: 'Challenge 1 – General Knowledge',
-    blurb: 'A balanced mix of geography, science, history, and everyday facts. Warm up and build your streak.',
+    title: 'Challenge 1 – Quick Trivia',
+    subtitle:
+      'A fast warm-up of general knowledge questions. Nothing obscure — just solid everyday trivia.',
   },
   2: {
-    title: 'Challenge 2 – Words & Language',
-    blurb: 'Vocabulary, meanings, grammar, and word origins. Quick thinking, clean answers.',
+    title: 'Challenge 2 – Word Scramble',
+    subtitle:
+      'Unscramble the letters to find the correct word. Quick, satisfying, and not overly tricky.',
   },
   3: {
-    title: 'Challenge 3 – Celebrity Trivia',
-    blurb: 'Movies, music, and famous faces. Fun pop culture questions without the “gotcha” weirdness.',
+    title: 'Challenge 3 – General Knowledge',
+    subtitle:
+      'A mixed bag of world knowledge: sports, geography, culture, and common facts. Keep it moving.',
   },
   4: {
-    title: 'Challenge 4 – History',
-    blurb: 'Big moments, key figures, and world-changing events. Solid history questions—no obscure rabbit holes.',
+    title: 'Challenge 4 – Emoji Word Puzzles',
+    subtitle:
+      'Guess the word from the picture/emoji clues. Think “rebus” style — simple, visual, and fun.',
   },
   5: {
     title: 'Challenge 5 – Memory Sprint',
-    blurb: 'Focus and recall. You’ll briefly see a sequence—then answer from memory.',
+    subtitle:
+      'A short memory test. Watch the sequence, hold it in your head, then answer the question.',
   },
   6: {
-    title: 'Challenge 6 – Science & Nature',
-    blurb: 'Space, biology, the natural world, and how things work. Smart, practical science trivia.',
+    title: 'Challenge 6 – Quick Quiz',
+    subtitle:
+      'Straightforward trivia prompts (sometimes with a hint like “4 letters”). Simple, clean, and satisfying.',
   },
   7: {
-    title: 'Challenge 7 – Culture & History Mix',
-    blurb: 'A final mixed set to finish strong. Stay sharp—then claim your reward at the end.',
+    title: 'Challenge 7 – Final Mixed Round',
+    subtitle:
+      'The final run: a mixed set to finish strong. Stay sharp and lock in that bonus reward.',
   },
 }
 
@@ -62,10 +68,14 @@ export default function PuzzlePage() {
     return 1
   })()
 
-  // Weekly-rotating puzzles (full-set rotation if EXTRA_SETS exist; otherwise baseline order rotates)
+  // Weekly-rotating puzzles
   const puzzles: Puzzle[] = getRotatingPuzzlesByChallenge(challengeIndex)
   const idNum = parseInt((query.id as string) || '1', 10)
   const puzzle = puzzles[idNum - 1]
+
+  const isMemoryDay = challengeIndex === 5
+  const total = isMemoryDay ? 10 : puzzles.length
+  const isResults = idNum > total
 
   useEffect(() => {
     if (idNum === 1) {
@@ -75,9 +85,6 @@ export default function PuzzlePage() {
       )
     }
   }, [idNum, challengeIndex, puzzles])
-
-  const isMemoryDay = challengeIndex === 5
-  const total = isMemoryDay ? 10 : puzzles.length
 
   const flashSeq = useMemo<string[]>(() => {
     if (!isMemoryDay) return []
@@ -124,12 +131,8 @@ export default function PuzzlePage() {
     afterAnswer(userAns.trim() === flashSeq[askIndex])
   }
 
-  const isResults = idNum > total
   const factKey = `${challengeIndex}-${idNum}`
-
-  // ✅ Intro shows only on Question 1 (and not on results screens)
-  const showIntro = !isResults && idNum === 1
-  const intro = CHALLENGE_INTROS[challengeIndex]
+  const showIntro = !isResults && idNum === 1 && !!CHALLENGE_INTROS[challengeIndex]
 
   return (
     <div
@@ -161,29 +164,28 @@ export default function PuzzlePage() {
       )}
 
       <main style={{ width: '100%', maxWidth: 800, padding: '1rem', textAlign: 'center' }}>
-        {/* ✅ Challenge intro (ONLY on Question 1) */}
-        {showIntro && intro && (
-          <section
+        {/* ✅ Challenge Intro (ONLY Question 1, not on results) */}
+        {showIntro && (
+          <div
             style={{
               textAlign: 'left',
               border: '1px solid #eaeaea',
               borderRadius: 12,
               padding: '14px 16px',
-              margin: '0 auto 1rem',
-              maxWidth: 720,
+              margin: '0 auto 18px',
               background: '#fafafa',
             }}
           >
-            <div style={{ fontSize: 12, color: '#555', marginBottom: 6 }}>
-              {`Challenge ${challengeIndex} • Question 1`}
+            <div style={{ fontSize: 12, color: '#666', marginBottom: 6 }}>
+              Challenge {challengeIndex} • Question 1
             </div>
             <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 6 }}>
-              {intro.title}
+              {CHALLENGE_INTROS[challengeIndex].title}
             </div>
-            <div style={{ fontSize: 14, lineHeight: 1.5, color: '#333' }}>
-              {intro.blurb}
+            <div style={{ fontSize: 14, color: '#333', lineHeight: 1.45 }}>
+              {CHALLENGE_INTROS[challengeIndex].subtitle}
             </div>
-          </section>
+          </div>
         )}
 
         {isResults ? (
@@ -267,21 +269,19 @@ export default function PuzzlePage() {
                 <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1rem' }}>
                   {passed ? (
                     <Link href={`/puzzle/1?challenge=${challengeIndex + 1}`}>
-                      <button className="ms-btn ms-btn--primary" style={{ width: 'auto', maxWidth: 'none' }}>
+                      <button style={{ padding: '8px 16px' }}>
                         Start Challenge {challengeIndex + 1}
                       </button>
                     </Link>
                   ) : (
                     <Link href={`/puzzle/1?challenge=${challengeIndex}`}>
-                      <button className="ms-btn" style={{ width: 'auto', maxWidth: 'none' }}>
+                      <button style={{ padding: '8px 16px' }}>
                         You scored {score}/{total}. Try Again
                       </button>
                     </Link>
                   )}
                   <Link href="/">
-                    <button className="ms-btn" style={{ width: 'auto', maxWidth: 'none' }}>
-                      Back to Home
-                    </button>
+                    <button style={{ padding: '8px 16px' }}>Back to Home</button>
                   </Link>
                 </div>
               </>
@@ -305,7 +305,7 @@ export default function PuzzlePage() {
                   required
                   style={{ padding: '8px', fontSize: 16 }}
                 />
-                <button type="submit" className="ms-btn ms-btn--primary" style={{ width: 'auto', maxWidth: 'none', marginLeft: 10 }}>
+                <button type="submit" style={{ marginLeft: 10, padding: '8px 16px' }}>
                   Submit
                 </button>
               </form>
@@ -314,7 +314,11 @@ export default function PuzzlePage() {
               <div id="ezoic-pub-ad-placeholder-101" style={{ margin: '1rem 0' }} />
 
               {/* Fact on memory day too */}
-              {DID_YOU_KNOW[factKey] && <p className="ms-fact">{DID_YOU_KNOW[factKey]}</p>}
+              {DID_YOU_KNOW[factKey] && (
+                <p style={{ fontStyle: 'italic', margin: '1rem 0', color: '#555' }}>
+                  {DID_YOU_KNOW[factKey]}
+                </p>
+              )}
             </>
           )
         ) : (
@@ -326,17 +330,27 @@ export default function PuzzlePage() {
               <button
                 key={opt}
                 onClick={() => afterAnswer(opt === puzzle.answer)}
-                className="ms-btn"
+                style={{
+                  display: 'block',
+                  margin: '8px auto',
+                  padding: '10px 20px',
+                  width: '80%',
+                  cursor: 'pointer',
+                }}
               >
                 {opt}
               </button>
             ))}
 
-            {/* Ezoic placeholder – UNDER answers (regular puzzles) */}
+            {/* Ezoic placeholder – UNDER answers */}
             <div id="ezoic-pub-ad-placeholder-101" style={{ margin: '1rem 0' }} />
 
             {/* Fact under the options */}
-            {DID_YOU_KNOW[factKey] && <p className="ms-fact">{DID_YOU_KNOW[factKey]}</p>}
+            {DID_YOU_KNOW[factKey] && (
+              <p style={{ fontStyle: 'italic', margin: '1rem 0', color: '#555' }}>
+                {DID_YOU_KNOW[factKey]}
+              </p>
+            )}
           </>
         )}
 
