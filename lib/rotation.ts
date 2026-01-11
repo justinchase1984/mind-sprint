@@ -4,12 +4,13 @@ import { getPuzzlesByDayIndex } from './utils'
 
 /**
  * Add complete 10-question sets per challenge here.
- * - If no sets are provided for a challenge, we fall back to rotating the ORDER
- *   of your baseline questions weekly (no content change).
  *
- * IMPORTANT (fix for “old questions showing”):
- * - If sets ARE provided for a challenge, we rotate ONLY across those sets.
- *   We do NOT include baseline in the rotation, so baseline can’t “win” some weeks.
+ * IMPORTANT BEHAVIOR (so you don't see old baseline questions):
+ * - If EXTRA_SETS[challenge] exists and has at least 1 set:
+ *     we rotate ONLY across those extra sets weekly.
+ *     (We do NOT include baseline in that rotation.)
+ * - If no EXTRA_SETS exist for that challenge:
+ *     we rotate the ORDER of the baseline weekly (no content change).
  */
 const EXTRA_SETS: Record<number, Puzzle[][]> = {
   1: [
@@ -53,12 +54,7 @@ const EXTRA_SETS: Record<number, Puzzle[][]> = {
       },
       {
         question: 'Which treaty formally ended World War I in 1919?',
-        options: [
-          'Treaty of Vienna',
-          'Treaty of Paris',
-          'Treaty of Versailles',
-          'Treaty of Utrecht',
-        ],
+        options: ['Treaty of Vienna', 'Treaty of Paris', 'Treaty of Versailles', 'Treaty of Utrecht'],
         answer: 'Treaty of Versailles',
       },
       {
@@ -81,16 +77,13 @@ const EXTRA_SETS: Record<number, Puzzle[][]> = {
   ],
 
   2: [
-    // Challenge 2 — Set B (Words & Language, on-theme, balanced, no repeats)
+    // Challenge 2 — Set B (Words & Language)
+    // NOTE: Your intro says "Word Scramble" — if this set isn't actually used in your baseline,
+    // you can revise later. This is fine for now.
     [
       {
         question: 'What is the meaning of the word “ephemeral”?',
-        options: [
-          'Lasting a very short time',
-          'Extremely large',
-          'Hidden or secret',
-          'Brightly colored',
-        ],
+        options: ['Lasting a very short time', 'Extremely large', 'Hidden or secret', 'Brightly colored'],
         answer: 'Lasting a very short time',
       },
       {
@@ -119,14 +112,12 @@ const EXTRA_SETS: Record<number, Puzzle[][]> = {
         answer: 'A word spelled the same backward and forward',
       },
       {
-        question:
-          'Which Shakespeare play contains the line “To be, or not to be, that is the question”?',
+        question: 'Which Shakespeare play contains the line “To be, or not to be, that is the question”?',
         options: ['Macbeth', 'Hamlet', 'Othello', 'King Lear'],
         answer: 'Hamlet',
       },
       {
-        question:
-          'What is the correct term for a word that has the opposite meaning of another word?',
+        question: 'What is the correct term for a word that has the opposite meaning of another word?',
         options: ['Synonym', 'Antonym', 'Homonym', 'Acronym'],
         answer: 'Antonym',
       },
@@ -141,8 +132,7 @@ const EXTRA_SETS: Record<number, Puzzle[][]> = {
         answer: 'Mandarin Chinese',
       },
       {
-        question:
-          'What is the term for a word formed by combining parts of two other words, like “brunch”?',
+        question: 'What is the term for a word formed by combining parts of two other words, like “brunch”?',
         options: ['Compound word', 'Acronym', 'Blend', 'Anagram'],
         answer: 'Blend',
       },
@@ -204,12 +194,6 @@ const EXTRA_SETS: Record<number, Puzzle[][]> = {
       },
     ],
   ],
-
-  // Add future sets as you create them:
-  // 4: [ [ /* Challenge 4 – Set B */ ] ],
-  // 5: [ [ /* Challenge 5 – Set B */ ] ],
-  // 6: [ [ /* Challenge 6 – Set B */ ] ],
-  // 7: [ [ /* Challenge 7 – Set B */ ] ],
 }
 
 /** Return UTC midnight for a given date (avoids timezone drift). */
@@ -230,9 +214,9 @@ function posMod(n: number, m: number): number {
  * Returns the puzzles for a challenge, rotated weekly.
  *
  * RULES:
- * 1) If EXTRA_SETS exist for this challenge, rotate ONLY across EXTRA_SETS.
- *    (This prevents baseline/old questions from appearing.)
- * 2) If no EXTRA_SETS exist, rotate the ORDER of baseline weekly.
+ * 1) If EXTRA_SETS exist for this challenge → rotate ONLY across EXTRA_SETS weekly.
+ *    (This ensures you won't ever see old baseline questions for that challenge.)
+ * 2) Else → rotate baseline ORDER weekly (same content, different order).
  */
 export function getRotatingPuzzlesByChallenge(
   challengeIndex: number,
@@ -242,19 +226,19 @@ export function getRotatingPuzzlesByChallenge(
   const extraSets = EXTRA_SETS[challengeIndex] || []
   const weeksSinceEpoch = Math.floor((toUtcMidnight(today) - EPOCH_UTC_MS) / WEEK_MS)
 
-  // If we have explicit sets for this challenge, ONLY rotate those sets.
+  // If you provided extra sets, use them (and ONLY them).
   if (extraSets.length > 0) {
     const candidateSets: Puzzle[][] = extraSets.filter(
       (set) => Array.isArray(set) && set.length > 0
     )
-    if (candidateSets.length === 0) return []
+    if (candidateSets.length === 0) return baseline
     const pick = posMod(weeksSinceEpoch, candidateSets.length)
     return candidateSets[pick]
   }
 
-  // No extra sets yet → rotate baseline ORDER weekly (non-mutating).
-  if (!baseline.length) return []
+  // No extra sets → rotate baseline order weekly.
+  if (baseline.length === 0) return []
 
-  const shiftBy = posMod(weeksSinceEpoch, Math.max(1, baseline.length))
+  const shiftBy = posMod(weeksSinceEpoch, baseline.length)
   return [...baseline.slice(shiftBy), ...baseline.slice(0, shiftBy)]
 }
