@@ -15,6 +15,41 @@ function ordinal(n: number): string {
   return `${n}th`
 }
 
+// ✅ Challenge intros (static by challenge number; does not conflict with rotating question sets)
+const CHALLENGE_INTROS: Record<
+  number,
+  { title: string; blurb: string }
+> = {
+  1: {
+    title: 'Challenge 1 – General Knowledge',
+    blurb: 'A balanced mix of geography, science, history, and everyday facts. Warm up and build your streak.',
+  },
+  2: {
+    title: 'Challenge 2 – Words & Language',
+    blurb: 'Vocabulary, meanings, grammar, and word origins. Quick thinking, clean answers.',
+  },
+  3: {
+    title: 'Challenge 3 – Celebrity Trivia',
+    blurb: 'Movies, music, and famous faces. Fun pop culture questions without the “gotcha” weirdness.',
+  },
+  4: {
+    title: 'Challenge 4 – History',
+    blurb: 'Big moments, key figures, and world-changing events. Solid history questions—no obscure rabbit holes.',
+  },
+  5: {
+    title: 'Challenge 5 – Memory Sprint',
+    blurb: 'Focus and recall. You’ll briefly see a sequence—then answer from memory.',
+  },
+  6: {
+    title: 'Challenge 6 – Science & Nature',
+    blurb: 'Space, biology, the natural world, and how things work. Smart, practical science trivia.',
+  },
+  7: {
+    title: 'Challenge 7 – Culture & History Mix',
+    blurb: 'A final mixed set to finish strong. Stay sharp—then claim your reward at the end.',
+  },
+}
+
 export default function PuzzlePage() {
   const router = useRouter()
   const { query } = router
@@ -27,7 +62,7 @@ export default function PuzzlePage() {
     return 1
   })()
 
-  // Weekly-rotating puzzles (order rotation by week; can rotate full sets via EXTRA_SETS)
+  // Weekly-rotating puzzles (full-set rotation if EXTRA_SETS exist; otherwise baseline order rotates)
   const puzzles: Puzzle[] = getRotatingPuzzlesByChallenge(challengeIndex)
   const idNum = parseInt((query.id as string) || '1', 10)
   const puzzle = puzzles[idNum - 1]
@@ -46,9 +81,7 @@ export default function PuzzlePage() {
 
   const flashSeq = useMemo<string[]>(() => {
     if (!isMemoryDay) return []
-    return Array.from({ length: 5 }, () =>
-      String(Math.ceil(Math.random() * 9))
-    )
+    return Array.from({ length: 5 }, () => String(Math.ceil(Math.random() * 9)))
   }, [idNum, isMemoryDay])
 
   const askIndex = useMemo(() => {
@@ -94,6 +127,10 @@ export default function PuzzlePage() {
   const isResults = idNum > total
   const factKey = `${challengeIndex}-${idNum}`
 
+  // ✅ Intro shows only on Question 1 (and not on results screens)
+  const showIntro = !isResults && idNum === 1
+  const intro = CHALLENGE_INTROS[challengeIndex]
+
   return (
     <div
       style={{
@@ -124,6 +161,31 @@ export default function PuzzlePage() {
       )}
 
       <main style={{ width: '100%', maxWidth: 800, padding: '1rem', textAlign: 'center' }}>
+        {/* ✅ Challenge intro (ONLY on Question 1) */}
+        {showIntro && intro && (
+          <section
+            style={{
+              textAlign: 'left',
+              border: '1px solid #eaeaea',
+              borderRadius: 12,
+              padding: '14px 16px',
+              margin: '0 auto 1rem',
+              maxWidth: 720,
+              background: '#fafafa',
+            }}
+          >
+            <div style={{ fontSize: 12, color: '#555', marginBottom: 6 }}>
+              {`Challenge ${challengeIndex} • Question 1`}
+            </div>
+            <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 6 }}>
+              {intro.title}
+            </div>
+            <div style={{ fontSize: 14, lineHeight: 1.5, color: '#333' }}>
+              {intro.blurb}
+            </div>
+          </section>
+        )}
+
         {isResults ? (
           (() => {
             const score = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
@@ -151,7 +213,11 @@ export default function PuzzlePage() {
                   >
                     <input type="hidden" name="meta_web_form_id" value="317058051" />
                     <input type="hidden" name="listname" value="awlist6897043" />
-                    <input type="hidden" name="redirect" value="https://www.dailymindsprint.com/bonus/thank-you" />
+                    <input
+                      type="hidden"
+                      name="redirect"
+                      value="https://www.dailymindsprint.com/bonus/thank-you"
+                    />
                     <input type="hidden" name="meta_required" value="email" />
                     <input
                       type="email"
@@ -198,29 +264,24 @@ export default function PuzzlePage() {
                 <p>
                   You scored <strong>{score}/{total}</strong>
                 </p>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    gap: '1rem',
-                    marginTop: '1rem',
-                  }}
-                >
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1rem' }}>
                   {passed ? (
                     <Link href={`/puzzle/1?challenge=${challengeIndex + 1}`}>
-                      <button style={{ padding: '8px 16px' }}>
+                      <button className="ms-btn ms-btn--primary" style={{ width: 'auto', maxWidth: 'none' }}>
                         Start Challenge {challengeIndex + 1}
                       </button>
                     </Link>
                   ) : (
                     <Link href={`/puzzle/1?challenge=${challengeIndex}`}>
-                      <button style={{ padding: '8px 16px' }}>
+                      <button className="ms-btn" style={{ width: 'auto', maxWidth: 'none' }}>
                         You scored {score}/{total}. Try Again
                       </button>
                     </Link>
                   )}
                   <Link href="/">
-                    <button style={{ padding: '8px 16px' }}>Back to Home</button>
+                    <button className="ms-btn" style={{ width: 'auto', maxWidth: 'none' }}>
+                      Back to Home
+                    </button>
                   </Link>
                 </div>
               </>
@@ -244,7 +305,7 @@ export default function PuzzlePage() {
                   required
                   style={{ padding: '8px', fontSize: 16 }}
                 />
-                <button type="submit" style={{ marginLeft: 10, padding: '8px 16px' }}>
+                <button type="submit" className="ms-btn ms-btn--primary" style={{ width: 'auto', maxWidth: 'none', marginLeft: 10 }}>
                   Submit
                 </button>
               </form>
@@ -253,11 +314,7 @@ export default function PuzzlePage() {
               <div id="ezoic-pub-ad-placeholder-101" style={{ margin: '1rem 0' }} />
 
               {/* Fact on memory day too */}
-              {DID_YOU_KNOW[factKey] && (
-                <p style={{ fontStyle: 'italic', margin: '1rem 0' }}>
-                  {DID_YOU_KNOW[factKey]}
-                </p>
-              )}
+              {DID_YOU_KNOW[factKey] && <p className="ms-fact">{DID_YOU_KNOW[factKey]}</p>}
             </>
           )
         ) : (
@@ -269,13 +326,7 @@ export default function PuzzlePage() {
               <button
                 key={opt}
                 onClick={() => afterAnswer(opt === puzzle.answer)}
-                style={{
-                  display: 'block',
-                  margin: '8px auto',
-                  padding: '10px 20px',
-                  width: '80%',
-                  cursor: 'pointer',
-                }}
+                className="ms-btn"
               >
                 {opt}
               </button>
@@ -285,18 +336,12 @@ export default function PuzzlePage() {
             <div id="ezoic-pub-ad-placeholder-101" style={{ margin: '1rem 0' }} />
 
             {/* Fact under the options */}
-            {DID_YOU_KNOW[factKey] && (
-              <p style={{ fontStyle: 'italic', margin: '1rem 0' }}>
-                {DID_YOU_KNOW[factKey]}
-              </p>
-            )}
+            {DID_YOU_KNOW[factKey] && <p className="ms-fact">{DID_YOU_KNOW[factKey]}</p>}
           </>
         )}
 
         {/* Ezoic placeholder – BOTTOM of puzzle (not on results) */}
-        {!isResults && (
-          <div id="ezoic-pub-ad-placeholder-102" style={{ marginTop: '1rem' }} />
-        )}
+        {!isResults && <div id="ezoic-pub-ad-placeholder-102" style={{ marginTop: '1rem' }} />}
       </main>
     </div>
   )
