@@ -34,7 +34,7 @@ const CHALLENGE_INTROS: Record<number, { title: string; subtitle: string }> = {
   4: {
     title: 'Challenge 4 – Emoji Word Puzzles',
     subtitle:
-      'Guess the word from the picture/emoji clues. Rebus-style — simple, visual, and fun.',
+      'Guess the word from the emoji/picture clues. Rebus-style — simple, visual, and fun.',
   },
   5: {
     title: 'Challenge 5 – Memory Sprint',
@@ -60,13 +60,11 @@ export default function PuzzlePage() {
   const challengeIndex = (() => {
     const q = query.challenge as string | undefined
     if (q && !isNaN(+q)) return +q
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined')
       return parseInt(localStorage.getItem('unlockedChallenge') || '1', 10)
-    }
     return 1
   })()
 
-  // ✅ Always use the weekly-rotating puzzles from rotation.ts (no per-challenge overrides here)
   const puzzles: Puzzle[] = getRotatingPuzzlesByChallenge(challengeIndex)
   const idNum = parseInt((query.id as string) || '1', 10)
   const puzzle = puzzles[idNum - 1]
@@ -154,7 +152,6 @@ export default function PuzzlePage() {
         </title>
       </Head>
 
-      {/* Ezoic placeholder – TOP of puzzle (not on results) */}
       {!isResults && (
         <div style={{ textAlign: 'center', marginBottom: '1rem', width: '100%' }}>
           <div id="ezoic-pub-ad-placeholder-100" />
@@ -162,7 +159,6 @@ export default function PuzzlePage() {
       )}
 
       <main style={{ width: '100%', maxWidth: 800, padding: '1rem', textAlign: 'center' }}>
-        {/* ✅ Challenge Intro (ONLY Question 1, not on results) */}
         {showIntro && (
           <div
             style={{
@@ -191,7 +187,6 @@ export default function PuzzlePage() {
             const score = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
 
             if (challengeIndex === 7) {
-              // No ads here per your rule
               return (
                 <>
                   <h1>🎉 Congratulations! You’ve completed all 7 challenges!</h1>
@@ -315,10 +310,8 @@ export default function PuzzlePage() {
                 </button>
               </form>
 
-              {/* Ezoic placeholder – MID (memory view) */}
               <div id="ezoic-pub-ad-placeholder-101" style={{ margin: '1rem 0' }} />
 
-              {/* Fact on memory day too */}
               {DID_YOU_KNOW[factKey] && (
                 <p style={{ fontStyle: 'italic', margin: '1rem 0', color: '#555' }}>
                   {DID_YOU_KNOW[factKey]}
@@ -329,50 +322,35 @@ export default function PuzzlePage() {
         ) : (
           <>
             <h2>Challenge {challengeIndex}</h2>
+            <p>{puzzle?.question}</p>
 
-            {/* Safety: if puzzles are missing for some reason */}
-            {!puzzle ? (
-              <p style={{ color: '#555' }}>
-                This puzzle could not be found. Please go back and try again.
+            {puzzle?.options.map((opt) => (
+              <button
+                key={opt}
+                onClick={() => afterAnswer(opt === puzzle.answer)}
+                style={{
+                  display: 'block',
+                  margin: '8px auto',
+                  padding: '10px 20px',
+                  width: '80%',
+                  cursor: 'pointer',
+                }}
+              >
+                {opt}
+              </button>
+            ))}
+
+            <div id="ezoic-pub-ad-placeholder-101" style={{ margin: '1rem 0' }} />
+
+            {DID_YOU_KNOW[factKey] && (
+              <p style={{ fontStyle: 'italic', margin: '1rem 0', color: '#555' }}>
+                {DID_YOU_KNOW[factKey]}
               </p>
-            ) : (
-              <>
-                <p>{puzzle.question}</p>
-
-                {puzzle.options.map((opt) => (
-                  <button
-                    key={opt}
-                    onClick={() => afterAnswer(opt === puzzle.answer)}
-                    style={{
-                      display: 'block',
-                      margin: '8px auto',
-                      padding: '10px 20px',
-                      width: '80%',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    {opt}
-                  </button>
-                ))}
-
-                {/* Ezoic placeholder – UNDER answers */}
-                <div id="ezoic-pub-ad-placeholder-101" style={{ margin: '1rem 0' }} />
-
-                {/* Fact under the options */}
-                {DID_YOU_KNOW[factKey] && (
-                  <p style={{ fontStyle: 'italic', margin: '1rem 0', color: '#555' }}>
-                    {DID_YOU_KNOW[factKey]}
-                  </p>
-                )}
-              </>
             )}
           </>
         )}
 
-        {/* Ezoic placeholder – BOTTOM of puzzle (not on results) */}
-        {!isResults && (
-          <div id="ezoic-pub-ad-placeholder-102" style={{ marginTop: '1rem' }} />
-        )}
+        {!isResults && <div id="ezoic-pub-ad-placeholder-102" style={{ marginTop: '1rem' }} />}
       </main>
     </div>
   )
