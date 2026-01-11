@@ -15,10 +15,66 @@ function ordinal(n: number): string {
   return `${n}th`
 }
 
-const CHALLENGE_INTROS: Record<
-  number,
-  { title: string; subtitle: string }
-> = {
+/**
+ * ✅ Challenge 3 override: Celebrity & Pop Culture (10 questions)
+ * - No "answer in the question"
+ * - No time-sensitive “who won in 2024” type questions
+ * - Balanced difficulty
+ */
+const CHALLENGE_3_CELEB: Puzzle[] = [
+  {
+    question: 'Which actor plays Iron Man in the Marvel Cinematic Universe?',
+    options: ['Robert Downey Jr.', 'Chris Evans', 'Chris Hemsworth', 'Mark Ruffalo'],
+    answer: 'Robert Downey Jr.',
+  },
+  {
+    question: 'Which actor starred as Jack Dawson in Titanic?',
+    options: ['Leonardo DiCaprio', 'Brad Pitt', 'Johnny Depp', 'Matt Damon'],
+    answer: 'Leonardo DiCaprio',
+  },
+  {
+    question: 'Taylor Swift won her first Grammy Award for which album?',
+    options: ['Fearless', 'Red', '1989', 'Speak Now'],
+    answer: 'Fearless',
+  },
+  {
+    question: "Which singer is widely known as the 'Queen of Pop'?",
+    options: ['Madonna', 'Beyoncé', 'Lady Gaga', 'Mariah Carey'],
+    answer: 'Madonna',
+  },
+  {
+    question: 'Which band released the song “Bohemian Rhapsody”?',
+    options: ['Queen', 'The Beatles', 'Led Zeppelin', 'Pink Floyd'],
+    answer: 'Queen',
+  },
+  {
+    question: 'Who played Hermione Granger in the Harry Potter film series?',
+    options: ['Emma Watson', 'Keira Knightley', 'Natalie Portman', 'Anne Hathaway'],
+    answer: 'Emma Watson',
+  },
+  {
+    question: 'Which singer released the best-selling album “Thriller”?',
+    options: ['Michael Jackson', 'Prince', 'Elton John', 'David Bowie'],
+    answer: 'Michael Jackson',
+  },
+  {
+    question: 'Which TV series features Ross, Rachel, Monica, Chandler, Joey, and Phoebe?',
+    options: ['Friends', 'Seinfeld', 'The Office', 'How I Met Your Mother'],
+    answer: 'Friends',
+  },
+  {
+    question: 'Who voices Woody in the Toy Story films?',
+    options: ['Tom Hanks', 'Tim Allen', 'Robin Williams', 'Will Ferrell'],
+    answer: 'Tom Hanks',
+  },
+  {
+    question: 'Which film franchise is associated with the quote “May the Force be with you”?',
+    options: ['Star Wars', 'Star Trek', 'The Matrix', 'Lord of the Rings'],
+    answer: 'Star Wars',
+  },
+]
+
+const CHALLENGE_INTROS: Record<number, { title: string; subtitle: string }> = {
   1: {
     title: 'Challenge 1 – Quick Trivia',
     subtitle:
@@ -30,9 +86,10 @@ const CHALLENGE_INTROS: Record<
       'Unscramble the letters to find the correct word. Quick, satisfying, and not overly tricky.',
   },
   3: {
-    title: 'Challenge 3 – General Knowledge',
+    // ✅ UPDATED to match Celebrity set
+    title: 'Challenge 3 – Celebrity & Pop Culture',
     subtitle:
-      'A mixed bag of world knowledge: sports, geography, culture, and common facts. Keep it moving.',
+      'Movies, music, and famous faces. Fun pop culture questions without “gotcha” weirdness.',
   },
   4: {
     title: 'Challenge 4 – Emoji Word Puzzles',
@@ -68,8 +125,10 @@ export default function PuzzlePage() {
     return 1
   })()
 
-  // Weekly-rotating puzzles
-  const puzzles: Puzzle[] = getRotatingPuzzlesByChallenge(challengeIndex)
+  // ✅ Weekly-rotating puzzles, BUT force Challenge 3 to be Celebrity/Pop Culture
+  const puzzles: Puzzle[] =
+    challengeIndex === 3 ? CHALLENGE_3_CELEB : getRotatingPuzzlesByChallenge(challengeIndex)
+
   const idNum = parseInt((query.id as string) || '1', 10)
   const puzzle = puzzles[idNum - 1]
 
@@ -266,7 +325,14 @@ export default function PuzzlePage() {
                 <p>
                   You scored <strong>{score}/{total}</strong>
                 </p>
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1rem' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    gap: '1rem',
+                    marginTop: '1rem',
+                  }}
+                >
                   {passed ? (
                     <Link href={`/puzzle/1?challenge=${challengeIndex + 1}`}>
                       <button style={{ padding: '8px 16px' }}>
@@ -355,7 +421,9 @@ export default function PuzzlePage() {
         )}
 
         {/* Ezoic placeholder – BOTTOM of puzzle (not on results) */}
-        {!isResults && <div id="ezoic-pub-ad-placeholder-102" style={{ marginTop: '1rem' }} />}
+        {!isResults && (
+          <div id="ezoic-pub-ad-placeholder-102" style={{ marginTop: '1rem' }} />
+        )}
       </main>
     </div>
   )
