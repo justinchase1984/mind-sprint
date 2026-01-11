@@ -6,8 +6,10 @@ import { getPuzzlesByDayIndex } from './utils'
  * Add complete 10-question sets per challenge here.
  * - If no sets are provided for a challenge, we fall back to rotating the ORDER
  *   of your baseline questions weekly (no content change).
- * - If sets ARE provided, we rotate weekly across [baseline, Set B, Set C, ...]
- *   so each week shows a full, fresh set.
+ *
+ * IMPORTANT (fix for “old questions showing”):
+ * - If sets ARE provided for a challenge, we rotate ONLY across those sets.
+ *   We do NOT include baseline in the rotation, so baseline can’t “win” some weeks.
  */
 const EXTRA_SETS: Record<number, Puzzle[][]> = {
   1: [
@@ -51,7 +53,12 @@ const EXTRA_SETS: Record<number, Puzzle[][]> = {
       },
       {
         question: 'Which treaty formally ended World War I in 1919?',
-        options: ['Treaty of Vienna', 'Treaty of Paris', 'Treaty of Versailles', 'Treaty of Utrecht'],
+        options: [
+          'Treaty of Vienna',
+          'Treaty of Paris',
+          'Treaty of Versailles',
+          'Treaty of Utrecht',
+        ],
         answer: 'Treaty of Versailles',
       },
       {
@@ -78,7 +85,12 @@ const EXTRA_SETS: Record<number, Puzzle[][]> = {
     [
       {
         question: 'What is the meaning of the word “ephemeral”?',
-        options: ['Lasting a very short time', 'Extremely large', 'Hidden or secret', 'Brightly colored'],
+        options: [
+          'Lasting a very short time',
+          'Extremely large',
+          'Hidden or secret',
+          'Brightly colored',
+        ],
         answer: 'Lasting a very short time',
       },
       {
@@ -107,12 +119,14 @@ const EXTRA_SETS: Record<number, Puzzle[][]> = {
         answer: 'A word spelled the same backward and forward',
       },
       {
-        question: 'Which Shakespeare play contains the line “To be, or not to be, that is the question”?',
+        question:
+          'Which Shakespeare play contains the line “To be, or not to be, that is the question”?',
         options: ['Macbeth', 'Hamlet', 'Othello', 'King Lear'],
         answer: 'Hamlet',
       },
       {
-        question: 'What is the correct term for a word that has the opposite meaning of another word?',
+        question:
+          'What is the correct term for a word that has the opposite meaning of another word?',
         options: ['Synonym', 'Antonym', 'Homonym', 'Acronym'],
         answer: 'Antonym',
       },
@@ -127,7 +141,8 @@ const EXTRA_SETS: Record<number, Puzzle[][]> = {
         answer: 'Mandarin Chinese',
       },
       {
-        question: 'What is the term for a word formed by combining parts of two other words, like “brunch”?',
+        question:
+          'What is the term for a word formed by combining parts of two other words, like “brunch”?',
         options: ['Compound word', 'Acronym', 'Blend', 'Anagram'],
         answer: 'Blend',
       },
@@ -213,10 +228,11 @@ function posMod(n: number, m: number): number {
 
 /**
  * Returns the puzzles for a challenge, rotated weekly.
- * Priority:
- * 1) If EXTRA_SETS[challengeIndex] exists, pick one full set by week index
- *    from [baseline, ...extraSets].
- * 2) Otherwise, rotate the ORDER of the baseline questions weekly.
+ *
+ * RULES:
+ * 1) If EXTRA_SETS exist for this challenge, rotate ONLY across EXTRA_SETS.
+ *    (This prevents baseline/old questions from appearing.)
+ * 2) If no EXTRA_SETS exist, rotate the ORDER of baseline weekly.
  */
 export function getRotatingPuzzlesByChallenge(
   challengeIndex: number,
@@ -226,20 +242,19 @@ export function getRotatingPuzzlesByChallenge(
   const extraSets = EXTRA_SETS[challengeIndex] || []
   const weeksSinceEpoch = Math.floor((toUtcMidnight(today) - EPOCH_UTC_MS) / WEEK_MS)
 
-  if (!baseline.length && !extraSets.length) return []
-
-  if (extraSets.length === 0) {
-    // No extra sets yet → rotate baseline ORDER weekly (non-mutating).
-    const shiftBy = posMod(weeksSinceEpoch, Math.max(1, baseline.length))
-    return baseline.length > 0
-      ? [...baseline.slice(shiftBy), ...baseline.slice(0, shiftBy)]
-      : baseline
+  // If we have explicit sets for this challenge, ONLY rotate those sets.
+  if (extraSets.length > 0) {
+    const candidateSets: Puzzle[][] = extraSets.filter(
+      (set) => Array.isArray(set) && set.length > 0
+    )
+    if (candidateSets.length === 0) return []
+    const pick = posMod(weeksSinceEpoch, candidateSets.length)
+    return candidateSets[pick]
   }
 
-  // With extra sets → rotate across baseline + all extra full sets
-  const candidateSets: Puzzle[][] = [baseline, ...extraSets].filter(
-    (set) => Array.isArray(set) && set.length > 0
-  )
-  const pick = posMod(weeksSinceEpoch, candidateSets.length)
-  return candidateSets[pick]
+  // No extra sets yet → rotate baseline ORDER weekly (non-mutating).
+  if (!baseline.length) return []
+
+  const shiftBy = posMod(weeksSinceEpoch, Math.max(1, baseline.length))
+  return [...baseline.slice(shiftBy), ...baseline.slice(0, shiftBy)]
 }
