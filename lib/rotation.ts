@@ -2,15 +2,14 @@
 import type { Puzzle } from './puzzles'
 import { getPuzzlesByDayIndex } from './utils'
 
+type ChallengeIntro = { title: string; subtitle: string }
+
 /**
  * Add complete 10-question sets per challenge here.
- *
- * IMPORTANT BEHAVIOR (so you don't see old baseline questions):
- * - If EXTRA_SETS[challenge] exists and has at least 1 set:
- *     we rotate ONLY across those extra sets weekly.
- *     (We do NOT include baseline in that rotation.)
- * - If no EXTRA_SETS exist for that challenge:
- *     we rotate the ORDER of the baseline weekly (no content change).
+ * - If no sets are provided for a challenge, we fall back to rotating the ORDER
+ *   of your baseline questions weekly (no content change).
+ * - If sets ARE provided, we rotate weekly across [baseline, Set B, Set C, ...]
+ *   so each week shows a full, fresh set.
  */
 const EXTRA_SETS: Record<number, Puzzle[][]> = {
   1: [
@@ -77,9 +76,7 @@ const EXTRA_SETS: Record<number, Puzzle[][]> = {
   ],
 
   2: [
-    // Challenge 2 — Set B (Words & Language)
-    // NOTE: Your intro says "Word Scramble" — if this set isn't actually used in your baseline,
-    // you can revise later. This is fine for now.
+    // Challenge 2 — Set B (Definitions / Word Meanings)
     [
       {
         question: 'What is the meaning of the word “ephemeral”?',
@@ -196,6 +193,71 @@ const EXTRA_SETS: Record<number, Puzzle[][]> = {
   ],
 }
 
+/**
+ * ✅ These intros rotate with the SAME set selection as the questions.
+ * You can adjust titles/subtitles any time without risking mismatch.
+ *
+ * RULE:
+ * - We rotate across [baseline, Set B, Set C, ...]
+ * - So index 0 = baseline intro, index 1 = Set B intro, etc.
+ */
+const ROTATING_INTROS: Record<number, ChallengeIntro[]> = {
+  1: [
+    {
+      title: 'Challenge 1 – Quick Trivia',
+      subtitle: 'A fast warm-up of everyday general knowledge. Clean, fair, and satisfying.',
+    },
+    {
+      title: 'Challenge 1 – Quick Trivia (Set B)',
+      subtitle: 'A fresh weekly mix of solid general knowledge—no obscure rabbit holes.',
+    },
+  ],
+  2: [
+    {
+      title: 'Challenge 2 – Word Meanings',
+      subtitle: 'Pick the correct definition. A clean vocabulary round—more substance than a scramble.',
+    },
+    {
+      title: 'Challenge 2 – Word Meanings (Set B)',
+      subtitle: 'A fresh weekly set of definitions, language facts, and word knowledge.',
+    },
+  ],
+  3: [
+    {
+      title: 'Challenge 3 – Celebrity & Pop Culture',
+      subtitle: 'Movies, music, and famous faces. Straightforward pop culture—no “gotcha” weirdness.',
+    },
+    {
+      title: 'Challenge 3 – Celebrity & Pop Culture (Set B)',
+      subtitle: 'A fresh weekly set of pop culture trivia that stays fun and not time-sensitive.',
+    },
+  ],
+  4: [
+    {
+      title: 'Challenge 4 – Emoji Word Puzzles',
+      subtitle: 'Guess the word from emoji clues. Visual, quick, and genuinely fun.',
+    },
+  ],
+  5: [
+    {
+      title: 'Challenge 5 – Memory Sprint',
+      subtitle: 'Watch the sequence, hold it in your head, then answer the question.',
+    },
+  ],
+  6: [
+    {
+      title: 'Challenge 6 – Quick Quiz',
+      subtitle: 'Straight-up multiple choice. Clean prompts, quick thinking, no fluff.',
+    },
+  ],
+  7: [
+    {
+      title: 'Challenge 7 – Final Mixed Round',
+      subtitle: 'The last stretch—finish strong and lock in your bonus reward.',
+    },
+  ],
+}
+
 /** Return UTC midnight for a given date (avoids timezone drift). */
 function toUtcMidnight(date: Date): number {
   return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())
@@ -211,12 +273,29 @@ function posMod(n: number, m: number): number {
 }
 
 /**
+ * Internal helper: which set is active this week for a challenge?
+ * - If extraSets exist -> we rotate across [baseline, ...extraSets]
+ * - pickIndex: 0 = baseline, 1 = Set B, 2 = Set C, ...
+ */
+function getWeeklyPickIndex(challengeIndex: number, today: Date): number {
+  const baseline = getPuzzlesByDayIndex(challengeIndex) || []
+  const extraSets = EXTRA_SETS[challengeIndex] || []
+  const weeksSinceEpoch = Math.floor((toUtcMidnight(today) - EPOCH_UTC_MS) / WEEK_MS)
+
+  const candidateSets: Puzzle[][] = [baseline, ...extraSets].filter(
+    (set) => Array.isArray(set) && set.length > 0
+  )
+
+  if (candidateSets.length === 0) return 0
+  return posMod(weeksSinceEpoch, candidateSets.length)
+}
+
+/**
  * Returns the puzzles for a challenge, rotated weekly.
- *
- * RULES:
- * 1) If EXTRA_SETS exist for this challenge → rotate ONLY across EXTRA_SETS weekly.
- *    (This ensures you won't ever see old baseline questions for that challenge.)
- * 2) Else → rotate baseline ORDER weekly (same content, different order).
+ * Priority:
+ * 1) If EXTRA_SETS[challengeIndex] exists, pick one full set by week index
+ *    from [baseline, ...extraSets].
+ * 2) Otherwise, rotate the ORDER of the baseline questions weekly.
  */
 export function getRotatingPuzzlesByChallenge(
   challengeIndex: number,
@@ -224,21 +303,40 @@ export function getRotatingPuzzlesByChallenge(
 ): Puzzle[] {
   const baseline = getPuzzlesByDayIndex(challengeIndex) || []
   const extraSets = EXTRA_SETS[challengeIndex] || []
-  const weeksSinceEpoch = Math.floor((toUtcMidnight(today) - EPOCH_UTC_MS) / WEEK_MS)
 
-  // If you provided extra sets, use them (and ONLY them).
-  if (extraSets.length > 0) {
-    const candidateSets: Puzzle[][] = extraSets.filter(
-      (set) => Array.isArray(set) && set.length > 0
-    )
-    if (candidateSets.length === 0) return baseline
-    const pick = posMod(weeksSinceEpoch, candidateSets.length)
-    return candidateSets[pick]
+  if (!baseline.length && !extraSets.length) return []
+
+  if (extraSets.length === 0) {
+    const weeksSinceEpoch = Math.floor((toUtcMidnight(today) - EPOCH_UTC_MS) / WEEK_MS)
+    const shiftBy = posMod(weeksSinceEpoch, Math.max(1, baseline.length))
+    return baseline.length > 0
+      ? [...baseline.slice(shiftBy), ...baseline.slice(0, shiftBy)]
+      : baseline
   }
 
-  // No extra sets → rotate baseline order weekly.
-  if (baseline.length === 0) return []
+  const candidateSets: Puzzle[][] = [baseline, ...extraSets].filter(
+    (set) => Array.isArray(set) && set.length > 0
+  )
+  const pick = getWeeklyPickIndex(challengeIndex, today)
+  return candidateSets[pick] || baseline
+}
 
-  const shiftBy = posMod(weeksSinceEpoch, baseline.length)
-  return [...baseline.slice(shiftBy), ...baseline.slice(0, shiftBy)]
+/**
+ * ✅ NEW: Returns the intro that matches the CURRENTLY SELECTED weekly set.
+ * If intros are missing for a specific set index, we fall back safely.
+ */
+export function getRotatingIntroByChallenge(
+  challengeIndex: number,
+  today: Date = new Date()
+): ChallengeIntro | null {
+  const list = ROTATING_INTROS[challengeIndex]
+  if (!list || list.length === 0) return null
+
+  const pick = getWeeklyPickIndex(challengeIndex, today)
+
+  // If we have an intro for the exact set index, use it.
+  if (list[pick]) return list[pick]
+
+  // Otherwise fall back to the first intro (baseline) instead of showing wrong info.
+  return list[0]
 }
