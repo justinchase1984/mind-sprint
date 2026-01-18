@@ -5,7 +5,7 @@ import { useEffect, useState, useMemo, FormEvent } from 'react'
 import Link from 'next/link'
 import type { Puzzle } from '../../lib/puzzles'
 import { getStreaks, saveStreaks } from '../../lib/streak'
-import { getRotatingPuzzlesByChallenge } from '../../lib/rotation'
+import { getRotatingPuzzlesByChallenge, getRotatingIntroByChallenge } from '../../lib/rotation'
 import { DID_YOU_KNOW } from '../../lib/facts'
 
 function ordinal(n: number): string {
@@ -13,44 +13,6 @@ function ordinal(n: number): string {
   if (n % 10 === 2 && n % 100 !== 12) return `${n}nd`
   if (n % 10 === 3 && n % 100 !== 13) return `${n}rd`
   return `${n}th`
-}
-
-const CHALLENGE_INTROS: Record<number, { title: string; subtitle: string }> = {
-  1: {
-    title: 'Challenge 1 – Quick Trivia',
-    subtitle:
-      'A fast warm-up of general knowledge questions. Nothing obscure — just solid everyday trivia.',
-  },
-  2: {
-    title: 'Challenge 2 – Word Scramble',
-    subtitle:
-      'Unscramble the letters to find the correct word. Quick, satisfying, and not overly tricky.',
-  },
-  3: {
-    title: 'Challenge 3 – Celebrity & Pop Culture',
-    subtitle:
-      'Movies, music, and famous faces. Fun pop culture questions — straightforward, not “gotcha” weird.',
-  },
-  4: {
-    title: 'Challenge 4 – Emoji Word Puzzles',
-    subtitle:
-      'Guess the word from the emoji/picture clues. Rebus-style — simple, visual, and fun.',
-  },
-  5: {
-    title: 'Challenge 5 – Memory Sprint',
-    subtitle:
-      'A short memory test. Watch the sequence, hold it in your head, then answer the question.',
-  },
-  6: {
-    title: 'Challenge 6 – Quick Quiz',
-    subtitle:
-      'Straightforward trivia prompts (sometimes with a hint like “4 letters”). Simple, clean, and satisfying.',
-  },
-  7: {
-    title: 'Challenge 7 – Final Mixed Round',
-    subtitle:
-      'The final run: a mixed set to finish strong. Stay sharp and lock in that bonus reward.',
-  },
 }
 
 export default function PuzzlePage() {
@@ -128,7 +90,10 @@ export default function PuzzlePage() {
   }
 
   const factKey = `${challengeIndex}-${idNum}`
-  const showIntro = !isResults && idNum === 1 && !!CHALLENGE_INTROS[challengeIndex]
+
+  // ✅ Intro that matches the set-of-the-week (same rotation logic)
+  const rotatingIntro = getRotatingIntroByChallenge(challengeIndex)
+  const showIntro = !isResults && idNum === 1 && !!rotatingIntro
 
   return (
     <div
@@ -159,7 +124,7 @@ export default function PuzzlePage() {
       )}
 
       <main style={{ width: '100%', maxWidth: 800, padding: '1rem', textAlign: 'center' }}>
-        {showIntro && (
+        {showIntro && rotatingIntro && (
           <div
             style={{
               textAlign: 'left',
@@ -174,10 +139,10 @@ export default function PuzzlePage() {
               Challenge {challengeIndex} • Question 1
             </div>
             <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 6 }}>
-              {CHALLENGE_INTROS[challengeIndex].title}
+              {rotatingIntro.title}
             </div>
             <div style={{ fontSize: 14, color: '#333', lineHeight: 1.45 }}>
-              {CHALLENGE_INTROS[challengeIndex].subtitle}
+              {rotatingIntro.subtitle}
             </div>
           </div>
         )}
@@ -259,14 +224,7 @@ export default function PuzzlePage() {
                 <p>
                   You scored <strong>{score}/{total}</strong>
                 </p>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    gap: '1rem',
-                    marginTop: '1rem',
-                  }}
-                >
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1rem' }}>
                   {passed ? (
                     <Link href={`/puzzle/1?challenge=${challengeIndex + 1}`}>
                       <button style={{ padding: '8px 16px' }}>
