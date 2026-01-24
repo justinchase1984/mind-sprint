@@ -5,7 +5,7 @@ import { useEffect, useState, useMemo, FormEvent } from 'react'
 import Link from 'next/link'
 import type { Puzzle } from '../../lib/puzzles'
 import { getStreaks, saveStreaks } from '../../lib/streak'
-import { getRotatingPuzzlesByChallenge, getRotatingIntroByChallenge } from '../../lib/rotation'
+import { getRotatingPuzzlesByChallenge } from '../../lib/rotation'
 import { DID_YOU_KNOW } from '../../lib/facts'
 
 function ordinal(n: number): string {
@@ -27,6 +27,7 @@ export default function PuzzlePage() {
     return 1
   })()
 
+  // Weekly-rotating puzzles
   const puzzles: Puzzle[] = getRotatingPuzzlesByChallenge(challengeIndex)
   const idNum = parseInt((query.id as string) || '1', 10)
   const puzzle = puzzles[idNum - 1]
@@ -91,10 +92,6 @@ export default function PuzzlePage() {
 
   const factKey = `${challengeIndex}-${idNum}`
 
-  // ✅ Intro that matches the set-of-the-week (same rotation logic)
-  const rotatingIntro = getRotatingIntroByChallenge(challengeIndex)
-  const showIntro = !isResults && idNum === 1 && !!rotatingIntro
-
   return (
     <div
       style={{
@@ -117,6 +114,7 @@ export default function PuzzlePage() {
         </title>
       </Head>
 
+      {/* Ezoic placeholder – TOP of puzzle (not on results) */}
       {!isResults && (
         <div style={{ textAlign: 'center', marginBottom: '1rem', width: '100%' }}>
           <div id="ezoic-pub-ad-placeholder-100" />
@@ -124,34 +122,12 @@ export default function PuzzlePage() {
       )}
 
       <main style={{ width: '100%', maxWidth: 800, padding: '1rem', textAlign: 'center' }}>
-        {showIntro && rotatingIntro && (
-          <div
-            style={{
-              textAlign: 'left',
-              border: '1px solid #eaeaea',
-              borderRadius: 12,
-              padding: '14px 16px',
-              margin: '0 auto 18px',
-              background: '#fafafa',
-            }}
-          >
-            <div style={{ fontSize: 12, color: '#666', marginBottom: 6 }}>
-              Challenge {challengeIndex} • Question 1
-            </div>
-            <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 6 }}>
-              {rotatingIntro.title}
-            </div>
-            <div style={{ fontSize: 14, color: '#333', lineHeight: 1.45 }}>
-              {rotatingIntro.subtitle}
-            </div>
-          </div>
-        )}
-
         {isResults ? (
           (() => {
             const score = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
 
             if (challengeIndex === 7) {
+              // No ads here per your rule
               return (
                 <>
                   <h1>🎉 Congratulations! You’ve completed all 7 challenges!</h1>
@@ -224,7 +200,14 @@ export default function PuzzlePage() {
                 <p>
                   You scored <strong>{score}/{total}</strong>
                 </p>
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1rem' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    gap: '1rem',
+                    marginTop: '1rem',
+                  }}
+                >
                   {passed ? (
                     <Link href={`/puzzle/1?challenge=${challengeIndex + 1}`}>
                       <button style={{ padding: '8px 16px' }}>
@@ -268,8 +251,10 @@ export default function PuzzlePage() {
                 </button>
               </form>
 
+              {/* Ezoic placeholder – MID (memory view) */}
               <div id="ezoic-pub-ad-placeholder-101" style={{ margin: '1rem 0' }} />
 
+              {/* Fact on memory day too */}
               {DID_YOU_KNOW[factKey] && (
                 <p style={{ fontStyle: 'italic', margin: '1rem 0', color: '#555' }}>
                   {DID_YOU_KNOW[factKey]}
@@ -298,8 +283,10 @@ export default function PuzzlePage() {
               </button>
             ))}
 
+            {/* Ezoic placeholder – UNDER answers */}
             <div id="ezoic-pub-ad-placeholder-101" style={{ margin: '1rem 0' }} />
 
+            {/* Fact under the options */}
             {DID_YOU_KNOW[factKey] && (
               <p style={{ fontStyle: 'italic', margin: '1rem 0', color: '#555' }}>
                 {DID_YOU_KNOW[factKey]}
@@ -308,6 +295,7 @@ export default function PuzzlePage() {
           </>
         )}
 
+        {/* Ezoic placeholder – BOTTOM of puzzle (not on results) */}
         {!isResults && <div id="ezoic-pub-ad-placeholder-102" style={{ marginTop: '1rem' }} />}
       </main>
     </div>
