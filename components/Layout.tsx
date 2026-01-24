@@ -22,7 +22,7 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
           }}
         >
           <div>
-            <Link href="/" legacyBehavior>
+            <Link href="/" passHref legacyBehavior>
               <a
                 style={{
                   fontSize: '1.1rem',
@@ -39,18 +39,35 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
             </Link>
           </div>
 
-          <nav style={{ display: 'flex', gap: '1.25rem' }}>
+          <nav style={{ display: 'flex', gap: '1rem' }}>
+            <Link href="/how-it-works" legacyBehavior>
+              <a className="ms-navlink" style={{ color: '#000' }}>
+                How it works
+              </a>
+            </Link>
+
             <Link href="/brain-training" legacyBehavior>
-              <a className="ms-navlink">Brain Training</a>
+              <a className="ms-navlink" style={{ color: '#000' }}>
+                Brain Training
+              </a>
             </Link>
+
             <Link href="/faq" legacyBehavior>
-              <a className="ms-navlink">FAQ</a>
+              <a className="ms-navlink" style={{ color: '#000' }}>
+                FAQ
+              </a>
             </Link>
+
             <Link href="/about" legacyBehavior>
-              <a className="ms-navlink">About</a>
+              <a className="ms-navlink" style={{ color: '#000' }}>
+                About
+              </a>
             </Link>
+
             <Link href="/privacy" legacyBehavior>
-              <a className="ms-navlink">Privacy</a>
+              <a className="ms-navlink" style={{ color: '#000' }}>
+                Privacy
+              </a>
             </Link>
           </nav>
         </header>
@@ -66,18 +83,35 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
           fontSize: '0.9rem',
         }}
       >
-        <div style={{ maxWidth: '600px', margin: '0 auto', display: 'flex', gap: '1.25rem', justifyContent: 'center' }}>
+        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+          <Link href="/how-it-works" legacyBehavior>
+            <a className="ms-navlink" style={{ marginRight: '1rem', color: '#000' }}>
+              How it works
+            </a>
+          </Link>
+
           <Link href="/brain-training" legacyBehavior>
-            <a className="ms-navlink">Brain Training</a>
+            <a className="ms-navlink" style={{ marginRight: '1rem', color: '#000' }}>
+              Brain Training
+            </a>
           </Link>
+
           <Link href="/faq" legacyBehavior>
-            <a className="ms-navlink">FAQ</a>
+            <a className="ms-navlink" style={{ marginRight: '1rem', color: '#000' }}>
+              FAQ
+            </a>
           </Link>
+
           <Link href="/about" legacyBehavior>
-            <a className="ms-navlink">About</a>
+            <a className="ms-navlink" style={{ marginRight: '1rem', color: '#000' }}>
+              About
+            </a>
           </Link>
+
           <Link href="/privacy" legacyBehavior>
-            <a className="ms-navlink">Privacy Policy</a>
+            <a className="ms-navlink" style={{ color: '#000' }}>
+              Privacy Policy
+            </a>
           </Link>
         </div>
       </footer>
