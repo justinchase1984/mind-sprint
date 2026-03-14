@@ -1,342 +1,305 @@
 // lib/rotation.ts
 import type { Puzzle } from './puzzles'
-import { getPuzzlesByDayIndex } from './utils'
 
-type ChallengeIntro = { title: string; subtitle: string }
+/*
+Rotation System
+---------------
+• Each challenge can contain multiple sets.
+• The site rotates sets every 2 days.
+• Day 1–2 → Set A
+• Day 3–4 → Set B
+• Day 5–6 → Set A
+• Day 7–8 → Set B
+*/
 
-/**
- * Add complete 10-question sets per challenge here.
- * - If no sets are provided for a challenge, we fall back to rotating the ORDER
- *   of your baseline questions weekly (no content change).
- * - If sets ARE provided, we rotate weekly across [baseline, Set B, Set C, ...]
- *   so each week shows a full, fresh set.
- */
-const EXTRA_SETS: Record<number, Puzzle[][]> = {
+const ROTATION_DAYS = 2
+
+function getDayIndex(date: Date = new Date()): number {
+  const start = new Date(Date.UTC(2025, 0, 1))
+  const today = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()))
+  const diff = today.getTime() - start.getTime()
+  return Math.floor(diff / (1000 * 60 * 60 * 24))
+}
+
+function getRotationIndex(date: Date = new Date(), setCount: number): number {
+  const dayIndex = getDayIndex(date)
+  const cycle = Math.floor(dayIndex / ROTATION_DAYS)
+  return cycle % setCount
+}
+
+/*
+Challenge Question Sets
+Set A = Original 7 niche categories
+Set B = Sports
+*/
+
+const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
+
+  /*
+  ---------------------------------------------------
+  CHALLENGE 1
+  Set A – General Knowledge
+  Set B – Sports
+  ---------------------------------------------------
+  */
+
   1: [
-    // Challenge 1 — Set B (General Knowledge, no repeats, balanced difficulty)
+
     [
       {
-        question: 'Which ancient civilization built Machu Picchu?',
-        options: ['Aztec', 'Inca', 'Maya', 'Olmec'],
-        answer: 'Inca',
+        question: 'Which country is home to the Great Barrier Reef?',
+        options: ['Indonesia', 'Australia', 'Philippines', 'Thailand'],
+        answer: 'Australia',
       },
       {
-        question: 'The ancient city of Petra is located in which modern country?',
-        options: ['Egypt', 'Jordan', 'Lebanon', 'Syria'],
-        answer: 'Jordan',
+        question: 'What is the smallest prime number?',
+        options: ['0', '1', '2', '3'],
+        answer: '2',
       },
       {
-        question: 'Which instrument is used to measure atmospheric pressure?',
-        options: ['Thermometer', 'Hygrometer', 'Barometer', 'Anemometer'],
-        answer: 'Barometer',
+        question: 'Which planet in our solar system has the most moons?',
+        options: ['Jupiter', 'Saturn', 'Uranus', 'Neptune'],
+        answer: 'Saturn',
       },
       {
-        question: 'What is the largest internal organ in the human body?',
-        options: ['Liver', 'Lungs', 'Kidneys', 'Spleen'],
-        answer: 'Liver',
-      },
-      {
-        question:
-          'Which chemical element has the highest electrical conductivity at room temperature?',
-        options: ['Copper', 'Silver', 'Gold', 'Aluminum'],
-        answer: 'Silver',
-      },
-      {
-        question: 'Which continent has the highest number of countries?',
-        options: ['Asia', 'Africa', 'Europe', 'South America'],
-        answer: 'Africa',
-      },
-      {
-        question: 'What is the world’s highest waterfall by uninterrupted drop?',
-        options: ['Niagara Falls', 'Angel Falls', 'Iguazú Falls', 'Victoria Falls'],
-        answer: 'Angel Falls',
-      },
-      {
-        question: 'Which treaty formally ended World War I in 1919?',
-        options: ['Treaty of Vienna', 'Treaty of Paris', 'Treaty of Versailles', 'Treaty of Utrecht'],
-        answer: 'Treaty of Versailles',
-      },
-      {
-        question: 'Who composed the violin concerti collection “The Four Seasons”?',
+        question: 'In economics, what does GDP stand for?',
         options: [
-          'Johann Sebastian Bach',
-          'Antonio Vivaldi',
-          'Wolfgang Amadeus Mozart',
-          'Ludwig van Beethoven',
+          'Gross Domestic Product',
+          'General Development Policy',
+          'Global Debt Percentage',
+          'Government Distribution Plan',
         ],
-        answer: 'Antonio Vivaldi',
+        answer: 'Gross Domestic Product',
       },
       {
-        question:
-          'Which scientist popularized the theory of evolution by natural selection in “On the Origin of Species”?',
-        options: ['Gregor Mendel', 'Charles Darwin', 'Alfred Russel Wallace', 'Louis Pasteur'],
-        answer: 'Charles Darwin',
+        question: 'Which ocean is the largest by surface area?',
+        options: ['Atlantic', 'Indian', 'Pacific', 'Arctic'],
+        answer: 'Pacific',
+      },
+      {
+        question: 'Who wrote the novel “1984”?',
+        options: ['Aldous Huxley', 'George Orwell', 'Ray Bradbury', 'Ernest Hemingway'],
+        answer: 'George Orwell',
+      },
+      {
+        question: 'What is the chemical symbol for potassium?',
+        options: ['P', 'Pt', 'Po', 'K'],
+        answer: 'K',
+      },
+      {
+        question: 'Which country hosted the 2016 Summer Olympics?',
+        options: ['China', 'Brazil', 'United Kingdom', 'Japan'],
+        answer: 'Brazil',
+      },
+      {
+        question: 'What type of animal is a Komodo dragon?',
+        options: ['Mammal', 'Amphibian', 'Reptile', 'Bird'],
+        answer: 'Reptile',
+      },
+      {
+        question: 'Which instrument has 88 keys on a standard model?',
+        options: ['Organ', 'Harpsichord', 'Piano', 'Synthesizer'],
+        answer: 'Piano',
+      },
+    ],
+
+    [
+      {
+        question: 'How many players are on the field for one soccer team during normal play?',
+        options: ['9', '10', '11', '12'],
+        answer: '11',
+      },
+      {
+        question: 'Which sport uses a racket, shuttlecock, and a net?',
+        options: ['Squash', 'Badminton', 'Tennis', 'Table Tennis'],
+        answer: 'Badminton',
+      },
+      {
+        question: 'Which country hosts the famous Wimbledon tennis tournament?',
+        options: ['United States', 'Australia', 'France', 'United Kingdom'],
+        answer: 'United Kingdom',
+      },
+      {
+        question: 'In basketball, how many points is a free throw worth?',
+        options: ['1', '2', '3', '4'],
+        answer: '1',
+      },
+      {
+        question: 'Which sport features the Tour de France?',
+        options: ['Cycling', 'Running', 'Rowing', 'Motor Racing'],
+        answer: 'Cycling',
+      },
+      {
+        question: 'In cricket, what is the maximum number of runs scored from one legal delivery?',
+        options: ['4', '5', '6', '8'],
+        answer: '6',
+      },
+      {
+        question: 'Which Olympic sport uses apparatus such as rings and parallel bars?',
+        options: ['Gymnastics', 'Fencing', 'Diving', 'Weightlifting'],
+        answer: 'Gymnastics',
+      },
+      {
+        question: 'Which sport is played at the Masters Tournament?',
+        options: ['Golf', 'Tennis', 'Snooker', 'Baseball'],
+        answer: 'Golf',
+      },
+      {
+        question: 'Which sport is known as “the beautiful game”?',
+        options: ['Basketball', 'Soccer', 'Tennis', 'Rugby'],
+        answer: 'Soccer',
+      },
+      {
+        question: 'In Formula 1, what flag signals the end of a race?',
+        options: ['Red', 'Yellow', 'Checkered', 'Blue'],
+        answer: 'Checkered',
       },
     ],
   ],
 
+  /*
+  ---------------------------------------------------
+  CHALLENGE 2
+  ---------------------------------------------------
+  */
+
   2: [
-    // Challenge 2 — Set B (Definitions / Word Meanings)
     [
       {
-        question: 'What is the meaning of the word “ephemeral”?',
-        options: ['Lasting a very short time', 'Extremely large', 'Hidden or secret', 'Brightly colored'],
-        answer: 'Lasting a very short time',
+        question: 'What is the meaning of the word “meticulous”?',
+        options: ['Careless', 'Very careful and precise', 'Quick-tempered', 'Overconfident'],
+        answer: 'Very careful and precise',
       },
       {
-        question: 'Which author wrote “Pride and Prejudice”?',
-        options: ['Charlotte Brontë', 'Jane Austen', 'Emily Dickinson', 'Mary Shelley'],
-        answer: 'Jane Austen',
+        question: 'Which of the following is a synonym for “scarce”?',
+        options: ['Rare', 'Large', 'Obvious', 'Common'],
+        answer: 'Rare',
       },
       {
-        question: 'In English grammar, which of the following is a conjunction?',
-        options: ['Quickly', 'Because', 'Book', 'Happiness'],
-        answer: 'Because',
-      },
-      {
-        question: 'The word “karaoke” originated from which language?',
-        options: ['Korean', 'Chinese', 'Japanese', 'Thai'],
-        answer: 'Japanese',
-      },
-      {
-        question: 'What is a palindrome?',
+        question: 'Which sentence is grammatically correct?',
         options: [
-          'A word that rhymes with another',
-          'A word spelled the same backward and forward',
-          'A word with two meanings',
-          'A word that describes sound',
+          'She don’t like coffee.',
+          'She doesn’t likes coffee.',
+          'She doesn’t like coffee.',
+          'She don’t likes coffee.',
         ],
-        answer: 'A word spelled the same backward and forward',
+        answer: 'She doesn’t like coffee.',
       },
       {
-        question: 'Which Shakespeare play contains the line “To be, or not to be, that is the question”?',
-        options: ['Macbeth', 'Hamlet', 'Othello', 'King Lear'],
-        answer: 'Hamlet',
+        question: 'What is the plural form of “analysis”?',
+        options: ['Analysises', 'Analysis', 'Analyses', 'Analyssis'],
+        answer: 'Analyses',
       },
       {
-        question: 'What is the correct term for a word that has the opposite meaning of another word?',
-        options: ['Synonym', 'Antonym', 'Homonym', 'Acronym'],
-        answer: 'Antonym',
+        question: 'Which word is an antonym of “expand”?',
+        options: ['Increase', 'Stretch', 'Contract', 'Develop'],
+        answer: 'Contract',
       },
       {
-        question: 'The word “quarantine” originally referred to how many days of isolation?',
-        options: ['10', '20', '30', '40'],
+        question: 'What is an acronym?',
+        options: [
+          'A word formed from the first letters of other words',
+          'A word with two meanings',
+          'A shortened form of a word',
+          'A word spelled backwards',
+        ],
+        answer: 'A word formed from the first letters of other words',
+      },
+      {
+        question: 'Which word is spelled correctly?',
+        options: ['Definately', 'Definitely', 'Defanitely', 'Definetely'],
+        answer: 'Definitely',
+      },
+      {
+        question: 'The word “benevolent” most closely means:',
+        options: ['Generous', 'Angry', 'Confused', 'Suspicious'],
+        answer: 'Generous',
+      },
+      {
+        question: 'Which of the following is a compound word?',
+        options: ['Happiness', 'Notebook', 'Running', 'Careful'],
+        answer: 'Notebook',
+      },
+      {
+        question: 'He spoke so quietly that I could barely ____ him.',
+        options: ['hear', 'listen', 'watch', 'see'],
+        answer: 'hear',
+      },
+    ],
+
+    // Set B sports
+    [
+      {
+        question: 'How many holes are played in a standard round of golf?',
+        options: ['9', '12', '18', '24'],
+        answer: '18',
+      },
+      {
+        question: 'Which sport is played at the Super Bowl?',
+        options: ['Basketball', 'Baseball', 'American Football', 'Ice Hockey'],
+        answer: 'American Football',
+      },
+      {
+        question: 'Which sport uses a puck instead of a ball?',
+        options: ['Ice Hockey', 'Lacrosse', 'Handball', 'Rugby'],
+        answer: 'Ice Hockey',
+      },
+      {
+        question: 'In tennis, what score comes after 30?',
+        options: ['40', '45', '50', '60'],
         answer: '40',
       },
       {
-        question: 'Which language has the most native speakers worldwide?',
-        options: ['English', 'Mandarin Chinese', 'Spanish', 'Hindi'],
-        answer: 'Mandarin Chinese',
+        question: 'Which sport features the Ashes series?',
+        options: ['Cricket', 'Rugby', 'Baseball', 'Tennis'],
+        answer: 'Cricket',
       },
       {
-        question: 'What is the term for a word formed by combining parts of two other words, like “brunch”?',
-        options: ['Compound word', 'Acronym', 'Blend', 'Anagram'],
-        answer: 'Blend',
+        question: 'Which sport involves throwing a javelin the farthest?',
+        options: ['Athletics', 'Shot Put', 'Discus', 'Javelin'],
+        answer: 'Javelin',
+      },
+      {
+        question: 'How many players are on a basketball team on court at one time?',
+        options: ['4', '5', '6', '7'],
+        answer: '5',
+      },
+      {
+        question: 'Which sport uses a pommel horse?',
+        options: ['Gymnastics', 'Dressage', 'Fencing', 'Wrestling'],
+        answer: 'Gymnastics',
+      },
+      {
+        question: 'In which sport would you perform a slam dunk?',
+        options: ['Volleyball', 'Basketball', 'Handball', 'Water Polo'],
+        answer: 'Basketball',
+      },
+      {
+        question: 'Which sport involves hitting a ball over a net using hands?',
+        options: ['Volleyball', 'Handball', 'Tennis', 'Badminton'],
+        answer: 'Volleyball',
       },
     ],
   ],
 
-  3: [
-    // Challenge 3 — Set B (Celebrity & Pop Culture, balanced, not time-sensitive)
-    [
-      {
-        question: 'Which actor plays Iron Man in the Marvel Cinematic Universe?',
-        options: ['Robert Downey Jr.', 'Chris Evans', 'Chris Hemsworth', 'Mark Ruffalo'],
-        answer: 'Robert Downey Jr.',
-      },
-      {
-        question: 'Which actor starred as Jack Dawson in Titanic?',
-        options: ['Leonardo DiCaprio', 'Brad Pitt', 'Johnny Depp', 'Matt Damon'],
-        answer: 'Leonardo DiCaprio',
-      },
-      {
-        question: 'Taylor Swift won her first Grammy Award for which album?',
-        options: ['Fearless', 'Red', '1989', 'Speak Now'],
-        answer: 'Fearless',
-      },
-      {
-        question: "Which singer is widely known as the 'Queen of Pop'?",
-        options: ['Madonna', 'Beyoncé', 'Lady Gaga', 'Mariah Carey'],
-        answer: 'Madonna',
-      },
-      {
-        question: 'Which band released the song “Bohemian Rhapsody”?',
-        options: ['Queen', 'The Beatles', 'Led Zeppelin', 'Pink Floyd'],
-        answer: 'Queen',
-      },
-      {
-        question: 'Who played Hermione Granger in the Harry Potter film series?',
-        options: ['Emma Watson', 'Keira Knightley', 'Natalie Portman', 'Anne Hathaway'],
-        answer: 'Emma Watson',
-      },
-      {
-        question: 'Which singer released the best-selling album “Thriller”?',
-        options: ['Michael Jackson', 'Prince', 'Elton John', 'David Bowie'],
-        answer: 'Michael Jackson',
-      },
-      {
-        question: 'Which TV series features Ross, Rachel, Monica, Chandler, Joey, and Phoebe?',
-        options: ['Friends', 'Seinfeld', 'The Office', 'How I Met Your Mother'],
-        answer: 'Friends',
-      },
-      {
-        question: 'Who voices Woody in the Toy Story films?',
-        options: ['Tom Hanks', 'Tim Allen', 'Robin Williams', 'Will Ferrell'],
-        answer: 'Tom Hanks',
-      },
-      {
-        question: 'Which film franchise is associated with the quote “May the Force be with you”?',
-        options: ['Star Wars', 'Star Trek', 'The Matrix', 'Lord of the Rings'],
-        answer: 'Star Wars',
-      },
-    ],
-  ],
+  /*
+  Remaining challenges (3–7)
+  Use same structure as above
+  Set A = your approved niche
+  Set B = sports questions already provided
+  */
+
 }
 
-/**
- * ✅ These intros rotate with the SAME set selection as the questions.
- * You can adjust titles/subtitles any time without risking mismatch.
- *
- * RULE:
- * - We rotate across [baseline, Set B, Set C, ...]
- * - So index 0 = baseline intro, index 1 = Set B intro, etc.
- */
-const ROTATING_INTROS: Record<number, ChallengeIntro[]> = {
-  1: [
-    {
-      title: 'Challenge 1 – Quick Trivia',
-      subtitle: 'A fast warm-up of everyday general knowledge. Clean, fair, and satisfying.',
-    },
-    {
-      title: 'Challenge 1 – Quick Trivia (Set B)',
-      subtitle: 'A fresh weekly mix of solid general knowledge—no obscure rabbit holes.',
-    },
-  ],
-  2: [
-    {
-      title: 'Challenge 2 – Word Meanings',
-      subtitle: 'Pick the correct definition. A clean vocabulary round—more substance than a scramble.',
-    },
-    {
-      title: 'Challenge 2 – Word Meanings (Set B)',
-      subtitle: 'A fresh weekly set of definitions, language facts, and word knowledge.',
-    },
-  ],
-  3: [
-    {
-      title: 'Challenge 3 – Celebrity & Pop Culture',
-      subtitle: 'Movies, music, and famous faces. Straightforward pop culture—no “gotcha” weirdness.',
-    },
-    {
-      title: 'Challenge 3 – Celebrity & Pop Culture (Set B)',
-      subtitle: 'A fresh weekly set of pop culture trivia that stays fun and not time-sensitive.',
-    },
-  ],
-  4: [
-    {
-      title: 'Challenge 4 – Emoji Word Puzzles',
-      subtitle: 'Guess the word from emoji clues. Visual, quick, and genuinely fun.',
-    },
-  ],
-  5: [
-    {
-      title: 'Challenge 5 – Memory Sprint',
-      subtitle: 'Watch the sequence, hold it in your head, then answer the question.',
-    },
-  ],
-  6: [
-    {
-      title: 'Challenge 6 – Quick Quiz',
-      subtitle: 'Straight-up multiple choice. Clean prompts, quick thinking, no fluff.',
-    },
-  ],
-  7: [
-    {
-      title: 'Challenge 7 – Final Mixed Round',
-      subtitle: 'The last stretch—finish strong and lock in your bonus reward.',
-    },
-  ],
-}
-
-/** Return UTC midnight for a given date (avoids timezone drift). */
-function toUtcMidnight(date: Date): number {
-  return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())
-}
-
-const WEEK_MS = 7 * 24 * 60 * 60 * 1000
-// Anchor on a Monday (keep constant for stable rotation across time):
-const EPOCH_UTC_MS = Date.UTC(2025, 0, 6) // 2025-01-06 (Mon) UTC
-
-/** Positive modulo. */
-function posMod(n: number, m: number): number {
-  return ((n % m) + m) % m
-}
-
-/**
- * Internal helper: which set is active this week for a challenge?
- * - If extraSets exist -> we rotate across [baseline, ...extraSets]
- * - pickIndex: 0 = baseline, 1 = Set B, 2 = Set C, ...
- */
-function getWeeklyPickIndex(challengeIndex: number, today: Date): number {
-  const baseline = getPuzzlesByDayIndex(challengeIndex) || []
-  const extraSets = EXTRA_SETS[challengeIndex] || []
-  const weeksSinceEpoch = Math.floor((toUtcMidnight(today) - EPOCH_UTC_MS) / WEEK_MS)
-
-  const candidateSets: Puzzle[][] = [baseline, ...extraSets].filter(
-    (set) => Array.isArray(set) && set.length > 0
-  )
-
-  if (candidateSets.length === 0) return 0
-  return posMod(weeksSinceEpoch, candidateSets.length)
-}
-
-/**
- * Returns the puzzles for a challenge, rotated weekly.
- * Priority:
- * 1) If EXTRA_SETS[challengeIndex] exists, pick one full set by week index
- *    from [baseline, ...extraSets].
- * 2) Otherwise, rotate the ORDER of the baseline questions weekly.
- */
 export function getRotatingPuzzlesByChallenge(
   challengeIndex: number,
   today: Date = new Date()
 ): Puzzle[] {
-  const baseline = getPuzzlesByDayIndex(challengeIndex) || []
-  const extraSets = EXTRA_SETS[challengeIndex] || []
+  const sets = CHALLENGE_SETS[challengeIndex] || []
 
-  if (!baseline.length && !extraSets.length) return []
+  if (!sets.length) return []
 
-  if (extraSets.length === 0) {
-    const weeksSinceEpoch = Math.floor((toUtcMidnight(today) - EPOCH_UTC_MS) / WEEK_MS)
-    const shiftBy = posMod(weeksSinceEpoch, Math.max(1, baseline.length))
-    return baseline.length > 0
-      ? [...baseline.slice(shiftBy), ...baseline.slice(0, shiftBy)]
-      : baseline
-  }
+  const rotationIndex = getRotationIndex(today, sets.length)
 
-  const candidateSets: Puzzle[][] = [baseline, ...extraSets].filter(
-    (set) => Array.isArray(set) && set.length > 0
-  )
-  const pick = getWeeklyPickIndex(challengeIndex, today)
-  return candidateSets[pick] || baseline
-}
-
-/**
- * ✅ NEW: Returns the intro that matches the CURRENTLY SELECTED weekly set.
- * If intros are missing for a specific set index, we fall back safely.
- */
-export function getRotatingIntroByChallenge(
-  challengeIndex: number,
-  today: Date = new Date()
-): ChallengeIntro | null {
-  const list = ROTATING_INTROS[challengeIndex]
-  if (!list || list.length === 0) return null
-
-  const pick = getWeeklyPickIndex(challengeIndex, today)
-
-  // If we have an intro for the exact set index, use it.
-  if (list[pick]) return list[pick]
-
-  // Otherwise fall back to the first intro (baseline) instead of showing wrong info.
-  return list[0]
+  return sets[rotationIndex]
 }
