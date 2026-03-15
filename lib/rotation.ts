@@ -34,7 +34,6 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
 
   1: [
 
-    // SET A
     [
       {question:'Which country is home to the Great Barrier Reef?',options:['Indonesia','Australia','Philippines','Thailand'],answer:'Australia'},
       {question:'What is the smallest prime number?',options:['0','1','2','3'],answer:'2'},
@@ -48,7 +47,6 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {question:'Instrument with 88 keys?',options:['Organ','Harpsichord','Piano','Synthesizer'],answer:'Piano'}
     ],
 
-    // SET B
     [
       {question:'Which continent is the Sahara Desert located in?',options:['Africa','Asia','Australia','South America'],answer:'Africa'},
       {question:'Largest mammal on Earth?',options:['Elephant','Blue whale','Giraffe','Hippo'],answer:'Blue whale'},
@@ -59,7 +57,7 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {question:'Instrument used to measure temperature?',options:['Barometer','Thermometer','Hygrometer','Anemometer'],answer:'Thermometer'},
       {question:'Currency of Japan?',options:['Won','Yuan','Yen','Ringgit'],answer:'Yen'},
       {question:'Gas plants absorb?',options:['Oxygen','Carbon dioxide','Nitrogen','Helium'],answer:'Carbon dioxide'},
-      {question:'Scientist behind relativity?',options:['Newton','Einstein','Galileo','Tesla'],answer:'Einstein'}
+      {question:'Scientist behind relativity?',options:['Isaac Newton','Albert Einstein','Galileo Galilei','Nikola Tesla'],answer:'Albert Einstein'}
     ]
 
   ],
@@ -112,11 +110,11 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {question:'Actor who played Joker in The Dark Knight?',options:['Joaquin Phoenix','Jared Leto','Heath Ledger','Christian Bale'],answer:'Heath Ledger'},
       {question:'Band that released Abbey Road?',options:['Rolling Stones','Beatles','Pink Floyd','Queen'],answer:'Beatles'},
       {question:'Series set in Westeros?',options:['The Witcher','Game of Thrones','Vikings','Rings of Power'],answer:'Game of Thrones'},
-      {question:'Singer known as King of Pop?',options:['Elvis','Michael Jackson','Prince','Bruno Mars'],answer:'Michael Jackson'},
-      {question:'Director of Pulp Fiction?',options:['Scorsese','Nolan','Tarantino','Spielberg'],answer:'Tarantino'},
+      {question:'Singer known as King of Pop?',options:['Elvis Presley','Michael Jackson','Prince','Bruno Mars'],answer:'Michael Jackson'},
+      {question:'Director of Pulp Fiction?',options:['Martin Scorsese','Christopher Nolan','Quentin Tarantino','Steven Spielberg'],answer:'Quentin Tarantino'},
       {question:'Sitcom set in Springfield?',options:['Family Guy','South Park','The Simpsons','American Dad'],answer:'The Simpsons'},
       {question:'Actor playing Jack Sparrow?',options:['Orlando Bloom','Johnny Depp','Brad Pitt','Tom Cruise'],answer:'Johnny Depp'},
-      {question:'Film franchise with Neo?',options:['Inception','Matrix','Blade Runner','Tron'],answer:'Matrix'},
+      {question:'Film franchise with Neo?',options:['Inception','The Matrix','Blade Runner','Tron'],answer:'The Matrix'},
       {question:'Singer of album 1989?',options:['Ariana Grande','Taylor Swift','Rihanna','Dua Lipa'],answer:'Taylor Swift'},
       {question:'Animated film with Woody?',options:['Toy Story','Shrek','Cars','Frozen'],answer:'Toy Story'}
     ],
@@ -137,7 +135,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
   ],
 
   /*
+  ---------------------------------------------------
   CHALLENGE 4 — HISTORY
+  ---------------------------------------------------
   */
 
   4: [
@@ -147,18 +147,18 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {question:'In which year did World War II end?',options:['1943','1945','1947','1950'],answer:'1945'},
       {question:'Civilization that built pyramids?',options:['Romans','Egyptians','Greeks','Mayans'],answer:'Egyptians'},
       {question:'French Revolution began?',options:['1776','1789','1804','1812'],answer:'1789'},
-      {question:'WWII British Prime Minister?',options:['Chamberlain','Churchill','Thatcher','Blair'],answer:'Churchill'},
+      {question:'WWII British Prime Minister?',options:['Neville Chamberlain','Winston Churchill','Margaret Thatcher','Tony Blair'],answer:'Winston Churchill'},
       {question:'Ship that sank in 1912?',options:['Lusitania','Titanic','Britannic','Queen Mary'],answer:'Titanic'},
       {question:'Renaissance began where?',options:['France','Germany','Italy','Spain'],answer:'Italy'},
-      {question:'Wall that fell in 1989?',options:['Hadrians','Berlin','Great Wall','Western Wall'],answer:'Berlin'},
-      {question:'Empire ruled by Julius Caesar?',options:['Greek','Roman','Ottoman','British'],answer:'Roman'},
+      {question:'Wall that fell in 1989?',options:['Hadrian’s Wall','Berlin Wall','Great Wall','Western Wall'],answer:'Berlin Wall'},
+      {question:'Empire ruled by Julius Caesar?',options:['Greek Empire','Roman Republic','Ottoman Empire','British Empire'],answer:'Roman Republic'},
       {question:'WWI ended in?',options:['1917','1918','1919','1920'],answer:'1918'}
     ],
 
     [
-      {question:'Explorer who reached Americas 1492?',options:['Magellan','Columbus','Cook','Vespucci'],answer:'Columbus'},
+      {question:'Which explorer reached the Americas in 1492?',options:['Ferdinand Magellan','Christopher Columbus','James Cook','Amerigo Vespucci'],answer:'Christopher Columbus'},
       {question:'Great Wall built in which country?',options:['Japan','China','Korea','Vietnam'],answer:'China'},
-      {question:'Leader of Soviet Union during WWII?',options:['Stalin','Lenin','Khrushchev','Putin'],answer:'Stalin'},
+      {question:'Leader of Soviet Union during WWII?',options:['Joseph Stalin','Vladimir Lenin','Nikita Khrushchev','Vladimir Putin'],answer:'Joseph Stalin'},
       {question:'Ancient Greek philosopher who taught Alexander?',options:['Plato','Aristotle','Socrates','Pythagoras'],answer:'Aristotle'},
       {question:'Empire ruled by Genghis Khan?',options:['Roman','Mongol','Ottoman','Persian'],answer:'Mongol'},
       {question:'First man on the Moon?',options:['Buzz Aldrin','Neil Armstrong','Yuri Gagarin','John Glenn'],answer:'Neil Armstrong'},
