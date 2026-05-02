@@ -159,7 +159,7 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {question:'Which explorer reached the Americas in 1492?',options:['Ferdinand Magellan','Christopher Columbus','James Cook','Amerigo Vespucci'],answer:'Christopher Columbus'},
       {question:'Great Wall built in which country?',options:['Japan','China','Korea','Vietnam'],answer:'China'},
       {question:'Leader of Soviet Union during WWII?',options:['Joseph Stalin','Vladimir Lenin','Nikita Khrushchev','Vladimir Putin'],answer:'Joseph Stalin'},
-      {question:'Ancient Greek philosopher who taught Alexander?',options:['Plato','Aristotle','Socrates','Pythagoras'],answer:'Aristotle'},
+      {question:'Ancient Greek philosopher who taught Alexander the Great?',options:['Plato','Aristotle','Socrates','Pythagoras'],answer:'Aristotle'},
       {question:'Empire ruled by Genghis Khan?',options:['Roman','Mongol','Ottoman','Persian'],answer:'Mongol'},
       {question:'First man on the Moon?',options:['Buzz Aldrin','Neil Armstrong','Yuri Gagarin','John Glenn'],answer:'Neil Armstrong'},
       {question:'Cold War wall dividing Germany?',options:['Berlin Wall','Iron Curtain','Great Wall','Hadrian Wall'],answer:'Berlin Wall'},
