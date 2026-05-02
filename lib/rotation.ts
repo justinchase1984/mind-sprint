@@ -91,7 +91,7 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {question:'Synonym for quick?',options:['Rapid','Heavy','Bright','Weak'],answer:'Rapid'},
       {question:'Correct spelling?',options:['Occured','Occurred','Occerred','Occureded'],answer:'Occurred'},
       {question:'Fill: "Please ___ the instructions carefully"',options:['read','reads','reading','reader'],answer:'read'},
-      {question:'Which is a noun?',options:['Run','Happiness','Quickly','Bright'],answer:'Happiness'},
+      {question:'Which word is a noun?',options:['Happiness','Quickly','Bright','Swiftly'],answer:'Happiness'},
       {question:'Opposite of ancient?',options:['Modern','Old','Historic','Traditional'],answer:'Modern'},
       {question:'Synonym for difficult?',options:['Simple','Hard','Easy','Clear'],answer:'Hard'}
     ]
