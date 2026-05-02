@@ -211,29 +211,29 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
   6: [
 
     [
-      {question:'Red Planet?',options:['Mars','Venus','Jupiter','Saturn'],answer:'Mars'},
-      {question:'Humans breathe?',options:['Nitrogen','Oxygen','Hydrogen','Helium'],answer:'Oxygen'},
-      {question:'Symbol for gold?',options:['Ag','Au','Gd','Go'],answer:'Au'},
-      {question:'Organ pumping blood?',options:['Lungs','Brain','Heart','Liver'],answer:'Heart'},
-      {question:'Largest planet?',options:['Earth','Saturn','Jupiter','Neptune'],answer:'Jupiter'},
-      {question:'Force keeping planets orbit?',options:['Magnetism','Friction','Gravity','Radiation'],answer:'Gravity'},
-      {question:'Water freezes at?',options:['0°C','10°C','-5°C','32°C'],answer:'0°C'},
-      {question:'Plants make food via?',options:['Respiration','Digestion','Photosynthesis','Fermentation'],answer:'Photosynthesis'},
-      {question:'Cell part with DNA?',options:['Cytoplasm','Nucleus','Membrane','Ribosome'],answer:'Nucleus'},
-      {question:'Sunlight produces vitamin?',options:['A','B12','C','D'],answer:'Vitamin D'}
+      {question:'Which planet is known as the Red Planet?',options:['Mars','Venus','Jupiter','Saturn'],answer:'Mars'},
+      {question:'Which gas do humans need to breathe to survive?',options:['Nitrogen','Oxygen','Hydrogen','Helium'],answer:'Oxygen'},
+      {question:'What is the chemical symbol for gold?',options:['Ag','Au','Gd','Go'],answer:'Au'},
+      {question:'Which organ pumps blood around the human body?',options:['Lungs','Brain','Heart','Liver'],answer:'Heart'},
+      {question:'Which is the largest planet in our solar system?',options:['Earth','Saturn','Jupiter','Neptune'],answer:'Jupiter'},
+      {question:'What force keeps planets in orbit around the Sun?',options:['Magnetism','Friction','Gravity','Radiation'],answer:'Gravity'},
+      {question:'At what temperature does water freeze?',options:['0°C','10°C','-5°C','32°C'],answer:'0°C'},
+      {question:'What process do plants use to make their own food?',options:['Respiration','Digestion','Photosynthesis','Fermentation'],answer:'Photosynthesis'},
+      {question:'Which part of a cell contains genetic material',options:['Cytoplasm','Nucleus','Membrane','Ribosome'],answer:'Nucleus'},
+      {question:'Which vitamin is produced when the skin is exposed to sunlight?',options:['A','B12','C','D'],answer:'Vitamin D'}
     ],
 
     [
-      {question:'Largest organ in human body?',options:['Heart','Liver','Skin','Brain'],answer:'Skin'},
-      {question:'Gas most abundant in atmosphere?',options:['Oxygen','Nitrogen','Carbon dioxide','Hydrogen'],answer:'Nitrogen'},
-      {question:'Earth satellite?',options:['Moon','Mars','Europa','Titan'],answer:'Moon'},
-      {question:'Boiling point of water?',options:['90°C','100°C','110°C','120°C'],answer:'100°C'},
-      {question:'Energy from Sun called?',options:['Solar','Thermal','Nuclear','Electric'],answer:'Solar'},
-      {question:'Largest ocean?',options:['Atlantic','Indian','Pacific','Arctic'],answer:'Pacific'},
-      {question:'Planet with rings?',options:['Mars','Saturn','Venus','Mercury'],answer:'Saturn'},
-      {question:'Human skeleton bones?',options:['106','206','306','406'],answer:'206'},
-      {question:'Center of atom?',options:['Core','Nucleus','Cell','Atom'],answer:'Nucleus'},
-      {question:'Fastest land animal?',options:['Lion','Cheetah','Tiger','Leopard'],answer:'Cheetah'}
+      {question:'What is the largest organ in human body?',options:['Heart','Liver','Skin','Brain'],answer:'Skin'},
+      {question:'Which gas is most abundant in the Earth’s atmosphere?',options:['Oxygen','Nitrogen','Carbon dioxide','Hydrogen'],answer:'Nitrogen'},
+      {question:'What is Earth’s natural satellite?',options:['Moon','Mars','Europa','Titan'],answer:'Moon'},
+      {question:'What part of the human body is responsible for breathing?',options:['Heart','Lungs','Brain','Liver'],answer:'Lungs'},
+      {question:'What type of energy comes from the Sun?',options:['Solar','Thermal','Nuclear','Electric'],answer:'Solar'},
+      {question:'Which is the largest ocean on Earth?',options:['Atlantic','Indian','Pacific','Arctic'],answer:'Pacific'},
+      {question:'Which planet is known for its prominent rings?',options:['Mars','Saturn','Venus','Mercury'],answer:'Saturn'},
+      {question:'How many bones are in the human body?',options:['106','206','306','406'],answer:'206'},
+      {question:'What is the center of an atom called?',options:['Core','Nucleus','Cell','Atom'],answer:'Nucleus'},
+      {question:'What is the fastest land animal?',options:['Lion','Cheetah','Tiger','Leopard'],answer:'Cheetah'}
     ]
 
   ],
