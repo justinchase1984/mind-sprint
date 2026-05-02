@@ -258,16 +258,16 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
     ],
 
     [
-      {question:'Capital of Australia?',options:['Sydney','Melbourne','Canberra','Perth'],answer:'Canberra'},
-      {question:'Longest river?',options:['Amazon','Nile','Yangtze','Mississippi'],answer:'Nile'},
-      {question:'Largest continent?',options:['Africa','Asia','Europe','North America'],answer:'Asia'},
-      {question:'Country with city Dubai?',options:['Qatar','UAE','Oman','Saudi Arabia'],answer:'UAE'},
-      {question:'Mount Everest located in?',options:['Nepal','India','China','Bhutan'],answer:'Nepal'},
-      {question:'River through Paris?',options:['Rhine','Seine','Danube','Thames'],answer:'Seine'},
-      {question:'Largest island?',options:['Greenland','Iceland','Borneo','Madagascar'],answer:'Greenland'},
-      {question:'Capital of Italy?',options:['Rome','Milan','Venice','Naples'],answer:'Rome'},
-      {question:'Continent with most countries?',options:['Asia','Africa','Europe','South America'],answer:'Africa'},
-      {question:'Great Barrier Reef located in which sea?',options:['Coral Sea','Tasman Sea','Arafura Sea','Timor Sea'],answer:'Coral Sea'}
+      {question:'What is the capital city of Australia?',options:['Sydney','Melbourne','Canberra','Perth'],answer:'Canberra'},
+      {question:'Which is the longest river in the world?',options:['Amazon','Nile','Yangtze','Mississippi'],answer:'Nile'},
+      {question:'Which is the largest continent by land area?',options:['Africa','Asia','Europe','North America'],answer:'Asia'},
+      {question:'Which country is the city of Dubai located in?',options:['Qatar','UAE','Oman','Saudi Arabia'],answer:'UAE'},
+      {question:'Mount Everest is located in which country?',options:['Nepal','India','China','Bhutan'],answer:'Nepal'},
+      {question:'Which river flows through the city of Paris?',options:['Rhine','Seine','Danube','Thames'],answer:'Seine'},
+      {question:'Which is the largest island in the world?',options:['Greenland','Iceland','Borneo','Madagascar'],answer:'Greenland'},
+      {question:'What is the capital city of Italy?',options:['Rome','Milan','Venice','Naples'],answer:'Rome'},
+      {question:'Which continent has the most countries?',options:['Asia','Africa','Europe','South America'],answer:'Africa'},
+      {question:'The Great Barrier Reef is located in which sea?',options:['Coral Sea','Tasman Sea','Arafura Sea','Timor Sea'],answer:'Coral Sea'}
     ]
 
   ]
