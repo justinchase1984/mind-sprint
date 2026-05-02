@@ -162,7 +162,7 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {question:'Ancient Greek philosopher who taught Alexander the Great?',options:['Plato','Aristotle','Socrates','Pythagoras'],answer:'Aristotle'},
       {question:'Empire ruled by Genghis Khan?',options:['Roman','Mongol','Ottoman','Persian'],answer:'Mongol'},
       {question:'First man on the Moon?',options:['Buzz Aldrin','Neil Armstrong','Yuri Gagarin','John Glenn'],answer:'Neil Armstrong'},
-      {question:'Cold War wall dividing Germany?',options:['Berlin Wall','Iron Curtain','Great Wall','Hadrian Wall'],answer:'Berlin Wall'},
+      {question:'Which wall divided Germany during the Cold War?',options:['Berlin Wall','Iron Curtain','Great Wall','Hadrian Wall'],answer:'Berlin Wall'},
       {question:'Roman arena in Rome?',options:['Pantheon','Colosseum','Forum','Acropolis'],answer:'Colosseum'},
       {question:'Napoleon defeated at?',options:['Waterloo','Verdun','Trafalgar','Somme'],answer:'Waterloo'},
       {question:'Ancient writing system of Egypt?',options:['Runes','Hieroglyphics','Cuneiform','Latin'],answer:'Hieroglyphics'}
