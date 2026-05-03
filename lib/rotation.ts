@@ -56,8 +56,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {question:'Planet closest to the Sun?',options:['Mercury','Venus','Earth','Mars'],answer:'Mercury'},
       {question:'Instrument used to measure temperature?',options:['Barometer','Thermometer','Hygrometer','Anemometer'],answer:'Thermometer'},
       {question:'Currency of Japan?',options:['Won','Yuan','Yen','Ringgit'],answer:'Yen'},
-      {question:'Gas plants absorb?',options:['Oxygen','Carbon dioxide','Nitrogen','Helium'],answer:'Carbon dioxide'},
-      {question:'Scientist behind relativity?',options:['Isaac Newton','Albert Einstein','Galileo Galilei','Nikola Tesla'],answer:'Albert Einstein'}
+      {question:'Which gas do plants absorb from the air?',options:['Oxygen','Carbon dioxide','Nitrogen','Helium'],answer:'Carbon dioxide'},
+      {question:'Which scientist developed the theory of relativity?',options:['Isaac Newton','Albert Einstein','Galileo Galilei','Nikola Tesla'],answer:'Albert Einstein'}
     ]
 
   ],
