@@ -42,20 +42,20 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {question:'Which ocean is the largest?',options:['Atlantic','Indian','Pacific','Arctic'],answer:'Pacific'},
       {question:'Who wrote the novel "1984"?',options:['Aldous Huxley','George Orwell','Ray Bradbury','Ernest Hemingway'],answer:'George Orwell'},
       {question:'Chemical symbol for potassium?',options:['P','Pt','Po','K'],answer:'K'},
-      {question:'2016 Olympic host country?',options:['China','Brazil','UK','Japan'],answer:'Brazil'},
+      {question:'Which country hosted the 2016 Olympics?',options:['China','Brazil','UK','Japan'],answer:'Brazil'},
       {question:'What animal is a Komodo dragon?',options:['Mammal','Amphibian','Reptile','Bird'],answer:'Reptile'},
-      {question:'Instrument with 88 keys?',options:['Organ','Harpsichord','Piano','Synthesizer'],answer:'Piano'}
+      {question:'What instrument has 88 keys?',options:['Organ','Harpsichord','Piano','Synthesizer'],answer:'Piano'}
     ],
 
     [
       {question:'Which continent is the Sahara Desert located in?',options:['Africa','Asia','Australia','South America'],answer:'Africa'},
-      {question:'Largest mammal on Earth?',options:['Elephant','Blue whale','Giraffe','Hippo'],answer:'Blue whale'},
+      {question:'What is the largest mammal on Earth?',options:['Elephant','Blue whale','Giraffe','Hippo'],answer:'Blue whale'},
       {question:'Metal with symbol Fe?',options:['Iron','Lead','Tin','Zinc'],answer:'Iron'},
-      {question:'Capital of Canada?',options:['Toronto','Ottawa','Vancouver','Montreal'],answer:'Ottawa'},
+      {question:'What is the capital of Canada?',options:['Toronto','Ottawa','Vancouver','Montreal'],answer:'Ottawa'},
       {question:'Which organ filters blood?',options:['Heart','Kidneys','Liver','Lungs'],answer:'Kidneys'},
       {question:'Planet closest to the Sun?',options:['Mercury','Venus','Earth','Mars'],answer:'Mercury'},
       {question:'Instrument used to measure temperature?',options:['Barometer','Thermometer','Hygrometer','Anemometer'],answer:'Thermometer'},
-      {question:'Currency of Japan?',options:['Won','Yuan','Yen','Ringgit'],answer:'Yen'},
+      {question:'The currency of Japan is?',options:['Won','Yuan','Yen','Ringgit'],answer:'Yen'},
       {question:'Which gas do plants absorb from the air?',options:['Oxygen','Carbon dioxide','Nitrogen','Helium'],answer:'Carbon dioxide'},
       {question:'Which scientist developed the theory of relativity?',options:['Isaac Newton','Albert Einstein','Galileo Galilei','Nikola Tesla'],answer:'Albert Einstein'}
     ]
