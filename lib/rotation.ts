@@ -190,16 +190,16 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
     ],
 
     [
-      {question:'20% of 150?',options:['20','25','30','35'],answer:'30'},
-      {question:'Next: 3,6,9,12?',options:['15','18','21','24'],answer:'15'},
-      {question:'7×8?',options:['54','56','58','60'],answer:'56'},
-      {question:'Average of 10,20,30?',options:['15','20','25','30'],answer:'20'},
-      {question:'Square of 15?',options:['200','210','225','240'],answer:'225'},
-      {question:'Half of 400?',options:['150','180','200','220'],answer:'200'},
-      {question:'5x=25?',options:['3','4','5','6'],answer:'5'},
-      {question:'Area of 6×6?',options:['30','36','40','42'],answer:'36'},
-      {question:'Next: 5,10,15,?',options:['20','25','30','35'],answer:'20'},
-      {question:'10% of 500?',options:['40','50','60','70'],answer:'50'}
+      {question:'What is 20% of 150?',options:['20','25','30','35'],answer:'30'},
+      {question:'What is the next number in the sequence: 3, 6, 9, 12, ...?',options:['15','18','21','24'],answer:'15'},
+      {question:'What is 7 × 8?',options:['54','56','58','60'],answer:'56'},
+      {question:'What is the average of 10, 20, and 30?',options:['15','20','25','30'],answer:'20'},
+      {question:'What is 15 squared?',options:['200','210','225','240'],answer:'225'},
+      {question:'What is half of 400?',options:['150','180','200','220'],answer:'200'},
+      {question:'Solve for x: 5x = 25',options:['3','4','5','6'],answer:'5'},
+      {question:'What is the area of a 6 × 6 square?',options:['30','36','40','42'],answer:'36'},
+      {question:'What is the next number in the sequence: 5, 10, 15, ...?',options:['20','25','30','35'],answer:'20'},
+      {question:'What is 10% of 500?',options:['40','50','60','70'],answer:'50'}
     ]
 
   ],
