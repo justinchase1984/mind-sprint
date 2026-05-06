@@ -11,40 +11,43 @@ Daily Puzzle System
 • We take ONE puzzle from each challenge (position-based)
 • Result = 7 puzzles per day
 
-OPTION:
-If you want 10 puzzles total (current UI), we cycle again
+• UI expects 10 → we pad remaining slots
 */
 
 export function getDailyPuzzles(date: Date = new Date()): Puzzle[] {
   const TOTAL_CHALLENGES = 7
-
   const puzzles: Puzzle[] = []
 
-  // Get rotation index (same logic as rotation.ts)
+  // Anchor date (same as rotation.ts)
   const start = new Date(Date.UTC(2025, 0, 1))
-  const today = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()))
-  const dayIndex = Math.floor((today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24))
+  const today = new Date(
+    Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())
+  )
 
-  // This controls WHICH puzzle we take from each set
-  const puzzleIndex = dayIndex % 10
+  const dayIndex = Math.floor(
+    (today.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)
+  )
 
+  // Ensures index stays within 0–9 safely
+  const puzzleIndex = ((dayIndex % 10) + 10) % 10
+
+  // Pull 1 puzzle from each challenge
   for (let i = 1; i <= TOTAL_CHALLENGES; i++) {
     const challengePuzzles = getRotatingPuzzlesByChallenge(i, date)
 
-    if (!challengePuzzles.length) continue
+    if (!challengePuzzles || challengePuzzles.length === 0) continue
 
-    puzzles.push(challengePuzzles[puzzleIndex])
+    const safeIndex = puzzleIndex % challengePuzzles.length
+    puzzles.push(challengePuzzles[safeIndex])
   }
 
   /*
-  Your UI expects 10 puzzles.
-  We currently have 7 (1 per challenge).
-
-  So we loop again from start to reach 10.
+  UI expects 10 puzzles
+  If we have less (e.g. 7), repeat from start
   */
 
   let i = 0
-  while (puzzles.length < 10) {
+  while (puzzles.length > 0 && puzzles.length < 10) {
     puzzles.push(puzzles[i % puzzles.length])
     i++
   }
