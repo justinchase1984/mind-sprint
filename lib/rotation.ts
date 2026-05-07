@@ -177,16 +177,16 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
   5: [
 
     [
-      {question:'15% of 200?',options:['25','30','35','40'],answer:'30'},
-      {question:'60 km/h for 2 hours distance?',options:['100','110','120','140'],answer:'120'},
-      {question:'Next: 2,4,8,16?',options:['24','28','32','36'],answer:'32'},
-      {question:'$80 reduced 25%?',options:['55','60','65','70'],answer:'60'},
-      {question:'Square of 12?',options:['124','134','144','154'],answer:'144'},
-      {question:'Average 2,4,6?',options:['3','4','5','6'],answer:'4'},
-      {question:'3x=21?',options:['6','7','8','9'],answer:'7'},
-      {question:'9×7?',options:['54','63','72','81'],answer:'63'},
-      {question:'Area 10×5?',options:['40','45','50','55'],answer:'50'},
-      {question:'Half of 250?',options:['100','110','120','125'],answer:'125'}
+      {question:'What is 15% of 200?',options:['25','30','35','40'],answer:'30'},
+      {question:'If you travel at 60 km/h for 2 hours, how far do you go?',options:['100','110','120','140'],answer:'120'},
+      {question:'What is the next number in the sequence: 2, 4, 8, 16, ...?',options:['24','28','32','36'],answer:'32'},
+      {question:'What is $80 reduced by 25%?',options:['55','60','65','70'],answer:'60'},
+      {question:'What is 12 squared?',options:['124','134','144','154'],answer:'144'},
+      {question:'What is the average of 2, 4, and 6?',options:['3','4','5','6'],answer:'4'},
+      {question:'Solve for x: 3x = 21',options:['6','7','8','9'],answer:'7'},
+      {question:'What is 9 × 7?',options:['54','63','72','81'],answer:'63'},
+      {question:'What is the area of a rectangle with sides 10 and 5?',options:['40','45','50','55'],answer:'50'},
+      {question:'What is half of 250?',options:['100','110','120','125'],answer:'125'}
     ],
 
     [
