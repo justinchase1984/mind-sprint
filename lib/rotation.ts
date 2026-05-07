@@ -71,16 +71,16 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
   2: [
 
     [
-      {question:'Meaning of the word "ancient"?',options:['Very old','Very fast','Very small','Very loud'],answer:'Very old'},
-      {question:'Opposite of "early"?',options:['Late','Soon','Quick','First'],answer:'Late'},
-      {question:'Correct sentence?',options:['She don’t like tea','She doesn’t like tea','She don’t likes tea','She doesn’t likes tea'],answer:'She doesn’t like tea'},
-      {question:'Plural of "child"?',options:['Childs','Children','Childes','Childrens'],answer:'Children'},
-      {question:'Word meaning "begin"?',options:['Start','Finish','Close','Stop'],answer:'Start'},
-      {question:'Correct spelling?',options:['Recieve','Receive','Receeve','Receve'],answer:'Receive'},
-      {question:'Synonym for "happy"?',options:['Angry','Joyful','Cold','Weak'],answer:'Joyful'},
-      {question:'Which is a compound word?',options:['Sunlight','Happy','Running','Blue'],answer:'Sunlight'},
-      {question:'Fill: "Please ___ the door."',options:['open','opened','opening','opens'],answer:'open'},
-      {question:'Word meaning very big?',options:['Tiny','Huge','Short','Thin'],answer:'Huge'}
+      {question:'What does the word "ancient" mean?',options:['Very old','Very fast','Very small','Very loud'],answer:'Very old'},
+      {question:'What is the opposite of "early"?',options:['Late','Soon','Quick','First'],answer:'Late'},
+      {question:'Which of the following is a grammatically correct sentence?',options:['She don’t like tea','She doesn’t like tea','She don’t likes tea','She doesn’t likes tea'],answer:'She doesn’t like tea'},
+      {question:'What is the plural form of "child"?',options:['Childs','Children','Childes','Childrens'],answer:'Children'},
+      {question:'Which word means "to begin"?',options:['Start','Finish','Close','Stop'],answer:'Start'},
+      {question:'Which of the following is the correct spelling?',options:['Recieve','Receive','Receeve','Receve'],answer:'Receive'},
+      {question:'What is a synonym for "happy"?',options:['Angry','Joyful','Cold','Weak'],answer:'Joyful'},
+      {question:'Which of the following is a compound word?',options:['Sunlight','Happy','Running','Blue'],answer:'Sunlight'},
+      {question:'Complete the sentence: "Please ___ the door."',options:['open','opened','opening','opens'],answer:'open'},
+      {question:'Which word means "very big"?',options:['Tiny','Huge','Short','Thin'],answer:'Huge'}
     ],
 
     [
