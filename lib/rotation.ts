@@ -245,16 +245,16 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
   7: [
 
     [
-      {question:'Country with most time zones?',options:['Russia','USA','France','UK'],answer:'France'},
-      {question:'Kilimanjaro located where?',options:['Kenya','Tanzania','Uganda','Ethiopia'],answer:'Tanzania'},
-      {question:'River through Budapest?',options:['Rhine','Danube','Seine','Thames'],answer:'Danube'},
-      {question:'Smallest country?',options:['Monaco','Vatican City','San Marino','Liechtenstein'],answer:'Vatican City'},
-      {question:'Largest hot desert?',options:['Gobi','Kalahari','Sahara','Atacama'],answer:'Sahara'},
-      {question:'Sea between Europe & Africa?',options:['Baltic','Black','Mediterranean','Caribbean'],answer:'Mediterranean'},
-      {question:'Land of Rising Sun?',options:['China','Japan','Korea','Thailand'],answer:'Japan'},
-      {question:'Largest US state?',options:['Texas','California','Alaska','Montana'],answer:'Alaska'},
-      {question:'Casablanca located in?',options:['Spain','Morocco','Tunisia','Egypt'],answer:'Morocco'},
-      {question:'Andes located in?',options:['North America','Europe','South America','Asia'],answer:'South America'}
+      {question:'Which country has the most time zones?',options:['Russia','USA','France','UK'],answer:'France'},
+      {question:'Mount Kilimanjaro is located in which country?',options:['Kenya','Tanzania','Uganda','Ethiopia'],answer:'Tanzania'},
+      {question:'Which river flows through the city of Budapest?',options:['Rhine','Danube','Seine','Thames'],answer:'Danube'},
+      {question:'What is the smallest country in the world?',options:['Monaco','Vatican City','San Marino','Liechtenstein'],answer:'Vatican City'},
+      {question:'Which is the largest hot desert in the world?',options:['Gobi','Kalahari','Sahara','Atacama'],answer:'Sahara'},
+      {question:'Which sea lies between Europe and Africa?',options:['Baltic','Black','Mediterranean','Caribbean'],answer:'Mediterranean'},
+      {question:'Which country is known as the "Land of the Rising Sun"?',options:['China','Japan','Korea','Thailand'],answer:'Japan'},
+      {question:'Which is the largest U.S. state by land area?',options:['Texas','California','Alaska','Montana'],answer:'Alaska'},
+      {question:'Casablanca is a city in which country?',options:['Spain','Morocco','Tunisia','Egypt'],answer:'Morocco'},
+      {question:'The Andes mountain range is located on which continent?',options:['North America','Europe','South America','Asia'],answer:'South America'}
     ],
 
     [
