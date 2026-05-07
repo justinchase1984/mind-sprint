@@ -84,16 +84,16 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
     ],
 
     [
-      {question:'Meaning of "fragile"?',options:['Strong','Easily broken','Heavy','Huge'],answer:'Easily broken'},
-      {question:'Opposite of increase?',options:['Expand','Reduce','Improve','Multiply'],answer:'Reduce'},
-      {question:'Correct sentence?',options:['They was late','They were late','They be late','They is late'],answer:'They were late'},
-      {question:'Plural of mouse?',options:['Mouses','Mouse','Mice','Mices'],answer:'Mice'},
-      {question:'Synonym for quick?',options:['Rapid','Heavy','Bright','Weak'],answer:'Rapid'},
-      {question:'Correct spelling?',options:['Occured','Occurred','Occerred','Occureded'],answer:'Occurred'},
-      {question:'Fill: "Please ___ the instructions carefully"',options:['read','reads','reading','reader'],answer:'read'},
-      {question:'Which word is a noun?',options:['Happiness','Quickly','Bright','Swiftly'],answer:'Happiness'},
-      {question:'Opposite of ancient?',options:['Modern','Old','Historic','Traditional'],answer:'Modern'},
-      {question:'Synonym for difficult?',options:['Simple','Hard','Easy','Clear'],answer:'Hard'}
+      {question:'What is the meaning of "fragile"?',options:['Strong','Easily broken','Heavy','Huge'],answer:'Easily broken'},
+      {question:'What is the opposite of increase?',options:['Expand','Reduce','Improve','Multiply'],answer:'Reduce'},
+      {question:'Which of the following is a grammatically correct sentence?',options:['They was late','They were late','They be late','They is late'],answer:'They were late'},
+      {question:'What is the plural form of "mouse"?',options:['Mouses','Mouse','Mice','Mices'],answer:'Mice'},
+      {question:'What is a synonym for "quick"?',options:['Rapid','Heavy','Bright','Weak'],answer:'Rapid'},
+      {question:'Which of the following is spelled correctly?',options:['Occured','Occurred','Occerred','Occureded'],answer:'Occurred'},
+      {question:'Complete the sentence: "Please ___ the instructions carefully."',options:['read','reads','reading','reader'],answer:'read'},
+      {question:'Which of the following is a noun?',options:['Happiness','Quickly','Bright','Swiftly'],answer:'Happiness'},
+      {question:'What is the opposite of "ancient"?',options:['Modern','Old','Historic','Traditional'],answer:'Modern'},
+      {question:'What is a synonym for "difficult"?',options:['Simple','Hard','Easy','Clear'],answer:'Hard'}
     ]
 
   ],
