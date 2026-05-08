@@ -27,9 +27,14 @@ export default function PuzzlePage() {
   const total = puzzles.length
   const isResults = idNum > total
 
+  // ✅ SCORE STATE
+  const [score, setScore] = useState(0)
+
   useEffect(() => {
     if (idNum === 1) {
       sessionStorage.setItem('dailyCorrect', '0')
+      setScore(0)
+
       puzzles.forEach((_p, idx) =>
         sessionStorage.removeItem(`challenge${challengeIndex}_q${idx + 1}`)
       )
@@ -65,6 +70,9 @@ export default function PuzzlePage() {
       cnt += 1
       sessionStorage.setItem(key, '1')
     }
+
+    // ✅ UPDATE LIVE SCORE
+    if (isCorrect) setScore((prev) => prev + 1)
 
     sessionStorage.setItem('dailyCorrect', cnt.toString())
 
@@ -147,6 +155,11 @@ export default function PuzzlePage() {
           <>
             <h2>Challenge {challengeIndex}</h2>
 
+            {/* ✅ LIVE SCORE */}
+            <p style={{ marginBottom: '0.5rem', color: '#555' }}>
+              Score: {score}
+            </p>
+
             {/* ✅ PROGRESS BAR */}
             <div style={{ marginBottom: '1rem' }}>
               <div style={{ fontSize: 14, marginBottom: 4 }}>
@@ -172,7 +185,7 @@ export default function PuzzlePage() {
 
             <p>{puzzle?.question}</p>
 
-            {/* ✅ UPDATED BUTTONS */}
+            {/* ✅ ANSWER BUTTONS */}
             {puzzle?.options.map((opt) => (
               <button
                 key={opt}
@@ -210,7 +223,7 @@ export default function PuzzlePage() {
               </button>
             ))}
 
-            {/* ✅ FEEDBACK TEXT */}
+            {/* ✅ FEEDBACK */}
             {locked && (
               <p style={{ marginTop: 10, fontWeight: 500 }}>
                 {selected === puzzle.answer ? 'Correct ✅' : 'Incorrect ❌'}
