@@ -138,7 +138,31 @@ export default function PuzzlePage() {
         ) : (
           <>
             <h2>Challenge {challengeIndex}</h2>
-            <p>{puzzle?.question}</p>
+
+<div style={{ marginBottom: '1rem' }}>
+  <div style={{ fontSize: 14, marginBottom: 4 }}>
+    Question {idNum} of {total}
+  </div>
+
+  <div
+    style={{
+      height: 8,
+      background: '#eee',
+      borderRadius: 4,
+      overflow: 'hidden',
+    }}
+  >
+    <div
+      style={{
+        width: `${(idNum / total) * 100}%`,
+        background: '#4caf50',
+        height: '100%',
+      }}
+    />
+  </div>
+</div>
+
+<p>{puzzle?.question}</p>
 
             {puzzle?.options.map((opt) => (
               <button
