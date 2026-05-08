@@ -27,7 +27,6 @@ export default function PuzzlePage() {
   const total = puzzles.length
   const isResults = idNum > total
 
-  // ✅ SCORE STATE
   const [score, setScore] = useState(0)
 
   useEffect(() => {
@@ -45,7 +44,6 @@ export default function PuzzlePage() {
   const [selected, setSelected] = useState<string | null>(null)
   const [locked, setLocked] = useState(false)
 
-  // ✅ RESET ON NEW QUESTION
   useEffect(() => {
     setUserAns('')
     setSelected(null)
@@ -71,7 +69,6 @@ export default function PuzzlePage() {
       sessionStorage.setItem(key, '1')
     }
 
-    // ✅ UPDATE LIVE SCORE
     if (isCorrect) setScore((prev) => prev + 1)
 
     sessionStorage.setItem('dailyCorrect', cnt.toString())
@@ -96,9 +93,7 @@ export default function PuzzlePage() {
       <Head>
         <title>
           {isResults
-            ? challengeIndex === 7
-              ? 'All Done! | Mind Sprint'
-              : `Results | Challenge ${challengeIndex}`
+            ? `Results | Challenge ${challengeIndex}`
             : `Challenge ${challengeIndex} – Puzzle ${idNum}`}
         </title>
       </Head>
@@ -114,39 +109,76 @@ export default function PuzzlePage() {
           (() => {
             const score = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
 
-            if (challengeIndex === 7) {
-              return (
-                <>
-                  <h1>🎉 Congratulations! You’ve completed all 7 challenges!</h1>
-                  <p>
-                    You scored <strong>{score}/{total}</strong>
-                  </p>
-                </>
-              )
-            }
+            // ✅ PERFORMANCE LABEL
+            let label = '😅 Needs Work'
+            if (score >= 9) label = '🧠 Genius'
+            else if (score >= 7) label = '🔥 Strong'
+            else if (score >= 5) label = '👍 Solid'
 
             const passed = score >= 8
+
             if (passed && challengeIndex < 7) {
               localStorage.setItem('unlockedChallenge', String(challengeIndex + 1))
             }
 
             return (
               <>
-                <h1>🎉 You’ve completed Challenge {challengeIndex}!</h1>
-                <p>
+                <h1>🎯 Challenge Complete</h1>
+
+                <p style={{ fontSize: 20, margin: '10px 0' }}>
                   You scored <strong>{score}/{total}</strong>
                 </p>
+
+                <p style={{ fontSize: 18 }}>{label}</p>
 
                 <div style={{ marginTop: '1rem' }}>
                   {passed ? (
                     <Link href={`/puzzle/1?challenge=${challengeIndex + 1}`}>
-                      <button>Start Next Challenge</button>
+                      <button style={{ padding: '12px 20px', fontSize: 16 }}>
+                        Continue →
+                      </button>
                     </Link>
                   ) : (
                     <Link href={`/puzzle/1?challenge=${challengeIndex}`}>
-                      <button>Try Again</button>
+                      <button style={{ padding: '12px 20px', fontSize: 16 }}>
+                        Try Again
+                      </button>
                     </Link>
                   )}
+                </div>
+
+                <p style={{ marginTop: '1.5rem', color: '#555' }}>
+                  Come back tomorrow for a new challenge.
+                </p>
+
+                {/* ✅ EMAIL HOOK */}
+                <div
+                  style={{
+                    marginTop: '2rem',
+                    padding: '1rem',
+                    border: '1px solid #eee',
+                    borderRadius: 8,
+                  }}
+                >
+                  <p style={{ marginBottom: 10 }}>
+                    🎁 Want daily challenges + future rewards?
+                  </p>
+
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    style={{
+                      padding: 10,
+                      width: '70%',
+                      marginRight: 8,
+                      borderRadius: 6,
+                      border: '1px solid #ccc',
+                    }}
+                  />
+
+                  <button style={{ padding: '10px 16px' }}>
+                    Join
+                  </button>
                 </div>
               </>
             )
@@ -155,12 +187,10 @@ export default function PuzzlePage() {
           <>
             <h2>Challenge {challengeIndex}</h2>
 
-            {/* ✅ LIVE SCORE */}
             <p style={{ marginBottom: '0.5rem', color: '#555' }}>
               Score: {score}
             </p>
 
-            {/* ✅ PROGRESS BAR */}
             <div style={{ marginBottom: '1rem' }}>
               <div style={{ fontSize: 14, marginBottom: 4 }}>
                 Question {idNum} of {total}
@@ -185,13 +215,11 @@ export default function PuzzlePage() {
 
             <p>{puzzle?.question}</p>
 
-            {/* ✅ ANSWER BUTTONS */}
             {puzzle?.options.map((opt) => (
               <button
                 key={opt}
                 onClick={() => {
                   if (locked) return
-
                   setSelected(opt)
                   setLocked(true)
 
@@ -208,14 +236,12 @@ export default function PuzzlePage() {
                   border: '1px solid #ddd',
                   fontSize: 16,
                   cursor: 'pointer',
-
                   background:
                     locked && opt === puzzle.answer
                       ? '#4caf50'
                       : locked && opt === selected
                       ? '#f44336'
                       : '#fff',
-
                   color: locked ? '#fff' : '#000',
                 }}
               >
@@ -223,7 +249,6 @@ export default function PuzzlePage() {
               </button>
             ))}
 
-            {/* ✅ FEEDBACK */}
             {locked && (
               <p style={{ marginTop: 10, fontWeight: 500 }}>
                 {selected === puzzle.answer ? 'Correct ✅' : 'Incorrect ❌'}
