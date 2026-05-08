@@ -162,7 +162,18 @@ export default function PuzzlePage() {
                     🎁 Enter for weekly prize draws + daily brain challenges
                   </p>
 
-                  <div className="AW-Form-317058051"></div>
+                  <div
+  style={{
+    maxWidth: 400,
+    margin: '0 auto',
+    padding: '1rem',
+    background: '#fafafa',
+    borderRadius: 10,
+    border: '1px solid #eee',
+  }}
+>
+  <div className="AW-Form-317058051"></div>
+</div>
 
                   {/* ✅ CORRECT SCRIPT LOAD */}
                   <Script
