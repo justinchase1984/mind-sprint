@@ -41,12 +41,10 @@ export default function PuzzlePage() {
     }
   }, [idNum, challengeIndex, puzzles])
 
-  const [userAns, setUserAns] = useState('')
   const [selected, setSelected] = useState<string | null>(null)
   const [locked, setLocked] = useState(false)
 
   useEffect(() => {
-    setUserAns('')
     setSelected(null)
     setLocked(false)
   }, [idNum])
@@ -98,12 +96,6 @@ export default function PuzzlePage() {
             : `Challenge ${challengeIndex} – Puzzle ${idNum}`}
         </title>
       </Head>
-
-      {/* ✅ AWEBER SCRIPT */}
-      <Script
-        src="https://forms.aweber.com/form/51/317058051.js"
-        strategy="afterInteractive"
-      />
 
       {!isResults && (
         <div style={{ textAlign: 'center', marginBottom: '1rem', width: '100%' }}>
@@ -157,7 +149,7 @@ export default function PuzzlePage() {
                   Come back tomorrow for a new challenge.
                 </p>
 
-                {/* ✅ REAL EMAIL SYSTEM */}
+                {/* ✅ EMAIL CAPTURE */}
                 <div
                   style={{
                     marginTop: '2rem',
@@ -170,8 +162,22 @@ export default function PuzzlePage() {
                     🎁 Enter for weekly prize draws + daily brain challenges
                   </p>
 
-                  {/* AWEBER FORM */}
                   <div className="AW-Form-317058051"></div>
+
+                  {/* ✅ CORRECT SCRIPT LOAD */}
+                  <Script
+                    id="aweber-form"
+                    strategy="afterInteractive"
+                    dangerouslySetInnerHTML={{
+                      __html: `(function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s); js.id = id;
+                        js.src = "https://forms.aweber.com/form/51/317058051.js";
+                        fjs.parentNode.insertBefore(js, fjs);
+                      }(document, "script", "aweber-wjs-jd9yer2wm"));`,
+                    }}
+                  />
                 </div>
               </>
             )
@@ -188,6 +194,7 @@ export default function PuzzlePage() {
               <div style={{ fontSize: 14, marginBottom: 4 }}>
                 Question {idNum} of {total}
               </div>
+
               <div
                 style={{
                   height: 8,
