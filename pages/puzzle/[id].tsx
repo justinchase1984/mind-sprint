@@ -1,7 +1,7 @@
 // pages/puzzle/[id].tsx
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect, useState, FormEvent } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import type { Puzzle } from '../../lib/puzzles'
 import { getStreaks, saveStreaks } from '../../lib/streak'
@@ -37,10 +37,15 @@ export default function PuzzlePage() {
   }, [idNum, challengeIndex, puzzles])
 
   const [userAns, setUserAns] = useState('')
-  useEffect(() => setUserAns(''), [idNum])
-
   const [selected, setSelected] = useState<string | null>(null)
-const [locked, setLocked] = useState(false)
+  const [locked, setLocked] = useState(false)
+
+  // ✅ RESET ON NEW QUESTION
+  useEffect(() => {
+    setUserAns('')
+    setSelected(null)
+    setLocked(false)
+  }, [idNum])
 
   function afterAnswer(isCorrect: boolean) {
     let { current, max } = getStreaks()
@@ -142,46 +147,75 @@ const [locked, setLocked] = useState(false)
           <>
             <h2>Challenge {challengeIndex}</h2>
 
-<div style={{ marginBottom: '1rem' }}>
-  <div style={{ fontSize: 14, marginBottom: 4 }}>
-    Question {idNum} of {total}
-  </div>
+            {/* ✅ PROGRESS BAR */}
+            <div style={{ marginBottom: '1rem' }}>
+              <div style={{ fontSize: 14, marginBottom: 4 }}>
+                Question {idNum} of {total}
+              </div>
+              <div
+                style={{
+                  height: 8,
+                  background: '#eee',
+                  borderRadius: 4,
+                  overflow: 'hidden',
+                }}
+              >
+                <div
+                  style={{
+                    width: `${(idNum / total) * 100}%`,
+                    background: '#4caf50',
+                    height: '100%',
+                  }}
+                />
+              </div>
+            </div>
 
-  <div
-    style={{
-      height: 8,
-      background: '#eee',
-      borderRadius: 4,
-      overflow: 'hidden',
-    }}
-  >
-    <div
-      style={{
-        width: `${(idNum / total) * 100}%`,
-        background: '#4caf50',
-        height: '100%',
-      }}
-    />
-  </div>
-</div>
+            <p>{puzzle?.question}</p>
 
-<p>{puzzle?.question}</p>
-
+            {/* ✅ UPDATED BUTTONS */}
             {puzzle?.options.map((opt) => (
               <button
                 key={opt}
-                onClick={() => afterAnswer(opt === puzzle.answer)}
+                onClick={() => {
+                  if (locked) return
+
+                  setSelected(opt)
+                  setLocked(true)
+
+                  setTimeout(() => {
+                    afterAnswer(opt === puzzle.answer)
+                  }, 800)
+                }}
                 style={{
                   display: 'block',
-                  margin: '8px auto',
-                  padding: '10px 20px',
-                  width: '80%',
+                  margin: '10px auto',
+                  padding: '12px 16px',
+                  width: '85%',
+                  borderRadius: 8,
+                  border: '1px solid #ddd',
+                  fontSize: 16,
                   cursor: 'pointer',
+
+                  background:
+                    locked && opt === puzzle.answer
+                      ? '#4caf50'
+                      : locked && opt === selected
+                      ? '#f44336'
+                      : '#fff',
+
+                  color: locked ? '#fff' : '#000',
                 }}
               >
                 {opt}
               </button>
             ))}
+
+            {/* ✅ FEEDBACK TEXT */}
+            {locked && (
+              <p style={{ marginTop: 10, fontWeight: 500 }}>
+                {selected === puzzle.answer ? 'Correct ✅' : 'Incorrect ❌'}
+              </p>
+            )}
 
             <div id="ezoic-pub-ad-placeholder-101" style={{ margin: '1rem 0' }} />
 
