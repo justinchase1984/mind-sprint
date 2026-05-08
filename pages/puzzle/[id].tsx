@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Script from 'next/script'
 import type { Puzzle } from '../../lib/puzzles'
 import { getStreaks, saveStreaks } from '../../lib/streak'
 import { getRotatingPuzzlesByChallenge } from '../../lib/rotation'
@@ -98,6 +99,12 @@ export default function PuzzlePage() {
         </title>
       </Head>
 
+      {/* ✅ AWEBER SCRIPT */}
+      <Script
+        src="https://forms.aweber.com/form/51/317058051.js"
+        strategy="afterInteractive"
+      />
+
       {!isResults && (
         <div style={{ textAlign: 'center', marginBottom: '1rem', width: '100%' }}>
           <div id="ezoic-pub-ad-placeholder-100" />
@@ -109,7 +116,6 @@ export default function PuzzlePage() {
           (() => {
             const score = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
 
-            // ✅ PERFORMANCE LABEL
             let label = '😅 Needs Work'
             if (score >= 9) label = '🧠 Genius'
             else if (score >= 7) label = '🔥 Strong'
@@ -151,7 +157,7 @@ export default function PuzzlePage() {
                   Come back tomorrow for a new challenge.
                 </p>
 
-                {/* ✅ EMAIL HOOK */}
+                {/* ✅ REAL EMAIL SYSTEM */}
                 <div
                   style={{
                     marginTop: '2rem',
@@ -161,24 +167,11 @@ export default function PuzzlePage() {
                   }}
                 >
                   <p style={{ marginBottom: 10 }}>
-                    🎁 Want daily challenges + future rewards?
+                    🎁 Enter for weekly prize draws + daily brain challenges
                   </p>
 
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    style={{
-                      padding: 10,
-                      width: '70%',
-                      marginRight: 8,
-                      borderRadius: 6,
-                      border: '1px solid #ccc',
-                    }}
-                  />
-
-                  <button style={{ padding: '10px 16px' }}>
-                    Join
-                  </button>
+                  {/* AWEBER FORM */}
+                  <div className="AW-Form-317058051"></div>
                 </div>
               </>
             )
