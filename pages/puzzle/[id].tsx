@@ -3,7 +3,6 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import Script from 'next/script'
 import type { Puzzle } from '../../lib/puzzles'
 import { getStreaks, saveStreaks } from '../../lib/streak'
 import { getRotatingPuzzlesByChallenge } from '../../lib/rotation'
@@ -76,6 +75,22 @@ export default function PuzzlePage() {
   }
 
   const factKey = `${challengeIndex}-${idNum}`
+
+  /*
+  ✅ FIX: LOAD AWEBER SCRIPT PROPERLY
+  */
+  useEffect(() => {
+    const scriptId = 'aweber-wjs'
+
+    if (document.getElementById(scriptId)) return
+
+    const script = document.createElement('script')
+    script.id = scriptId
+    script.src = 'https://forms.aweber.com/form/51/317058051.js'
+    script.async = true
+
+    document.body.appendChild(script)
+  }, [])
 
   return (
     <div
@@ -162,33 +177,19 @@ export default function PuzzlePage() {
                     🎁 Enter for weekly prize draws + daily brain challenges
                   </p>
 
+                  {/* ✅ CLEAN CONTAINER */}
                   <div
-  style={{
-    maxWidth: 400,
-    margin: '0 auto',
-    padding: '1rem',
-    background: '#fafafa',
-    borderRadius: 10,
-    border: '1px solid #eee',
-  }}
->
-  <div className="AW-Form-317058051"></div>
-</div>
-
-                  {/* ✅ CORRECT SCRIPT LOAD */}
-                  <Script
-                    id="aweber-form"
-                    strategy="afterInteractive"
-                    dangerouslySetInnerHTML={{
-                      __html: `(function(d, s, id) {
-                        var js, fjs = d.getElementsByTagName(s)[0];
-                        if (d.getElementById(id)) return;
-                        js = d.createElement(s); js.id = id;
-                        js.src = "https://forms.aweber.com/form/51/317058051.js";
-                        fjs.parentNode.insertBefore(js, fjs);
-                      }(document, "script", "aweber-wjs-jd9yer2wm"));`,
+                    style={{
+                      maxWidth: 400,
+                      margin: '0 auto',
+                      padding: '1rem',
+                      background: '#fafafa',
+                      borderRadius: 10,
+                      border: '1px solid #eee',
                     }}
-                  />
+                  >
+                    <div className="AW-Form-317058051"></div>
+                  </div>
                 </div>
               </>
             )
