@@ -77,20 +77,29 @@ export default function PuzzlePage() {
   const factKey = `${challengeIndex}-${idNum}`
 
   /*
-  ✅ FIX: LOAD AWEBER SCRIPT PROPERLY
+  ✅ FIXED AWEBER LOAD (FORCES RE-INIT)
   */
   useEffect(() => {
-    const scriptId = 'aweber-wjs'
+    if (!isResults) return
 
-    if (document.getElementById(scriptId)) return
+    const container = document.getElementById('aweber-form-container')
+    if (!container) return
 
+    // clear previous
+    container.innerHTML = ''
+
+    // remove old script if exists
+    const existing = document.getElementById('aweber-wjs')
+    if (existing) existing.remove()
+
+    // create new script
     const script = document.createElement('script')
-    script.id = scriptId
+    script.id = 'aweber-wjs'
     script.src = 'https://forms.aweber.com/form/51/317058051.js'
     script.async = true
 
-    document.body.appendChild(script)
-  }, [])
+    container.appendChild(script)
+  }, [isResults])
 
   return (
     <div
@@ -164,7 +173,7 @@ export default function PuzzlePage() {
                   Come back tomorrow for a new challenge.
                 </p>
 
-                {/* ✅ EMAIL CAPTURE */}
+                {/* ✅ EMAIL SECTION */}
                 <div
                   style={{
                     marginTop: '2rem',
@@ -177,7 +186,6 @@ export default function PuzzlePage() {
                     🎁 Enter for weekly prize draws + daily brain challenges
                   </p>
 
-                  {/* ✅ CLEAN CONTAINER */}
                   <div
                     style={{
                       maxWidth: 400,
@@ -188,7 +196,8 @@ export default function PuzzlePage() {
                       border: '1px solid #eee',
                     }}
                   >
-                    <div className="AW-Form-317058051"></div>
+                    {/* 🔥 IMPORTANT CHANGE */}
+                    <div id="aweber-form-container"></div>
                   </div>
                 </div>
               </>
