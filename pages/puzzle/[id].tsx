@@ -39,6 +39,9 @@ export default function PuzzlePage() {
   const [userAns, setUserAns] = useState('')
   useEffect(() => setUserAns(''), [idNum])
 
+  const [selected, setSelected] = useState<string | null>(null)
+const [locked, setLocked] = useState(false)
+
   function afterAnswer(isCorrect: boolean) {
     let { current, max } = getStreaks()
 
