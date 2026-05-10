@@ -75,6 +75,19 @@ export default function PuzzlePage() {
 
   const factKey = `${challengeIndex}-${idNum}`
 
+  useEffect(() => {
+    if (!isResults) return
+
+    // load AWeber script once
+    if (!document.getElementById('aweber-wjs')) {
+      const script = document.createElement('script')
+      script.id = 'aweber-wjs'
+      script.src = 'https://forms.aweber.com/form/51/317058051.js'
+      script.async = true
+      document.body.appendChild(script)
+    }
+  }, [isResults])
+
   return (
     <div
       style={{
@@ -131,71 +144,13 @@ export default function PuzzlePage() {
                   )}
                 </div>
 
-                {/* ✅ EMAIL CAPTURE FIXED */}
+                {/* ✅ REAL AWEBER FORM */}
                 {!hasJoined ? (
-                  <>
-                    <form
-                      method="post"
-                      action="https://www.aweber.com/scripts/addlead.pl"
-                      target="hidden_iframe"
-                      onSubmit={() => {
-                        localStorage.setItem('joined', 'true')
-                        setHasJoined(true)
-                      }}
-                      style={{
-                        marginTop: '2rem',
-                        padding: '1rem',
-                        border: '1px solid #eee',
-                        borderRadius: 8,
-                        maxWidth: 400,
-                        marginLeft: 'auto',
-                        marginRight: 'auto',
-                      }}
-                    >
-                      <p>🎁 Enter for weekly prize draws + daily challenges</p>
+                  <div style={{ marginTop: '2rem' }}>
+                    <p>🎁 Enter for weekly prize draws + daily challenges</p>
 
-                      <input type="hidden" name="listname" value="awlist6897043" />
-                      <input type="hidden" name="meta_web_form_id" value="317058051" />
-                      <input type="hidden" name="meta_split_id" value="" />
-                      <input type="hidden" name="meta_adtracking" value="Mind_Sprint__Opt-In_Form" />
-                      <input type="hidden" name="meta_message" value="1" />
-                      <input type="hidden" name="meta_required" value="email" />
-                      <input type="hidden" name="meta_tooltip" value="" />
-                      <input type="hidden" name="redirect" value="" />
-
-                      <input
-                        type="email"
-                        name="email"
-                        placeholder="Enter your email"
-                        required
-                        style={{
-                          width: '100%',
-                          padding: '12px',
-                          marginTop: 10,
-                          borderRadius: 6,
-                          border: '1px solid #ccc',
-                        }}
-                      />
-
-                      <button
-                        type="submit"
-                        style={{
-                          width: '100%',
-                          marginTop: 10,
-                          padding: '12px',
-                          background: '#111',
-                          color: '#fff',
-                          border: 'none',
-                          borderRadius: 6,
-                          cursor: 'pointer',
-                        }}
-                      >
-                        Join
-                      </button>
-                    </form>
-
-                    <iframe name="hidden_iframe" style={{ display: 'none' }} />
-                  </>
+                    <div className="AW-Form-317058051"></div>
+                  </div>
                 ) : (
                   <p style={{ marginTop: '2rem', color: '#555' }}>
                     🎯 You're entered in the weekly draw — keep playing to earn more entries
@@ -255,14 +210,12 @@ export default function PuzzlePage() {
                   border: '1px solid #ddd',
                   fontSize: 16,
                   cursor: 'pointer',
-
                   background:
                     locked && opt === puzzle.answer
                       ? '#4caf50'
                       : locked && opt === selected
                       ? '#f44336'
                       : '#fff',
-
                   color: locked ? '#fff' : '#000',
                 }}
               >
