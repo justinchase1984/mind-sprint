@@ -109,7 +109,17 @@ export default function PuzzlePage() {
   const factKey = `${challengeIndex}-${idNum}`
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#fff', minHeight: '100vh', paddingTop: '1rem', paddingBottom: '2rem' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        background: '#fff',
+        minHeight: '100vh',
+        paddingTop: '1rem',
+        paddingBottom: '2rem',
+      }}
+    >
       <Head>
         <title>
           {isResults
@@ -148,7 +158,7 @@ export default function PuzzlePage() {
                   </Link>
                 </div>
 
-                {/* ✅ CLEAN EMAIL UI */}
+                {/* EMAIL SECTION */}
                 {!hasJoined ? (
                   <div style={{ marginTop: '2rem', maxWidth: 400, marginInline: 'auto' }}>
                     <p>🎁 Enter for weekly prize draws + daily challenges</p>
@@ -197,26 +207,45 @@ export default function PuzzlePage() {
           <>
             <h2>Challenge {challengeIndex}</h2>
 
+            {/* PROGRESS BAR */}
             <div style={{ marginBottom: '1rem' }}>
               <div style={{ fontSize: 14, marginBottom: 4 }}>
                 Question {idNum} of {total}
               </div>
 
-              <div style={{ height: 8, background: '#eee', borderRadius: 4, overflow: 'hidden' }}>
-                <div style={{ width: `${(idNum / total) * 100}%`, background: '#4caf50', height: '100%' }} />
+              <div
+                style={{
+                  height: 8,
+                  background: '#eee',
+                  borderRadius: 4,
+                  overflow: 'hidden',
+                }}
+              >
+                <div
+                  style={{
+                    width: `${(idNum / total) * 100}%`,
+                    background: '#4caf50',
+                    height: '100%',
+                  }}
+                />
               </div>
             </div>
 
             <p>{puzzle?.question}</p>
 
+            {/* ANSWERS */}
             {puzzle?.options.map((opt) => (
               <button
                 key={opt}
                 onClick={() => {
                   if (locked) return
+
                   setSelected(opt)
                   setLocked(true)
-                  setTimeout(() => afterAnswer(opt === puzzle.answer), 800)
+
+                  setTimeout(() => {
+                    afterAnswer(opt === puzzle.answer)
+                  }, 800)
                 }}
                 style={{
                   display: 'block',
@@ -225,11 +254,36 @@ export default function PuzzlePage() {
                   width: '85%',
                   borderRadius: 8,
                   border: '1px solid #ddd',
+                  fontSize: 16,
+                  cursor: 'pointer',
+
+                  background:
+                    locked && opt === puzzle.answer
+                      ? '#4caf50'
+                      : locked && opt === selected
+                      ? '#f44336'
+                      : '#fff',
+
+                  color: locked ? '#fff' : '#000',
                 }}
               >
                 {opt}
               </button>
             ))}
+
+            {/* FEEDBACK */}
+            {locked && (
+              <p style={{ marginTop: 10, fontWeight: 500 }}>
+                {selected === puzzle.answer ? 'Correct ✅' : 'Incorrect ❌'}
+              </p>
+            )}
+
+            {/* FACT */}
+            {DID_YOU_KNOW[factKey] && (
+              <p style={{ fontStyle: 'italic', marginTop: '1rem', color: '#555' }}>
+                {DID_YOU_KNOW[factKey]}
+              </p>
+            )}
           </>
         )}
       </main>
