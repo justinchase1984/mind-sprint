@@ -1,4 +1,3 @@
-// pages/puzzle/[id].tsx
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
@@ -29,6 +28,13 @@ export default function PuzzlePage() {
 
   const [score, setScore] = useState(0)
 
+  const [selected, setSelected] = useState<string | null>(null)
+  const [locked, setLocked] = useState(false)
+
+  // ✅ EMAIL STATE
+  const [email, setEmail] = useState('')
+  const [submitted, setSubmitted] = useState(false)
+
   useEffect(() => {
     if (idNum === 1) {
       sessionStorage.setItem('dailyCorrect', '0')
@@ -39,9 +45,6 @@ export default function PuzzlePage() {
       )
     }
   }, [idNum, challengeIndex, puzzles])
-
-  const [selected, setSelected] = useState<string | null>(null)
-  const [locked, setLocked] = useState(false)
 
   useEffect(() => {
     setSelected(null)
@@ -76,31 +79,6 @@ export default function PuzzlePage() {
 
   const factKey = `${challengeIndex}-${idNum}`
 
-  /*
-  ✅ FIXED AWEBER LOAD (FORCES RE-INIT)
-  */
-  useEffect(() => {
-    if (!isResults) return
-
-    const container = document.getElementById('aweber-form-container')
-    if (!container) return
-
-    // clear previous
-    container.innerHTML = ''
-
-    // remove old script if exists
-    const existing = document.getElementById('aweber-wjs')
-    if (existing) existing.remove()
-
-    // create new script
-    const script = document.createElement('script')
-    script.id = 'aweber-wjs'
-    script.src = 'https://forms.aweber.com/form/51/317058051.js'
-    script.async = true
-
-    container.appendChild(script)
-  }, [isResults])
-
   return (
     <div
       style={{
@@ -120,12 +98,6 @@ export default function PuzzlePage() {
             : `Challenge ${challengeIndex} – Puzzle ${idNum}`}
         </title>
       </Head>
-
-      {!isResults && (
-        <div style={{ textAlign: 'center', marginBottom: '1rem', width: '100%' }}>
-          <div id="ezoic-pub-ad-placeholder-100" />
-        </div>
-      )}
 
       <main style={{ width: '100%', maxWidth: 800, padding: '1rem', textAlign: 'center' }}>
         {isResults ? (
@@ -147,7 +119,7 @@ export default function PuzzlePage() {
               <>
                 <h1>🎯 Challenge Complete</h1>
 
-                <p style={{ fontSize: 20, margin: '10px 0' }}>
+                <p style={{ fontSize: 20 }}>
                   You scored <strong>{score}/{total}</strong>
                 </p>
 
@@ -156,49 +128,70 @@ export default function PuzzlePage() {
                 <div style={{ marginTop: '1rem' }}>
                   {passed ? (
                     <Link href={`/puzzle/1?challenge=${challengeIndex + 1}`}>
-                      <button style={{ padding: '12px 20px', fontSize: 16 }}>
-                        Continue →
-                      </button>
+                      <button>Continue →</button>
                     </Link>
                   ) : (
                     <Link href={`/puzzle/1?challenge=${challengeIndex}`}>
-                      <button style={{ padding: '12px 20px', fontSize: 16 }}>
-                        Try Again
-                      </button>
+                      <button>Try Again</button>
                     </Link>
                   )}
                 </div>
 
-                <p style={{ marginTop: '1.5rem', color: '#555' }}>
-                  Come back tomorrow for a new challenge.
-                </p>
-
-                {/* ✅ EMAIL SECTION */}
+                {/* ✅ CLEAN EMAIL FORM */}
                 <div
                   style={{
                     marginTop: '2rem',
                     padding: '1rem',
                     border: '1px solid #eee',
                     borderRadius: 8,
+                    maxWidth: 400,
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
                   }}
                 >
-                  <p style={{ marginBottom: 10 }}>
-                    🎁 Enter for weekly prize draws + daily brain challenges
-                  </p>
+                  <p>🎁 Enter for weekly prize draws</p>
 
-                  <div
-                    style={{
-                      maxWidth: 400,
-                      margin: '0 auto',
-                      padding: '1rem',
-                      background: '#fafafa',
-                      borderRadius: 10,
-                      border: '1px solid #eee',
-                    }}
-                  >
-                    {/* 🔥 IMPORTANT CHANGE */}
-                    <div id="aweber-form-container"></div>
-                  </div>
+                  {!submitted ? (
+                    <>
+                      <input
+                        type="email"
+                        placeholder="Enter your email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        style={{
+                          width: '100%',
+                          padding: '12px',
+                          marginTop: 10,
+                          borderRadius: 6,
+                          border: '1px solid #ccc',
+                        }}
+                      />
+
+                      <button
+                        onClick={() => {
+                          if (!email.includes('@')) {
+                            alert('Enter a valid email')
+                            return
+                          }
+                          setSubmitted(true)
+                        }}
+                        style={{
+                          width: '100%',
+                          marginTop: 10,
+                          padding: '12px',
+                          background: '#111',
+                          color: '#fff',
+                          border: 'none',
+                          borderRadius: 6,
+                          cursor: 'pointer',
+                        }}
+                      >
+                        Join
+                      </button>
+                    </>
+                  ) : (
+                    <p style={{ color: 'green' }}>You're in ✅</p>
+                  )}
                 </div>
               </>
             )
@@ -206,33 +199,6 @@ export default function PuzzlePage() {
         ) : (
           <>
             <h2>Challenge {challengeIndex}</h2>
-
-            <p style={{ marginBottom: '0.5rem', color: '#555' }}>
-              Score: {score}
-            </p>
-
-            <div style={{ marginBottom: '1rem' }}>
-              <div style={{ fontSize: 14, marginBottom: 4 }}>
-                Question {idNum} of {total}
-              </div>
-
-              <div
-                style={{
-                  height: 8,
-                  background: '#eee',
-                  borderRadius: 4,
-                  overflow: 'hidden',
-                }}
-              >
-                <div
-                  style={{
-                    width: `${(idNum / total) * 100}%`,
-                    background: '#4caf50',
-                    height: '100%',
-                  }}
-                />
-              </div>
-            </div>
 
             <p>{puzzle?.question}</p>
 
@@ -248,46 +214,11 @@ export default function PuzzlePage() {
                     afterAnswer(opt === puzzle.answer)
                   }, 800)
                 }}
-                style={{
-                  display: 'block',
-                  margin: '10px auto',
-                  padding: '12px 16px',
-                  width: '85%',
-                  borderRadius: 8,
-                  border: '1px solid #ddd',
-                  fontSize: 16,
-                  cursor: 'pointer',
-                  background:
-                    locked && opt === puzzle.answer
-                      ? '#4caf50'
-                      : locked && opt === selected
-                      ? '#f44336'
-                      : '#fff',
-                  color: locked ? '#fff' : '#000',
-                }}
               >
                 {opt}
               </button>
             ))}
-
-            {locked && (
-              <p style={{ marginTop: 10, fontWeight: 500 }}>
-                {selected === puzzle.answer ? 'Correct ✅' : 'Incorrect ❌'}
-              </p>
-            )}
-
-            <div id="ezoic-pub-ad-placeholder-101" style={{ margin: '1rem 0' }} />
-
-            {DID_YOU_KNOW[factKey] && (
-              <p style={{ fontStyle: 'italic', margin: '1rem 0', color: '#555' }}>
-                {DID_YOU_KNOW[factKey]}
-              </p>
-            )}
           </>
-        )}
-
-        {!isResults && (
-          <div id="ezoic-pub-ad-placeholder-102" style={{ marginTop: '1rem' }} />
         )}
       </main>
     </div>
