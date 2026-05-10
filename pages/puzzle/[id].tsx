@@ -54,6 +54,7 @@ export default function PuzzlePage() {
 
     if (isCorrect) current += 1
     else current = 0
+
     if (current > max) max = current
 
     saveStreaks(current, max)
@@ -75,7 +76,17 @@ export default function PuzzlePage() {
   const factKey = `${challengeIndex}-${idNum}`
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: '100vh', paddingTop: '1rem' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        background: '#fff',
+        minHeight: '100vh',
+        paddingTop: '1rem',
+        paddingBottom: '2rem',
+      }}
+    >
       <Head>
         <title>
           {isResults
@@ -84,7 +95,7 @@ export default function PuzzlePage() {
         </title>
       </Head>
 
-      <main style={{ width: '100%', maxWidth: 800, textAlign: 'center' }}>
+      <main style={{ width: '100%', maxWidth: 800, padding: '1rem', textAlign: 'center' }}>
         {isResults ? (
           (() => {
             const score = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
@@ -103,16 +114,24 @@ export default function PuzzlePage() {
             return (
               <>
                 <h1>🎯 Challenge Complete</h1>
-                <p>You scored <strong>{score}/{total}</strong></p>
-                <p>{label}</p>
+                <p style={{ fontSize: 20 }}>
+                  You scored <strong>{score}/{total}</strong>
+                </p>
+                <p style={{ fontSize: 18 }}>{label}</p>
 
                 <div style={{ marginTop: '1rem' }}>
-                  <Link href={`/puzzle/1?challenge=${passed ? challengeIndex + 1 : challengeIndex}`}>
-                    <button>{passed ? 'Continue →' : 'Try Again'}</button>
-                  </Link>
+                  {passed ? (
+                    <Link href={`/puzzle/1?challenge=${challengeIndex + 1}`}>
+                      <button>Continue →</button>
+                    </Link>
+                  ) : (
+                    <Link href={`/puzzle/1?challenge=${challengeIndex}`}>
+                      <button>Try Again</button>
+                    </Link>
+                  )}
                 </div>
 
-                {/* ✅ FIXED AWEBER FORM */}
+                {/* ✅ EMAIL CAPTURE FIXED */}
                 {!hasJoined ? (
                   <>
                     <form
@@ -168,17 +187,17 @@ export default function PuzzlePage() {
                           color: '#fff',
                           border: 'none',
                           borderRadius: 6,
+                          cursor: 'pointer',
                         }}
                       >
                         Join
                       </button>
                     </form>
 
-                    {/* 👇 THIS PREVENTS PAGE RELOAD */}
                     <iframe name="hidden_iframe" style={{ display: 'none' }} />
                   </>
                 ) : (
-                  <p style={{ marginTop: '2rem' }}>
+                  <p style={{ marginTop: '2rem', color: '#555' }}>
                     🎯 You're entered in the weekly draw — keep playing to earn more entries
                   </p>
                 )}
@@ -189,6 +208,29 @@ export default function PuzzlePage() {
           <>
             <h2>Challenge {challengeIndex}</h2>
 
+            <div style={{ marginBottom: '1rem' }}>
+              <div style={{ fontSize: 14, marginBottom: 4 }}>
+                Question {idNum} of {total}
+              </div>
+
+              <div
+                style={{
+                  height: 8,
+                  background: '#eee',
+                  borderRadius: 4,
+                  overflow: 'hidden',
+                }}
+              >
+                <div
+                  style={{
+                    width: `${(idNum / total) * 100}%`,
+                    background: '#4caf50',
+                    height: '100%',
+                  }}
+                />
+              </div>
+            </div>
+
             <p>{puzzle?.question}</p>
 
             {puzzle?.options.map((opt) => (
@@ -196,6 +238,7 @@ export default function PuzzlePage() {
                 key={opt}
                 onClick={() => {
                   if (locked) return
+
                   setSelected(opt)
                   setLocked(true)
 
@@ -203,10 +246,41 @@ export default function PuzzlePage() {
                     afterAnswer(opt === puzzle.answer)
                   }, 800)
                 }}
+                style={{
+                  display: 'block',
+                  margin: '10px auto',
+                  padding: '12px 16px',
+                  width: '85%',
+                  borderRadius: 8,
+                  border: '1px solid #ddd',
+                  fontSize: 16,
+                  cursor: 'pointer',
+
+                  background:
+                    locked && opt === puzzle.answer
+                      ? '#4caf50'
+                      : locked && opt === selected
+                      ? '#f44336'
+                      : '#fff',
+
+                  color: locked ? '#fff' : '#000',
+                }}
               >
                 {opt}
               </button>
             ))}
+
+            {locked && (
+              <p style={{ marginTop: 10, fontWeight: 500 }}>
+                {selected === puzzle.answer ? 'Correct ✅' : 'Incorrect ❌'}
+              </p>
+            )}
+
+            {DID_YOU_KNOW[factKey] && (
+              <p style={{ fontStyle: 'italic', marginTop: '1rem', color: '#555' }}>
+                {DID_YOU_KNOW[factKey]}
+              </p>
+            )}
           </>
         )}
       </main>
