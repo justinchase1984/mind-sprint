@@ -7,9 +7,27 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const { email } = req.body
 
-  console.log('New subscriber:', email)
+  if (!email || !email.includes('@')) {
+    return res.status(400).json({ error: 'Invalid email' })
+  }
 
-  // TEMP: just log it (next step we connect AWeber)
+  try {
+    const params = new URLSearchParams()
 
-  return res.status(200).json({ success: true })
+    // 🔴 REPLACE THIS WITH YOUR REAL LIST NAME
+    params.append('listname', 'mind-sprint-players')
+
+    params.append('email', email)
+    params.append('redirect', 'https://dailymindsprint.com')
+    params.append('meta_message', '1')
+
+    await fetch('https://www.aweber.com/scripts/addlead.pl', {
+      method: 'POST',
+      body: params,
+    })
+
+    return res.status(200).json({ success: true })
+  } catch (err) {
+    return res.status(500).json({ error: 'Failed to subscribe' })
+  }
 }
