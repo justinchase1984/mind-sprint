@@ -14,9 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const params = new URLSearchParams()
 
-    // 🔴 REPLACE THIS WITH YOUR REAL LIST NAME
-    params.append('listname', 'mind-sprint-players')
-
+    params.append('listname', 'awlist6897043') // ✅ FIXED
     params.append('email', email)
     params.append('redirect', 'https://dailymindsprint.com')
     params.append('meta_message', '1')
