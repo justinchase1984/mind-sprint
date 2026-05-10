@@ -150,7 +150,7 @@ export default function PuzzlePage() {
                     <input type="hidden" name="meta_message" value="1" />
                     <input type="hidden" name="meta_required" value="email" />
                     <input type="hidden" name="meta_tooltip" value="" />
-                    <input type="hidden" name="redirect" value="https://dailymindsprint.com" />
+                    <input type="hidden" name="redirect" value="" />
 
                     <input
                       type="email"
