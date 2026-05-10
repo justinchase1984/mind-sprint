@@ -28,20 +28,16 @@ export default function PuzzlePage() {
 
   const [selected, setSelected] = useState<string | null>(null)
   const [locked, setLocked] = useState(false)
-
   const [hasJoined, setHasJoined] = useState(false)
 
   useEffect(() => {
     const joined = localStorage.getItem('joined')
-    if (joined === 'true') {
-      setHasJoined(true)
-    }
+    if (joined === 'true') setHasJoined(true)
   }, [])
 
   useEffect(() => {
     if (idNum === 1) {
       sessionStorage.setItem('dailyCorrect', '0')
-
       puzzles.forEach((_p, idx) =>
         sessionStorage.removeItem(`challenge${challengeIndex}_q${idx + 1}`)
       )
@@ -58,7 +54,6 @@ export default function PuzzlePage() {
 
     if (isCorrect) current += 1
     else current = 0
-
     if (current > max) max = current
 
     saveStreaks(current, max)
@@ -80,7 +75,7 @@ export default function PuzzlePage() {
   const factKey = `${challengeIndex}-${idNum}`
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#fff', minHeight: '100vh', paddingTop: '1rem', paddingBottom: '2rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: '100vh', paddingTop: '1rem' }}>
       <Head>
         <title>
           {isResults
@@ -89,7 +84,7 @@ export default function PuzzlePage() {
         </title>
       </Head>
 
-      <main style={{ width: '100%', maxWidth: 800, padding: '1rem', textAlign: 'center' }}>
+      <main style={{ width: '100%', maxWidth: 800, textAlign: 'center' }}>
         {isResults ? (
           (() => {
             const score = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
@@ -108,82 +103,82 @@ export default function PuzzlePage() {
             return (
               <>
                 <h1>🎯 Challenge Complete</h1>
-                <p style={{ fontSize: 20 }}>
-                  You scored <strong>{score}/{total}</strong>
-                </p>
-                <p style={{ fontSize: 18 }}>{label}</p>
+                <p>You scored <strong>{score}/{total}</strong></p>
+                <p>{label}</p>
 
                 <div style={{ marginTop: '1rem' }}>
-                  {passed ? (
-                    <Link href={`/puzzle/1?challenge=${challengeIndex + 1}`}>
-                      <button>Continue →</button>
-                    </Link>
-                  ) : (
-                    <Link href={`/puzzle/1?challenge=${challengeIndex}`}>
-                      <button>Try Again</button>
-                    </Link>
-                  )}
+                  <Link href={`/puzzle/1?challenge=${passed ? challengeIndex + 1 : challengeIndex}`}>
+                    <button>{passed ? 'Continue →' : 'Try Again'}</button>
+                  </Link>
                 </div>
 
-                {/* ✅ AWEBER FORM (REPLACES API SYSTEM) */}
+                {/* ✅ FIXED AWEBER FORM */}
                 {!hasJoined ? (
-                  <form
-                    method="post"
-                    action="https://www.aweber.com/scripts/addlead.pl"
-                    onSubmit={() => localStorage.setItem('joined', 'true')}
-                    style={{
-                      marginTop: '2rem',
-                      padding: '1rem',
-                      border: '1px solid #eee',
-                      borderRadius: 8,
-                      maxWidth: 400,
-                      marginLeft: 'auto',
-                      marginRight: 'auto',
-                    }}
-                  >
-                    <p>🎁 Enter for weekly prize draws + daily challenges</p>
-
-                    <input type="hidden" name="listname" value="awlist6897043" />
-                    <input type="hidden" name="meta_web_form_id" value="317058051" />
-                    <input type="hidden" name="meta_split_id" value="" />
-                    <input type="hidden" name="meta_adtracking" value="Mind_Sprint__Opt-In_Form" />
-                    <input type="hidden" name="meta_message" value="1" />
-                    <input type="hidden" name="meta_required" value="email" />
-                    <input type="hidden" name="meta_tooltip" value="" />
-                    <input type="hidden" name="redirect" value="" />
-
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Enter your email"
-                      required
-                      style={{
-                        width: '100%',
-                        padding: '12px',
-                        marginTop: 10,
-                        borderRadius: 6,
-                        border: '1px solid #ccc',
+                  <>
+                    <form
+                      method="post"
+                      action="https://www.aweber.com/scripts/addlead.pl"
+                      target="hidden_iframe"
+                      onSubmit={() => {
+                        localStorage.setItem('joined', 'true')
+                        setHasJoined(true)
                       }}
-                    />
-
-                    <button
-                      type="submit"
                       style={{
-                        width: '100%',
-                        marginTop: 10,
-                        padding: '12px',
-                        background: '#111',
-                        color: '#fff',
-                        border: 'none',
-                        borderRadius: 6,
-                        cursor: 'pointer',
+                        marginTop: '2rem',
+                        padding: '1rem',
+                        border: '1px solid #eee',
+                        borderRadius: 8,
+                        maxWidth: 400,
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
                       }}
                     >
-                      Join
-                    </button>
-                  </form>
+                      <p>🎁 Enter for weekly prize draws + daily challenges</p>
+
+                      <input type="hidden" name="listname" value="awlist6897043" />
+                      <input type="hidden" name="meta_web_form_id" value="317058051" />
+                      <input type="hidden" name="meta_split_id" value="" />
+                      <input type="hidden" name="meta_adtracking" value="Mind_Sprint__Opt-In_Form" />
+                      <input type="hidden" name="meta_message" value="1" />
+                      <input type="hidden" name="meta_required" value="email" />
+                      <input type="hidden" name="meta_tooltip" value="" />
+                      <input type="hidden" name="redirect" value="" />
+
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                        style={{
+                          width: '100%',
+                          padding: '12px',
+                          marginTop: 10,
+                          borderRadius: 6,
+                          border: '1px solid #ccc',
+                        }}
+                      />
+
+                      <button
+                        type="submit"
+                        style={{
+                          width: '100%',
+                          marginTop: 10,
+                          padding: '12px',
+                          background: '#111',
+                          color: '#fff',
+                          border: 'none',
+                          borderRadius: 6,
+                        }}
+                      >
+                        Join
+                      </button>
+                    </form>
+
+                    {/* 👇 THIS PREVENTS PAGE RELOAD */}
+                    <iframe name="hidden_iframe" style={{ display: 'none' }} />
+                  </>
                 ) : (
-                  <p style={{ marginTop: '2rem', color: '#555' }}>
+                  <p style={{ marginTop: '2rem' }}>
                     🎯 You're entered in the weekly draw — keep playing to earn more entries
                   </p>
                 )}
@@ -193,16 +188,6 @@ export default function PuzzlePage() {
         ) : (
           <>
             <h2>Challenge {challengeIndex}</h2>
-
-            <div style={{ marginBottom: '1rem' }}>
-              <div style={{ fontSize: 14, marginBottom: 4 }}>
-                Question {idNum} of {total}
-              </div>
-
-              <div style={{ height: 8, background: '#eee', borderRadius: 4, overflow: 'hidden' }}>
-                <div style={{ width: `${(idNum / total) * 100}%`, background: '#4caf50', height: '100%' }} />
-              </div>
-            </div>
 
             <p>{puzzle?.question}</p>
 
@@ -218,39 +203,10 @@ export default function PuzzlePage() {
                     afterAnswer(opt === puzzle.answer)
                   }, 800)
                 }}
-                style={{
-                  display: 'block',
-                  margin: '10px auto',
-                  padding: '12px 16px',
-                  width: '85%',
-                  borderRadius: 8,
-                  border: '1px solid #ddd',
-                  fontSize: 16,
-                  cursor: 'pointer',
-                  background:
-                    locked && opt === puzzle.answer
-                      ? '#4caf50'
-                      : locked && opt === selected
-                      ? '#f44336'
-                      : '#fff',
-                  color: locked ? '#fff' : '#000',
-                }}
               >
                 {opt}
               </button>
             ))}
-
-            {locked && (
-              <p style={{ marginTop: 10, fontWeight: 500 }}>
-                {selected === puzzle.answer ? 'Correct ✅' : 'Incorrect ❌'}
-              </p>
-            )}
-
-            {DID_YOU_KNOW[factKey] && (
-              <p style={{ fontStyle: 'italic', marginTop: '1rem', color: '#555' }}>
-                {DID_YOU_KNOW[factKey]}
-              </p>
-            )}
           </>
         )}
       </main>
