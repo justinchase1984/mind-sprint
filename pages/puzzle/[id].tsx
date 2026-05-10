@@ -32,6 +32,16 @@ export default function PuzzlePage() {
   // ✅ EMAIL STATE
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const [hasJoined, setHasJoined] = useState(false)
+
+  // ✅ CHECK LOCAL STORAGE ON LOAD
+  useEffect(() => {
+    const joined = localStorage.getItem('joined')
+    if (joined === 'true') {
+      setHasJoined(true)
+      setSubmitted(true)
+    }
+  }, [])
 
   useEffect(() => {
     if (idNum === 1) {
@@ -132,62 +142,75 @@ export default function PuzzlePage() {
                   )}
                 </div>
 
-                {/* ✅ EMAIL FORM (CLEAN + WORKING) */}
-                <div
-                  style={{
-                    marginTop: '2rem',
-                    padding: '1rem',
-                    border: '1px solid #eee',
-                    borderRadius: 8,
-                    maxWidth: 400,
-                    marginLeft: 'auto',
-                    marginRight: 'auto',
-                  }}
-                >
-                  <p>🎁 Enter for weekly prize draws + daily challenges</p>
+                {/* ✅ ONLY SHOW IF NOT JOINED */}
+                {!hasJoined ? (
+                  <div
+                    style={{
+                      marginTop: '2rem',
+                      padding: '1rem',
+                      border: '1px solid #eee',
+                      borderRadius: 8,
+                      maxWidth: 400,
+                      marginLeft: 'auto',
+                      marginRight: 'auto',
+                    }}
+                  >
+                    <p>🎁 Enter for weekly prize draws + daily challenges</p>
 
-                  {!submitted ? (
-                    <>
-                      <input
-                        type="email"
-                        placeholder="Enter your email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        style={{
-                          width: '100%',
-                          padding: '12px',
-                          marginTop: 10,
-                          borderRadius: 6,
-                          border: '1px solid #ccc',
-                        }}
-                      />
+                    <input
+                      type="email"
+                      placeholder="Enter your email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      style={{
+                        width: '100%',
+                        padding: '12px',
+                        marginTop: 10,
+                        borderRadius: 6,
+                        border: '1px solid #ccc',
+                      }}
+                    />
 
-                      <button
-                        onClick={() => {
-                          if (!email.includes('@')) {
-                            alert('Enter a valid email')
-                            return
-                          }
+                    <button
+                      onClick={async () => {
+                        if (!email.includes('@')) {
+                          alert('Enter a valid email')
+                          return
+                        }
+
+                        try {
+                          await fetch('/api/subscribe', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ email }),
+                          })
+
                           setSubmitted(true)
-                        }}
-                        style={{
-                          width: '100%',
-                          marginTop: 10,
-                          padding: '12px',
-                          background: '#111',
-                          color: '#fff',
-                          border: 'none',
-                          borderRadius: 6,
-                          cursor: 'pointer',
-                        }}
-                      >
-                        Join
-                      </button>
-                    </>
-                  ) : (
-                    <p style={{ color: 'green' }}>You're in ✅</p>
-                  )}
-                </div>
+                          setHasJoined(true)
+                          localStorage.setItem('joined', 'true')
+                        } catch {
+                          alert('Something went wrong')
+                        }
+                      }}
+                      style={{
+                        width: '100%',
+                        marginTop: 10,
+                        padding: '12px',
+                        background: '#111',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: 6,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      Join
+                    </button>
+                  </div>
+                ) : (
+                  <p style={{ marginTop: '2rem', color: '#555' }}>
+                    🎯 You're entered in the weekly draw — keep playing to earn more entries
+                  </p>
+                )}
               </>
             )
           })()
@@ -195,7 +218,6 @@ export default function PuzzlePage() {
           <>
             <h2>Challenge {challengeIndex}</h2>
 
-            {/* ✅ PROGRESS BAR */}
             <div style={{ marginBottom: '1rem' }}>
               <div style={{ fontSize: 14, marginBottom: 4 }}>
                 Question {idNum} of {total}
@@ -221,13 +243,11 @@ export default function PuzzlePage() {
 
             <p>{puzzle?.question}</p>
 
-            {/* ✅ STYLED ANSWERS */}
             {puzzle?.options.map((opt) => (
               <button
                 key={opt}
                 onClick={() => {
                   if (locked) return
-
                   setSelected(opt)
                   setLocked(true)
 
