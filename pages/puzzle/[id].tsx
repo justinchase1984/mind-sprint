@@ -29,17 +29,12 @@ export default function PuzzlePage() {
   const [selected, setSelected] = useState<string | null>(null)
   const [locked, setLocked] = useState(false)
 
-  // ✅ EMAIL STATE
-  const [email, setEmail] = useState('')
-  const [submitted, setSubmitted] = useState(false)
   const [hasJoined, setHasJoined] = useState(false)
 
-  // ✅ CHECK LOCAL STORAGE ON LOAD
   useEffect(() => {
     const joined = localStorage.getItem('joined')
     if (joined === 'true') {
       setHasJoined(true)
-      setSubmitted(true)
     }
   }, [])
 
@@ -85,17 +80,7 @@ export default function PuzzlePage() {
   const factKey = `${challengeIndex}-${idNum}`
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        background: '#fff',
-        minHeight: '100vh',
-        paddingTop: '1rem',
-        paddingBottom: '2rem',
-      }}
-    >
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#fff', minHeight: '100vh', paddingTop: '1rem', paddingBottom: '2rem' }}>
       <Head>
         <title>
           {isResults
@@ -123,11 +108,9 @@ export default function PuzzlePage() {
             return (
               <>
                 <h1>🎯 Challenge Complete</h1>
-
                 <p style={{ fontSize: 20 }}>
                   You scored <strong>{score}/{total}</strong>
                 </p>
-
                 <p style={{ fontSize: 18 }}>{label}</p>
 
                 <div style={{ marginTop: '1rem' }}>
@@ -142,9 +125,12 @@ export default function PuzzlePage() {
                   )}
                 </div>
 
-                {/* ✅ ONLY SHOW IF NOT JOINED */}
+                {/* ✅ AWEBER FORM (REPLACES API SYSTEM) */}
                 {!hasJoined ? (
-                  <div
+                  <form
+                    method="post"
+                    action="https://www.aweber.com/scripts/addlead.pl"
+                    onSubmit={() => localStorage.setItem('joined', 'true')}
                     style={{
                       marginTop: '2rem',
                       padding: '1rem',
@@ -157,11 +143,20 @@ export default function PuzzlePage() {
                   >
                     <p>🎁 Enter for weekly prize draws + daily challenges</p>
 
+                    <input type="hidden" name="listname" value="awlist6897043" />
+                    <input type="hidden" name="meta_web_form_id" value="317058051" />
+                    <input type="hidden" name="meta_split_id" value="" />
+                    <input type="hidden" name="meta_adtracking" value="Mind_Sprint__Opt-In_Form" />
+                    <input type="hidden" name="meta_message" value="1" />
+                    <input type="hidden" name="meta_required" value="email" />
+                    <input type="hidden" name="meta_tooltip" value="" />
+                    <input type="hidden" name="redirect" value="https://dailymindsprint.com" />
+
                     <input
                       type="email"
+                      name="email"
                       placeholder="Enter your email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      required
                       style={{
                         width: '100%',
                         padding: '12px',
@@ -172,26 +167,7 @@ export default function PuzzlePage() {
                     />
 
                     <button
-                      onClick={async () => {
-                        if (!email.includes('@')) {
-                          alert('Enter a valid email')
-                          return
-                        }
-
-                        try {
-                          await fetch('/api/subscribe', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ email }),
-                          })
-
-                          setSubmitted(true)
-                          setHasJoined(true)
-                          localStorage.setItem('joined', 'true')
-                        } catch {
-                          alert('Something went wrong')
-                        }
-                      }}
+                      type="submit"
                       style={{
                         width: '100%',
                         marginTop: 10,
@@ -205,7 +181,7 @@ export default function PuzzlePage() {
                     >
                       Join
                     </button>
-                  </div>
+                  </form>
                 ) : (
                   <p style={{ marginTop: '2rem', color: '#555' }}>
                     🎯 You're entered in the weekly draw — keep playing to earn more entries
@@ -223,21 +199,8 @@ export default function PuzzlePage() {
                 Question {idNum} of {total}
               </div>
 
-              <div
-                style={{
-                  height: 8,
-                  background: '#eee',
-                  borderRadius: 4,
-                  overflow: 'hidden',
-                }}
-              >
-                <div
-                  style={{
-                    width: `${(idNum / total) * 100}%`,
-                    background: '#4caf50',
-                    height: '100%',
-                  }}
-                />
+              <div style={{ height: 8, background: '#eee', borderRadius: 4, overflow: 'hidden' }}>
+                <div style={{ width: `${(idNum / total) * 100}%`, background: '#4caf50', height: '100%' }} />
               </div>
             </div>
 
