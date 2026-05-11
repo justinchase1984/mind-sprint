@@ -29,7 +29,6 @@ export default function PuzzlePage() {
   const [selected, setSelected] = useState<string | null>(null)
   const [locked, setLocked] = useState(false)
   const [hasJoined, setHasJoined] = useState(false)
-  const [email, setEmail] = useState('')
 
   useEffect(() => {
     const joined = localStorage.getItem('joined')
@@ -72,38 +71,6 @@ export default function PuzzlePage() {
     sessionStorage.setItem('dailyCorrect', cnt.toString())
 
     router.push(`/puzzle/${idNum + 1}?challenge=${challengeIndex}`)
-  }
-
-  function handleSubmit() {
-    if (!email.includes('@')) return
-
-    const form = document.createElement('form')
-    form.method = 'POST'
-    form.action = 'https://www.aweber.com/scripts/addlead.pl'
-    form.target = 'hidden_iframe'
-
-    const fields = {
-      listname: 'awlist6897043',
-      email: email,
-      meta_web_form_id: '317058051',
-      meta_message: '1',
-      meta_required: 'email',
-    }
-
-    Object.entries(fields).forEach(([key, value]) => {
-      const input = document.createElement('input')
-      input.type = 'hidden'
-      input.name = key
-      input.value = value
-      form.appendChild(input)
-    })
-
-    document.body.appendChild(form)
-    form.submit()
-    document.body.removeChild(form)
-
-    localStorage.setItem('joined', 'true')
-    setHasJoined(true)
   }
 
   const factKey = `${challengeIndex}-${idNum}`
@@ -160,14 +127,33 @@ export default function PuzzlePage() {
 
                 {/* EMAIL SECTION */}
                 {!hasJoined ? (
-                  <div style={{ marginTop: '2rem', maxWidth: 400, marginInline: 'auto' }}>
+                  <form
+                    method="post"
+                    action="https://www.aweber.com/scripts/addlead.pl"
+                    onSubmit={() => {
+                      localStorage.setItem('joined', 'true')
+                      setHasJoined(true)
+                    }}
+                    style={{
+                      marginTop: '2rem',
+                      maxWidth: 400,
+                      marginInline: 'auto',
+                    }}
+                  >
                     <p>🎁 Enter for weekly prize draws + daily challenges</p>
+
+                    {/* REQUIRED HIDDEN FIELDS */}
+                    <input type="hidden" name="listname" value="awlist6897043" />
+                    <input type="hidden" name="redirect" value="" />
+                    <input type="hidden" name="meta_message" value="1" />
+                    <input type="hidden" name="meta_required" value="email" />
+                    <input type="hidden" name="meta_web_form_id" value="317058051" />
 
                     <input
                       type="email"
+                      name="email"
                       placeholder="Enter your email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      required
                       style={{
                         width: '100%',
                         padding: '12px',
@@ -178,7 +164,7 @@ export default function PuzzlePage() {
                     />
 
                     <button
-                      onClick={handleSubmit}
+                      type="submit"
                       style={{
                         width: '100%',
                         marginTop: 10,
@@ -192,9 +178,7 @@ export default function PuzzlePage() {
                     >
                       Join
                     </button>
-
-                    <iframe name="hidden_iframe" style={{ display: 'none' }} />
-                  </div>
+                  </form>
                 ) : (
                   <p style={{ marginTop: '2rem', color: '#555' }}>
                     🎯 You're entered in the weekly draw — keep playing to earn more entries
@@ -207,7 +191,6 @@ export default function PuzzlePage() {
           <>
             <h2>Challenge {challengeIndex}</h2>
 
-            {/* PROGRESS BAR */}
             <div style={{ marginBottom: '1rem' }}>
               <div style={{ fontSize: 14, marginBottom: 4 }}>
                 Question {idNum} of {total}
@@ -233,16 +216,13 @@ export default function PuzzlePage() {
 
             <p>{puzzle?.question}</p>
 
-            {/* ANSWERS */}
             {puzzle?.options.map((opt) => (
               <button
                 key={opt}
                 onClick={() => {
                   if (locked) return
-
                   setSelected(opt)
                   setLocked(true)
-
                   setTimeout(() => {
                     afterAnswer(opt === puzzle.answer)
                   }, 800)
@@ -256,14 +236,12 @@ export default function PuzzlePage() {
                   border: '1px solid #ddd',
                   fontSize: 16,
                   cursor: 'pointer',
-
                   background:
                     locked && opt === puzzle.answer
                       ? '#4caf50'
                       : locked && opt === selected
                       ? '#f44336'
                       : '#fff',
-
                   color: locked ? '#fff' : '#000',
                 }}
               >
@@ -271,14 +249,12 @@ export default function PuzzlePage() {
               </button>
             ))}
 
-            {/* FEEDBACK */}
             {locked && (
               <p style={{ marginTop: 10, fontWeight: 500 }}>
                 {selected === puzzle.answer ? 'Correct ✅' : 'Incorrect ❌'}
               </p>
             )}
 
-            {/* FACT */}
             {DID_YOU_KNOW[factKey] && (
               <p style={{ fontStyle: 'italic', marginTop: '1rem', color: '#555' }}>
                 {DID_YOU_KNOW[factKey]}
