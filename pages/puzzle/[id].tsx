@@ -33,7 +33,13 @@ export default function PuzzlePage() {
   useEffect(() => {
     const joined = localStorage.getItem('joined')
     if (joined === 'true') setHasJoined(true)
-  }, [])
+
+    // ✅ detect redirect return
+    if (router.query.joined === 'true') {
+      localStorage.setItem('joined', 'true')
+      setHasJoined(true)
+    }
+  }, [router.query.joined])
 
   useEffect(() => {
     if (idNum === 1) {
@@ -76,17 +82,7 @@ export default function PuzzlePage() {
   const factKey = `${challengeIndex}-${idNum}`
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        background: '#fff',
-        minHeight: '100vh',
-        paddingTop: '1rem',
-        paddingBottom: '2rem',
-      }}
-    >
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#fff', minHeight: '100vh', paddingTop: '1rem', paddingBottom: '2rem' }}>
       <Head>
         <title>
           {isResults
@@ -146,22 +142,31 @@ export default function PuzzlePage() {
                     <button
                       onClick={() => {
                         const emailInput = document.getElementById('custom-email') as HTMLInputElement
-                        const hiddenInput = document.querySelector(
-                          '#aweber-hidden input[name="email"]'
-                        ) as HTMLInputElement
-
                         if (!emailInput?.value.includes('@')) return
 
-                        hiddenInput.value = emailInput.value
+                        const form = document.createElement('form')
+                        form.method = 'POST'
+                        form.action = 'https://www.aweber.com/scripts/addlead.pl'
 
-                        const form = document.querySelector(
-                          '#aweber-hidden form'
-                        ) as HTMLFormElement
+                        const fields: Record<string, string> = {
+                          listname: 'awlist6897043',
+                          email: emailInput.value,
+                          meta_web_form_id: '317058051',
+                          meta_message: '1',
+                          meta_required: 'email',
+                          redirect: 'https://dailymindsprint.com/puzzle/999?joined=true'
+                        }
 
+                        Object.entries(fields).forEach(([k, v]) => {
+                          const input = document.createElement('input')
+                          input.type = 'hidden'
+                          input.name = k
+                          input.value = v
+                          form.appendChild(input)
+                        })
+
+                        document.body.appendChild(form)
                         form.submit()
-
-                        localStorage.setItem('joined', 'true')
-                        setHasJoined(true)
                       }}
                       style={{
                         width: '100%',
@@ -176,17 +181,6 @@ export default function PuzzlePage() {
                     >
                       Join
                     </button>
-
-                    {/* HIDDEN REAL AWEBER FORM */}
-                    <div id="aweber-hidden" style={{ display: 'none' }}>
-                      <form method="post" action="https://www.aweber.com/scripts/addlead.pl">
-                        <input type="hidden" name="listname" value="awlist6897043" />
-                        <input type="hidden" name="meta_web_form_id" value="317058051" />
-                        <input type="hidden" name="meta_message" value="1" />
-                        <input type="hidden" name="meta_required" value="email" />
-                        <input type="hidden" name="email" />
-                      </form>
-                    </div>
                   </div>
                 ) : (
                   <p style={{ marginTop: '2rem', color: '#555' }}>
@@ -205,21 +199,8 @@ export default function PuzzlePage() {
                 Question {idNum} of {total}
               </div>
 
-              <div
-                style={{
-                  height: 8,
-                  background: '#eee',
-                  borderRadius: 4,
-                  overflow: 'hidden',
-                }}
-              >
-                <div
-                  style={{
-                    width: `${(idNum / total) * 100}%`,
-                    background: '#4caf50',
-                    height: '100%',
-                  }}
-                />
+              <div style={{ height: 8, background: '#eee', borderRadius: 4, overflow: 'hidden' }}>
+                <div style={{ width: `${(idNum / total) * 100}%`, background: '#4caf50', height: '100%' }} />
               </div>
             </div>
 
