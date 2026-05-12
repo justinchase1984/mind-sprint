@@ -127,33 +127,13 @@ export default function PuzzlePage() {
 
                 {/* EMAIL SECTION */}
                 {!hasJoined ? (
-                  <form
-                    method="post"
-                    action="https://www.aweber.com/scripts/addlead.pl"
-                    onSubmit={() => {
-                      localStorage.setItem('joined', 'true')
-                      setHasJoined(true)
-                    }}
-                    style={{
-                      marginTop: '2rem',
-                      maxWidth: 400,
-                      marginInline: 'auto',
-                    }}
-                  >
+                  <div style={{ marginTop: '2rem', maxWidth: 400, marginInline: 'auto' }}>
                     <p>🎁 Enter for weekly prize draws + daily challenges</p>
 
-                    {/* REQUIRED HIDDEN FIELDS */}
-                    <input type="hidden" name="listname" value="awlist6897043" />
-                    <input type="hidden" name="redirect" value="" />
-                    <input type="hidden" name="meta_message" value="1" />
-                    <input type="hidden" name="meta_required" value="email" />
-                    <input type="hidden" name="meta_web_form_id" value="317058051" />
-
                     <input
+                      id="custom-email"
                       type="email"
-                      name="email"
                       placeholder="Enter your email"
-                      required
                       style={{
                         width: '100%',
                         padding: '12px',
@@ -164,7 +144,25 @@ export default function PuzzlePage() {
                     />
 
                     <button
-                      type="submit"
+                      onClick={() => {
+                        const emailInput = document.getElementById('custom-email') as HTMLInputElement
+                        const hiddenInput = document.querySelector(
+                          '#aweber-hidden input[name="email"]'
+                        ) as HTMLInputElement
+
+                        if (!emailInput?.value.includes('@')) return
+
+                        hiddenInput.value = emailInput.value
+
+                        const form = document.querySelector(
+                          '#aweber-hidden form'
+                        ) as HTMLFormElement
+
+                        form.submit()
+
+                        localStorage.setItem('joined', 'true')
+                        setHasJoined(true)
+                      }}
                       style={{
                         width: '100%',
                         marginTop: 10,
@@ -178,7 +176,18 @@ export default function PuzzlePage() {
                     >
                       Join
                     </button>
-                  </form>
+
+                    {/* HIDDEN REAL AWEBER FORM */}
+                    <div id="aweber-hidden" style={{ display: 'none' }}>
+                      <form method="post" action="https://www.aweber.com/scripts/addlead.pl">
+                        <input type="hidden" name="listname" value="awlist6897043" />
+                        <input type="hidden" name="meta_web_form_id" value="317058051" />
+                        <input type="hidden" name="meta_message" value="1" />
+                        <input type="hidden" name="meta_required" value="email" />
+                        <input type="hidden" name="email" />
+                      </form>
+                    </div>
+                  </div>
                 ) : (
                   <p style={{ marginTop: '2rem', color: '#555' }}>
                     🎯 You're entered in the weekly draw — keep playing to earn more entries
