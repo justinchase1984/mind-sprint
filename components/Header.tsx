@@ -14,7 +14,7 @@ export default function Header() {
       }}
     >
       {/* ← Updated logo to match center homepage logo */}
-      <Link href="/">
+      <Link href="/"> 
         <a
           style={{
             fontSize: '1.5rem',
