@@ -141,33 +141,41 @@ export default function PuzzlePage() {
 
                     <button
                       onClick={() => {
-                        const emailInput = document.getElementById('custom-email') as HTMLInputElement
-                        if (!emailInput?.value.includes('@')) return
+  const emailInput = document.getElementById('custom-email') as HTMLInputElement
+  if (!emailInput?.value.includes('@')) return
 
-                        const form = document.createElement('form')
-                        form.method = 'POST'
-                        form.action = 'https://www.aweber.com/scripts/addlead.pl'
+  const form = document.createElement('form')
+  form.method = 'POST'
+  form.action = 'https://www.aweber.com/scripts/addlead.pl'
 
-                        const fields: Record<string, string> = {
-                          listname: 'awlist6897043',
-                          email: emailInput.value,
-                          meta_web_form_id: '317058051',
-                          meta_message: '1',
-                          meta_required: 'email',
-                          redirect: 'https://dailymindsprint.com/puzzle/999?joined=true'
-                        }
+  // 👇 THIS IS THE FIX
+  form.target = 'hidden_iframe'
 
-                        Object.entries(fields).forEach(([k, v]) => {
-                          const input = document.createElement('input')
-                          input.type = 'hidden'
-                          input.name = k
-                          input.value = v
-                          form.appendChild(input)
-                        })
+  const fields: Record<string, string> = {
+    listname: 'awlist6897043',
+    email: emailInput.value,
+    meta_web_form_id: '317058051',
+    meta_message: '1',
+    meta_required: 'email'
+    // ❌ REMOVE redirect completely
+  }
 
-                        document.body.appendChild(form)
-                        form.submit()
-                      }}
+  Object.entries(fields).forEach(([k, v]) => {
+    const input = document.createElement('input')
+    input.type = 'hidden'
+    input.name = k
+    input.value = v
+    form.appendChild(input)
+  })
+
+  document.body.appendChild(form)
+  form.submit()
+  document.body.removeChild(form)
+
+  // ✅ UI updates immediately, no reload
+  localStorage.setItem('joined', 'true')
+  setHasJoined(true)
+}}
                       style={{
                         width: '100%',
                         marginTop: 10,
