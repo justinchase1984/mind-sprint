@@ -107,77 +107,78 @@ export default function PuzzlePage() {
 
       <main style={{ width: '100%', maxWidth: 800, padding: '1rem', textAlign: 'center' }}>
         {isResults ? (
-          (() => {
-            const score = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
+          <>
+            {(() => {
+              const score = parseInt(sessionStorage.getItem('dailyCorrect') || '0', 10)
 
-            let label = '😅 Needs Work'
-            if (score >= 9) label = '🧠 Genius'
-            else if (score >= 7) label = '🔥 Strong'
-            else if (score >= 5) label = '👍 Solid'
+              let label = '😅 Needs Work'
+              if (score >= 9) label = '🧠 Genius'
+              else if (score >= 7) label = '🔥 Strong'
+              else if (score >= 5) label = '👍 Solid'
 
-            const passed = score >= 8
+              const passed = score >= 8
 
-            if (passed && challengeIndex < 7) {
-              localStorage.setItem('unlockedChallenge', String(challengeIndex + 1))
-            }
+              if (passed && challengeIndex < 7) {
+                localStorage.setItem('unlockedChallenge', String(challengeIndex + 1))
+              }
 
-            return (
-              <>
-                <h1>🎯 Challenge Complete</h1>
-                <p style={{ fontSize: 20 }}>
-                  You scored <strong>{score}/{total}</strong>
-                </p>
-                <p style={{ fontSize: 18 }}>{label}</p>
-
-                <div style={{ marginTop: '1rem' }}>
-                  <Link href={`/puzzle/1?challenge=${passed ? challengeIndex + 1 : challengeIndex}`}>
-                    <button>{passed ? 'Continue →' : 'Try Again'}</button>
-                  </Link>
-                </div>
-
-                {/* CLEAN EMAIL SECTION */}
-                {!hasJoined ? (
-                  <div style={{ marginTop: '2rem', maxWidth: 400, marginInline: 'auto' }}>
-                    <p>🎁 Enter for weekly prize draws + daily challenges</p>
-
-                    <input
-                      type="email"
-                      placeholder="Enter your email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      style={{
-                        width: '100%',
-                        padding: '12px',
-                        marginTop: 10,
-                        borderRadius: 6,
-                        border: '1px solid #ccc',
-                      }}
-                    />
-
-                    <button
-                      onClick={handleSubmit}
-                      style={{
-                        width: '100%',
-                        marginTop: 10,
-                        padding: '12px',
-                        background: '#111',
-                        color: '#fff',
-                        border: 'none',
-                        borderRadius: 6,
-                        cursor: 'pointer',
-                      }}
-                    >
-                      Join
-                    </button>
-                  </div>
-                ) : (
-                  <p style={{ marginTop: '2rem', color: '#555' }}>
-                    🎯 You're entered in the weekly draw — keep playing to earn more entries
+              return (
+                <>
+                  <h1>🎯 Challenge Complete</h1>
+                  <p style={{ fontSize: 20 }}>
+                    You scored <strong>{score}/{total}</strong>
                   </p>
-                )}
-              </>
-            )
-          })()
+                  <p style={{ fontSize: 18 }}>{label}</p>
+
+                  <div style={{ marginTop: '1rem' }}>
+                    <Link href={`/puzzle/1?challenge=${passed ? challengeIndex + 1 : challengeIndex}`}>
+                      <button>{passed ? 'Continue →' : 'Try Again'}</button>
+                    </Link>
+                  </div>
+                </>
+              )
+            })()}
+
+            {!hasJoined ? (
+              <div style={{ marginTop: '2rem', maxWidth: 400, marginInline: 'auto' }}>
+                <p>🎁 Enter for weekly prize draws + daily challenges</p>
+
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '12px',
+                    marginTop: 10,
+                    borderRadius: 6,
+                    border: '1px solid #ccc',
+                  }}
+                />
+
+                <button
+                  onClick={handleSubmit}
+                  style={{
+                    width: '100%',
+                    marginTop: 10,
+                    padding: '12px',
+                    background: '#111',
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: 6,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Join
+                </button>
+              </div>
+            ) : (
+              <p style={{ marginTop: '2rem', color: '#555' }}>
+                🎯 You're entered in the weekly draw — keep playing to earn more entries
+              </p>
+            )}
+          </>
         ) : (
           <>
             <h2>Challenge {challengeIndex}</h2>
@@ -229,4 +230,18 @@ export default function PuzzlePage() {
 
             {locked && (
               <p style={{ marginTop: 10, fontWeight: 500 }}>
-                {selected === puzzle.answer ? 'Correct
+                {selected === puzzle.answer ? 'Correct ✅' : 'Incorrect ❌'}
+              </p>
+            )}
+
+            {DID_YOU_KNOW[factKey] && (
+              <p style={{ fontStyle: 'italic', marginTop: '1rem', color: '#555' }}>
+                {DID_YOU_KNOW[factKey]}
+              </p>
+            )}
+          </>
+        )}
+      </main>
+    </div>
+  )
+}
