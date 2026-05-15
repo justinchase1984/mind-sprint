@@ -74,6 +74,7 @@ export default function PuzzlePage() {
     router.push(`/puzzle/${idNum + 1}?challenge=${challengeIndex}`)
   }
 
+  // 🔥 THIS IS THE IMPORTANT PART (FIXED)
   async function handleSubmit() {
     if (!email.includes('@')) return
 
@@ -85,11 +86,13 @@ export default function PuzzlePage() {
 
     const data = await res.json()
 
+    console.log('API RESPONSE:', data)
+
     if (data.success) {
       localStorage.setItem('joined', 'true')
       setHasJoined(true)
     } else {
-      alert('Something went wrong')
+      alert(JSON.stringify(data, null, 2)) // 👈 shows REAL error
     }
   }
 
