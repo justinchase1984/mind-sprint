@@ -29,17 +29,12 @@ export default function PuzzlePage() {
   const [selected, setSelected] = useState<string | null>(null)
   const [locked, setLocked] = useState(false)
   const [hasJoined, setHasJoined] = useState(false)
+  const [email, setEmail] = useState('')
 
   useEffect(() => {
     const joined = localStorage.getItem('joined')
     if (joined === 'true') setHasJoined(true)
-
-    // ✅ detect redirect return
-    if (router.query.joined === 'true') {
-      localStorage.setItem('joined', 'true')
-      setHasJoined(true)
-    }
-  }, [router.query.joined])
+  }, [])
 
   useEffect(() => {
     if (idNum === 1) {
@@ -77,6 +72,25 @@ export default function PuzzlePage() {
     sessionStorage.setItem('dailyCorrect', cnt.toString())
 
     router.push(`/puzzle/${idNum + 1}?challenge=${challengeIndex}`)
+  }
+
+  async function handleSubmit() {
+    if (!email.includes('@')) return
+
+    const res = await fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    })
+
+    const data = await res.json()
+
+    if (data.success) {
+      localStorage.setItem('joined', 'true')
+      setHasJoined(true)
+    } else {
+      alert('Something went wrong')
+    }
   }
 
   const factKey = `${challengeIndex}-${idNum}`
@@ -121,15 +135,16 @@ export default function PuzzlePage() {
                   </Link>
                 </div>
 
-                {/* EMAIL SECTION */}
+                {/* CLEAN EMAIL SECTION */}
                 {!hasJoined ? (
                   <div style={{ marginTop: '2rem', maxWidth: 400, marginInline: 'auto' }}>
                     <p>🎁 Enter for weekly prize draws + daily challenges</p>
 
                     <input
-                      id="custom-email"
                       type="email"
                       placeholder="Enter your email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       style={{
                         width: '100%',
                         padding: '12px',
@@ -140,42 +155,7 @@ export default function PuzzlePage() {
                     />
 
                     <button
-                      onClick={() => {
-  const emailInput = document.getElementById('custom-email') as HTMLInputElement
-  if (!emailInput?.value.includes('@')) return
-
-  const form = document.createElement('form')
-  form.method = 'POST'
-  form.action = 'https://www.aweber.com/scripts/addlead.pl'
-
-  // 👇 THIS IS THE FIX
-  form.target = 'hidden_iframe'
-
-  const fields: Record<string, string> = {
-    listname: 'awlist6897043',
-    email: emailInput.value,
-    meta_web_form_id: '317058051',
-    meta_message: '1',
-    meta_required: 'email'
-    // ❌ REMOVE redirect completely
-  }
-
-  Object.entries(fields).forEach(([k, v]) => {
-    const input = document.createElement('input')
-    input.type = 'hidden'
-    input.name = k
-    input.value = v
-    form.appendChild(input)
-  })
-
-  document.body.appendChild(form)
-  form.submit()
-  document.body.removeChild(form)
-
-  // ✅ UI updates immediately, no reload
-  localStorage.setItem('joined', 'true')
-  setHasJoined(true)
-}}
+                      onClick={handleSubmit}
                       style={{
                         width: '100%',
                         marginTop: 10,
@@ -249,18 +229,4 @@ export default function PuzzlePage() {
 
             {locked && (
               <p style={{ marginTop: 10, fontWeight: 500 }}>
-                {selected === puzzle.answer ? 'Correct ✅' : 'Incorrect ❌'}
-              </p>
-            )}
-
-            {DID_YOU_KNOW[factKey] && (
-              <p style={{ fontStyle: 'italic', marginTop: '1rem', color: '#555' }}>
-                {DID_YOU_KNOW[factKey]}
-              </p>
-            )}
-          </>
-        )}
-      </main>
-    </div>
-  )
-}
+                {selected === puzzle.answer ? 'Correct
