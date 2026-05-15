@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-const ACCESS_TOKEN = 'PASTE_YOUR_ACCESS_TOKEN_HERE'
+const ACCESS_TOKEN = 'RfbiEIlQHFv2YkjRU0PaqbfZuo60ZZf2'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
