@@ -1,30 +1,26 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-const ACCESS_TOKEN = 'RfbiEIlQHFv2YkjRU0PaqbfZuo60ZZf2'
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' })
-  }
-
-  const { email } = req.body
-
-  if (!email || !email.includes('@')) {
-    return res.status(400).json({ error: 'Invalid email' })
-  }
-
   try {
-    // 🔹 STEP 1 — Get account
+    const { email } = req.body
+
+    const accessToken = process.env.AWEBER_ACCESS_TOKEN
+
+    if (!accessToken) {
+      return res.status(500).json({ success: false, error: 'Missing access token' })
+    }
+
+    // STEP 1: Get account
     const accountRes = await fetch('https://api.aweber.com/1.0/accounts', {
       headers: {
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     })
 
     const accountData = await accountRes.json()
 
-    if (!accountData.entries || accountData.entries.length === 0) {
-      return res.status(400).json({
+    if (!accountRes.ok) {
+      return res.json({
         success: false,
         step: 'account',
         accountData,
@@ -33,77 +29,66 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const accountId = accountData.entries[0].id
 
-    // 🔹 STEP 2 — Get lists
-    const listRes = await fetch(
-      `https://api.aweber.com/1.0/accounts/${accountId}/lists`,
-      {
-        headers: {
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
-        },
-      }
-    )
+    // STEP 2: Get lists
+    const listsRes = await fetch(`https://api.aweber.com/1.0/accounts/${accountId}/lists`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
 
-    const listData = await listRes.json()
+    const listsData = await listsRes.json()
 
-    if (!listData.entries) {
-      return res.status(400).json({
+    if (!listsRes.ok) {
+      return res.json({
         success: false,
         step: 'lists',
-        listData,
+        listsData,
       })
     }
 
-    // 🔹 DEBUG: return list names so we KNOW what exists
-    const listNames = listData.entries.map((l: any) => ({
-      id: l.id,
-      name: l.name,
-    }))
-
-    const list = listData.entries.find(
+    // 👉 IMPORTANT: use YOUR list name
+    const list = listsData.entries.find(
       (l: any) => l.name === 'Mind Sprint Players'
     )
 
     if (!list) {
-      return res.status(400).json({
+      return res.json({
         success: false,
         step: 'list_not_found',
-        availableLists: listNames,
+        availableLists: listsData.entries.map((l: any) => l.name),
       })
     }
 
-    // 🔹 STEP 3 — Add subscriber
+    // STEP 3: Add subscriber
     const subRes = await fetch(
-      `https://api.aweber.com/1.0/lists/${list.id}/subscribers`,
+      `https://api.aweber.com/1.0/accounts/${accountId}/lists/${list.id}/subscribers`,
       {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
+          Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: email,
-          name: '',
-          ad_tracking: 'mind_sprint_app',
+          email,
         }),
       }
     )
 
     const subData = await subRes.json()
 
-    // 🔹 DEBUG FULL RESPONSE
-    return res.status(200).json({
-      success: true,
-      accountId,
-      listUsed: list.name,
-      subscriberResponse: subData,
-    })
+    if (!subRes.ok) {
+      return res.json({
+        success: false,
+        step: 'subscribe',
+        subData,
+      })
+    }
 
+    return res.json({ success: true })
   } catch (err: any) {
-    console.error('AWeber API ERROR:', err)
-
-    return res.status(500).json({
+    return res.json({
       success: false,
-      error: err.message || 'Unknown error',
+      error: err.message,
     })
   }
 }
