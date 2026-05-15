@@ -1,5 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+const ACCESS_TOKEN = 'PASTE_YOUR_ACCESS_TOKEN_HERE'
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).end()
@@ -12,33 +14,52 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const params = new URLSearchParams()
+    // 1️⃣ Get account
+    const accountRes = await fetch('https://api.aweber.com/1.0/accounts', {
+      headers: {
+        Authorization: `Bearer ${ACCESS_TOKEN}`
+      }
+    })
+    const accountData = await accountRes.json()
+    const accountId = accountData.entries[0].id
 
-    // ✅ REQUIRED
-    params.append('email', email)
-    params.append('listname', 'awlist6897043')
+    // 2️⃣ Get lists
+    const listRes = await fetch(`https://api.aweber.com/1.0/accounts/${accountId}/lists`, {
+      headers: {
+        Authorization: `Bearer ${ACCESS_TOKEN}`
+      }
+    })
+    const listData = await listRes.json()
 
-    // ✅ EXACT FIELDS FROM YOUR FORM (cleaned)
-    params.append('meta_web_form_id', '317058051')
-    params.append('meta_split_id', '')
-    params.append('meta_adtracking', 'Mind_Sprint__Opt-In_Form')
-    params.append('meta_message', '1')
-    params.append('meta_required', 'email')
-    params.append('meta_tooltip', '')
+    // 👉 find your list (Mind Sprint Players)
+    const list = listData.entries.find((l: any) =>
+      l.name === 'Mind Sprint Players'
+    )
 
-    // optional redirect
-    params.append('redirect', 'https://www.aweber.com/thankyou-coi.htm?m=text')
+    if (!list) {
+      return res.status(400).json({ error: 'List not found' })
+    }
 
-    const response = await fetch('https://www.aweber.com/scripts/addlead.pl', {
+    // 3️⃣ Add subscriber
+    const subRes = await fetch(`https://api.aweber.com/1.0/lists/${list.id}/subscribers`, {
       method: 'POST',
-      body: params,
+      headers: {
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email,
+        name: '',
+        ad_tracking: 'mind_sprint_app'
+      })
     })
 
-    console.log('AWeber response status:', response.status)
+    const subData = await subRes.json()
 
-    return res.status(200).json({ success: true })
+    return res.status(200).json({ success: true, data: subData })
+
   } catch (err) {
-    console.error('Subscribe error:', err)
+    console.error(err)
     return res.status(500).json({ error: 'Failed to subscribe' })
   }
 }
