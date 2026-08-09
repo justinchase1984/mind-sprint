@@ -1,120 +1,341 @@
-// components/Layout.tsx
-import React, { ReactNode } from 'react'
-import Link from 'next/link'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
-interface LayoutProps {
-  children: ReactNode
-  hideHeader?: boolean
+const AWEBER_LIST_NAME = 'Mind Sprint Players'
+
+const ACCESS_TOKEN_KEY = 'aweber:access_token'
+const REFRESH_TOKEN_KEY = 'aweber:refresh_token'
+const EXPIRES_AT_KEY = 'aweber:expires_at'
+
+type TokenState = {
+  accessToken: string
+  refreshToken: string
+  expiresAt: number
 }
 
-export default function Layout({ children, hideHeader = false }: LayoutProps) {
-  return (
-    <>
-      {!hideHeader && (
-        <header
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            padding: '0.75rem 1rem',
-            borderBottom: '1px solid #e8e8e8',
-            fontSize: '0.9rem',
-          }}
-        >
-          <div>
-            <Link href="/" passHref legacyBehavior>
-              <a
-                style={{
-                  fontSize: '1.1rem',
-                  fontWeight: 600,
-                  textDecoration: 'none',
-                  color: '#000',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 6,
-                }}
-              >
-                <span style={{ fontSize: '1rem' }}>🧠</span> Mind Sprint
-              </a>
-            </Link>
-          </div>
+async function redisCommand<T = any>(
+  command: Array<string | number>
+): Promise<T> {
+  const redisUrl = process.env.KV_REST_API_URL
+  const redisToken = process.env.KV_REST_API_TOKEN
 
-          <nav style={{ display: 'flex', gap: '1rem' }}>
-            <Link href="/how-it-works" legacyBehavior>
-              <a className="ms-navlink" style={{ color: '#000' }}>
-                How it works
-              </a>
-            </Link>
+  if (!redisUrl || !redisToken) {
+    throw new Error('Redis environment variables are missing')
+  }
 
-            <Link href="/brain-training" legacyBehavior>
-              <a className="ms-navlink" style={{ color: '#000' }}>
-                Brain Training
-              </a>
-            </Link>
+  const response = await fetch(redisUrl, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${redisToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(command),
+  })
 
-            <Link href="/faq" legacyBehavior>
-              <a className="ms-navlink" style={{ color: '#000' }}>
-                FAQ
-              </a>
-            </Link>
+  const data = await response.json()
 
-            <Link href="/about" legacyBehavior>
-              <a className="ms-navlink" style={{ color: '#000' }}>
-                About
-              </a>
-            </Link>
+  if (!response.ok || data.error) {
+    throw new Error(data.error || 'Redis request failed')
+  }
 
-            <Link href="/privacy" legacyBehavior>
-              <a className="ms-navlink" style={{ color: '#000' }}>
-                Privacy
-              </a>
-            </Link>
-          </nav>
-        </header>
-      )}
+  return data.result
+}
 
-      <main style={{ minHeight: '80vh' }}>{children}</main>
+async function redisGet(key: string): Promise<string | null> {
+  return redisCommand<string | null>(['GET', key])
+}
 
-      <footer
-        style={{
-          borderTop: '1px solid #eee',
-          textAlign: 'center',
-          padding: '2rem 0',
-          fontSize: '0.9rem',
-        }}
-      >
-        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-          <Link href="/how-it-works" legacyBehavior>
-            <a className="ms-navlink" style={{ marginRight: '1rem', color: '#000' }}>
-              How it works
-            </a>
-          </Link>
+async function redisSet(key: string, value: string): Promise<void> {
+  await redisCommand(['SET', key, value])
+}
 
-          <Link href="/brain-training" legacyBehavior>
-            <a className="ms-navlink" style={{ marginRight: '1rem', color: '#000' }}>
-              Brain Training
-            </a>
-          </Link>
+async function loadTokens(): Promise<TokenState> {
+  let accessToken = await redisGet(ACCESS_TOKEN_KEY)
+  let refreshToken = await redisGet(REFRESH_TOKEN_KEY)
+  const storedExpiresAt = await redisGet(EXPIRES_AT_KEY)
 
-          <Link href="/faq" legacyBehavior>
-            <a className="ms-navlink" style={{ marginRight: '1rem', color: '#000' }}>
-              FAQ
-            </a>
-          </Link>
+  // First-time fallback:
+  // use the existing Vercel environment variables to initialise Redis.
+  if (!accessToken) {
+    accessToken = process.env.AWEBER_ACCESS_TOKEN || null
 
-          <Link href="/about" legacyBehavior>
-            <a className="ms-navlink" style={{ marginRight: '1rem', color: '#000' }}>
-              About
-            </a>
-          </Link>
+    if (accessToken) {
+      await redisSet(ACCESS_TOKEN_KEY, accessToken)
+    }
+  }
 
-          <Link href="/privacy" legacyBehavior>
-            <a className="ms-navlink" style={{ color: '#000' }}>
-              Privacy Policy
-            </a>
-          </Link>
-        </div>
-      </footer>
-    </>
+  if (!refreshToken) {
+    refreshToken = process.env.AWEBER_REFRESH_TOKEN || null
+
+    if (refreshToken) {
+      await redisSet(REFRESH_TOKEN_KEY, refreshToken)
+    }
+  }
+
+  if (!accessToken) {
+    throw new Error('AWeber access token is missing')
+  }
+
+  if (!refreshToken) {
+    throw new Error('AWeber refresh token is missing')
+  }
+
+  return {
+    accessToken,
+    refreshToken,
+    expiresAt: storedExpiresAt ? Number(storedExpiresAt) : 0,
+  }
+}
+
+async function refreshAWeberToken(
+  refreshToken: string
+): Promise<TokenState> {
+  const clientId = process.env.AWEBER_CLIENT_ID
+  const clientSecret = process.env.AWEBER_CLIENT_SECRET
+
+  if (!clientId || !clientSecret) {
+    throw new Error('AWeber client credentials are missing')
+  }
+
+  const basicAuth = Buffer.from(
+    `${clientId}:${clientSecret}`
+  ).toString('base64')
+
+  const response = await fetch(
+    'https://auth.aweber.com/oauth2/token',
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Basic ${basicAuth}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        grant_type: 'refresh_token',
+        refresh_token: refreshToken,
+      }).toString(),
+    }
   )
+
+  const data = await response.json()
+
+  if (!response.ok || !data.access_token) {
+    console.error('AWeber token refresh failed:', data)
+    throw new Error('AWeber token refresh failed')
+  }
+
+  const newAccessToken = data.access_token
+  const newRefreshToken = data.refresh_token || refreshToken
+
+  const expiresInSeconds = Number(data.expires_in || 3600)
+
+  const expiresAt =
+    Date.now() + expiresInSeconds * 1000
+
+  // Save the NEW tokens permanently in Upstash.
+  await Promise.all([
+    redisSet(ACCESS_TOKEN_KEY, newAccessToken),
+    redisSet(REFRESH_TOKEN_KEY, newRefreshToken),
+    redisSet(EXPIRES_AT_KEY, String(expiresAt)),
+  ])
+
+  return {
+    accessToken: newAccessToken,
+    refreshToken: newRefreshToken,
+    expiresAt,
+  }
+}
+
+async function safeJson(response: Response) {
+  const text = await response.text()
+
+  if (!text) {
+    return null
+  }
+
+  try {
+    return JSON.parse(text)
+  } catch {
+    return text
+  }
+}
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({
+      success: false,
+      error: 'Method not allowed',
+    })
+  }
+
+  try {
+    const email =
+      typeof req.body?.email === 'string'
+        ? req.body.email.trim().toLowerCase()
+        : ''
+
+    const emailLooksValid =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+
+    if (!email || !emailLooksValid || email.length > 50) {
+      return res.status(400).json({
+        success: false,
+        error: 'Please enter a valid email address',
+      })
+    }
+
+    let tokens = await loadTokens()
+
+    // If we already know the token has expired,
+    // refresh it BEFORE contacting AWeber.
+    if (
+      tokens.expiresAt > 0 &&
+      Date.now() >= tokens.expiresAt - 60000
+    ) {
+      tokens = await refreshAWeberToken(
+        tokens.refreshToken
+      )
+    }
+
+    async function aweberFetch(
+      url: string,
+      options: RequestInit = {}
+    ): Promise<Response> {
+      const makeRequest = (accessToken: string) =>
+        fetch(url, {
+          ...options,
+          headers: {
+            ...(options.headers || {}),
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+
+      let response = await makeRequest(
+        tokens.accessToken
+      )
+
+      // If AWeber says the token has expired,
+      // automatically refresh it and try again.
+      if (response.status === 401) {
+        tokens = await refreshAWeberToken(
+          tokens.refreshToken
+        )
+
+        response = await makeRequest(
+          tokens.accessToken
+        )
+      }
+
+      return response
+    }
+
+    // STEP 1: Get AWeber account
+    const accountRes = await aweberFetch(
+      'https://api.aweber.com/1.0/accounts'
+    )
+
+    const accountData = await safeJson(accountRes)
+
+    if (!accountRes.ok) {
+      console.error(
+        'AWeber account request failed:',
+        accountData
+      )
+
+      return res.status(502).json({
+        success: false,
+        error: 'Unable to connect to AWeber',
+      })
+    }
+
+    const accountId = accountData?.entries?.[0]?.id
+
+    if (!accountId) {
+      return res.status(502).json({
+        success: false,
+        error: 'AWeber account could not be found',
+      })
+    }
+
+    // STEP 2: Get the Mind Sprint Players list
+    const listsRes = await aweberFetch(
+      `https://api.aweber.com/1.0/accounts/${accountId}/lists`
+    )
+
+    const listsData = await safeJson(listsRes)
+
+    if (!listsRes.ok) {
+      console.error(
+        'AWeber list request failed:',
+        listsData
+      )
+
+      return res.status(502).json({
+        success: false,
+        error: 'Unable to find AWeber list',
+      })
+    }
+
+    const list = listsData?.entries?.find(
+      (item: any) =>
+        item.name === AWEBER_LIST_NAME
+    )
+
+    if (!list) {
+      return res.status(502).json({
+        success: false,
+        error: 'Mind Sprint Players list was not found',
+      })
+    }
+
+    // STEP 3: Add subscriber
+    //
+    // update_existing means an email that is already
+    // subscribed will NOT be treated as an error.
+    const subscriberRes = await aweberFetch(
+      `https://api.aweber.com/1.0/accounts/${accountId}/lists/${list.id}/subscribers`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          update_existing: 'true',
+        }),
+      }
+    )
+
+    const subscriberData =
+      await safeJson(subscriberRes)
+
+    if (!subscriberRes.ok) {
+      console.error(
+        'AWeber subscriber request failed:',
+        subscriberData
+      )
+
+      return res.status(502).json({
+        success: false,
+        error: 'Unable to add subscriber',
+      })
+    }
+
+    return res.status(200).json({
+      success: true,
+    })
+  } catch (error: any) {
+    console.error(
+      'Mind Sprint subscribe error:',
+      error
+    )
+
+    return res.status(500).json({
+      success: false,
+      error:
+        error?.message ||
+        'Something went wrong',
+    })
+  }
 }
