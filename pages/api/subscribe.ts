@@ -53,8 +53,6 @@ async function loadTokens(): Promise<TokenState> {
   let refreshToken = await redisGet(REFRESH_TOKEN_KEY)
   const storedExpiresAt = await redisGet(EXPIRES_AT_KEY)
 
-  // First-time fallback:
-  // use the existing Vercel environment variables to initialise Redis.
   if (!accessToken) {
     accessToken = process.env.AWEBER_ACCESS_TOKEN || null
 
@@ -100,20 +98,17 @@ async function refreshAWeberToken(
     `${clientId}:${clientSecret}`
   ).toString('base64')
 
-  const response = await fetch(
-    'https://auth.aweber.com/oauth2/token',
-    {
-      method: 'POST',
-      headers: {
-        Authorization: `Basic ${basicAuth}`,
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        grant_type: 'refresh_token',
-        refresh_token: refreshToken,
-      }).toString(),
-    }
-  )
+  const response = await fetch('https://auth.aweber.com/oauth2/token', {
+    method: 'POST',
+    headers: {
+      Authorization: `Basic ${basicAuth}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      grant_type: 'refresh_token',
+      refresh_token: refreshToken,
+    }).toString(),
+  })
 
   const data = await response.json()
 
@@ -124,13 +119,9 @@ async function refreshAWeberToken(
 
   const newAccessToken = data.access_token
   const newRefreshToken = data.refresh_token || refreshToken
-
   const expiresInSeconds = Number(data.expires_in || 3600)
+  const expiresAt = Date.now() + expiresInSeconds * 1000
 
-  const expiresAt =
-    Date.now() + expiresInSeconds * 1000
-
-  // Save the NEW tokens permanently in Upstash.
   await Promise.all([
     redisSet(ACCESS_TOKEN_KEY, newAccessToken),
     redisSet(REFRESH_TOKEN_KEY, newRefreshToken),
@@ -144,7 +135,7 @@ async function refreshAWeberToken(
   }
 }
 
-async function safeJson(response: Response) {
+async function safeJson(response: Response): Promise<any> {
   const text = await response.text()
 
   if (!text) {
@@ -178,7 +169,7 @@ export default async function handler(
     const emailLooksValid =
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 
-    if (!email || !emailLooksValid || email.length > 50) {
+    if (!email || !emailLooksValid || email.length > 254) {
       return res.status(400).json({
         success: false,
         error: 'Please enter a valid email address',
@@ -187,21 +178,17 @@ export default async function handler(
 
     let tokens = await loadTokens()
 
-    // If we already know the token has expired,
-    // refresh it BEFORE contacting AWeber.
     if (
       tokens.expiresAt > 0 &&
       Date.now() >= tokens.expiresAt - 60000
     ) {
-      tokens = await refreshAWeberToken(
-        tokens.refreshToken
-      )
+      tokens = await refreshAWeberToken(tokens.refreshToken)
     }
 
-    async function aweberFetch(
+    const aweberFetch = async (
       url: string,
       options: RequestInit = {}
-    ): Promise<Response> {
+    ): Promise<Response> => {
       const makeRequest = (accessToken: string) =>
         fetch(url, {
           ...options,
@@ -211,26 +198,17 @@ export default async function handler(
           },
         })
 
-      let response = await makeRequest(
-        tokens.accessToken
-      )
+      let response = await makeRequest(tokens.accessToken)
 
-      // If AWeber says the token has expired,
-      // automatically refresh it and try again.
       if (response.status === 401) {
-        tokens = await refreshAWeberToken(
-          tokens.refreshToken
-        )
+        tokens = await refreshAWeberToken(tokens.refreshToken)
 
-        response = await makeRequest(
-          tokens.accessToken
-        )
+        response = await makeRequest(tokens.accessToken)
       }
 
       return response
     }
 
-    // STEP 1: Get AWeber account
     const accountRes = await aweberFetch(
       'https://api.aweber.com/1.0/accounts'
     )
@@ -238,10 +216,7 @@ export default async function handler(
     const accountData = await safeJson(accountRes)
 
     if (!accountRes.ok) {
-      console.error(
-        'AWeber account request failed:',
-        accountData
-      )
+      console.error('AWeber account request failed:', accountData)
 
       return res.status(502).json({
         success: false,
@@ -258,7 +233,6 @@ export default async function handler(
       })
     }
 
-    // STEP 2: Get the Mind Sprint Players list
     const listsRes = await aweberFetch(
       `https://api.aweber.com/1.0/accounts/${accountId}/lists`
     )
@@ -266,10 +240,7 @@ export default async function handler(
     const listsData = await safeJson(listsRes)
 
     if (!listsRes.ok) {
-      console.error(
-        'AWeber list request failed:',
-        listsData
-      )
+      console.error('AWeber list request failed:', listsData)
 
       return res.status(502).json({
         success: false,
@@ -278,8 +249,7 @@ export default async function handler(
     }
 
     const list = listsData?.entries?.find(
-      (item: any) =>
-        item.name === AWEBER_LIST_NAME
+      (item: any) => item.name === AWEBER_LIST_NAME
     )
 
     if (!list) {
@@ -289,10 +259,6 @@ export default async function handler(
       })
     }
 
-    // STEP 3: Add subscriber
-    //
-    // update_existing means an email that is already
-    // subscribed will NOT be treated as an error.
     const subscriberRes = await aweberFetch(
       `https://api.aweber.com/1.0/accounts/${accountId}/lists/${list.id}/subscribers`,
       {
@@ -307,8 +273,7 @@ export default async function handler(
       }
     )
 
-    const subscriberData =
-      await safeJson(subscriberRes)
+    const subscriberData = await safeJson(subscriberRes)
 
     if (!subscriberRes.ok) {
       console.error(
@@ -326,16 +291,11 @@ export default async function handler(
       success: true,
     })
   } catch (error: any) {
-    console.error(
-      'Mind Sprint subscribe error:',
-      error
-    )
+    console.error('Mind Sprint subscribe error:', error)
 
     return res.status(500).json({
       success: false,
-      error:
-        error?.message ||
-        'Something went wrong',
+      error: error?.message || 'Something went wrong',
     })
   }
 }
