@@ -48,8 +48,8 @@ export default function Home() {
             }}
           >
             Bite-sized trivia & brain challenges — 7 quick puzzles per challenge, one question per page.
-            Complete them at your own pace, keep your streak alive, and unlock a bonus reward when you
-            finish all 7. No login required — just tap and play.
+Play at your own pace, keep your streak alive, and earn an entry into our weekly digital reward
+draw for every challenge you complete. No login required — just tap and play.
           </p>
 
           {/* Get Started button */}
