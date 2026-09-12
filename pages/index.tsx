@@ -9,7 +9,7 @@ export default function Home() {
         <title>🧠 Mind Sprint</title>
         <meta
           name="description"
-          content="Mind Sprint is a bite-sized trivia & brain challenge platform. Solve 7 quick puzzles—each on its own page—at your own pace. Keep your streak alive and unlock a bonus reward when you complete all 7. No login required, just tap and play."
+          content="Bite-sized trivia & brain challenges — 7 quick puzzles per challenge, one question per page. Play at your own pace, keep your streak alive, and earn an entry into our weekly digital reward draw for every challenge you complete. No login required — just tap and play."
         />
       </Head>
 
