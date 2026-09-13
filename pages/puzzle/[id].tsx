@@ -13,7 +13,10 @@ export default function PuzzlePage() {
 
   const challengeIndex = (() => {
     const q = query.challenge as string | undefined
-    if (q && !isNaN(+q)) return +q
+
+    if (q && !isNaN(+q)) {
+      return +q
+    }
 
     if (typeof window !== 'undefined') {
       return parseInt(
@@ -56,22 +59,45 @@ export default function PuzzlePage() {
   const [joinError, setJoinError] =
     useState('')
 
-  useEffect(() => {
-    const joined = localStorage.getItem('joined')
+  const [entriesThisWeek, setEntriesThisWeek] =
+    useState<number | null>(null)
 
-    if (joined === 'true') {
+  /*
+    If we already know the player's email,
+    we know they have joined Mind Sprint.
+  */
+  useEffect(() => {
+    const savedEmail =
+      localStorage.getItem('mindSprintEmail')
+
+    if (savedEmail) {
       setHasJoined(true)
+    } else {
+      setHasJoined(false)
     }
   }, [])
 
+  /*
+    Starting question 1 means a fresh challenge.
+
+    Reset the score and remove any old attempt
+    for this challenge.
+  */
   useEffect(() => {
     if (idNum === 1) {
-      sessionStorage.setItem('dailyCorrect', '0')
+      sessionStorage.setItem(
+        'dailyCorrect',
+        '0'
+      )
 
       puzzles.forEach((_p, idx) =>
         sessionStorage.removeItem(
           `challenge${challengeIndex}_q${idx + 1}`
         )
+      )
+
+      sessionStorage.removeItem(
+        `mindSprintAttempt:${challengeIndex}`
       )
     }
   }, [idNum, challengeIndex, puzzles])
@@ -81,13 +107,37 @@ export default function PuzzlePage() {
     setLocked(false)
   }, [idNum])
 
-  function afterAnswer(isCorrect: boolean) {
-    let { current, max } = getStreaks()
+  /*
+    When the results page is reached,
+    a previously joined player can claim
+    their verified challenge entry.
+  */
+  useEffect(() => {
+    if (!isResults) return
 
-    if (isCorrect) current += 1
-    else current = 0
+    const savedEmail =
+      localStorage.getItem('mindSprintEmail')
 
-    if (current > max) max = current
+    if (!savedEmail) return
+
+    claimPrizeEntry(savedEmail)
+  }, [isResults, challengeIndex])
+
+  function afterAnswer(
+    isCorrect: boolean
+  ) {
+    let { current, max } =
+      getStreaks()
+
+    if (isCorrect) {
+      current += 1
+    } else {
+      current = 0
+    }
+
+    if (current > max) {
+      max = current
+    }
 
     saveStreaks(current, max)
 
@@ -98,7 +148,9 @@ export default function PuzzlePage() {
       sessionStorage.getItem(key)
 
     let cnt = parseInt(
-      sessionStorage.getItem('dailyCorrect') || '0',
+      sessionStorage.getItem(
+        'dailyCorrect'
+      ) || '0',
       10
     )
 
@@ -121,6 +173,240 @@ export default function PuzzlePage() {
     )
   }
 
+  /*
+    Get the current server-side challenge
+    attempt, or create a new one.
+  */
+  async function getOrStartAttempt():
+    Promise<string | null> {
+    const storageKey =
+      `mindSprintAttempt:${challengeIndex}`
+
+    const existingAttempt =
+      sessionStorage.getItem(
+        storageKey
+      )
+
+    if (existingAttempt) {
+      return existingAttempt
+    }
+
+    try {
+      const res = await fetch(
+        '/api/attempt',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type':
+              'application/json',
+          },
+          body: JSON.stringify({
+            action: 'start',
+            challenge:
+              challengeIndex,
+          }),
+        }
+      )
+
+      const data = await res
+        .json()
+        .catch(() => ({
+          success: false,
+        }))
+
+      if (
+        !data.success ||
+        !data.attemptId
+      ) {
+        console.error(
+          'Unable to start challenge attempt:',
+          data
+        )
+
+        return null
+      }
+
+      sessionStorage.setItem(
+        storageKey,
+        data.attemptId
+      )
+
+      return data.attemptId
+    } catch (error) {
+      console.error(
+        'Unable to start challenge attempt:',
+        error
+      )
+
+      return null
+    }
+  }
+
+  /*
+    Tell the server that one question
+    was answered.
+
+    The server checks that questions
+    are being completed in order.
+  */
+  async function recordAttemptAnswer(
+    answer: string
+  ) {
+    const attemptId =
+      await getOrStartAttempt()
+
+    if (!attemptId) {
+      return false
+    }
+
+    try {
+      const res = await fetch(
+        '/api/attempt',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type':
+              'application/json',
+          },
+          body: JSON.stringify({
+            action: 'answer',
+            attemptId,
+            question: idNum,
+            answer,
+          }),
+        }
+      )
+
+      const data = await res
+        .json()
+        .catch(() => ({
+          success: false,
+        }))
+
+      if (!data.success) {
+        console.error(
+          'Unable to record challenge answer:',
+          data
+        )
+
+        return false
+      }
+
+      return true
+    } catch (error) {
+      console.error(
+        'Unable to record challenge answer:',
+        error
+      )
+
+      return false
+    }
+  }
+
+  /*
+    Handle the player's answer.
+
+    We keep the existing green/red answer
+    feedback while also recording the
+    completion on the server.
+  */
+  async function handleAnswer(
+    answer: string
+  ) {
+    if (locked || !puzzle) {
+      return
+    }
+
+    setSelected(answer)
+    setLocked(true)
+
+    const clickedAt =
+      Date.now()
+
+    await recordAttemptAnswer(
+      answer
+    )
+
+    /*
+      Keep roughly the same 800ms answer
+      feedback that Mind Sprint already had.
+    */
+    const elapsed =
+      Date.now() - clickedAt
+
+    const remaining =
+      Math.max(
+        0,
+        800 - elapsed
+      )
+
+    setTimeout(() => {
+      afterAnswer(
+        answer === puzzle.answer
+      )
+    }, remaining)
+  }
+
+  /*
+    Claim the weekly prize entry using
+    the completed server-side attempt.
+  */
+  async function claimPrizeEntry(
+    emailAddress: string
+  ) {
+    const attemptId =
+      sessionStorage.getItem(
+        `mindSprintAttempt:${challengeIndex}`
+      )
+
+    if (!attemptId) {
+      console.error(
+        'No completed challenge attempt was found'
+      )
+
+      return
+    }
+
+    try {
+      const res = await fetch(
+        '/api/entry',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type':
+              'application/json',
+          },
+          body: JSON.stringify({
+            email: emailAddress,
+            attemptId,
+          }),
+        }
+      )
+
+      const data = await res
+        .json()
+        .catch(() => ({
+          success: false,
+        }))
+
+      if (data.success) {
+        setEntriesThisWeek(
+          data.entriesThisWeek
+        )
+      } else {
+        console.error(
+          'Prize entry error:',
+          data
+        )
+      }
+    } catch (error) {
+      console.error(
+        'Prize entry error:',
+        error
+      )
+    }
+  }
+
   async function handleSubmit() {
     if (isJoining) return
 
@@ -136,6 +422,7 @@ export default function PuzzlePage() {
       setJoinError(
         'Please enter a valid email address.'
       )
+
       return
     }
 
@@ -169,27 +456,57 @@ export default function PuzzlePage() {
           'true'
         )
 
+        /*
+          This is what lets future completed
+          challenges automatically earn entries
+          without asking for the email again.
+        */
+        localStorage.setItem(
+          'mindSprintEmail',
+          cleanEmail
+        )
+
         setHasJoined(true)
         setEmail('')
+
+        /*
+          They have already completed this
+          challenge, so award its entry now.
+        */
+        await claimPrizeEntry(
+          cleanEmail
+        )
 
         return
       }
 
       const oldAweberMessage =
-        data?.subData?.error?.message || ''
+        data?.subData?.error?.message ||
+        ''
 
       if (
         oldAweberMessage
           .toLowerCase()
-          .includes('already subscribed')
+          .includes(
+            'already subscribed'
+          )
       ) {
         localStorage.setItem(
           'joined',
           'true'
         )
 
+        localStorage.setItem(
+          'mindSprintEmail',
+          cleanEmail
+        )
+
         setHasJoined(true)
         setEmail('')
+
+        await claimPrizeEntry(
+          cleanEmail
+        )
 
         return
       }
@@ -257,11 +574,18 @@ export default function PuzzlePage() {
                 '😅 Needs Work'
 
               if (score >= 9) {
-                label = '🧠 Genius'
-              } else if (score >= 7) {
-                label = '🔥 Strong'
-              } else if (score >= 5) {
-                label = '👍 Solid'
+                label =
+                  '🧠 Genius'
+              } else if (
+                score >= 7
+              ) {
+                label =
+                  '🔥 Strong'
+              } else if (
+                score >= 5
+              ) {
+                label =
+                  '👍 Solid'
               }
 
               const passed =
@@ -306,13 +630,15 @@ export default function PuzzlePage() {
 
                   <div
                     style={{
-                      marginTop: '1rem',
+                      marginTop:
+                        '1rem',
                     }}
                   >
                     <Link
                       href={`/puzzle/1?challenge=${
                         passed
-                          ? challengeIndex + 1
+                          ? challengeIndex +
+                            1
                           : challengeIndex
                       }`}
                     >
@@ -330,14 +656,17 @@ export default function PuzzlePage() {
             {!hasJoined ? (
               <div
                 style={{
-                  marginTop: '2rem',
+                  marginTop:
+                    '2rem',
                   maxWidth: 400,
-                  marginInline: 'auto',
+                  marginInline:
+                    'auto',
                 }}
               >
                 <p>
-                  🎁 Enter for weekly prize
-                  draws + daily challenges
+                  🎁 Enter for weekly
+                  prize draws + daily
+                  challenges
                 </p>
 
                 <form
@@ -350,15 +679,21 @@ export default function PuzzlePage() {
                     type="email"
                     placeholder="Enter your email"
                     value={email}
-                    disabled={isJoining}
+                    disabled={
+                      isJoining
+                    }
                     autoComplete="email"
                     onChange={(e) => {
                       setEmail(
                         e.target.value
                       )
 
-                      if (joinError) {
-                        setJoinError('')
+                      if (
+                        joinError
+                      ) {
+                        setJoinError(
+                          ''
+                        )
                       }
                     }}
                     style={{
@@ -375,21 +710,26 @@ export default function PuzzlePage() {
 
                   <button
                     type="submit"
-                    disabled={isJoining}
+                    disabled={
+                      isJoining
+                    }
                     style={{
                       width: '100%',
                       marginTop: 10,
                       padding: '12px',
-                      background: '#111',
+                      background:
+                        '#111',
                       color: '#fff',
                       border: 'none',
                       borderRadius: 6,
-                      cursor: isJoining
-                        ? 'default'
-                        : 'pointer',
-                      opacity: isJoining
-                        ? 0.7
-                        : 1,
+                      cursor:
+                        isJoining
+                          ? 'default'
+                          : 'pointer',
+                      opacity:
+                        isJoining
+                          ? 0.7
+                          : 1,
                     }}
                   >
                     {isJoining
@@ -405,7 +745,8 @@ export default function PuzzlePage() {
                       marginTop: 10,
                       marginBottom: 0,
                       fontSize: 14,
-                      color: '#b00020',
+                      color:
+                        '#b00020',
                     }}
                   >
                     {joinError}
@@ -413,28 +754,61 @@ export default function PuzzlePage() {
                 )}
               </div>
             ) : (
-              <p
-                role="status"
+              <div
                 style={{
-                  marginTop: '2rem',
-                  color: '#555',
+                  marginTop:
+                    '2rem',
                 }}
               >
-                🎯 You're entered in the
-                weekly draw — keep playing
-                to earn more entries
-              </p>
+                <p
+                  role="status"
+                  style={{
+                    color: '#555',
+                    marginBottom: 8,
+                  }}
+                >
+                  🎯 You're entered in
+                  the weekly draw —
+                  keep playing to earn
+                  more entries
+                </p>
+
+                {entriesThisWeek !==
+                  null && (
+                  <p
+                    style={{
+                      marginTop: 0,
+                      fontWeight: 600,
+                    }}
+                  >
+                    🎟️ You have{' '}
+                    <strong>
+                      {
+                        entriesThisWeek
+                      }
+                    </strong>{' '}
+                    {entriesThisWeek ===
+                    1
+                      ? 'entry'
+                      : 'entries'}{' '}
+                    in this
+                    week&apos;s draw
+                  </p>
+                )}
+              </div>
             )}
           </>
         ) : (
           <>
             <h2>
-              Challenge {challengeIndex}
+              Challenge{' '}
+              {challengeIndex}
             </h2>
 
             <div
               style={{
-                marginBottom: '1rem',
+                marginBottom:
+                  '1rem',
               }}
             >
               <div
@@ -458,7 +832,8 @@ export default function PuzzlePage() {
                 <div
                   style={{
                     width: `${
-                      (idNum / total) *
+                      (idNum /
+                        total) *
                       100
                     }%`,
                     background:
@@ -477,21 +852,14 @@ export default function PuzzlePage() {
               (opt) => (
                 <button
                   key={opt}
-                  onClick={() => {
-                    if (locked) return
-
-                    setSelected(opt)
-                    setLocked(true)
-
-                    setTimeout(() => {
-                      afterAnswer(
-                        opt ===
-                          puzzle.answer
-                      )
-                    }, 800)
-                  }}
+                  onClick={() =>
+                    handleAnswer(
+                      opt
+                    )
+                  }
                   style={{
-                    display: 'block',
+                    display:
+                      'block',
                     margin:
                       '10px auto',
                     padding:
@@ -501,7 +869,9 @@ export default function PuzzlePage() {
                     border:
                       '1px solid #ddd',
                     fontSize: 16,
-                    cursor: 'pointer',
+                    cursor: locked
+                      ? 'default'
+                      : 'pointer',
                     background:
                       locked &&
                       opt ===
@@ -543,7 +913,8 @@ export default function PuzzlePage() {
                 style={{
                   fontStyle:
                     'italic',
-                  marginTop: '1rem',
+                  marginTop:
+                    '1rem',
                   color: '#555',
                 }}
               >
