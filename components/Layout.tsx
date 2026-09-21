@@ -79,31 +79,40 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
         style={{
           borderTop: '1px solid #eee',
           textAlign: 'center',
-          padding: '2rem 0',
+          padding: '2rem 1rem',
           fontSize: '0.9rem',
         }}
       >
-        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+        <div
+          style={{
+            maxWidth: '900px',
+            margin: '0 auto',
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: '1rem',
+          }}
+        >
           <Link href="/how-it-works" legacyBehavior>
-            <a className="ms-navlink" style={{ marginRight: '1rem', color: '#000' }}>
+            <a className="ms-navlink" style={{ color: '#000' }}>
               How it works
             </a>
           </Link>
 
           <Link href="/brain-training" legacyBehavior>
-            <a className="ms-navlink" style={{ marginRight: '1rem', color: '#000' }}>
+            <a className="ms-navlink" style={{ color: '#000' }}>
               Brain Training
             </a>
           </Link>
 
           <Link href="/faq" legacyBehavior>
-            <a className="ms-navlink" style={{ marginRight: '1rem', color: '#000' }}>
+            <a className="ms-navlink" style={{ color: '#000' }}>
               FAQ
             </a>
           </Link>
 
           <Link href="/about" legacyBehavior>
-            <a className="ms-navlink" style={{ marginRight: '1rem', color: '#000' }}>
+            <a className="ms-navlink" style={{ color: '#000' }}>
               About
             </a>
           </Link>
@@ -111,6 +120,18 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
           <Link href="/privacy" legacyBehavior>
             <a className="ms-navlink" style={{ color: '#000' }}>
               Privacy Policy
+            </a>
+          </Link>
+
+          <Link href="/terms" legacyBehavior>
+            <a className="ms-navlink" style={{ color: '#000' }}>
+              Terms
+            </a>
+          </Link>
+
+          <Link href="/weekly-prize-draw-terms" legacyBehavior>
+            <a className="ms-navlink" style={{ color: '#000' }}>
+              Prize Draw Terms
             </a>
           </Link>
         </div>
