@@ -8,7 +8,7 @@ export default function HowItWorks() {
         <title>How It Works | Mind Sprint</title>
         <meta
           name="description"
-          content="How Mind Sprint works: 7 bite-sized challenges, one question per page, streak tracking, and a bonus reward at the end. No login required."
+          content="How Mind Sprint works: complete bite-sized brain challenges, track your streak, and earn entries into the weekly digital reward draw. No login required."
         />
       </Head>
 
@@ -41,9 +41,22 @@ export default function HowItWorks() {
             If you pass, you’ll unlock the next challenge and continue.
           </li>
           <li>
-            Finish all 7 challenges to reach the <strong>final reward</strong> screen.
+            Once you’ve joined the weekly draw, every challenge you complete earns <strong>1 entry</strong>.
           </li>
         </ol>
+
+        <h2 style={{ marginTop: '1.5rem' }}>Weekly digital reward</h2>
+        <p style={{ color: '#555', lineHeight: 1.6 }}>
+          Complete challenges throughout the week to earn entries into the Mind Sprint weekly draw. Each completed
+          challenge earns <strong>1 entry</strong>, with a maximum of <strong>7 entries per week</strong>. Replaying the
+          same challenge does not create another entry.
+        </p>
+
+        <p style={{ color: '#555', lineHeight: 1.6 }}>
+          One winner is selected from the eligible entries for the completed week. The weekly digital reward is worth
+          approximately <strong>A$25 or the local-currency equivalent</strong> and is delivered by email, with available
+          redemption options depending on the winner’s country.
+        </p>
 
         <h2 style={{ marginTop: '1.5rem' }}>What kind of challenges are they?</h2>
         <p style={{ color: '#555', lineHeight: 1.6 }}>
@@ -65,6 +78,7 @@ export default function HowItWorks() {
         <h2 style={{ marginTop: '1.5rem' }}>Quick tips</h2>
         <ul style={{ lineHeight: 1.7, color: '#222' }}>
           <li>Play one challenge at a time — it’s meant to be bite-sized.</li>
+          <li>Complete different challenges throughout the week to earn more draw entries.</li>
           <li>If a set feels too easy or too hard, come back later — rotations keep it fresh.</li>
           <li>Consistency beats intensity: short daily play works best.</li>
         </ul>
