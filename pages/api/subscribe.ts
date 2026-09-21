@@ -6,10 +6,10 @@ const ACCESS_TOKEN_KEY = 'aweber:access_token'
 const REFRESH_TOKEN_KEY = 'aweber:refresh_token'
 const EXPIRES_AT_KEY = 'aweber:expires_at'
 
-const CONSENT_VERSION = '2026-09-21-v1'
+const CONSENT_VERSION = '2026-09-21-v2'
 
 const CONSENT_TEXT =
-  'Email me new Mind Sprint challenges, tips and occasional updates. I can unsubscribe anytime.'
+  'Send me occasional Mind Sprint emails (optional)'
 
 type TokenState = {
   accessToken: string
@@ -296,15 +296,6 @@ export default async function handler(
       })
     }
 
-    /*
-      IMPORTANT:
-      Prize entry does NOT require
-      marketing consent.
-
-      This API is now ONLY for people
-      who actively tick the optional
-      marketing checkbox.
-    */
     if (!marketingConsent) {
       return res.status(400).json({
         success: false,
@@ -330,10 +321,6 @@ export default async function handler(
         null as string | null,
     }
 
-    /*
-      Save evidence of the positive
-      consent action in Upstash.
-    */
     await redisSet(
       getConsentKey(email),
       JSON.stringify(
@@ -508,11 +495,6 @@ export default async function handler(
       })
     }
 
-    /*
-      Update our consent record to
-      show that AWeber subscription
-      completed successfully.
-    */
     consentRecord.aweberSubscribedAt =
       new Date().toISOString()
 
