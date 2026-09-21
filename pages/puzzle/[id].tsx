@@ -68,10 +68,6 @@ export default function PuzzlePage() {
   const [entriesThisWeek, setEntriesThisWeek] =
     useState<number | null>(null)
 
-  /*
-    If the player's email is already stored,
-    they have previously entered the draw.
-  */
   useEffect(() => {
     const savedEmail =
       localStorage.getItem('mindSprintEmail')
@@ -83,12 +79,6 @@ export default function PuzzlePage() {
     }
   }, [])
 
-  /*
-    Starting question 1 means a fresh challenge.
-
-    Reset the score and remove any old attempt
-    for this challenge.
-  */
   useEffect(() => {
     if (idNum === 1) {
       sessionStorage.setItem(
@@ -113,11 +103,6 @@ export default function PuzzlePage() {
     setLocked(false)
   }, [idNum])
 
-  /*
-    If the player has already entered the draw,
-    reaching a results page automatically claims
-    the entry for this completed challenge.
-  */
   useEffect(() => {
     if (!isResults) return
 
@@ -179,10 +164,6 @@ export default function PuzzlePage() {
     )
   }
 
-  /*
-    Get the current server-side challenge
-    attempt or create a new one.
-  */
   async function getOrStartAttempt():
     Promise<string | null> {
     const storageKey =
@@ -248,10 +229,6 @@ export default function PuzzlePage() {
     }
   }
 
-  /*
-    Record one question answer against
-    the server-side challenge attempt.
-  */
   async function recordAttemptAnswer(
     answer: string
   ) {
@@ -306,10 +283,6 @@ export default function PuzzlePage() {
     }
   }
 
-  /*
-    Existing Mind Sprint answer behaviour,
-    plus server-side challenge verification.
-  */
   async function handleAnswer(
     answer: string
   ) {
@@ -343,10 +316,6 @@ export default function PuzzlePage() {
     }, remaining)
   }
 
-  /*
-    Turn the verified completed challenge
-    into one weekly prize entry.
-  */
   async function claimPrizeEntry(
     emailAddress: string
   ): Promise<boolean> {
@@ -409,12 +378,6 @@ export default function PuzzlePage() {
     }
   }
 
-  /*
-    Submit the email for prize entry.
-
-    Prize entry is independent of
-    optional marketing consent.
-  */
   async function handleSubmit() {
     if (isJoining) return
 
@@ -439,13 +402,6 @@ export default function PuzzlePage() {
     setMarketingNotice('')
 
     try {
-      /*
-        STEP 1:
-        Record the prize entry first.
-
-        This happens whether or not the
-        player wants marketing emails.
-      */
       const entryRecorded =
         await claimPrizeEntry(
           cleanEmail
@@ -459,10 +415,6 @@ export default function PuzzlePage() {
         return
       }
 
-      /*
-        Remember the player for future
-        challenge entries.
-      */
       localStorage.setItem(
         'joined',
         'true'
@@ -476,11 +428,6 @@ export default function PuzzlePage() {
       setHasJoined(true)
       setEmail('')
 
-      /*
-        STEP 2:
-        Only subscribe to AWeber if the
-        OPTIONAL checkbox was actively ticked.
-      */
       if (marketingConsent) {
         try {
           const subscribeRes =
@@ -522,7 +469,7 @@ export default function PuzzlePage() {
             )
 
             setMarketingNotice(
-              'Your prize entry is saved, but we couldn’t enable email updates this time.'
+              'Your prize entry is saved, but email updates could not be enabled.'
             )
           }
         } catch (error) {
@@ -532,7 +479,7 @@ export default function PuzzlePage() {
           )
 
           setMarketingNotice(
-            'Your prize entry is saved, but we couldn’t enable email updates this time.'
+            'Your prize entry is saved, but email updates could not be enabled.'
           )
         }
       }
@@ -680,31 +627,30 @@ export default function PuzzlePage() {
             {!hasJoined ? (
               <div
                 style={{
-                  marginTop:
-                    '2rem',
+                  marginTop: '2rem',
                   maxWidth: 400,
-                  marginInline:
-                    'auto',
+                  marginInline: 'auto',
                 }}
               >
                 <p
                   style={{
-                    marginBottom: 4,
+                    marginBottom: 5,
+                    fontSize: 17,
+                    fontWeight: 600,
                   }}
                 >
-                  🎁 Enter the weekly
-                  prize draw
+                  🎁 Weekly Prize Draw
                 </p>
 
                 <p
                   style={{
                     marginTop: 0,
+                    marginBottom: 14,
                     color: '#666',
                     fontSize: 14,
                   }}
                 >
-                  Complete challenges to
-                  earn entries.
+                  Enter your email to claim this challenge entry.
                 </p>
 
                 <form
@@ -737,7 +683,6 @@ export default function PuzzlePage() {
                     style={{
                       width: '100%',
                       padding: '12px',
-                      marginTop: 10,
                       borderRadius: 6,
                       border:
                         '1px solid #ccc',
@@ -749,14 +694,12 @@ export default function PuzzlePage() {
                   <label
                     style={{
                       display: 'flex',
-                      alignItems:
-                        'flex-start',
+                      alignItems: 'center',
                       gap: 8,
                       textAlign: 'left',
-                      marginTop: 14,
-                      fontSize: 14,
-                      lineHeight: 1.45,
-                      color: '#444',
+                      marginTop: 12,
+                      fontSize: 13,
+                      color: '#555',
                       cursor: 'pointer',
                     }}
                   >
@@ -770,21 +713,13 @@ export default function PuzzlePage() {
                       }
                       onChange={(e) =>
                         setMarketingConsent(
-                          e.target
-                            .checked
+                          e.target.checked
                         )
                       }
-                      style={{
-                        marginTop: 3,
-                      }}
                     />
 
                     <span>
-                      Email me new Mind
-                      Sprint challenges,
-                      tips and occasional
-                      updates. I can
-                      unsubscribe anytime.
+                      Send me occasional Mind Sprint emails (optional)
                     </span>
                   </label>
 
@@ -813,30 +748,27 @@ export default function PuzzlePage() {
                     }}
                   >
                     {isJoining
-                      ? 'Entering...'
-                      : 'Enter Draw'}
+                      ? 'Claiming...'
+                      : 'Claim Entry'}
                   </button>
                 </form>
 
                 <p
                   style={{
-                    marginTop: 12,
+                    marginTop: 10,
                     marginBottom: 0,
                     fontSize: 12,
-                    lineHeight: 1.5,
                     color: '#777',
                   }}
                 >
-                  By entering, you confirm
-                  you are 18+ and agree to
-                  the{' '}
+                  18+ ·{' '}
                   <Link
                     href="/weekly-prize-draw-terms"
                     legacyBehavior
                   >
                     <a
                       style={{
-                        color: '#555',
+                        color: '#666',
                         textDecoration:
                           'underline',
                       }}
@@ -844,22 +776,21 @@ export default function PuzzlePage() {
                       Prize Draw Terms
                     </a>
                   </Link>
-                  . See our{' '}
+                  {' · '}
                   <Link
                     href="/privacy"
                     legacyBehavior
                   >
                     <a
                       style={{
-                        color: '#555',
+                        color: '#666',
                         textDecoration:
                           'underline',
                       }}
                     >
-                      Privacy Policy
+                      Privacy
                     </a>
                   </Link>
-                  .
                 </p>
 
                 {joinError && (
