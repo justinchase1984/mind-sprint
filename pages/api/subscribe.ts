@@ -6,10 +6,10 @@ const ACCESS_TOKEN_KEY = 'aweber:access_token'
 const REFRESH_TOKEN_KEY = 'aweber:refresh_token'
 const EXPIRES_AT_KEY = 'aweber:expires_at'
 
-const CONSENT_VERSION = '2026-09-21-v2'
+const CONSENT_VERSION = '2026-09-22-v3'
 
 const CONSENT_TEXT =
-  'Send me occasional Mind Sprint emails (optional)'
+  'Send me weekly prize draw reminders & new Mind Sprint challenges (optional)'
 
 type TokenState = {
   accessToken: string
