@@ -719,7 +719,7 @@ export default function PuzzlePage() {
                     />
 
                     <span>
-                      Send me occasional Mind Sprint emails (optional)
+                      Send me weekly prize draw reminders & new Mind Sprint challenges (optional)
                     </span>
                   </label>
 
