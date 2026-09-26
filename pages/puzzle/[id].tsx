@@ -7,6 +7,8 @@ import { getStreaks, saveStreaks } from '../../lib/streak'
 import { getRotatingPuzzlesByChallenge } from '../../lib/rotation'
 import { DID_YOU_KNOW } from '../../lib/facts'
 
+const PRIZE_DRAW_LIVE = false
+
 export default function PuzzlePage() {
   const router = useRouter()
   const { query } = router
@@ -104,6 +106,7 @@ export default function PuzzlePage() {
   }, [idNum])
 
   useEffect(() => {
+    if (!PRIZE_DRAW_LIVE) return
     if (!isResults) return
 
     const savedEmail =
@@ -319,6 +322,10 @@ export default function PuzzlePage() {
   async function claimPrizeEntry(
     emailAddress: string
   ): Promise<boolean> {
+    if (!PRIZE_DRAW_LIVE) {
+      return false
+    }
+
     const attemptId =
       sessionStorage.getItem(
         `mindSprintAttempt:${challengeIndex}`
@@ -380,6 +387,14 @@ export default function PuzzlePage() {
 
   async function handleSubmit() {
     if (isJoining) return
+
+    if (!PRIZE_DRAW_LIVE) {
+      setJoinError(
+        'The weekly prize draw is not live yet.'
+      )
+
+      return
+    }
 
     const cleanEmail =
       email.trim().toLowerCase()
@@ -562,6 +577,24 @@ export default function PuzzlePage() {
               const passed =
                 score >= 8
 
+              const nextHref =
+                passed &&
+                challengeIndex >= 7
+                  ? '/results'
+                  : `/puzzle/1?challenge=${
+                      passed
+                        ? challengeIndex + 1
+                        : challengeIndex
+                    }`
+
+              const nextLabel =
+                passed &&
+                challengeIndex >= 7
+                  ? 'Finish →'
+                  : passed
+                  ? 'Continue →'
+                  : 'Try Again'
+
               if (
                 passed &&
                 challengeIndex < 7
@@ -606,17 +639,10 @@ export default function PuzzlePage() {
                     }}
                   >
                     <Link
-                      href={`/puzzle/1?challenge=${
-                        passed
-                          ? challengeIndex +
-                            1
-                          : challengeIndex
-                      }`}
+                      href={nextHref}
                     >
                       <button>
-                        {passed
-                          ? 'Continue →'
-                          : 'Try Again'}
+                        {nextLabel}
                       </button>
                     </Link>
                   </div>
@@ -624,7 +650,61 @@ export default function PuzzlePage() {
               )
             })()}
 
-            {!hasJoined ? (
+            {!PRIZE_DRAW_LIVE ? (
+              <div
+                style={{
+                  marginTop: '2rem',
+                  maxWidth: 400,
+                  marginInline: 'auto',
+                }}
+              >
+                <p
+                  style={{
+                    marginBottom: 5,
+                    fontSize: 17,
+                    fontWeight: 600,
+                  }}
+                >
+                  🎁 Weekly Prize Draw
+                </p>
+
+                <p
+                  style={{
+                    marginTop: 0,
+                    marginBottom: 10,
+                    color: '#666',
+                    fontSize: 14,
+                  }}
+                >
+                  Coming soon — entries will open when the official weekly prize draw launches.
+                </p>
+
+                <p
+                  style={{
+                    marginTop: 0,
+                    marginBottom: 0,
+                    fontSize: 12,
+                    color: '#777',
+                  }}
+                >
+                  18+ ·{' '}
+                  <Link
+                    href="/weekly-prize-draw-terms"
+                    legacyBehavior
+                  >
+                    <a
+                      style={{
+                        color: '#666',
+                        textDecoration:
+                          'underline',
+                      }}
+                    >
+                      Prize Draw Terms
+                    </a>
+                  </Link>
+                </p>
+              </div>
+            ) : !hasJoined ? (
               <div
                 style={{
                   marginTop: '2rem',
