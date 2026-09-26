@@ -10,7 +10,7 @@ export default function Home() {
 
         <meta
           name="description"
-          content="Play 7 bite-sized Mind Sprint challenges with 10 questions each. Test your trivia, memory and problem-solving skills, build your streak, and earn weekly prize draw entries."
+          content="Play 7 bite-sized Mind Sprint challenges with 10 questions each. Test your trivia, memory and problem-solving skills, build your streak, and return for fresh rotating question sets."
         />
       </Head>
 
@@ -48,9 +48,9 @@ export default function Home() {
             }}
           >
             Bite-sized trivia and brain challenges designed to give your mind
-            a quick workout. Play through 7 challenges with 10 questions each,
-            test your knowledge, build your streak and come back for fresh
-            rotating question sets.
+            something interesting to think about. Play through 7 challenges
+            with 10 questions each, test your knowledge, build your streak and
+            come back for fresh rotating question sets.
           </p>
 
           <Link href="/puzzle/1?challenge=1" legacyBehavior>
@@ -106,7 +106,11 @@ export default function Home() {
               }}
             >
               <div style={{ fontSize: 24 }}>🎯</div>
-              <h2 style={{ fontSize: 18, marginBottom: 6 }}>7 Challenges</h2>
+
+              <h2 style={{ fontSize: 18, marginBottom: 6 }}>
+                7 Challenges
+              </h2>
+
               <p style={{ color: '#666', margin: 0, lineHeight: 1.5 }}>
                 Work your way through seven different Mind Sprint challenges.
               </p>
@@ -121,9 +125,11 @@ export default function Home() {
               }}
             >
               <div style={{ fontSize: 24 }}>🧩</div>
+
               <h2 style={{ fontSize: 18, marginBottom: 6 }}>
                 10 Questions Each
               </h2>
+
               <p style={{ color: '#666', margin: 0, lineHeight: 1.5 }}>
                 One question per page keeps every challenge quick and easy to
                 follow.
@@ -139,7 +145,11 @@ export default function Home() {
               }}
             >
               <div style={{ fontSize: 24 }}>🔄</div>
-              <h2 style={{ fontSize: 18, marginBottom: 6 }}>Fresh Rotations</h2>
+
+              <h2 style={{ fontSize: 18, marginBottom: 6 }}>
+                Fresh Rotations
+              </h2>
+
               <p style={{ color: '#666', margin: 0, lineHeight: 1.5 }}>
                 Question sets rotate over time so returning players can keep
                 testing themselves.
@@ -169,13 +179,16 @@ export default function Home() {
             }}
           >
             <li>Start Challenge 1 and answer 10 quick questions.</li>
+
             <li>See your score and streak when the challenge is complete.</li>
+
             <li>
               Pass the challenge to unlock the next one and keep progressing.
             </li>
+
             <li>
-              Complete different challenges during the week to build your
-              weekly prize draw entries.
+              Come back over time as fresh question sets rotate into the
+              challenges.
             </li>
           </ol>
         </section>
@@ -189,7 +202,7 @@ export default function Home() {
             textAlign: 'center',
           }}
         >
-          <h2>🎁 Weekly Prize Draw</h2>
+          <h2>🎁 Weekly Prize Draw — Coming Soon</h2>
 
           <p
             style={{
@@ -199,11 +212,24 @@ export default function Home() {
               margin: '0 auto',
             }}
           >
-            Players who choose to enter the weekly draw can earn one entry for
-            each different Mind Sprint challenge they complete during the week,
-            up to seven entries. An email address is only required if you want
-            your challenge completions included in the draw and to be contacted
-            if selected as a winner.
+            Mind Sprint is preparing a weekly promotional prize draw. When the
+            draw officially launches, eligible players will be able to earn one
+            entry for each different Mind Sprint challenge they complete during
+            the weekly entry period, up to seven entries.
+          </p>
+
+          <p
+            style={{
+              color: '#555',
+              lineHeight: 1.7,
+              maxWidth: 650,
+              margin: '1rem auto 0',
+            }}
+          >
+            The first official weekly draw will begin only when Mind Sprint
+            announces on the website that entries are open. Challenge
+            completions made before that launch will not count as prize draw
+            entries.
           </p>
 
           <p style={{ marginTop: '1rem' }}>
@@ -214,7 +240,7 @@ export default function Home() {
                   textDecoration: 'underline',
                 }}
               >
-                View Prize Draw Terms
+                View Planned Prize Draw Terms
               </a>
             </Link>
           </p>
@@ -228,7 +254,9 @@ export default function Home() {
             padding: '2rem 1rem',
           }}
         >
-          <h2 style={{ textAlign: 'center' }}>A Quick Workout for Your Brain</h2>
+          <h2 style={{ textAlign: 'center' }}>
+            A Quick Challenge for Your Mind
+          </h2>
 
           <p
             style={{
@@ -236,11 +264,11 @@ export default function Home() {
               lineHeight: 1.7,
             }}
           >
-            Mind Sprint is built around short challenges rather than long tests.
-            You can play a single challenge when you have a few spare minutes or
-            continue through several challenges in one session. Questions cover
-            a mix of trivia, words, memory and general brain-teaser style
-            challenges.
+            Mind Sprint is built around short challenges rather than long
+            tests. You can play a single challenge when you have a few spare
+            minutes or continue through several challenges in one session.
+            Questions cover a mix of trivia, words, memory and general
+            brain-teaser style challenges.
           </p>
 
           <p
