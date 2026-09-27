@@ -24,10 +24,14 @@ export default function About() {
       >
         <h1>About Mind Sprint</h1>
 
+        <p style={{ color: '#777', marginTop: '-0.5rem' }}>
+          By Mind Sprint · Updated September 2026
+        </p>
+
         <p>
           Mind Sprint is an independent trivia and brain-challenge website
-          designed around short, easy-to-play challenges that test general
-          knowledge, memory, words and problem-solving.
+          designed around short, easy-to-play challenges involving general
+          knowledge, memory, words, patterns and problem-solving.
         </p>
 
         <p>
@@ -73,27 +77,34 @@ export default function About() {
         </p>
 
         <p>
-          Some questions also include short “Did you know?” facts to add a
-          little extra context or interesting information after an answer.
+          Some questions also include short “Did you know?” facts to provide
+          additional context or interesting information after an answer.
         </p>
 
         <p>
-          If you notice an incorrect answer, outdated fact or technical problem,
-          please let us know so we can review it.
+          Questions and explanatory information are reviewed as the site is
+          maintained. If you notice an incorrect answer, outdated fact or
+          technical problem, please let us know so it can be reviewed.
         </p>
 
-        <h2>Weekly Prize Draw</h2>
+        <h2>Weekly Prize Draw — Coming Soon</h2>
 
         <p>
-          Eligible players can choose to enter the Mind Sprint weekly prize
-          draw. Completing different challenges during the week can earn
-          additional entries, up to the weekly limit described in the official
-          prize draw terms.
+          Mind Sprint is preparing a weekly promotional prize draw. The prize
+          draw is not currently live.
         </p>
 
         <p>
-          No purchase is required to play Mind Sprint or enter an eligible
-          weekly draw.
+          When the draw officially launches, eligible players will be able to
+          earn one entry for each different Mind Sprint challenge they complete
+          during the applicable weekly entry period, up to the weekly limit
+          described in the prize draw terms.
+        </p>
+
+        <p>
+          Challenge completions or test entries made before the official launch
+          will not be eligible for a prize. No purchase or payment will be
+          required to enter an eligible weekly draw.
         </p>
 
         <p>
@@ -104,7 +115,7 @@ export default function About() {
                 textDecoration: 'underline',
               }}
             >
-              Read the Weekly Prize Draw Terms
+              Read the Planned Weekly Prize Draw Terms
             </a>
           </Link>
         </p>
@@ -112,12 +123,18 @@ export default function About() {
         <h2>Publisher Information</h2>
 
         <p>
-          Mind Sprint is operated from Queensland, Australia.
+          Mind Sprint is independently operated from Queensland, Australia.
         </p>
 
         <p>
-          The site is intended primarily for entertainment, trivia and general
-          knowledge. Mind Sprint does not provide medical advice or claim that
+          The site is maintained specifically for Mind Sprint players, including
+          the creation and organisation of challenge content, question
+          rotations, explanatory facts and website features.
+        </p>
+
+        <p>
+          Mind Sprint is intended primarily for entertainment, trivia and
+          general knowledge. It is not a medical service and does not claim that
           playing its challenges can diagnose, treat or prevent health
           conditions.
         </p>
@@ -126,7 +143,7 @@ export default function About() {
 
         <p>
           Have a question, spotted a problem, or want to send feedback? You can
-          contact Mind Sprint at:
+          contact Mind Sprint directly at:
         </p>
 
         <p>
@@ -137,8 +154,8 @@ export default function About() {
         </p>
 
         <p>
-          We welcome feedback about questions, website issues, prize draws and
-          the general Mind Sprint experience.
+          We welcome feedback about questions, website issues, planned prize
+          draws and the general Mind Sprint experience.
         </p>
 
         <div
