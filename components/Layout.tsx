@@ -39,7 +39,14 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
             </Link>
           </div>
 
-          <nav style={{ display: 'flex', gap: '1rem' }}>
+          <nav
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'flex-end',
+              gap: '1rem',
+            }}
+          >
             <Link href="/how-it-works" legacyBehavior>
               <a className="ms-navlink" style={{ color: '#000' }}>
                 How it works
@@ -61,6 +68,12 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
             <Link href="/about" legacyBehavior>
               <a className="ms-navlink" style={{ color: '#000' }}>
                 About
+              </a>
+            </Link>
+
+            <Link href="/contact" legacyBehavior>
+              <a className="ms-navlink" style={{ color: '#000' }}>
+                Contact
               </a>
             </Link>
 
@@ -114,6 +127,12 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
           <Link href="/about" legacyBehavior>
             <a className="ms-navlink" style={{ color: '#000' }}>
               About
+            </a>
+          </Link>
+
+          <Link href="/contact" legacyBehavior>
+            <a className="ms-navlink" style={{ color: '#000' }}>
+              Contact
             </a>
           </Link>
 
