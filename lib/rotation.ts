@@ -341,119 +341,324 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
 
   2: [
 
-    [
-      {
-        question: 'What does the word "ancient" mean?',
-        options: ['Very old', 'Very fast', 'Very small', 'Very loud'],
-        answer: 'Very old'
-      },
-      {
-        question: 'What is the opposite of "early"?',
-        options: ['Late', 'Soon', 'Quick', 'First'],
-        answer: 'Late'
-      },
-      {
-        question: 'Which of the following is a grammatically correct sentence?',
-        options: [
-          'She don’t like tea',
-          'She doesn’t like tea',
-          'She don’t likes tea',
-          'She doesn’t likes tea'
-        ],
-        answer: 'She doesn’t like tea'
-      },
-      {
-        question: 'What is the plural form of "child"?',
-        options: ['Childs', 'Children', 'Childes', 'Childrens'],
-        answer: 'Children'
-      },
-      {
-        question: 'Which word means "to begin"?',
-        options: ['Start', 'Finish', 'Close', 'Stop'],
-        answer: 'Start'
-      },
-      {
-        question: 'Which of the following is the correct spelling?',
-        options: ['Recieve', 'Receive', 'Receeve', 'Receve'],
-        answer: 'Receive'
-      },
-      {
-        question: 'What is a synonym for "happy"?',
-        options: ['Angry', 'Joyful', 'Cold', 'Weak'],
-        answer: 'Joyful'
-      },
-      {
-        question: 'Which of the following is a compound word?',
-        options: ['Sunlight', 'Happy', 'Running', 'Blue'],
-        answer: 'Sunlight'
-      },
-      {
-        question: 'Complete the sentence: "Please ___ the door."',
-        options: ['open', 'opened', 'opening', 'opens'],
-        answer: 'open'
-      },
-      {
-        question: 'Which word means "very big"?',
-        options: ['Tiny', 'Huge', 'Short', 'Thin'],
-        answer: 'Huge'
-      }
-    ],
+    /*
+    SET A
+    */
 
     [
       {
-        question: 'What is the meaning of "fragile"?',
-        options: ['Strong', 'Easily broken', 'Heavy', 'Huge'],
-        answer: 'Easily broken'
-      },
-      {
-        question: 'What is the opposite of increase?',
-        options: ['Expand', 'Reduce', 'Improve', 'Multiply'],
-        answer: 'Reduce'
-      },
-      {
-        question: 'Which of the following is a grammatically correct sentence?',
+        question: 'Which word is closest in meaning to "reluctant"?',
         options: [
-          'They was late',
-          'They were late',
-          'They be late',
-          'They is late'
+          'Unwilling',
+          'Excited',
+          'Careless',
+          'Certain'
         ],
-        answer: 'They were late'
+        answer: 'Unwilling'
       },
       {
-        question: 'What is the plural form of "mouse"?',
-        options: ['Mouses', 'Mouse', 'Mice', 'Mices'],
-        answer: 'Mice'
+        question: 'Which sentence uses "their" correctly?',
+        options: [
+          'Their going to the beach.',
+          'The players packed their equipment.',
+          'Put the books over their.',
+          'Their is no reason to worry.'
+        ],
+        answer: 'The players packed their equipment.'
       },
       {
-        question: 'What is a synonym for "quick"?',
-        options: ['Rapid', 'Heavy', 'Bright', 'Weak'],
-        answer: 'Rapid'
+        question: 'Which word is an antonym of "scarce"?',
+        options: [
+          'Rare',
+          'Limited',
+          'Abundant',
+          'Missing'
+        ],
+        answer: 'Abundant'
       },
       {
-        question: 'Which of the following is spelled correctly?',
-        options: ['Occured', 'Occurred', 'Occerred', 'Occureded'],
-        answer: 'Occurred'
+        question: 'What does the idiom "break the ice" usually mean?',
+        options: [
+          'Damage something frozen',
+          'Start a friendly conversation',
+          'End an argument',
+          'Reveal a secret'
+        ],
+        answer: 'Start a friendly conversation'
       },
       {
-        question: 'Complete the sentence: "Please ___ the instructions carefully."',
-        options: ['read', 'reads', 'reading', 'reader'],
-        answer: 'read'
+        question: 'Which word is spelled correctly?',
+        options: [
+          'Accomodate',
+          'Acommodate',
+          'Accommodate',
+          'Accommadate'
+        ],
+        answer: 'Accommodate'
       },
       {
-        question: 'Which of the following is a noun?',
-        options: ['Happiness', 'Quickly', 'Bright', 'Swiftly'],
-        answer: 'Happiness'
+        question: 'Which sentence is punctuated correctly?',
+        options: [
+          'After dinner we watched a movie.',
+          'After dinner, we watched a movie.',
+          'After, dinner we watched a movie.',
+          'After dinner we, watched a movie.'
+        ],
+        answer: 'After dinner, we watched a movie.'
       },
       {
-        question: 'What is the opposite of "ancient"?',
-        options: ['Modern', 'Old', 'Historic', 'Traditional'],
-        answer: 'Modern'
+        question: 'Which word best completes the sentence: "The evidence had a significant ___ on the decision."',
+        options: [
+          'Affect',
+          'Effect',
+          'Effort',
+          'Event'
+        ],
+        answer: 'Effect'
       },
       {
-        question: 'What is a synonym for "difficult"?',
-        options: ['Simple', 'Hard', 'Easy', 'Clear'],
-        answer: 'Hard'
+        question: 'Which of these is an adjective?',
+        options: [
+          'Carefully',
+          'Brightness',
+          'Curious',
+          'Imagine'
+        ],
+        answer: 'Curious'
+      },
+      {
+        question: 'What does the prefix "pre-" usually mean?',
+        options: [
+          'After',
+          'Before',
+          'Against',
+          'Again'
+        ],
+        answer: 'Before'
+      },
+      {
+        question: 'Which pair of words are homophones?',
+        options: [
+          'Sea and see',
+          'Run and walk',
+          'Bright and dark',
+          'House and home'
+        ],
+        answer: 'Sea and see'
+      }
+    ],
+
+    /*
+    SET B
+    */
+
+    [
+      {
+        question: 'Which word is closest in meaning to "meticulous"?',
+        options: [
+          'Careless',
+          'Very careful',
+          'Impatient',
+          'Confused'
+        ],
+        answer: 'Very careful'
+      },
+      {
+        question: 'Which sentence is grammatically correct?',
+        options: [
+          'Neither of the answers are correct.',
+          'Neither of the answers is correct.',
+          'Neither of the answer is correct.',
+          'Neither answers are correct.'
+        ],
+        answer: 'Neither of the answers is correct.'
+      },
+      {
+        question: 'What does the expression "once in a blue moon" mean?',
+        options: [
+          'Every evening',
+          'Very rarely',
+          'Without warning',
+          'At exactly midnight'
+        ],
+        answer: 'Very rarely'
+      },
+      {
+        question: 'Which word means "to make something less severe or serious"?',
+        options: [
+          'Aggravate',
+          'Mitigate',
+          'Duplicate',
+          'Navigate'
+        ],
+        answer: 'Mitigate'
+      },
+      {
+        question: 'Which sentence uses "its" correctly?',
+        options: [
+          "The dog wagged it's tail.",
+          'The company changed its logo.',
+          "Its going to rain tonight.",
+          "The tree lost it's leaves."
+        ],
+        answer: 'The company changed its logo.'
+      },
+      {
+        question: 'Which word contains a suffix meaning "without"?',
+        options: [
+          'Fearless',
+          'Fearful',
+          'Fearfully',
+          'Fearsome'
+        ],
+        answer: 'Fearless'
+      },
+      {
+        question: 'Which word is the odd one out?',
+        options: [
+          'Whisper',
+          'Shout',
+          'Speak',
+          'Listen'
+        ],
+        answer: 'Listen'
+      },
+      {
+        question: 'Which word best completes the sentence: "She gave a very ___ explanation of the complicated idea."',
+        options: [
+          'Clear',
+          'Clearly',
+          'Clearing',
+          'Cleared'
+        ],
+        answer: 'Clear'
+      },
+      {
+        question: 'What is the plural of "criterion"?',
+        options: [
+          'Criterions',
+          'Criteria',
+          'Criterias',
+          'Criterion'
+        ],
+        answer: 'Criteria'
+      },
+      {
+        question: 'Which word is spelled correctly?',
+        options: [
+          'Definately',
+          'Definitely',
+          'Definitly',
+          'Definatly'
+        ],
+        answer: 'Definitely'
+      }
+    ],
+
+    /*
+    SET C
+    */
+
+    [
+      {
+        question: 'What does "ambiguous" mean?',
+        options: [
+          'Having more than one possible meaning',
+          'Extremely obvious',
+          'Impossible to hear',
+          'Completely incorrect'
+        ],
+        answer: 'Having more than one possible meaning'
+      },
+      {
+        question: 'Which sentence uses "fewer" correctly?',
+        options: [
+          'There is fewer water in the bottle.',
+          'We had fewer customers today.',
+          'She drank fewer coffee than yesterday.',
+          'There was fewer traffic this morning.'
+        ],
+        answer: 'We had fewer customers today.'
+      },
+      {
+        question: 'Which word is closest in meaning to "concise"?',
+        options: [
+          'Brief',
+          'Confusing',
+          'Emotional',
+          'Repetitive'
+        ],
+        answer: 'Brief'
+      },
+      {
+        question: 'What does the phrase "read between the lines" mean?',
+        options: [
+          'Skip every second line',
+          'Look for an implied meaning',
+          'Read very quickly',
+          'Correct spelling mistakes'
+        ],
+        answer: 'Look for an implied meaning'
+      },
+      {
+        question: 'Which sentence uses the apostrophe correctly?',
+        options: [
+          'The dogs collar was red.',
+          "The dog's collar was red.",
+          "The dogs' collar was red.",
+          "The dog,s collar was red."
+        ],
+        answer: "The dog's collar was red."
+      },
+      {
+        question: 'Which word is an antonym of "transparent" when describing an explanation?',
+        options: [
+          'Clear',
+          'Open',
+          'Obscure',
+          'Direct'
+        ],
+        answer: 'Obscure'
+      },
+      {
+        question: 'Which word best completes the sentence: "The new policy will ___ every employee."',
+        options: [
+          'Effect',
+          'Affect',
+          'Effects',
+          'Affected'
+        ],
+        answer: 'Affect'
+      },
+      {
+        question: 'Which of these is a conjunction?',
+        options: [
+          'Although',
+          'Quickly',
+          'Table',
+          'Bright'
+        ],
+        answer: 'Although'
+      },
+      {
+        question: 'Which analogy is correct: Bird is to fly as fish is to ___?',
+        options: [
+          'Swim',
+          'Nest',
+          'Feather',
+          'Wing'
+        ],
+        answer: 'Swim'
+      },
+      {
+        question: 'Which word is spelled correctly?',
+        options: [
+          'Separate',
+          'Seperate',
+          'Sepperate',
+          'Seperrate'
+        ],
+        answer: 'Separate'
       }
     ]
 
