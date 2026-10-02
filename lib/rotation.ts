@@ -672,9 +672,13 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
 
   3: [
 
+    /*
+    SET A
+    */
+
     [
       {
-        question: 'Actor who played Joker in The Dark Knight?',
+        question: 'Which actor played the Joker in the 2008 film "The Dark Knight"?',
         options: [
           'Joaquin Phoenix',
           'Jared Leto',
@@ -684,27 +688,27 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Heath Ledger'
       },
       {
-        question: 'Band that released Abbey Road?',
+        question: 'Which band released the album "Abbey Road"?',
         options: [
-          'Rolling Stones',
-          'Beatles',
+          'The Rolling Stones',
+          'The Beatles',
           'Pink Floyd',
           'Queen'
         ],
-        answer: 'Beatles'
+        answer: 'The Beatles'
       },
       {
-        question: 'Series set in Westeros?',
+        question: 'Which television series is primarily set in the fictional continents of Westeros and Essos?',
         options: [
           'The Witcher',
           'Game of Thrones',
           'Vikings',
-          'Rings of Power'
+          'The Rings of Power'
         ],
         answer: 'Game of Thrones'
       },
       {
-        question: 'Singer known as King of Pop?',
+        question: 'Which singer is widely known by the nickname "King of Pop"?',
         options: [
           'Elvis Presley',
           'Michael Jackson',
@@ -714,7 +718,7 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Michael Jackson'
       },
       {
-        question: 'Director of Pulp Fiction?',
+        question: 'Who directed the film "Pulp Fiction"?',
         options: [
           'Martin Scorsese',
           'Christopher Nolan',
@@ -724,17 +728,17 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Quentin Tarantino'
       },
       {
-        question: 'Sitcom set in Springfield?',
+        question: 'Which animated television series is set in the fictional town of Springfield?',
         options: [
           'Family Guy',
           'South Park',
           'The Simpsons',
-          'American Dad'
+          'American Dad!'
         ],
         answer: 'The Simpsons'
       },
       {
-        question: 'Actor playing Jack Sparrow?',
+        question: 'Which actor plays Captain Jack Sparrow in the "Pirates of the Caribbean" films?',
         options: [
           'Orlando Bloom',
           'Johnny Depp',
@@ -744,7 +748,7 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Johnny Depp'
       },
       {
-        question: 'Film franchise with Neo?',
+        question: 'Neo is the central character in which science-fiction film franchise?',
         options: [
           'Inception',
           'The Matrix',
@@ -754,7 +758,7 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'The Matrix'
       },
       {
-        question: 'Singer of album 1989?',
+        question: 'Which singer released the album "1989"?',
         options: [
           'Ariana Grande',
           'Taylor Swift',
@@ -764,7 +768,7 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Taylor Swift'
       },
       {
-        question: 'Animated film with Woody?',
+        question: 'Woody and Buzz Lightyear are characters from which animated film series?',
         options: [
           'Toy Story',
           'Shrek',
@@ -775,9 +779,13 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       }
     ],
 
+    /*
+    SET B
+    */
+
     [
       {
-        question: 'Who played Iron Man?',
+        question: 'Which actor portrayed Tony Stark, also known as Iron Man, in the Marvel Cinematic Universe?',
         options: [
           'Chris Evans',
           'Robert Downey Jr.',
@@ -787,17 +795,17 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Robert Downey Jr.'
       },
       {
-        question: 'Band behind Bohemian Rhapsody?',
+        question: 'Which band originally recorded "Bohemian Rhapsody"?',
         options: [
           'Queen',
-          'Beatles',
+          'The Beatles',
           'U2',
           'Coldplay'
         ],
         answer: 'Queen'
       },
       {
-        question: 'Actor who played Wolverine?',
+        question: 'Which actor is best known for portraying Wolverine in the "X-Men" film series?',
         options: [
           'Hugh Jackman',
           'Tom Hardy',
@@ -807,7 +815,7 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Hugh Jackman'
       },
       {
-        question: 'Movie featuring dinosaurs theme park?',
+        question: 'Which 1993 film features a theme park populated by cloned dinosaurs?',
         options: [
           'Jurassic Park',
           'Avatar',
@@ -817,17 +825,17 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Jurassic Park'
       },
       {
-        question: 'Which singer performed "Rolling in the Deep"?',
+        question: 'Which singer released the hit song "Rolling in the Deep"?',
         options: [
           'Adele',
-          'Beyonce',
+          'Beyoncé',
           'Rihanna',
           'Sia'
         ],
         answer: 'Adele'
       },
       {
-        question: 'Which streaming series features Eleven?',
+        question: 'The character Eleven appears in which television series?',
         options: [
           'Dark',
           'Stranger Things',
@@ -837,27 +845,27 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Stranger Things'
       },
       {
-        question: 'Character Batman lives in?',
+        question: 'Batman is most closely associated with which fictional city?',
         options: [
           'Star City',
           'Metropolis',
-          'Gotham',
+          'Gotham City',
           'Central City'
         ],
-        answer: 'Gotham'
+        answer: 'Gotham City'
       },
       {
-        question: 'Actor who played Neo?',
+        question: 'What is the name of the coffee shop frequently visited by the characters in "Friends"?',
         options: [
-          'Keanu Reeves',
-          'Tom Cruise',
-          'Matt Damon',
-          'Christian Bale'
+          'Central Perk',
+          'Monk’s Café',
+          'Luke’s Diner',
+          'The Peach Pit'
         ],
-        answer: 'Keanu Reeves'
+        answer: 'Central Perk'
       },
       {
-        question: 'Which film features Pandora?',
+        question: 'Pandora is the setting for much of which film franchise?',
         options: [
           'Avatar',
           'Titanic',
@@ -867,14 +875,121 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Avatar'
       },
       {
-        question: 'Band Coldplay originates from?',
+        question: 'Coldplay was formed in which country?',
         options: [
-          'USA',
+          'United States',
           'Australia',
-          'UK',
+          'United Kingdom',
           'Canada'
         ],
-        answer: 'UK'
+        answer: 'United Kingdom'
+      }
+    ],
+
+    /*
+    SET C
+    */
+
+    [
+      {
+        question: 'What is the name of the school attended by Harry Potter?',
+        options: [
+          'Hogwarts',
+          'Beauxbatons',
+          'Durmstrang',
+          'Ilvermorny'
+        ],
+        answer: 'Hogwarts'
+      },
+      {
+        question: 'The One Ring is central to the story of which fantasy film trilogy?',
+        options: [
+          'The Chronicles of Narnia',
+          'The Lord of the Rings',
+          'Harry Potter',
+          'The Hunger Games'
+        ],
+        answer: 'The Lord of the Rings'
+      },
+      {
+        question: 'Beyoncé first rose to widespread fame as a member of which group?',
+        options: [
+          'TLC',
+          'Destiny’s Child',
+          'En Vogue',
+          'The Pussycat Dolls'
+        ],
+        answer: 'Destiny’s Child'
+      },
+      {
+        question: 'Which actor played Walter White in the television series "Breaking Bad"?',
+        options: [
+          'Bryan Cranston',
+          'Aaron Paul',
+          'Bob Odenkirk',
+          'Jon Hamm'
+        ],
+        answer: 'Bryan Cranston'
+      },
+      {
+        question: 'Wakanda is the fictional home nation of which Marvel superhero?',
+        options: [
+          'Doctor Strange',
+          'Black Panther',
+          'Spider-Man',
+          'Ant-Man'
+        ],
+        answer: 'Black Panther'
+      },
+      {
+        question: 'What type of car is used as the time machine in "Back to the Future"?',
+        options: [
+          'Ferrari',
+          'DeLorean',
+          'Mustang',
+          'Porsche'
+        ],
+        answer: 'DeLorean'
+      },
+      {
+        question: 'Which actor provides the English-language voice of Shrek in the original film series?',
+        options: [
+          'Eddie Murphy',
+          'Mike Myers',
+          'Jim Carrey',
+          'Ben Stiller'
+        ],
+        answer: 'Mike Myers'
+      },
+      {
+        question: 'Which yellow Pokémon is one of the best-known mascots of the Pokémon franchise?',
+        options: [
+          'Pikachu',
+          'Charmander',
+          'Squirtle',
+          'Jigglypuff'
+        ],
+        answer: 'Pikachu'
+      },
+      {
+        question: 'Who directed the 2023 film "Barbie"?',
+        options: [
+          'Greta Gerwig',
+          'Sofia Coppola',
+          'Patty Jenkins',
+          'Chloé Zhao'
+        ],
+        answer: 'Greta Gerwig'
+      },
+      {
+        question: 'Which fictional archaeologist is known for carrying a whip and wearing a fedora?',
+        options: [
+          'Indiana Jones',
+          'Rick O’Connell',
+          'Allan Quatermain',
+          'Nathan Drake'
+        ],
+        answer: 'Indiana Jones'
       }
     ]
 
