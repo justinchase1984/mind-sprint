@@ -1003,6 +1003,10 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
 
   4: [
 
+    /*
+    SET A
+    */
+
     [
       {
         question: 'Who was the first President of the United States?',
@@ -1016,36 +1020,46 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       },
       {
         question: 'In which year did World War II end?',
-        options: ['1943', '1945', '1947', '1950'],
+        options: [
+          '1943',
+          '1945',
+          '1947',
+          '1950'
+        ],
         answer: '1945'
       },
       {
-        question: 'Civilization that built pyramids?',
+        question: 'Which ancient civilization built the pyramids at Giza?',
         options: [
           'Romans',
           'Egyptians',
           'Greeks',
-          'Mayans'
+          'Persians'
         ],
         answer: 'Egyptians'
       },
       {
-        question: 'French Revolution began?',
-        options: ['1776', '1789', '1804', '1812'],
+        question: 'In which year did the French Revolution begin?',
+        options: [
+          '1776',
+          '1789',
+          '1804',
+          '1815'
+        ],
         answer: '1789'
       },
       {
-        question: 'WWII British Prime Minister?',
+        question: 'Who became British Prime Minister in May 1940 and led Britain for most of World War II?',
         options: [
           'Neville Chamberlain',
           'Winston Churchill',
-          'Margaret Thatcher',
-          'Tony Blair'
+          'Clement Attlee',
+          'Anthony Eden'
         ],
         answer: 'Winston Churchill'
       },
       {
-        question: 'Ship that sank in 1912?',
+        question: 'Which passenger liner struck an iceberg and sank in 1912?',
         options: [
           'Lusitania',
           'Titanic',
@@ -1055,45 +1069,54 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Titanic'
       },
       {
-        question: 'Renaissance began where?',
+        question: 'The Renaissance first developed most strongly in which part of Europe?',
         options: [
-          'France',
-          'Germany',
-          'Italy',
-          'Spain'
+          'Italian city-states',
+          'Scandinavia',
+          'British Isles',
+          'Iberian Peninsula'
         ],
-        answer: 'Italy'
+        answer: 'Italian city-states'
       },
       {
-        question: 'Wall that fell in 1989?',
+        question: 'Which major Cold War barrier was opened in November 1989?',
         options: [
           'Hadrian’s Wall',
           'Berlin Wall',
-          'Great Wall',
+          'Great Wall of China',
           'Western Wall'
         ],
         answer: 'Berlin Wall'
       },
       {
-        question: 'Empire ruled by Julius Caesar?',
+        question: 'Julius Caesar was a leading political and military figure of which Roman period?',
         options: [
-          'Greek Empire',
           'Roman Republic',
-          'Ottoman Empire',
-          'British Empire'
+          'Byzantine Empire',
+          'Holy Roman Empire',
+          'Roman Kingdom'
         ],
         answer: 'Roman Republic'
       },
       {
-        question: 'WWI ended in?',
-        options: ['1917', '1918', '1919', '1920'],
+        question: 'In which year did the armistice end major fighting in World War I?',
+        options: [
+          '1916',
+          '1917',
+          '1918',
+          '1919'
+        ],
         answer: '1918'
       }
     ],
 
+    /*
+    SET B
+    */
+
     [
       {
-        question: 'Which explorer reached the Americas in 1492?',
+        question: 'Which explorer led the 1492 voyage from Spain that reached the Caribbean?',
         options: [
           'Ferdinand Magellan',
           'Christopher Columbus',
@@ -1103,7 +1126,7 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Christopher Columbus'
       },
       {
-        question: 'Great Wall built in which country?',
+        question: 'The Great Wall was built and expanded by dynasties in which country?',
         options: [
           'Japan',
           'China',
@@ -1113,17 +1136,17 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'China'
       },
       {
-        question: 'Leader of Soviet Union during WWII?',
+        question: 'Who led the Soviet Union for most of World War II?',
         options: [
           'Joseph Stalin',
           'Vladimir Lenin',
           'Nikita Khrushchev',
-          'Vladimir Putin'
+          'Leon Trotsky'
         ],
         answer: 'Joseph Stalin'
       },
       {
-        question: 'Ancient Greek philosopher who taught Alexander the Great?',
+        question: 'Which ancient Greek philosopher tutored Alexander the Great?',
         options: [
           'Plato',
           'Aristotle',
@@ -1133,17 +1156,17 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Aristotle'
       },
       {
-        question: 'Empire ruled by Genghis Khan?',
+        question: 'Genghis Khan founded and became the first Great Khan of which empire?',
         options: [
-          'Roman',
-          'Mongol',
-          'Ottoman',
-          'Persian'
+          'Roman Empire',
+          'Mongol Empire',
+          'Ottoman Empire',
+          'Persian Empire'
         ],
-        answer: 'Mongol'
+        answer: 'Mongol Empire'
       },
       {
-        question: 'First man on the Moon?',
+        question: 'Who became the first person to walk on the Moon in 1969?',
         options: [
           'Buzz Aldrin',
           'Neil Armstrong',
@@ -1153,27 +1176,17 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Neil Armstrong'
       },
       {
-        question: 'Which wall divided Germany during the Cold War?',
-        options: [
-          'Berlin Wall',
-          'Iron Curtain',
-          'Great Wall',
-          'Hadrian Wall'
-        ],
-        answer: 'Berlin Wall'
-      },
-      {
-        question: 'Which famous arena is located in Rome?',
+        question: 'Which ancient amphitheatre is one of the best-known landmarks of Rome?',
         options: [
           'Pantheon',
           'Colosseum',
-          'Forum',
+          'Parthenon',
           'Acropolis'
         ],
         answer: 'Colosseum'
       },
       {
-        question: 'Where was Napoleon defeated in his final battle?',
+        question: 'At which battle was Napoleon Bonaparte finally defeated in 1815?',
         options: [
           'Waterloo',
           'Verdun',
@@ -1183,14 +1196,131 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Waterloo'
       },
       {
-        question: 'Ancient writing system of Egypt?',
+        question: 'What name is commonly given to the picture-based writing system used in ancient Egypt?',
         options: [
           'Runes',
-          'Hieroglyphics',
+          'Hieroglyphs',
           'Cuneiform',
           'Latin'
         ],
-        answer: 'Hieroglyphics'
+        answer: 'Hieroglyphs'
+      },
+      {
+        question: 'Which ancient Roman city was buried by the eruption of Mount Vesuvius in 79 CE?',
+        options: [
+          'Pompeii',
+          'Athens',
+          'Carthage',
+          'Sparta'
+        ],
+        answer: 'Pompeii'
+      }
+    ],
+
+    /*
+    SET C
+    */
+
+    [
+      {
+        question: 'Which ancient Mesopotamian civilization is closely associated with the earliest development of cuneiform writing?',
+        options: [
+          'Sumerians',
+          'Vikings',
+          'Phoenicians',
+          'Romans'
+        ],
+        answer: 'Sumerians'
+      },
+      {
+        question: 'Which ruler is associated with one of the earliest surviving written law codes?',
+        options: [
+          'Hammurabi',
+          'Pericles',
+          'Augustus',
+          'Cleopatra'
+        ],
+        answer: 'Hammurabi'
+      },
+      {
+        question: 'Which trade network historically connected East Asia with Central Asia, the Middle East and Europe?',
+        options: [
+          'Silk Road',
+          'Amber Road',
+          'Royal Road',
+          'Appian Way'
+        ],
+        answer: 'Silk Road'
+      },
+      {
+        question: 'Which city served as the capital of the Byzantine Empire for most of its history?',
+        options: [
+          'Constantinople',
+          'Alexandria',
+          'Athens',
+          'Venice'
+        ],
+        answer: 'Constantinople'
+      },
+      {
+        question: 'Which empire used knotted cords called quipu for recording information?',
+        options: [
+          'Inca Empire',
+          'Roman Empire',
+          'Mali Empire',
+          'Ottoman Empire'
+        ],
+        answer: 'Inca Empire'
+      },
+      {
+        question: 'Which battle in 1066 led to Norman rule in England?',
+        options: [
+          'Battle of Hastings',
+          'Battle of Agincourt',
+          'Battle of Bosworth',
+          'Battle of Bannockburn'
+        ],
+        answer: 'Battle of Hastings'
+      },
+      {
+        question: 'Which U.S. president issued the Emancipation Proclamation during the American Civil War?',
+        options: [
+          'George Washington',
+          'Abraham Lincoln',
+          'Andrew Jackson',
+          'Ulysses S. Grant'
+        ],
+        answer: 'Abraham Lincoln'
+      },
+      {
+        question: 'Mansa Musa was a famous ruler of which West African empire?',
+        options: [
+          'Mali Empire',
+          'Roman Empire',
+          'Aztec Empire',
+          'Mughal Empire'
+        ],
+        answer: 'Mali Empire'
+      },
+      {
+        question: 'Joan of Arc played a major role in which long conflict between England and France?',
+        options: [
+          'Hundred Years’ War',
+          'Thirty Years’ War',
+          'Napoleonic Wars',
+          'Crimean War'
+        ],
+        answer: 'Hundred Years’ War'
+      },
+      {
+        question: 'Which document, signed in 1776, declared the thirteen American colonies independent from Great Britain?',
+        options: [
+          'Declaration of Independence',
+          'Bill of Rights',
+          'Magna Carta',
+          'Treaty of Versailles'
+        ],
+        answer: 'Declaration of Independence'
       }
     ]
 
