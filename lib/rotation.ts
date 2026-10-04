@@ -1996,124 +1996,324 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
 
   7: [
 
-    [
-      {
-        question: 'Which country has the most time zones?',
-        options: ['Russia', 'USA', 'France', 'UK'],
-        answer: 'France'
-      },
-      {
-        question: 'Mount Kilimanjaro is located in which country?',
-        options: ['Kenya', 'Tanzania', 'Uganda', 'Ethiopia'],
-        answer: 'Tanzania'
-      },
-      {
-        question: 'Which river flows through the city of Budapest?',
-        options: ['Rhine', 'Danube', 'Seine', 'Thames'],
-        answer: 'Danube'
-      },
-      {
-        question: 'What is the smallest country in the world?',
-        options: [
-          'Monaco',
-          'Vatican City',
-          'San Marino',
-          'Liechtenstein'
-        ],
-        answer: 'Vatican City'
-      },
-      {
-        question: 'Which is the largest hot desert in the world?',
-        options: ['Gobi', 'Kalahari', 'Sahara', 'Atacama'],
-        answer: 'Sahara'
-      },
-      {
-        question: 'Which sea lies between Europe and Africa?',
-        options: ['Baltic', 'Black', 'Mediterranean', 'Caribbean'],
-        answer: 'Mediterranean'
-      },
-      {
-        question: 'Which country is known as the "Land of the Rising Sun"?',
-        options: ['China', 'Japan', 'Korea', 'Thailand'],
-        answer: 'Japan'
-      },
-      {
-        question: 'Which is the largest U.S. state by land area?',
-        options: ['Texas', 'California', 'Alaska', 'Montana'],
-        answer: 'Alaska'
-      },
-      {
-        question: 'Casablanca is a city in which country?',
-        options: ['Spain', 'Morocco', 'Tunisia', 'Egypt'],
-        answer: 'Morocco'
-      },
-      {
-        question: 'The Andes mountain range is located on which continent?',
-        options: [
-          'North America',
-          'Europe',
-          'South America',
-          'Asia'
-        ],
-        answer: 'South America'
-      }
-    ],
+    /*
+    SET A
+    */
 
     [
       {
-        question: 'What is the capital city of Australia?',
-        options: ['Sydney', 'Melbourne', 'Canberra', 'Perth'],
-        answer: 'Canberra'
+        question: 'What is the capital city of New Zealand?',
+        options: [
+          'Auckland',
+          'Wellington',
+          'Christchurch',
+          'Hamilton'
+        ],
+        answer: 'Wellington'
       },
       {
-        question: 'Which is the longest river in the world?',
-        options: ['Amazon', 'Nile', 'Yangtze', 'Mississippi'],
+        question: 'Which mountain range runs along much of the western edge of South America?',
+        options: [
+          'Andes',
+          'Alps',
+          'Rockies',
+          'Himalayas'
+        ],
+        answer: 'Andes'
+      },
+      {
+        question: 'Which strait separates southern Spain from northern Morocco?',
+        options: [
+          'Strait of Gibraltar',
+          'Bering Strait',
+          'Strait of Hormuz',
+          'Bosporus'
+        ],
+        answer: 'Strait of Gibraltar'
+      },
+      {
+        question: 'Which country completely surrounds the nation of Lesotho?',
+        options: [
+          'Botswana',
+          'South Africa',
+          'Zimbabwe',
+          'Mozambique'
+        ],
+        answer: 'South Africa'
+      },
+      {
+        question: 'Which major river flows through Cairo?',
+        options: [
+          'Nile',
+          'Congo',
+          'Niger',
+          'Zambezi'
+        ],
         answer: 'Nile'
       },
       {
-        question: 'Which is the largest continent by land area?',
-        options: ['Africa', 'Asia', 'Europe', 'North America'],
-        answer: 'Asia'
+        question: 'What is the capital city of Morocco?',
+        options: [
+          'Casablanca',
+          'Marrakesh',
+          'Rabat',
+          'Fez'
+        ],
+        answer: 'Rabat'
       },
       {
-        question: 'Which country is the city of Dubai located in?',
-        options: ['Qatar', 'UAE', 'Oman', 'Saudi Arabia'],
-        answer: 'UAE'
+        question: 'The Atacama Desert is located primarily in which country?',
+        options: [
+          'Peru',
+          'Chile',
+          'Argentina',
+          'Bolivia'
+        ],
+        answer: 'Chile'
       },
       {
-        question: 'Mount Everest is located in which country?',
-        options: ['Nepal', 'India', 'China', 'Bhutan'],
-        answer: 'Nepal'
+        question: 'The island of Bali is part of which country?',
+        options: [
+          'Malaysia',
+          'Indonesia',
+          'Philippines',
+          'Thailand'
+        ],
+        answer: 'Indonesia'
       },
       {
-        question: 'Which river flows through the city of Paris?',
-        options: ['Rhine', 'Seine', 'Danube', 'Thames'],
-        answer: 'Seine'
-      },
-      {
-        question: 'Which is the largest island in the world?',
-        options: ['Greenland', 'Iceland', 'Borneo', 'Madagascar'],
+        question: 'Which is the largest island in the world that is not classified as a continent?',
+        options: [
+          'Greenland',
+          'New Guinea',
+          'Borneo',
+          'Madagascar'
+        ],
         answer: 'Greenland'
       },
       {
-        question: 'What is the capital city of Italy?',
-        options: ['Rome', 'Milan', 'Venice', 'Naples'],
-        answer: 'Rome'
+        question: 'Which imaginary line divides Earth into the Northern and Southern Hemispheres?',
+        options: [
+          'Equator',
+          'Prime Meridian',
+          'Tropic of Cancer',
+          'International Date Line'
+        ],
+        answer: 'Equator'
+      }
+    ],
+
+    /*
+    SET B
+    */
+
+    [
+      {
+        question: 'What is the capital city of Kenya?',
+        options: [
+          'Mombasa',
+          'Nairobi',
+          'Kampala',
+          'Kigali'
+        ],
+        answer: 'Nairobi'
       },
       {
-        question: 'Which continent has the most countries?',
-        options: ['Asia', 'Africa', 'Europe', 'South America'],
+        question: 'The Bosporus runs through which major city?',
+        options: [
+          'Athens',
+          'Istanbul',
+          'Cairo',
+          'Rome'
+        ],
+        answer: 'Istanbul'
+      },
+      {
+        question: 'Lake Titicaca lies on the border between Peru and which other country?',
+        options: [
+          'Chile',
+          'Bolivia',
+          'Ecuador',
+          'Brazil'
+        ],
+        answer: 'Bolivia'
+      },
+      {
+        question: 'The region known as Patagonia is shared mainly by Argentina and which other country?',
+        options: [
+          'Chile',
+          'Uruguay',
+          'Peru',
+          'Paraguay'
+        ],
+        answer: 'Chile'
+      },
+      {
+        question: 'Which strait separates mainland Australia from Tasmania?',
+        options: [
+          'Bass Strait',
+          'Torres Strait',
+          'Cook Strait',
+          'Dover Strait'
+        ],
+        answer: 'Bass Strait'
+      },
+      {
+        question: 'Mount Kilimanjaro is located in which African country?',
+        options: [
+          'Kenya',
+          'Tanzania',
+          'Uganda',
+          'Ethiopia'
+        ],
+        answer: 'Tanzania'
+      },
+      {
+        question: 'Prague is the capital city of which country?',
+        options: [
+          'Slovakia',
+          'Czechia',
+          'Hungary',
+          'Austria'
+        ],
+        answer: 'Czechia'
+      },
+      {
+        question: 'Which river flows through Paris?',
+        options: [
+          'Rhine',
+          'Seine',
+          'Danube',
+          'Thames'
+        ],
+        answer: 'Seine'
+      },
+      {
+        question: 'Which body of water is the world’s largest inland body of water by surface area?',
+        options: [
+          'Caspian Sea',
+          'Lake Superior',
+          'Black Sea',
+          'Lake Victoria'
+        ],
+        answer: 'Caspian Sea'
+      },
+      {
+        question: 'Mount Everest lies on the border between Nepal and which country?',
+        options: [
+          'India',
+          'Bhutan',
+          'China',
+          'Pakistan'
+        ],
+        answer: 'China'
+      }
+    ],
+
+    /*
+    SET C
+    */
+
+    [
+      {
+        question: 'The Panama Canal connects the Atlantic Ocean with which other ocean?',
+        options: [
+          'Indian Ocean',
+          'Pacific Ocean',
+          'Arctic Ocean',
+          'Southern Ocean'
+        ],
+        answer: 'Pacific Ocean'
+      },
+      {
+        question: 'What is the capital city of Iceland?',
+        options: [
+          'Reykjavík',
+          'Oslo',
+          'Helsinki',
+          'Stockholm'
+        ],
+        answer: 'Reykjavík'
+      },
+      {
+        question: 'Which mountain range is commonly regarded as part of the conventional boundary between Europe and Asia?',
+        options: [
+          'Ural Mountains',
+          'Pyrenees',
+          'Carpathians',
+          'Apennines'
+        ],
+        answer: 'Ural Mountains'
+      },
+      {
+        question: 'Madagascar lies off the southeastern coast of which continent?',
+        options: [
+          'Africa',
+          'Asia',
+          'South America',
+          'Australia'
+        ],
         answer: 'Africa'
       },
       {
-        question: 'The Great Barrier Reef is located in which sea?',
+        question: 'What is the capital city of Argentina?',
         options: [
-          'Coral Sea',
-          'Tasman Sea',
-          'Arafura Sea',
-          'Timor Sea'
+          'Santiago',
+          'Buenos Aires',
+          'Montevideo',
+          'Lima'
         ],
-        answer: 'Coral Sea'
+        answer: 'Buenos Aires'
+      },
+      {
+        question: 'The ancient city of Petra is located in which modern-day country?',
+        options: [
+          'Jordan',
+          'Egypt',
+          'Lebanon',
+          'Syria'
+        ],
+        answer: 'Jordan'
+      },
+      {
+        question: 'Which country is especially famous for its long, deeply indented fjord coastline?',
+        options: [
+          'Norway',
+          'Belgium',
+          'Portugal',
+          'Poland'
+        ],
+        answer: 'Norway'
+      },
+      {
+        question: 'Which line of longitude is defined as 0° longitude?',
+        options: [
+          'Prime Meridian',
+          'Equator',
+          'International Date Line',
+          'Tropic of Capricorn'
+        ],
+        answer: 'Prime Meridian'
+      },
+      {
+        question: 'Which of these countries is crossed by the Equator?',
+        options: [
+          'Ecuador',
+          'Mexico',
+          'Argentina',
+          'Spain'
+        ],
+        answer: 'Ecuador'
+      },
+      {
+        question: 'Which tropical latitude line passes through Australia?',
+        options: [
+          'Tropic of Capricorn',
+          'Tropic of Cancer',
+          'Arctic Circle',
+          'Equator'
+        ],
+        answer: 'Tropic of Capricorn'
       }
     ]
 
