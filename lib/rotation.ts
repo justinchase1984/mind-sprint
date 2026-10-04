@@ -1334,109 +1334,324 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
 
   5: [
 
-    [
-      {
-        question: 'What is 15% of 200?',
-        options: ['25', '30', '35', '40'],
-        answer: '30'
-      },
-      {
-        question: 'If you travel at 60 km/h for 2 hours, how far do you go?',
-        options: ['100', '110', '120', '140'],
-        answer: '120'
-      },
-      {
-        question: 'What is the next number in the sequence: 2, 4, 8, 16, ...?',
-        options: ['24', '28', '32', '36'],
-        answer: '32'
-      },
-      {
-        question: 'What is $80 reduced by 25%?',
-        options: ['55', '60', '65', '70'],
-        answer: '60'
-      },
-      {
-        question: 'What is 12 squared?',
-        options: ['124', '134', '144', '154'],
-        answer: '144'
-      },
-      {
-        question: 'What is the average of 2, 4, and 6?',
-        options: ['3', '4', '5', '6'],
-        answer: '4'
-      },
-      {
-        question: 'Solve for x: 3x = 21',
-        options: ['6', '7', '8', '9'],
-        answer: '7'
-      },
-      {
-        question: 'What is 9 × 7?',
-        options: ['54', '63', '72', '81'],
-        answer: '63'
-      },
-      {
-        question: 'What is the area of a rectangle with sides 10 and 5?',
-        options: ['40', '45', '50', '55'],
-        answer: '50'
-      },
-      {
-        question: 'What is half of 250?',
-        options: ['100', '110', '120', '125'],
-        answer: '125'
-      }
-    ],
+    /*
+    SET A
+    */
 
     [
       {
-        question: 'What is 20% of 150?',
-        options: ['20', '25', '30', '35'],
-        answer: '30'
-      },
-      {
-        question: 'What is the next number in the sequence: 3, 6, 9, 12, ...?',
-        options: ['15', '18', '21', '24'],
-        answer: '15'
-      },
-      {
-        question: 'What is 7 × 8?',
-        options: ['54', '56', '58', '60'],
-        answer: '56'
-      },
-      {
-        question: 'What is the average of 10, 20, and 30?',
-        options: ['15', '20', '25', '30'],
-        answer: '20'
-      },
-      {
-        question: 'What is 15 squared?',
-        options: ['200', '210', '225', '240'],
-        answer: '225'
-      },
-      {
-        question: 'What is half of 400?',
-        options: ['150', '180', '200', '220'],
-        answer: '200'
-      },
-      {
-        question: 'Solve for x: 5x = 25',
-        options: ['3', '4', '5', '6'],
-        answer: '5'
-      },
-      {
-        question: 'What is the area of a 6 × 6 square?',
-        options: ['30', '36', '40', '42'],
+        question: 'What is 15% of 240?',
+        options: [
+          '24',
+          '30',
+          '36',
+          '42'
+        ],
         answer: '36'
       },
       {
-        question: 'What is the next number in the sequence: 5, 10, 15, ...?',
-        options: ['20', '25', '30', '35'],
-        answer: '20'
+        question: 'A car travels at 72 km/h for 2.5 hours. How far does it travel?',
+        options: [
+          '144 km',
+          '160 km',
+          '180 km',
+          '200 km'
+        ],
+        answer: '180 km'
       },
       {
-        question: 'What is 10% of 500?',
-        options: ['40', '50', '60', '70'],
-        answer: '50'
+        question: 'What number comes next in the sequence: 3, 6, 12, 24, ...?',
+        options: [
+          '36',
+          '42',
+          '48',
+          '54'
+        ],
+        answer: '48'
+      },
+      {
+        question: 'An item costs $160 and is reduced by 25%. What is the sale price?',
+        options: [
+          '$100',
+          '$120',
+          '$125',
+          '$140'
+        ],
+        answer: '$120'
+      },
+      {
+        question: 'What is 14 squared?',
+        options: [
+          '176',
+          '186',
+          '196',
+          '206'
+        ],
+        answer: '196'
+      },
+      {
+        question: 'What is the average of 12, 18, 24 and 30?',
+        options: [
+          '18',
+          '20',
+          '21',
+          '22'
+        ],
+        answer: '21'
+      },
+      {
+        question: 'Solve for x: 4x + 6 = 30',
+        options: [
+          '5',
+          '6',
+          '7',
+          '8'
+        ],
+        answer: '6'
+      },
+      {
+        question: 'Red and blue counters are in the ratio 2:3. If there are 25 counters in total, how many are red?',
+        options: [
+          '8',
+          '10',
+          '12',
+          '15'
+        ],
+        answer: '10'
+      },
+      {
+        question: 'What is the area of a rectangle that is 12 metres long and 7 metres wide?',
+        options: [
+          '72 m²',
+          '84 m²',
+          '96 m²',
+          '108 m²'
+        ],
+        answer: '84 m²'
+      },
+      {
+        question: 'What is 3/8 of 64?',
+        options: [
+          '16',
+          '20',
+          '24',
+          '28'
+        ],
+        answer: '24'
+      }
+    ],
+
+    /*
+    SET B
+    */
+
+    [
+      {
+        question: 'What is 18% of 250?',
+        options: [
+          '40',
+          '45',
+          '50',
+          '55'
+        ],
+        answer: '45'
+      },
+      {
+        question: 'A price of $80 increases by 15%. What is the new price?',
+        options: [
+          '$88',
+          '$90',
+          '$92',
+          '$94'
+        ],
+        answer: '$92'
+      },
+      {
+        question: 'What number comes next in the sequence: 2, 5, 11, 23, ...?',
+        options: [
+          '35',
+          '41',
+          '47',
+          '49'
+        ],
+        answer: '47'
+      },
+      {
+        question: 'Five identical items cost $37.50 in total. How much does one item cost?',
+        options: [
+          '$6.50',
+          '$7.00',
+          '$7.50',
+          '$8.00'
+        ],
+        answer: '$7.50'
+      },
+      {
+        question: 'How many minutes are in 1.5 hours?',
+        options: [
+          '75',
+          '80',
+          '90',
+          '100'
+        ],
+        answer: '90'
+      },
+      {
+        question: 'A square has a perimeter of 36 cm. What is its area?',
+        options: [
+          '72 cm²',
+          '81 cm²',
+          '90 cm²',
+          '108 cm²'
+        ],
+        answer: '81 cm²'
+      },
+      {
+        question: 'What percentage is equivalent to 7/10?',
+        options: [
+          '7%',
+          '17%',
+          '70%',
+          '700%'
+        ],
+        answer: '70%'
+      },
+      {
+        question: 'Solve for x: 2x - 5 = 17',
+        options: [
+          '9',
+          '10',
+          '11',
+          '12'
+        ],
+        answer: '11'
+      },
+      {
+        question: 'A vehicle travels 150 km in 2.5 hours. What is its average speed?',
+        options: [
+          '50 km/h',
+          '60 km/h',
+          '65 km/h',
+          '75 km/h'
+        ],
+        answer: '60 km/h'
+      },
+      {
+        question: 'What is 2/3 of 90?',
+        options: [
+          '45',
+          '50',
+          '60',
+          '75'
+        ],
+        answer: '60'
+      }
+    ],
+
+    /*
+    SET C
+    */
+
+    [
+      {
+        question: 'What is 12.5% of 240?',
+        options: [
+          '24',
+          '30',
+          '32',
+          '36'
+        ],
+        answer: '30'
+      },
+      {
+        question: 'Four workers can complete a job in 6 hours. At the same rate, how long would 8 workers take to complete the same job?',
+        options: [
+          '2 hours',
+          '3 hours',
+          '4 hours',
+          '5 hours'
+        ],
+        answer: '3 hours'
+      },
+      {
+        question: 'What number comes next in the sequence: 1, 4, 9, 16, ...?',
+        options: [
+          '20',
+          '24',
+          '25',
+          '36'
+        ],
+        answer: '25'
+      },
+      {
+        question: 'A $75 item is discounted by 20%. What is the sale price?',
+        options: [
+          '$55',
+          '$60',
+          '$62',
+          '$65'
+        ],
+        answer: '$60'
+      },
+      {
+        question: 'How many grams are in 2.75 kilograms?',
+        options: [
+          '275',
+          '750',
+          '2,075',
+          '2,750'
+        ],
+        answer: '2,750'
+      },
+      {
+        question: 'Three notebooks cost $13.50. At the same price per notebook, how much would eight notebooks cost?',
+        options: [
+          '$32',
+          '$34',
+          '$36',
+          '$38'
+        ],
+        answer: '$36'
+      },
+      {
+        question: 'Red and blue marbles are in the ratio 3:5. If there are 40 marbles altogether, how many are red?',
+        options: [
+          '12',
+          '15',
+          '18',
+          '25'
+        ],
+        answer: '15'
+      },
+      {
+        question: 'A bag contains 5 red, 3 blue and 2 green balls. What is the probability of randomly choosing a blue ball?',
+        options: [
+          '1/5',
+          '3/10',
+          '1/3',
+          '1/2'
+        ],
+        answer: '3/10'
+      },
+      {
+        question: 'Using standard order of operations, what is 6 + 4 × 3?',
+        options: [
+          '18',
+          '24',
+          '30',
+          '42'
+        ],
+        answer: '18'
+      },
+      {
+        question: 'What is the smaller angle between the hour and minute hands of a clock at exactly 3:00?',
+        options: [
+          '45°',
+          '60°',
+          '90°',
+          '120°'
+        ],
+        answer: '90°'
       }
     ]
 
