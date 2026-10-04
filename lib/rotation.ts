@@ -4,23 +4,28 @@ import type { Puzzle } from './puzzles'
 /*
 Rotation System
 ---------------
-• Challenges rotate every 2 days
-• Each challenge can contain multiple question sets
+• Challenges rotate every day
+• Each challenge contains 3 question sets
+• Rotation changes at midnight Brisbane / AEST
 */
 
-const ROTATION_DAYS = 2
+const ROTATION_DAYS = 1
+const AEST_OFFSET_MS = 10 * 60 * 60 * 1000
 
 function getDayIndex(date: Date = new Date()): number {
-  const start = new Date(Date.UTC(2025, 0, 1))
-  const today = new Date(
-    Date.UTC(
-      date.getUTCFullYear(),
-      date.getUTCMonth(),
-      date.getUTCDate()
-    )
+  const start = Date.UTC(2025, 0, 1)
+
+  // Shift the supplied time into Brisbane / AEST before extracting the date.
+  // Brisbane remains UTC+10 year-round.
+  const aestDate = new Date(date.getTime() + AEST_OFFSET_MS)
+
+  const today = Date.UTC(
+    aestDate.getUTCFullYear(),
+    aestDate.getUTCMonth(),
+    aestDate.getUTCDate()
   )
 
-  const diff = today.getTime() - start.getTime()
+  const diff = today - start
 
   return Math.floor(diff / (1000 * 60 * 60 * 24))
 }
