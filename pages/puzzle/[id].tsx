@@ -49,6 +49,9 @@ export default function PuzzlePage() {
   const [locked, setLocked] =
     useState(false)
 
+  const [answerProcessed, setAnswerProcessed] =
+    useState(false)
+
   const [hasJoined, setHasJoined] =
     useState(false)
 
@@ -103,6 +106,7 @@ export default function PuzzlePage() {
   useEffect(() => {
     setSelected(null)
     setLocked(false)
+    setAnswerProcessed(false)
   }, [idNum])
 
   useEffect(() => {
@@ -161,6 +165,12 @@ export default function PuzzlePage() {
       'dailyCorrect',
       cnt.toString()
     )
+  }
+
+  function goToNextQuestion() {
+    if (!answerProcessed) {
+      return
+    }
 
     router.push(
       `/puzzle/${idNum + 1}?challenge=${challengeIndex}`
@@ -296,27 +306,15 @@ export default function PuzzlePage() {
     setSelected(answer)
     setLocked(true)
 
-    const clickedAt =
-      Date.now()
-
     await recordAttemptAnswer(
       answer
     )
 
-    const elapsed =
-      Date.now() - clickedAt
+    afterAnswer(
+      answer === puzzle.answer
+    )
 
-    const remaining =
-      Math.max(
-        0,
-        800 - elapsed
-      )
-
-    setTimeout(() => {
-      afterAnswer(
-        answer === puzzle.answer
-      )
-    }, remaining)
+    setAnswerProcessed(true)
   }
 
   async function claimPrizeEntry(
@@ -1054,24 +1052,48 @@ export default function PuzzlePage() {
               </p>
             )}
 
-            {DID_YOU_KNOW[
-              factKey
-            ] && (
-              <p
+            {answerProcessed &&
+              DID_YOU_KNOW[
+                factKey
+              ] && (
+                <p
+                  style={{
+                    fontStyle:
+                      'italic',
+                    marginTop:
+                      '1rem',
+                    color: '#555',
+                  }}
+                >
+                  {
+                    DID_YOU_KNOW[
+                      factKey
+                    ]
+                  }
+                </p>
+              )}
+
+            {answerProcessed && (
+              <button
+                onClick={
+                  goToNextQuestion
+                }
                 style={{
-                  fontStyle:
-                    'italic',
-                  marginTop:
-                    '1rem',
-                  color: '#555',
+                  marginTop: '1rem',
+                  padding:
+                    '12px 18px',
+                  borderRadius: 8,
+                  border: 'none',
+                  background: '#111',
+                  color: '#fff',
+                  fontSize: 16,
+                  cursor: 'pointer',
                 }}
               >
-                {
-                  DID_YOU_KNOW[
-                    factKey
-                  ]
-                }
-              </p>
+                {idNum >= total
+                  ? 'See Results →'
+                  : 'Next Question →'}
+              </button>
             )}
           </>
         )}
