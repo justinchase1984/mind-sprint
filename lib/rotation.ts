@@ -57,7 +57,7 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
     [
       {
         question: 'Which country is home to the Great Barrier Reef?',
-        options: ['Indonesia', 'Australia', 'Philippines', 'Thailand'],
+        options: ['Australia', 'Indonesia', 'Philippines', 'Thailand'],
         answer: 'Australia'
       },
       {
@@ -67,14 +67,14 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       },
       {
         question: 'What is the capital city of Canada?',
-        options: ['Toronto', 'Ottawa', 'Vancouver', 'Montreal'],
+        options: ['Toronto', 'Vancouver', 'Montreal', 'Ottawa'],
         answer: 'Ottawa'
       },
       {
         question: 'Who wrote the novel "1984"?',
         options: [
-          'Aldous Huxley',
           'George Orwell',
+          'Aldous Huxley',
           'Ray Bradbury',
           'Ernest Hemingway'
         ],
@@ -82,14 +82,14 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       },
       {
         question: 'What is the chemical symbol for potassium?',
-        options: ['P', 'Pt', 'Po', 'K'],
+        options: ['P', 'K', 'Pt', 'Po'],
         answer: 'K'
       },
       {
         question: 'Who painted the Mona Lisa?',
         options: [
-          'Michelangelo',
           'Leonardo da Vinci',
+          'Michelangelo',
           'Vincent van Gogh',
           'Pablo Picasso'
         ],
@@ -107,7 +107,7 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       },
       {
         question: 'How many rings appear on the Olympic symbol?',
-        options: ['4', '5', '6', '7'],
+        options: ['4', '6', '5', '7'],
         answer: '5'
       },
       {
@@ -125,8 +125,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         options: [
           'Atlantic Ocean',
           'Indian Ocean',
-          'Pacific Ocean',
-          'Arctic Ocean'
+          'Arctic Ocean',
+          'Pacific Ocean'
         ],
         answer: 'Pacific Ocean'
       }
@@ -151,18 +151,18 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'What is the largest animal known to live on Earth?',
         options: [
           'African elephant',
-          'Blue whale',
           'Giraffe',
-          'Whale shark'
+          'Whale shark',
+          'Blue whale'
         ],
         answer: 'Blue whale'
       },
       {
         question: 'Mount Fuji is located in which country?',
         options: [
+          'Japan',
           'China',
           'South Korea',
-          'Japan',
           'Thailand'
         ],
         answer: 'Japan'
@@ -171,8 +171,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'What is the capital city of Türkiye?',
         options: [
           'Istanbul',
-          'Ankara',
           'Izmir',
+          'Ankara',
           'Antalya'
         ],
         answer: 'Ankara'
@@ -180,18 +180,18 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'What is the longest bone in the human body?',
         options: [
-          'Femur',
           'Humerus',
           'Tibia',
-          'Radius'
+          'Radius',
+          'Femur'
         ],
         answer: 'Femur'
       },
       {
         question: 'Who established the prizes now known as the Nobel Prizes?',
         options: [
-          'Alfred Nobel',
           'Isaac Newton',
+          'Alfred Nobel',
           'Louis Pasteur',
           'Alexander Fleming'
         ],
@@ -200,9 +200,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which is the largest planet in our solar system?',
         options: [
+          'Jupiter',
           'Earth',
           'Saturn',
-          'Jupiter',
           'Neptune'
         ],
         answer: 'Jupiter'
@@ -211,23 +211,23 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'In which year was Magna Carta first sealed?',
         options: [
           '1066',
-          '1215',
           '1492',
+          '1215',
           '1776'
         ],
         answer: '1215'
       },
       {
         question: 'How many pieces does each player begin with in a standard game of chess?',
-        options: ['12', '14', '16', '18'],
+        options: ['12', '16', '14', '18'],
         answer: '16'
       },
       {
         question: 'Which element has the atomic number 79?',
         options: [
           'Silver',
-          'Gold',
           'Copper',
+          'Gold',
           'Platinum'
         ],
         answer: 'Gold'
@@ -243,8 +243,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'What is the capital city of Australia?',
         options: [
           'Sydney',
-          'Melbourne',
           'Canberra',
+          'Melbourne',
           'Brisbane'
         ],
         answer: 'Canberra'
@@ -252,8 +252,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Machu Picchu is located in which country?',
         options: [
-          'Chile',
           'Peru',
+          'Chile',
           'Mexico',
           'Bolivia'
         ],
@@ -272,10 +272,10 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Who wrote "Pride and Prejudice"?',
         options: [
-          'Jane Austen',
           'Charlotte Brontë',
           'Mary Shelley',
-          'Virginia Woolf'
+          'Virginia Woolf',
+          'Jane Austen'
         ],
         answer: 'Jane Austen'
       },
@@ -283,8 +283,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Which naturally occurring material is traditionally regarded as the hardest?',
         options: [
           'Quartz',
-          'Diamond',
           'Granite',
+          'Diamond',
           'Iron'
         ],
         answer: 'Diamond'
@@ -293,23 +293,23 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'What is the official language spoken by the majority of people in Brazil?',
         options: [
           'Spanish',
-          'Portuguese',
           'French',
-          'Italian'
+          'Italian',
+          'Portuguese'
         ],
         answer: 'Portuguese'
       },
       {
         question: 'How many items are in a dozen?',
-        options: ['10', '12', '20', '24'],
+        options: ['10', '20', '12', '24'],
         answer: '12'
       },
       {
         question: 'In which country did the ancient Olympic Games originate?',
         options: [
+          'Greece',
           'Italy',
           'Egypt',
-          'Greece',
           'Turkey'
         ],
         answer: 'Greece'
@@ -385,18 +385,18 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'What does the idiom "break the ice" usually mean?',
         options: [
           'Damage something frozen',
-          'Start a friendly conversation',
           'End an argument',
-          'Reveal a secret'
+          'Reveal a secret',
+          'Start a friendly conversation'
         ],
         answer: 'Start a friendly conversation'
       },
       {
         question: 'Which word is spelled correctly?',
         options: [
+          'Accommodate',
           'Accomodate',
           'Acommodate',
-          'Accommodate',
           'Accommadate'
         ],
         answer: 'Accommodate'
@@ -405,9 +405,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Which sentence is punctuated correctly?',
         options: [
           'After dinner we watched a movie.',
-          'After dinner, we watched a movie.',
           'After, dinner we watched a movie.',
-          'After dinner we, watched a movie.'
+          'After dinner we, watched a movie.',
+          'After dinner, we watched a movie.'
         ],
         answer: 'After dinner, we watched a movie.'
       },
@@ -435,9 +435,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'What does the prefix "pre-" usually mean?',
         options: [
           'After',
-          'Before',
           'Against',
-          'Again'
+          'Again',
+          'Before'
         ],
         answer: 'Before'
       },
@@ -462,17 +462,17 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Which word is closest in meaning to "meticulous"?',
         options: [
           'Careless',
-          'Very careful',
           'Impatient',
-          'Confused'
+          'Confused',
+          'Very careful'
         ],
         answer: 'Very careful'
       },
       {
         question: 'Which sentence is grammatically correct?',
         options: [
-          'Neither of the answers are correct.',
           'Neither of the answers is correct.',
+          'Neither of the answers are correct.',
           'Neither of the answer is correct.',
           'Neither answers are correct.'
         ],
@@ -482,8 +482,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'What does the expression "once in a blue moon" mean?',
         options: [
           'Every evening',
-          'Very rarely',
           'Without warning',
+          'Very rarely',
           'At exactly midnight'
         ],
         answer: 'Very rarely'
@@ -502,8 +502,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Which sentence uses "its" correctly?',
         options: [
           "The dog wagged it's tail.",
-          'The company changed its logo.',
           "Its going to rain tonight.",
+          'The company changed its logo.',
           "The tree lost it's leaves."
         ],
         answer: 'The company changed its logo.'
@@ -511,8 +511,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which word contains a suffix meaning "without"?',
         options: [
-          'Fearless',
           'Fearful',
+          'Fearless',
           'Fearfully',
           'Fearsome'
         ],
@@ -531,8 +531,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which word best completes the sentence: "She gave a very ___ explanation of the complicated idea."',
         options: [
-          'Clear',
           'Clearly',
+          'Clear',
           'Clearing',
           'Cleared'
         ],
@@ -541,8 +541,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'What is the plural of "criterion"?',
         options: [
-          'Criterions',
           'Criteria',
+          'Criterions',
           'Criterias',
           'Criterion'
         ],
@@ -552,8 +552,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Which word is spelled correctly?',
         options: [
           'Definately',
-          'Definitely',
           'Definitly',
+          'Definitely',
           'Definatly'
         ],
         answer: 'Definitely'
@@ -568,18 +568,18 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'What does "ambiguous" mean?',
         options: [
-          'Having more than one possible meaning',
           'Extremely obvious',
           'Impossible to hear',
-          'Completely incorrect'
+          'Completely incorrect',
+          'Having more than one possible meaning'
         ],
         answer: 'Having more than one possible meaning'
       },
       {
         question: 'Which sentence uses "fewer" correctly?',
         options: [
-          'There is fewer water in the bottle.',
           'We had fewer customers today.',
+          'There is fewer water in the bottle.',
           'She drank fewer coffee than yesterday.',
           'There was fewer traffic this morning.'
         ],
@@ -588,8 +588,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which word is closest in meaning to "concise"?',
         options: [
-          'Brief',
           'Confusing',
+          'Brief',
           'Emotional',
           'Repetitive'
         ],
@@ -599,8 +599,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'What does the phrase "read between the lines" mean?',
         options: [
           'Skip every second line',
-          'Look for an implied meaning',
           'Read very quickly',
+          'Look for an implied meaning',
           'Correct spelling mistakes'
         ],
         answer: 'Look for an implied meaning'
@@ -618,9 +618,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which word is an antonym of "transparent" when describing an explanation?',
         options: [
+          'Obscure',
           'Clear',
           'Open',
-          'Obscure',
           'Direct'
         ],
         answer: 'Obscure'
@@ -629,9 +629,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Which word best completes the sentence: "The new policy will ___ every employee."',
         options: [
           'Effect',
-          'Affect',
           'Effects',
-          'Affected'
+          'Affected',
+          'Affect'
         ],
         answer: 'Affect'
       },
@@ -648,9 +648,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which analogy is correct: Bird is to fly as fish is to ___?',
         options: [
-          'Swim',
           'Nest',
           'Feather',
+          'Swim',
           'Wing'
         ],
         answer: 'Swim'
@@ -658,8 +658,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which word is spelled correctly?',
         options: [
-          'Separate',
           'Seperate',
+          'Separate',
           'Sepperate',
           'Seperrate'
         ],
@@ -685,9 +685,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which actor played the Joker in the 2008 film "The Dark Knight"?',
         options: [
+          'Heath Ledger',
           'Joaquin Phoenix',
           'Jared Leto',
-          'Heath Ledger',
           'Christian Bale'
         ],
         answer: 'Heath Ledger'
@@ -696,9 +696,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Which band released the album "Abbey Road"?',
         options: [
           'The Rolling Stones',
-          'The Beatles',
           'Pink Floyd',
-          'Queen'
+          'Queen',
+          'The Beatles'
         ],
         answer: 'The Beatles'
       },
@@ -706,8 +706,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Which television series is primarily set in the fictional continents of Westeros and Essos?',
         options: [
           'The Witcher',
-          'Game of Thrones',
           'Vikings',
+          'Game of Thrones',
           'The Rings of Power'
         ],
         answer: 'Game of Thrones'
@@ -715,8 +715,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which singer is widely known by the nickname "King of Pop"?',
         options: [
-          'Elvis Presley',
           'Michael Jackson',
+          'Elvis Presley',
           'Prince',
           'Bruno Mars'
         ],
@@ -726,8 +726,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Who directed the film "Pulp Fiction"?',
         options: [
           'Martin Scorsese',
-          'Christopher Nolan',
           'Quentin Tarantino',
+          'Christopher Nolan',
           'Steven Spielberg'
         ],
         answer: 'Quentin Tarantino'
@@ -746,17 +746,17 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Which actor plays Captain Jack Sparrow in the "Pirates of the Caribbean" films?',
         options: [
           'Orlando Bloom',
-          'Johnny Depp',
           'Brad Pitt',
-          'Tom Cruise'
+          'Tom Cruise',
+          'Johnny Depp'
         ],
         answer: 'Johnny Depp'
       },
       {
         question: 'Neo is the central character in which science-fiction film franchise?',
         options: [
-          'Inception',
           'The Matrix',
+          'Inception',
           'Blade Runner',
           'Tron'
         ],
@@ -766,8 +766,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Which singer released the album "1989"?',
         options: [
           'Ariana Grande',
-          'Taylor Swift',
           'Rihanna',
+          'Taylor Swift',
           'Dua Lipa'
         ],
         answer: 'Taylor Swift'
@@ -775,8 +775,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Woody and Buzz Lightyear are characters from which animated film series?',
         options: [
-          'Toy Story',
           'Shrek',
+          'Toy Story',
           'Cars',
           'Frozen'
         ],
@@ -793,17 +793,17 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Which actor portrayed Tony Stark, also known as Iron Man, in the Marvel Cinematic Universe?',
         options: [
           'Chris Evans',
-          'Robert Downey Jr.',
           'Mark Ruffalo',
-          'Chris Hemsworth'
+          'Chris Hemsworth',
+          'Robert Downey Jr.'
         ],
         answer: 'Robert Downey Jr.'
       },
       {
         question: 'Which band originally recorded "Bohemian Rhapsody"?',
         options: [
-          'Queen',
           'The Beatles',
+          'Queen',
           'U2',
           'Coldplay'
         ],
@@ -822,9 +822,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which 1993 film features a theme park populated by cloned dinosaurs?',
         options: [
-          'Jurassic Park',
           'Avatar',
           'Jaws',
+          'Jurassic Park',
           'King Kong'
         ],
         answer: 'Jurassic Park'
@@ -832,8 +832,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which singer released the hit song "Rolling in the Deep"?',
         options: [
-          'Adele',
           'Beyoncé',
+          'Adele',
           'Rihanna',
           'Sia'
         ],
@@ -843,8 +843,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'The character Eleven appears in which television series?',
         options: [
           'Dark',
-          'Stranger Things',
           'Lost',
+          'Stranger Things',
           'Westworld'
         ],
         answer: 'Stranger Things'
@@ -854,17 +854,17 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         options: [
           'Star City',
           'Metropolis',
-          'Gotham City',
-          'Central City'
+          'Central City',
+          'Gotham City'
         ],
         answer: 'Gotham City'
       },
       {
         question: 'What is the name of the coffee shop frequently visited by the characters in "Friends"?',
         options: [
-          'Central Perk',
           'Monk’s Café',
           'Luke’s Diner',
+          'Central Perk',
           'The Peach Pit'
         ],
         answer: 'Central Perk'
@@ -872,8 +872,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Pandora is the setting for much of which film franchise?',
         options: [
-          'Avatar',
           'Titanic',
+          'Avatar',
           'Gladiator',
           'Interstellar'
         ],
@@ -882,9 +882,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Coldplay was formed in which country?',
         options: [
+          'United Kingdom',
           'United States',
           'Australia',
-          'United Kingdom',
           'Canada'
         ],
         answer: 'United Kingdom'
@@ -899,8 +899,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'What is the name of the school attended by Harry Potter?',
         options: [
-          'Hogwarts',
           'Beauxbatons',
+          'Hogwarts',
           'Durmstrang',
           'Ilvermorny'
         ],
@@ -910,17 +910,17 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'The One Ring is central to the story of which fantasy film trilogy?',
         options: [
           'The Chronicles of Narnia',
-          'The Lord of the Rings',
           'Harry Potter',
-          'The Hunger Games'
+          'The Hunger Games',
+          'The Lord of the Rings'
         ],
         answer: 'The Lord of the Rings'
       },
       {
         question: 'Beyoncé first rose to widespread fame as a member of which group?',
         options: [
-          'TLC',
           'Destiny’s Child',
+          'TLC',
           'En Vogue',
           'The Pussycat Dolls'
         ],
@@ -929,9 +929,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which actor played Walter White in the television series "Breaking Bad"?',
         options: [
-          'Bryan Cranston',
           'Aaron Paul',
           'Bob Odenkirk',
+          'Bryan Cranston',
           'Jon Hamm'
         ],
         answer: 'Bryan Cranston'
@@ -939,8 +939,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Wakanda is the fictional home nation of which Marvel superhero?',
         options: [
-          'Doctor Strange',
           'Black Panther',
+          'Doctor Strange',
           'Spider-Man',
           'Ant-Man'
         ],
@@ -950,9 +950,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'What type of car is used as the time machine in "Back to the Future"?',
         options: [
           'Ferrari',
-          'DeLorean',
           'Mustang',
-          'Porsche'
+          'Porsche',
+          'DeLorean'
         ],
         answer: 'DeLorean'
       },
@@ -969,9 +969,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which yellow Pokémon is one of the best-known mascots of the Pokémon franchise?',
         options: [
-          'Pikachu',
           'Charmander',
           'Squirtle',
+          'Pikachu',
           'Jigglypuff'
         ],
         answer: 'Pikachu'
@@ -979,18 +979,18 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Who directed the 2023 film "Barbie"?',
         options: [
-          'Greta Gerwig',
           'Sofia Coppola',
           'Patty Jenkins',
-          'Chloé Zhao'
+          'Chloé Zhao',
+          'Greta Gerwig'
         ],
         answer: 'Greta Gerwig'
       },
       {
         question: 'Which fictional archaeologist is known for carrying a whip and wearing a fedora?',
         options: [
-          'Indiana Jones',
           'Rick O’Connell',
+          'Indiana Jones',
           'Allan Quatermain',
           'Nathan Drake'
         ],
@@ -1018,8 +1018,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         options: [
           'Abraham Lincoln',
           'Thomas Jefferson',
-          'George Washington',
-          'John Adams'
+          'John Adams',
+          'George Washington'
         ],
         answer: 'George Washington'
       },
@@ -1037,8 +1037,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Which ancient civilization built the pyramids at Giza?',
         options: [
           'Romans',
-          'Egyptians',
           'Greeks',
+          'Egyptians',
           'Persians'
         ],
         answer: 'Egyptians'
@@ -1046,8 +1046,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'In which year did the French Revolution begin?',
         options: [
-          '1776',
           '1789',
+          '1776',
           '1804',
           '1815'
         ],
@@ -1057,17 +1057,17 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Who became British Prime Minister in May 1940 and led Britain for most of World War II?',
         options: [
           'Neville Chamberlain',
-          'Winston Churchill',
           'Clement Attlee',
-          'Anthony Eden'
+          'Anthony Eden',
+          'Winston Churchill'
         ],
         answer: 'Winston Churchill'
       },
       {
         question: 'Which passenger liner struck an iceberg and sank in 1912?',
         options: [
-          'Lusitania',
           'Titanic',
+          'Lusitania',
           'Britannic',
           'Queen Mary'
         ],
@@ -1076,8 +1076,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'The Renaissance first developed most strongly in which part of Europe?',
         options: [
-          'Italian city-states',
           'Scandinavia',
+          'Italian city-states',
           'British Isles',
           'Iberian Peninsula'
         ],
@@ -1087,8 +1087,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Which major Cold War barrier was opened in November 1989?',
         options: [
           'Hadrian’s Wall',
-          'Berlin Wall',
           'Great Wall of China',
+          'Berlin Wall',
           'Western Wall'
         ],
         answer: 'Berlin Wall'
@@ -1108,8 +1108,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         options: [
           '1916',
           '1917',
-          '1918',
-          '1919'
+          '1919',
+          '1918'
         ],
         answer: '1918'
       }
@@ -1134,8 +1134,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'The Great Wall was built and expanded by dynasties in which country?',
         options: [
           'Japan',
-          'China',
           'Korea',
+          'China',
           'Vietnam'
         ],
         answer: 'China'
@@ -1143,8 +1143,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Who led the Soviet Union for most of World War II?',
         options: [
-          'Joseph Stalin',
           'Vladimir Lenin',
+          'Joseph Stalin',
           'Nikita Khrushchev',
           'Leon Trotsky'
         ],
@@ -1154,9 +1154,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Which ancient Greek philosopher tutored Alexander the Great?',
         options: [
           'Plato',
-          'Aristotle',
           'Socrates',
-          'Pythagoras'
+          'Pythagoras',
+          'Aristotle'
         ],
         answer: 'Aristotle'
       },
@@ -1173,8 +1173,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Who became the first person to walk on the Moon in 1969?',
         options: [
-          'Buzz Aldrin',
           'Neil Armstrong',
+          'Buzz Aldrin',
           'Yuri Gagarin',
           'John Glenn'
         ],
@@ -1184,9 +1184,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Which ancient amphitheatre is one of the best-known landmarks of Rome?',
         options: [
           'Pantheon',
-          'Colosseum',
           'Parthenon',
-          'Acropolis'
+          'Acropolis',
+          'Colosseum'
         ],
         answer: 'Colosseum'
       },
@@ -1204,8 +1204,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'What name is commonly given to the picture-based writing system used in ancient Egypt?',
         options: [
           'Runes',
-          'Hieroglyphs',
           'Cuneiform',
+          'Hieroglyphs',
           'Latin'
         ],
         answer: 'Hieroglyphs'
@@ -1230,9 +1230,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which ancient Mesopotamian civilization is closely associated with the earliest development of cuneiform writing?',
         options: [
-          'Sumerians',
           'Vikings',
           'Phoenicians',
+          'Sumerians',
           'Romans'
         ],
         answer: 'Sumerians'
@@ -1240,18 +1240,18 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which ruler is associated with one of the earliest surviving written law codes?',
         options: [
-          'Hammurabi',
           'Pericles',
           'Augustus',
-          'Cleopatra'
+          'Cleopatra',
+          'Hammurabi'
         ],
         answer: 'Hammurabi'
       },
       {
         question: 'Which trade network historically connected East Asia with Central Asia, the Middle East and Europe?',
         options: [
-          'Silk Road',
           'Amber Road',
+          'Silk Road',
           'Royal Road',
           'Appian Way'
         ],
@@ -1260,9 +1260,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which city served as the capital of the Byzantine Empire for most of its history?',
         options: [
-          'Constantinople',
           'Alexandria',
           'Athens',
+          'Constantinople',
           'Venice'
         ],
         answer: 'Constantinople'
@@ -1270,10 +1270,10 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which empire used knotted cords called quipu for recording information?',
         options: [
-          'Inca Empire',
           'Roman Empire',
           'Mali Empire',
-          'Ottoman Empire'
+          'Ottoman Empire',
+          'Inca Empire'
         ],
         answer: 'Inca Empire'
       },
@@ -1310,19 +1310,19 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Joan of Arc played a major role in which long conflict between England and France?',
         options: [
-          'Hundred Years’ War',
           'Thirty Years’ War',
           'Napoleonic Wars',
-          'Crimean War'
+          'Crimean War',
+          'Hundred Years’ War'
         ],
         answer: 'Hundred Years’ War'
       },
       {
         question: 'Which document, signed in 1776, declared the thirteen American colonies independent from Great Britain?',
         options: [
-          'Declaration of Independence',
           'Bill of Rights',
           'Magna Carta',
+          'Declaration of Independence',
           'Treaty of Versailles'
         ],
         answer: 'Declaration of Independence'
@@ -1348,8 +1348,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'What is 15% of 240?',
         options: [
           '24',
-          '30',
           '36',
+          '30',
           '42'
         ],
         answer: '36'
@@ -1357,9 +1357,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'A car travels at 72 km/h for 2.5 hours. How far does it travel?',
         options: [
+          '180 km',
           '144 km',
           '160 km',
-          '180 km',
           '200 km'
         ],
         answer: '180 km'
@@ -1369,8 +1369,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         options: [
           '36',
           '42',
-          '48',
-          '54'
+          '54',
+          '48'
         ],
         answer: '48'
       },
@@ -1378,8 +1378,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'An item costs $160 and is reduced by 25%. What is the sale price?',
         options: [
           '$100',
-          '$120',
           '$125',
+          '$120',
           '$140'
         ],
         answer: '$120'
@@ -1388,8 +1388,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'What is 14 squared?',
         options: [
           '176',
-          '186',
           '196',
+          '186',
           '206'
         ],
         answer: '196'
@@ -1399,8 +1399,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         options: [
           '18',
           '20',
-          '21',
-          '22'
+          '22',
+          '21'
         ],
         answer: '21'
       },
@@ -1418,8 +1418,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Red and blue counters are in the ratio 2:3. If there are 25 counters in total, how many are red?',
         options: [
           '8',
-          '10',
           '12',
+          '10',
           '15'
         ],
         answer: '10'
@@ -1427,8 +1427,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'What is the area of a rectangle that is 12 metres long and 7 metres wide?',
         options: [
-          '72 m²',
           '84 m²',
+          '72 m²',
           '96 m²',
           '108 m²'
         ],
@@ -1439,8 +1439,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         options: [
           '16',
           '20',
-          '24',
-          '28'
+          '28',
+          '24'
         ],
         answer: '24'
       }
@@ -1455,8 +1455,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'What is 18% of 250?',
         options: [
           '40',
-          '45',
           '50',
+          '45',
           '55'
         ],
         answer: '45'
@@ -1464,9 +1464,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'A price of $80 increases by 15%. What is the new price?',
         options: [
+          '$92',
           '$88',
           '$90',
-          '$92',
           '$94'
         ],
         answer: '$92'
@@ -1475,8 +1475,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'What number comes next in the sequence: 2, 5, 11, 23, ...?',
         options: [
           '35',
-          '41',
           '47',
+          '41',
           '49'
         ],
         answer: '47'
@@ -1486,8 +1486,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         options: [
           '$6.50',
           '$7.00',
-          '$7.50',
-          '$8.00'
+          '$8.00',
+          '$7.50'
         ],
         answer: '$7.50'
       },
@@ -1505,18 +1505,18 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'A square has a perimeter of 36 cm. What is its area?',
         options: [
           '72 cm²',
-          '81 cm²',
           '90 cm²',
-          '108 cm²'
+          '108 cm²',
+          '81 cm²'
         ],
         answer: '81 cm²'
       },
       {
         question: 'What percentage is equivalent to 7/10?',
         options: [
+          '70%',
           '7%',
           '17%',
-          '70%',
           '700%'
         ],
         answer: '70%'
@@ -1525,8 +1525,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Solve for x: 2x - 5 = 17',
         options: [
           '9',
-          '10',
           '11',
+          '10',
           '12'
         ],
         answer: '11'
@@ -1534,8 +1534,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'A vehicle travels 150 km in 2.5 hours. What is its average speed?',
         options: [
-          '50 km/h',
           '60 km/h',
+          '50 km/h',
           '65 km/h',
           '75 km/h'
         ],
@@ -1546,8 +1546,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         options: [
           '45',
           '50',
-          '60',
-          '75'
+          '75',
+          '60'
         ],
         answer: '60'
       }
@@ -1561,8 +1561,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'What is 12.5% of 240?',
         options: [
-          '24',
           '30',
+          '24',
           '32',
           '36'
         ],
@@ -1583,16 +1583,16 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         options: [
           '20',
           '24',
-          '25',
-          '36'
+          '36',
+          '25'
         ],
         answer: '25'
       },
       {
         question: 'A $75 item is discounted by 20%. What is the sale price?',
         options: [
-          '$55',
           '$60',
+          '$55',
           '$62',
           '$65'
         ],
@@ -1603,8 +1603,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         options: [
           '275',
           '750',
-          '2,075',
-          '2,750'
+          '2,750',
+          '2,075'
         ],
         answer: '2,750'
       },
@@ -1612,8 +1612,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Three notebooks cost $13.50. At the same price per notebook, how much would eight notebooks cost?',
         options: [
           '$32',
-          '$34',
           '$36',
+          '$34',
           '$38'
         ],
         answer: '$36'
@@ -1622,9 +1622,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Red and blue marbles are in the ratio 3:5. If there are 40 marbles altogether, how many are red?',
         options: [
           '12',
-          '15',
           '18',
-          '25'
+          '25',
+          '15'
         ],
         answer: '15'
       },
@@ -1641,10 +1641,10 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Using standard order of operations, what is 6 + 4 × 3?',
         options: [
-          '18',
           '24',
           '30',
-          '42'
+          '42',
+          '18'
         ],
         answer: '18'
       },
@@ -1678,8 +1678,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which organelle is primarily responsible for producing usable energy in most human cells?',
         options: [
-          'Nucleus',
           'Mitochondrion',
+          'Nucleus',
           'Ribosome',
           'Golgi apparatus'
         ],
@@ -1690,16 +1690,16 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         options: [
           'S',
           'So',
-          'Na',
-          'N'
+          'N',
+          'Na'
         ],
         answer: 'Na'
       },
       {
         question: 'Which force causes objects with mass to attract one another?',
         options: [
-          'Gravity',
           'Friction',
+          'Gravity',
           'Magnetism',
           'Buoyancy'
         ],
@@ -1708,10 +1708,10 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which type of blood cell is primarily responsible for carrying oxygen around the body?',
         options: [
-          'Red blood cells',
           'White blood cells',
           'Platelets',
-          'Stem cells'
+          'Stem cells',
+          'Red blood cells'
         ],
         answer: 'Red blood cells'
       },
@@ -1728,8 +1728,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which layer of Earth lies directly beneath the crust?',
         options: [
-          'Mantle',
           'Outer core',
+          'Mantle',
           'Inner core',
           'Atmosphere'
         ],
@@ -1739,8 +1739,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'What is the name of the process in which liquid water changes into water vapour?',
         options: [
           'Condensation',
-          'Evaporation',
           'Freezing',
+          'Evaporation',
           'Precipitation'
         ],
         answer: 'Evaporation'
@@ -1750,8 +1750,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         options: [
           'Venus',
           'Earth',
-          'Mercury',
-          'Mars'
+          'Mars',
+          'Mercury'
         ],
         answer: 'Mercury'
       },
@@ -1768,9 +1768,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which molecule carries most hereditary information in humans?',
         options: [
-          'DNA',
           'Glucose',
           'Insulin',
+          'DNA',
           'Haemoglobin'
         ],
         answer: 'DNA'
@@ -1785,8 +1785,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'What is the most abundant gas in Earth’s atmosphere?',
         options: [
-          'Oxygen',
           'Nitrogen',
+          'Oxygen',
           'Carbon dioxide',
           'Argon'
         ],
@@ -1805,8 +1805,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which part of a plant absorbs most of its water and mineral nutrients from the soil?',
         options: [
-          'Roots',
           'Flowers',
+          'Roots',
           'Leaves',
           'Fruit'
         ],
@@ -1815,8 +1815,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'What is the SI unit of force?',
         options: [
-          'Joule',
           'Newton',
+          'Joule',
           'Watt',
           'Pascal'
         ],
@@ -1825,8 +1825,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which process releases energy from glucose inside cells?',
         options: [
-          'Cellular respiration',
           'Photosynthesis',
+          'Cellular respiration',
           'Transpiration',
           'Osmosis'
         ],
@@ -1835,10 +1835,10 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which rock type forms when molten rock cools and solidifies?',
         options: [
-          'Igneous',
           'Sedimentary',
           'Metamorphic',
-          'Fossil'
+          'Fossil',
+          'Igneous'
         ],
         answer: 'Igneous'
       },
@@ -1865,10 +1865,10 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which organ produces insulin in the human body?',
         options: [
-          'Pancreas',
           'Kidney',
           'Spleen',
-          'Gallbladder'
+          'Gallbladder',
+          'Pancreas'
         ],
         answer: 'Pancreas'
       },
@@ -1892,8 +1892,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'What phenomenon causes a straight straw to appear bent when partly submerged in water?',
         options: [
-          'Reflection',
           'Refraction',
+          'Reflection',
           'Diffusion',
           'Radiation'
         ],
@@ -1902,10 +1902,10 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which organ filters the blood to remove wastes and produce urine?',
         options: [
-          'Kidneys',
           'Lungs',
           'Stomach',
-          'Pancreas'
+          'Pancreas',
+          'Kidneys'
         ],
         answer: 'Kidneys'
       },
@@ -1913,8 +1913,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'What is the chemical formula for carbon dioxide?',
         options: [
           'CO',
-          'CO₂',
           'C₂O',
+          'CO₂',
           'O₂C₂'
         ],
         answer: 'CO₂'
@@ -1942,18 +1942,18 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which structure in the human eye controls how much light enters through the pupil?',
         options: [
-          'Iris',
           'Retina',
           'Cornea',
-          'Optic nerve'
+          'Optic nerve',
+          'Iris'
         ],
         answer: 'Iris'
       },
       {
         question: 'Which process allows plants to convert light energy into chemical energy?',
         options: [
-          'Photosynthesis',
           'Respiration',
+          'Photosynthesis',
           'Fermentation',
           'Digestion'
         ],
@@ -1962,18 +1962,18 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'What is the name of the point directly above an earthquake’s focus on Earth’s surface?',
         options: [
-          'Epicentre',
           'Fault line',
           'Crater',
-          'Mantle'
+          'Mantle',
+          'Epicentre'
         ],
         answer: 'Epicentre'
       },
       {
         question: 'Which planet has the shortest year in our Solar System?',
         options: [
-          'Mercury',
           'Venus',
+          'Mercury',
           'Mars',
           'Jupiter'
         ],
@@ -1982,9 +1982,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which type of bond involves atoms sharing pairs of electrons?',
         options: [
-          'Covalent bond',
           'Ionic bond',
           'Metallic bond',
+          'Covalent bond',
           'Hydrogen bond'
         ],
         answer: 'Covalent bond'
@@ -2010,18 +2010,18 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'What is the capital city of New Zealand?',
         options: [
           'Auckland',
-          'Wellington',
           'Christchurch',
-          'Hamilton'
+          'Hamilton',
+          'Wellington'
         ],
         answer: 'Wellington'
       },
       {
         question: 'Which mountain range runs along much of the western edge of South America?',
         options: [
-          'Andes',
           'Alps',
           'Rockies',
+          'Andes',
           'Himalayas'
         ],
         answer: 'Andes'
@@ -2049,9 +2049,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which major river flows through Cairo?',
         options: [
-          'Nile',
           'Congo',
           'Niger',
+          'Nile',
           'Zambezi'
         ],
         answer: 'Nile'
@@ -2059,9 +2059,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'What is the capital city of Morocco?',
         options: [
+          'Rabat',
           'Casablanca',
           'Marrakesh',
-          'Rabat',
           'Fez'
         ],
         answer: 'Rabat'
@@ -2079,8 +2079,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'The island of Bali is part of which country?',
         options: [
-          'Malaysia',
           'Indonesia',
+          'Malaysia',
           'Philippines',
           'Thailand'
         ],
@@ -2089,18 +2089,18 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which is the largest island in the world that is not classified as a continent?',
         options: [
-          'Greenland',
           'New Guinea',
           'Borneo',
-          'Madagascar'
+          'Madagascar',
+          'Greenland'
         ],
         answer: 'Greenland'
       },
       {
         question: 'Which imaginary line divides Earth into the Northern and Southern Hemispheres?',
         options: [
-          'Equator',
           'Prime Meridian',
+          'Equator',
           'Tropic of Cancer',
           'International Date Line'
         ],
@@ -2116,8 +2116,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'What is the capital city of Kenya?',
         options: [
-          'Mombasa',
           'Nairobi',
+          'Mombasa',
           'Kampala',
           'Kigali'
         ],
@@ -2127,8 +2127,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'The Bosporus runs through which major city?',
         options: [
           'Athens',
-          'Istanbul',
           'Cairo',
+          'Istanbul',
           'Rome'
         ],
         answer: 'Istanbul'
@@ -2156,9 +2156,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which strait separates mainland Australia from Tasmania?',
         options: [
-          'Bass Strait',
           'Torres Strait',
           'Cook Strait',
+          'Bass Strait',
           'Dover Strait'
         ],
         answer: 'Bass Strait'
@@ -2177,17 +2177,17 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'Prague is the capital city of which country?',
         options: [
           'Slovakia',
-          'Czechia',
           'Hungary',
-          'Austria'
+          'Austria',
+          'Czechia'
         ],
         answer: 'Czechia'
       },
       {
         question: 'Which river flows through Paris?',
         options: [
-          'Rhine',
           'Seine',
+          'Rhine',
           'Danube',
           'Thames'
         ],
@@ -2196,9 +2196,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which body of water is the world’s largest inland body of water by surface area?',
         options: [
-          'Caspian Sea',
           'Lake Superior',
           'Black Sea',
+          'Caspian Sea',
           'Lake Victoria'
         ],
         answer: 'Caspian Sea'
@@ -2208,8 +2208,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         options: [
           'India',
           'Bhutan',
-          'China',
-          'Pakistan'
+          'Pakistan',
+          'China'
         ],
         answer: 'China'
       }
@@ -2224,8 +2224,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'The Panama Canal connects the Atlantic Ocean with which other ocean?',
         options: [
           'Indian Ocean',
-          'Pacific Ocean',
           'Arctic Ocean',
+          'Pacific Ocean',
           'Southern Ocean'
         ],
         answer: 'Pacific Ocean'
@@ -2233,10 +2233,10 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'What is the capital city of Iceland?',
         options: [
-          'Reykjavík',
           'Oslo',
           'Helsinki',
-          'Stockholm'
+          'Stockholm',
+          'Reykjavík'
         ],
         answer: 'Reykjavík'
       },
@@ -2253,10 +2253,10 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Madagascar lies off the southeastern coast of which continent?',
         options: [
-          'Africa',
           'Asia',
           'South America',
-          'Australia'
+          'Australia',
+          'Africa'
         ],
         answer: 'Africa'
       },
@@ -2264,8 +2264,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         question: 'What is the capital city of Argentina?',
         options: [
           'Santiago',
-          'Buenos Aires',
           'Montevideo',
+          'Buenos Aires',
           'Lima'
         ],
         answer: 'Buenos Aires'
@@ -2273,8 +2273,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'The ancient city of Petra is located in which modern-day country?',
         options: [
-          'Jordan',
           'Egypt',
+          'Jordan',
           'Lebanon',
           'Syria'
         ],
@@ -2283,10 +2283,10 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which country is especially famous for its long, deeply indented fjord coastline?',
         options: [
-          'Norway',
           'Belgium',
           'Portugal',
-          'Poland'
+          'Poland',
+          'Norway'
         ],
         answer: 'Norway'
       },
@@ -2303,9 +2303,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which of these countries is crossed by the Equator?',
         options: [
-          'Ecuador',
           'Mexico',
           'Argentina',
+          'Ecuador',
           'Spain'
         ],
         answer: 'Ecuador'
@@ -2313,8 +2313,8 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which tropical latitude line passes through Australia?',
         options: [
-          'Tropic of Capricorn',
           'Tropic of Cancer',
+          'Tropic of Capricorn',
           'Arctic Circle',
           'Equator'
         ],
