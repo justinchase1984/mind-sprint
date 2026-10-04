@@ -1665,114 +1665,324 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
 
   6: [
 
+    /*
+    SET A
+    */
+
     [
       {
-        question: 'Which planet is known as the Red Planet?',
-        options: ['Mars', 'Venus', 'Jupiter', 'Saturn'],
-        answer: 'Mars'
+        question: 'Which organelle is primarily responsible for producing usable energy in most human cells?',
+        options: [
+          'Nucleus',
+          'Mitochondrion',
+          'Ribosome',
+          'Golgi apparatus'
+        ],
+        answer: 'Mitochondrion'
       },
       {
-        question: 'Which gas do humans need to breathe to survive?',
-        options: ['Nitrogen', 'Oxygen', 'Hydrogen', 'Helium'],
-        answer: 'Oxygen'
+        question: 'What is the chemical symbol for sodium?',
+        options: [
+          'S',
+          'So',
+          'Na',
+          'N'
+        ],
+        answer: 'Na'
       },
       {
-        question: 'What is the chemical symbol for gold?',
-        options: ['Ag', 'Au', 'Gd', 'Go'],
-        answer: 'Au'
-      },
-      {
-        question: 'Which organ pumps blood around the human body?',
-        options: ['Lungs', 'Brain', 'Heart', 'Liver'],
-        answer: 'Heart'
-      },
-      {
-        question: 'Which is the largest planet in our solar system?',
-        options: ['Earth', 'Saturn', 'Jupiter', 'Neptune'],
-        answer: 'Jupiter'
-      },
-      {
-        question: 'What force keeps planets in orbit around the Sun?',
-        options: ['Magnetism', 'Friction', 'Gravity', 'Radiation'],
+        question: 'Which force causes objects with mass to attract one another?',
+        options: [
+          'Gravity',
+          'Friction',
+          'Magnetism',
+          'Buoyancy'
+        ],
         answer: 'Gravity'
       },
       {
-        question: 'At what temperature does water freeze?',
-        options: ['0°C', '10°C', '-5°C', '32°C'],
-        answer: '0°C'
+        question: 'Which type of blood cell is primarily responsible for carrying oxygen around the body?',
+        options: [
+          'Red blood cells',
+          'White blood cells',
+          'Platelets',
+          'Stem cells'
+        ],
+        answer: 'Red blood cells'
       },
       {
-        question: 'What process do plants use to make their own food?',
+        question: 'A substance with a pH below 7 is generally described as what?',
         options: [
-          'Respiration',
-          'Digestion',
+          'Acidic',
+          'Neutral',
+          'Alkaline',
+          'Radioactive'
+        ],
+        answer: 'Acidic'
+      },
+      {
+        question: 'Which layer of Earth lies directly beneath the crust?',
+        options: [
+          'Mantle',
+          'Outer core',
+          'Inner core',
+          'Atmosphere'
+        ],
+        answer: 'Mantle'
+      },
+      {
+        question: 'What is the name of the process in which liquid water changes into water vapour?',
+        options: [
+          'Condensation',
+          'Evaporation',
+          'Freezing',
+          'Precipitation'
+        ],
+        answer: 'Evaporation'
+      },
+      {
+        question: 'Which planet is closest to the Sun?',
+        options: [
+          'Venus',
+          'Earth',
+          'Mercury',
+          'Mars'
+        ],
+        answer: 'Mercury'
+      },
+      {
+        question: 'What type of energy is stored in a stretched rubber band?',
+        options: [
+          'Elastic potential energy',
+          'Nuclear energy',
+          'Sound energy',
+          'Thermal energy'
+        ],
+        answer: 'Elastic potential energy'
+      },
+      {
+        question: 'Which molecule carries most hereditary information in humans?',
+        options: [
+          'DNA',
+          'Glucose',
+          'Insulin',
+          'Haemoglobin'
+        ],
+        answer: 'DNA'
+      }
+    ],
+
+    /*
+    SET B
+    */
+
+    [
+      {
+        question: 'What is the most abundant gas in Earth’s atmosphere?',
+        options: [
+          'Oxygen',
+          'Nitrogen',
+          'Carbon dioxide',
+          'Argon'
+        ],
+        answer: 'Nitrogen'
+      },
+      {
+        question: 'Which subatomic particle has a negative electric charge?',
+        options: [
+          'Proton',
+          'Neutron',
+          'Electron',
+          'Photon'
+        ],
+        answer: 'Electron'
+      },
+      {
+        question: 'Which part of a plant absorbs most of its water and mineral nutrients from the soil?',
+        options: [
+          'Roots',
+          'Flowers',
+          'Leaves',
+          'Fruit'
+        ],
+        answer: 'Roots'
+      },
+      {
+        question: 'What is the SI unit of force?',
+        options: [
+          'Joule',
+          'Newton',
+          'Watt',
+          'Pascal'
+        ],
+        answer: 'Newton'
+      },
+      {
+        question: 'Which process releases energy from glucose inside cells?',
+        options: [
+          'Cellular respiration',
           'Photosynthesis',
-          'Fermentation'
+          'Transpiration',
+          'Osmosis'
+        ],
+        answer: 'Cellular respiration'
+      },
+      {
+        question: 'Which rock type forms when molten rock cools and solidifies?',
+        options: [
+          'Igneous',
+          'Sedimentary',
+          'Metamorphic',
+          'Fossil'
+        ],
+        answer: 'Igneous'
+      },
+      {
+        question: 'Which electromagnetic radiation has a shorter wavelength than visible violet light?',
+        options: [
+          'Infrared',
+          'Microwaves',
+          'Ultraviolet',
+          'Radio waves'
+        ],
+        answer: 'Ultraviolet'
+      },
+      {
+        question: 'What is the name of the galaxy that contains our Solar System?',
+        options: [
+          'Andromeda Galaxy',
+          'Milky Way',
+          'Triangulum Galaxy',
+          'Whirlpool Galaxy'
+        ],
+        answer: 'Milky Way'
+      },
+      {
+        question: 'Which organ produces insulin in the human body?',
+        options: [
+          'Pancreas',
+          'Kidney',
+          'Spleen',
+          'Gallbladder'
+        ],
+        answer: 'Pancreas'
+      },
+      {
+        question: 'Which element is represented by the chemical symbol O?',
+        options: [
+          'Gold',
+          'Osmium',
+          'Oxygen',
+          'Oganesson'
+        ],
+        answer: 'Oxygen'
+      }
+    ],
+
+    /*
+    SET C
+    */
+
+    [
+      {
+        question: 'What phenomenon causes a straight straw to appear bent when partly submerged in water?',
+        options: [
+          'Reflection',
+          'Refraction',
+          'Diffusion',
+          'Radiation'
+        ],
+        answer: 'Refraction'
+      },
+      {
+        question: 'Which organ filters the blood to remove wastes and produce urine?',
+        options: [
+          'Kidneys',
+          'Lungs',
+          'Stomach',
+          'Pancreas'
+        ],
+        answer: 'Kidneys'
+      },
+      {
+        question: 'What is the chemical formula for carbon dioxide?',
+        options: [
+          'CO',
+          'CO₂',
+          'C₂O',
+          'O₂C₂'
+        ],
+        answer: 'CO₂'
+      },
+      {
+        question: 'Which type of plate boundary occurs when two tectonic plates move away from each other?',
+        options: [
+          'Divergent',
+          'Convergent',
+          'Transform',
+          'Subduction-only'
+        ],
+        answer: 'Divergent'
+      },
+      {
+        question: 'Which law states that for every action there is an equal and opposite reaction?',
+        options: [
+          'Newton’s first law',
+          'Newton’s second law',
+          'Newton’s third law',
+          'Ohm’s law'
+        ],
+        answer: 'Newton’s third law'
+      },
+      {
+        question: 'Which structure in the human eye controls how much light enters through the pupil?',
+        options: [
+          'Iris',
+          'Retina',
+          'Cornea',
+          'Optic nerve'
+        ],
+        answer: 'Iris'
+      },
+      {
+        question: 'Which process allows plants to convert light energy into chemical energy?',
+        options: [
+          'Photosynthesis',
+          'Respiration',
+          'Fermentation',
+          'Digestion'
         ],
         answer: 'Photosynthesis'
       },
       {
-        question: 'Which part of a cell contains genetic material',
-        options: ['Cytoplasm', 'Nucleus', 'Membrane', 'Ribosome'],
-        answer: 'Nucleus'
+        question: 'What is the name of the point directly above an earthquake’s focus on Earth’s surface?',
+        options: [
+          'Epicentre',
+          'Fault line',
+          'Crater',
+          'Mantle'
+        ],
+        answer: 'Epicentre'
       },
       {
-        question: 'Which vitamin is produced when the skin is exposed to sunlight?',
-        options: ['A', 'B12', 'C', 'D'],
-        answer: 'Vitamin D'
-      }
-    ],
-
-    [
-      {
-        question: 'What is the largest organ in human body?',
-        options: ['Heart', 'Liver', 'Skin', 'Brain'],
-        answer: 'Skin'
+        question: 'Which planet has the shortest year in our Solar System?',
+        options: [
+          'Mercury',
+          'Venus',
+          'Mars',
+          'Jupiter'
+        ],
+        answer: 'Mercury'
       },
       {
-        question: 'Which gas is most abundant in the Earth’s atmosphere?',
-        options: ['Oxygen', 'Nitrogen', 'Carbon dioxide', 'Hydrogen'],
-        answer: 'Nitrogen'
-      },
-      {
-        question: 'What is Earth’s natural satellite?',
-        options: ['Moon', 'Mars', 'Europa', 'Titan'],
-        answer: 'Moon'
-      },
-      {
-        question: 'What part of the human body is responsible for breathing?',
-        options: ['Heart', 'Lungs', 'Brain', 'Liver'],
-        answer: 'Lungs'
-      },
-      {
-        question: 'What type of energy comes from the Sun?',
-        options: ['Solar', 'Thermal', 'Nuclear', 'Electric'],
-        answer: 'Solar'
-      },
-      {
-        question: 'Which is the largest ocean on Earth?',
-        options: ['Atlantic', 'Indian', 'Pacific', 'Arctic'],
-        answer: 'Pacific'
-      },
-      {
-        question: 'Which planet is known for its prominent rings?',
-        options: ['Mars', 'Saturn', 'Venus', 'Mercury'],
-        answer: 'Saturn'
-      },
-      {
-        question: 'How many bones are in the human body?',
-        options: ['106', '206', '306', '406'],
-        answer: '206'
-      },
-      {
-        question: 'What is the center of an atom called?',
-        options: ['Core', 'Nucleus', 'Cell', 'Atom'],
-        answer: 'Nucleus'
-      },
-      {
-        question: 'What is the fastest land animal?',
-        options: ['Lion', 'Cheetah', 'Tiger', 'Leopard'],
-        answer: 'Cheetah'
+        question: 'Which type of bond involves atoms sharing pairs of electrons?',
+        options: [
+          'Covalent bond',
+          'Ionic bond',
+          'Metallic bond',
+          'Hydrogen bond'
+        ],
+        answer: 'Covalent bond'
       }
     ]
 
