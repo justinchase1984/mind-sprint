@@ -118,7 +118,7 @@ export default function PuzzlePage() {
       router.push(
         `/puzzle/${idNum + 1}?challenge=${challengeIndex}`
       )
-    }, 3500)
+    }, 1500)
 
     return () => {
       window.clearTimeout(timer)
