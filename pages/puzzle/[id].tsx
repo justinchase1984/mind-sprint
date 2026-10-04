@@ -110,6 +110,27 @@ export default function PuzzlePage() {
   }, [idNum])
 
   useEffect(() => {
+    if (!answerProcessed) {
+      return
+    }
+
+    const timer = window.setTimeout(() => {
+      router.push(
+        `/puzzle/${idNum + 1}?challenge=${challengeIndex}`
+      )
+    }, 3500)
+
+    return () => {
+      window.clearTimeout(timer)
+    }
+  }, [
+    answerProcessed,
+    idNum,
+    challengeIndex,
+    router,
+  ])
+
+  useEffect(() => {
     if (!PRIZE_DRAW_LIVE) return
     if (!isResults) return
 
@@ -164,16 +185,6 @@ export default function PuzzlePage() {
     sessionStorage.setItem(
       'dailyCorrect',
       cnt.toString()
-    )
-  }
-
-  function goToNextQuestion() {
-    if (!answerProcessed) {
-      return
-    }
-
-    router.push(
-      `/puzzle/${idNum + 1}?challenge=${challengeIndex}`
     )
   }
 
@@ -1028,9 +1039,14 @@ export default function PuzzlePage() {
                             selected
                         ? '#f44336'
                         : '#fff',
-                    color: locked
-                      ? '#fff'
-                      : '#000',
+                    color:
+                      locked &&
+                      (opt ===
+                        puzzle.answer ||
+                        opt ===
+                          selected)
+                        ? '#fff'
+                        : '#000',
                   }}
                 >
                   {opt}
@@ -1072,29 +1088,6 @@ export default function PuzzlePage() {
                   }
                 </p>
               )}
-
-            {answerProcessed && (
-              <button
-                onClick={
-                  goToNextQuestion
-                }
-                style={{
-                  marginTop: '1rem',
-                  padding:
-                    '12px 18px',
-                  borderRadius: 8,
-                  border: 'none',
-                  background: '#111',
-                  color: '#fff',
-                  fontSize: 16,
-                  cursor: 'pointer',
-                }}
-              >
-                {idNum >= total
-                  ? 'See Results →'
-                  : 'Next Question →'}
-              </button>
-            )}
           </>
         )}
       </main>
