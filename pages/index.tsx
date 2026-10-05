@@ -403,31 +403,50 @@ export default function Home() {
               gap: '1rem',
             }}
           >
-            <div
-              style={{
-                border:
-                  '1px solid #e6e6e6',
-                borderRadius: 10,
-                padding: '1rem',
-              }}
+            <Link
+              href="/general-knowledge-quiz"
+              legacyBehavior
             >
-              <strong>
-                🌍 General Knowledge
-              </strong>
-
-              <p
+              <a
                 style={{
-                  color: '#666',
-                  lineHeight: 1.5,
-                  marginBottom: 0,
+                  color: 'inherit',
+                  textDecoration:
+                    'none',
+                  display: 'block',
                 }}
               >
-                A broad mix of facts,
-                places, people,
-                culture and everyday
-                knowledge.
-              </p>
-            </div>
+                <div
+                  style={{
+                    border:
+                      '1px solid #e6e6e6',
+                    borderRadius: 10,
+                    padding: '1rem',
+                    height: '100%',
+                    boxSizing:
+                      'border-box',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <strong>
+                    🌍 General Knowledge
+                  </strong>
+
+                  <p
+                    style={{
+                      color: '#666',
+                      lineHeight: 1.5,
+                      marginBottom: 0,
+                    }}
+                  >
+                    A broad mix of
+                    facts, places,
+                    people, culture and
+                    everyday
+                    knowledge.
+                  </p>
+                </div>
+              </a>
+            </Link>
 
             <div
               style={{
