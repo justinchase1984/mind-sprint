@@ -534,9 +534,9 @@ export default function Home() {
                     }}
                   >
                     Major events,
-                    civilizations, leaders
-                    and moments from the
-                    past.
+                    civilizations,
+                    leaders and moments
+                    from the past.
                   </p>
                 </div>
               </a>
@@ -568,30 +568,49 @@ export default function Home() {
               </p>
             </div>
 
-            <div
-              style={{
-                border:
-                  '1px solid #e6e6e6',
-                borderRadius: 10,
-                padding: '1rem',
-              }}
+            <Link
+              href="/science-quiz"
+              legacyBehavior
             >
-              <strong>
-                🔬 Science
-              </strong>
-
-              <p
+              <a
                 style={{
-                  color: '#666',
-                  lineHeight: 1.5,
-                  marginBottom: 0,
+                  color: 'inherit',
+                  textDecoration:
+                    'none',
+                  display: 'block',
                 }}
               >
-                Biology, chemistry,
-                physics, Earth science
-                and astronomy.
-              </p>
-            </div>
+                <div
+                  style={{
+                    border:
+                      '1px solid #e6e6e6',
+                    borderRadius: 10,
+                    padding: '1rem',
+                    height: '100%',
+                    boxSizing:
+                      'border-box',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <strong>
+                    🔬 Science
+                  </strong>
+
+                  <p
+                    style={{
+                      color: '#666',
+                      lineHeight: 1.5,
+                      marginBottom: 0,
+                    }}
+                  >
+                    Biology, chemistry,
+                    physics, Earth
+                    science and
+                    astronomy.
+                  </p>
+                </div>
+              </a>
+            </Link>
 
             <div
               style={{
