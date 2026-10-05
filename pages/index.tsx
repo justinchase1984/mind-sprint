@@ -498,31 +498,49 @@ export default function Home() {
               </p>
             </div>
 
-            <div
-              style={{
-                border:
-                  '1px solid #e6e6e6',
-                borderRadius: 10,
-                padding: '1rem',
-              }}
+            <Link
+              href="/history-quiz"
+              legacyBehavior
             >
-              <strong>
-                🏛️ History
-              </strong>
-
-              <p
+              <a
                 style={{
-                  color: '#666',
-                  lineHeight: 1.5,
-                  marginBottom: 0,
+                  color: 'inherit',
+                  textDecoration:
+                    'none',
+                  display: 'block',
                 }}
               >
-                Major events,
-                civilizations, leaders
-                and moments from the
-                past.
-              </p>
-            </div>
+                <div
+                  style={{
+                    border:
+                      '1px solid #e6e6e6',
+                    borderRadius: 10,
+                    padding: '1rem',
+                    height: '100%',
+                    boxSizing:
+                      'border-box',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <strong>
+                    🏛️ History
+                  </strong>
+
+                  <p
+                    style={{
+                      color: '#666',
+                      lineHeight: 1.5,
+                      marginBottom: 0,
+                    }}
+                  >
+                    Major events,
+                    civilizations, leaders
+                    and moments from the
+                    past.
+                  </p>
+                </div>
+              </a>
+            </Link>
 
             <div
               style={{
