@@ -52,6 +52,9 @@ export default function PuzzlePage() {
   const [answerProcessed, setAnswerProcessed] =
     useState(false)
 
+  const [autoAdvance, setAutoAdvance] =
+    useState(false)
+
   const [hasJoined, setHasJoined] =
     useState(false)
 
@@ -85,32 +88,119 @@ export default function PuzzlePage() {
   }, [])
 
   useEffect(() => {
-    if (idNum === 1) {
-      sessionStorage.setItem(
-        'dailyCorrect',
-        '0'
+    if (idNum !== 1) {
+      return
+    }
+
+    const resetRequested =
+      query.reset === '1'
+
+    const firstQuestionKey =
+      `challenge${challengeIndex}_q1`
+
+    const firstQuestionAnswered =
+      sessionStorage.getItem(
+        firstQuestionKey
       )
 
-      puzzles.forEach((_p, idx) =>
-        sessionStorage.removeItem(
-          `challenge${challengeIndex}_q${idx + 1}`
-        )
-      )
+    if (
+      !resetRequested &&
+      firstQuestionAnswered
+    ) {
+      return
+    }
 
+    sessionStorage.setItem(
+      'dailyCorrect',
+      '0'
+    )
+
+    puzzles.forEach((_p, idx) =>
       sessionStorage.removeItem(
-        `mindSprintAttempt:${challengeIndex}`
+        `challenge${challengeIndex}_q${idx + 1}`
+      )
+    )
+
+    sessionStorage.removeItem(
+      `mindSprintAttempt:${challengeIndex}`
+    )
+
+    if (resetRequested) {
+      router.replace(
+        `/puzzle/1?challenge=${challengeIndex}`,
+        undefined,
+        { shallow: true }
       )
     }
-  }, [idNum, challengeIndex, puzzles])
+  }, [
+    idNum,
+    challengeIndex,
+    puzzles,
+    query.reset,
+    router,
+  ])
 
   useEffect(() => {
+    const key =
+      `challenge${challengeIndex}_q${idNum}`
+
+    const savedAnswer =
+      sessionStorage.getItem(key)
+
+    setAutoAdvance(false)
+
+    if (!savedAnswer) {
+      setSelected(null)
+      setLocked(false)
+      setAnswerProcessed(false)
+      return
+    }
+
+    if (
+      savedAnswer === '1' &&
+      puzzle
+    ) {
+      setSelected(puzzle.answer)
+      setLocked(true)
+      setAnswerProcessed(true)
+      return
+    }
+
+    try {
+      const parsed =
+        JSON.parse(savedAnswer)
+
+      if (
+        parsed &&
+        typeof parsed.answer ===
+          'string'
+      ) {
+        setSelected(parsed.answer)
+        setLocked(true)
+        setAnswerProcessed(true)
+        return
+      }
+    } catch (error) {
+      console.error(
+        'Unable to restore saved answer:',
+        error
+      )
+    }
+
     setSelected(null)
     setLocked(false)
     setAnswerProcessed(false)
-  }, [idNum])
+  }, [
+    idNum,
+    challengeIndex,
+    puzzle,
+  ])
 
   useEffect(() => {
-    if (!answerProcessed) {
+    if (
+      !answerProcessed ||
+      !autoAdvance
+    ) {
       return
     }
 
@@ -125,6 +215,7 @@ export default function PuzzlePage() {
     }
   }, [
     answerProcessed,
+    autoAdvance,
     idNum,
     challengeIndex,
     router,
@@ -143,8 +234,19 @@ export default function PuzzlePage() {
   }, [isResults, challengeIndex])
 
   function afterAnswer(
-    isCorrect: boolean
+    isCorrect: boolean,
+    answer: string
   ) {
+    const key =
+      `challenge${challengeIndex}_q${idNum}`
+
+    const already =
+      sessionStorage.getItem(key)
+
+    if (already) {
+      return
+    }
+
     let { current, max } =
       getStreaks()
 
@@ -160,12 +262,6 @@ export default function PuzzlePage() {
 
     saveStreaks(current, max)
 
-    const key =
-      `challenge${challengeIndex}_q${idNum}`
-
-    const already =
-      sessionStorage.getItem(key)
-
     let cnt = parseInt(
       sessionStorage.getItem(
         'dailyCorrect'
@@ -173,14 +269,17 @@ export default function PuzzlePage() {
       10
     )
 
-    if (isCorrect && !already) {
+    if (isCorrect) {
       cnt += 1
-
-      sessionStorage.setItem(
-        key,
-        '1'
-      )
     }
+
+    sessionStorage.setItem(
+      key,
+      JSON.stringify({
+        answer,
+        isCorrect,
+      })
+    )
 
     sessionStorage.setItem(
       'dailyCorrect',
@@ -322,10 +421,12 @@ export default function PuzzlePage() {
     )
 
     afterAnswer(
-      answer === puzzle.answer
+      answer === puzzle.answer,
+      answer
     )
 
     setAnswerProcessed(true)
+    setAutoAdvance(true)
   }
 
   async function claimPrizeEntry(
@@ -590,11 +691,9 @@ export default function PuzzlePage() {
                 passed &&
                 challengeIndex >= 7
                   ? '/results'
-                  : `/puzzle/1?challenge=${
-                      passed
-                        ? challengeIndex + 1
-                        : challengeIndex
-                    }`
+                  : passed
+                  ? `/puzzle/1?challenge=${challengeIndex + 1}`
+                  : `/puzzle/1?challenge=${challengeIndex}&reset=1`
 
               const nextLabel =
                 passed &&
@@ -1087,6 +1186,32 @@ export default function PuzzlePage() {
                     ]
                   }
                 </p>
+              )}
+
+            {answerProcessed &&
+              !autoAdvance && (
+                <button
+                  onClick={() =>
+                    router.push(
+                      `/puzzle/${idNum + 1}?challenge=${challengeIndex}`
+                    )
+                  }
+                  style={{
+                    marginTop: '1rem',
+                    padding:
+                      '12px 18px',
+                    borderRadius: 8,
+                    border: 'none',
+                    background: '#111',
+                    color: '#fff',
+                    fontSize: 16,
+                    cursor: 'pointer',
+                  }}
+                >
+                  {idNum >= total
+                    ? 'See Results →'
+                    : 'Continue →'}
+                </button>
               )}
           </>
         )}
