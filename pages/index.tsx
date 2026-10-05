@@ -135,28 +135,29 @@ export default function Home() {
           <h1
             style={{
               fontSize:
-                'clamp(30px, 5vw, 44px)',
-              marginBottom:
-                '0.75rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent:
-                'center',
-              gap: 8,
-              flexWrap: 'wrap',
+                'clamp(36px, 5vw, 48px)',
+              margin:
+                '0 0 0.65rem',
+              fontWeight: 700,
+              lineHeight: 1.15,
             }}
           >
-            <span
-              style={{
-                fontSize:
-                  '1.8rem',
-              }}
-            >
-              🧠
-            </span>
-
-            Mind Sprint: Free Daily General Knowledge Quiz
+            🧠 Mind Sprint
           </h1>
+
+          <p
+            style={{
+              fontSize:
+                'clamp(20px, 3vw, 27px)',
+              fontWeight: 600,
+              color: '#222',
+              margin:
+                '0 0 1rem',
+              lineHeight: 1.3,
+            }}
+          >
+            Free Daily General Knowledge Quiz
+          </p>
 
           <p
             style={{
@@ -169,17 +170,14 @@ export default function Home() {
                 '0 auto 1.75rem',
             }}
           >
-            Put your knowledge to the
-            test with seven free daily
-            quiz challenges and 70
-            questions covering general
+            Seven quick challenges.
+            70 questions. Test your
+            knowledge across general
             knowledge, words, pop
             culture, history, numbers,
-            science and geography.
-            Answer each question, build
-            your streak and come back
-            for a fresh rotation every
-            day.
+            science and geography —
+            with fresh question sets
+            every day.
           </p>
 
           <Link
