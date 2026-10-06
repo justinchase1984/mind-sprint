@@ -448,30 +448,48 @@ export default function Home() {
               </a>
             </Link>
 
-            <div
-              style={{
-                border:
-                  '1px solid #e6e6e6',
-                borderRadius: 10,
-                padding: '1rem',
-              }}
+            <Link
+              href="/word-language-quiz"
+              legacyBehavior
             >
-              <strong>
-                🔤 Word &amp; Language
-              </strong>
-
-              <p
+              <a
                 style={{
-                  color: '#666',
-                  lineHeight: 1.5,
-                  marginBottom: 0,
+                  color: 'inherit',
+                  textDecoration:
+                    'none',
+                  display: 'block',
                 }}
               >
-                Vocabulary, spelling,
-                grammar, meanings and
-                language reasoning.
-              </p>
-            </div>
+                <div
+                  style={{
+                    border:
+                      '1px solid #e6e6e6',
+                    borderRadius: 10,
+                    padding: '1rem',
+                    height: '100%',
+                    boxSizing:
+                      'border-box',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <strong>
+                    🔤 Word &amp; Language
+                  </strong>
+
+                  <p
+                    style={{
+                      color: '#666',
+                      lineHeight: 1.5,
+                      marginBottom: 0,
+                    }}
+                  >
+                    Vocabulary, spelling,
+                    grammar, meanings and
+                    language reasoning.
+                  </p>
+                </div>
+              </a>
+            </Link>
 
             <div
               style={{
