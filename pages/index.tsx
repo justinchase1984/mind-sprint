@@ -612,31 +612,49 @@ export default function Home() {
               </a>
             </Link>
 
-            <div
-              style={{
-                border:
-                  '1px solid #e6e6e6',
-                borderRadius: 10,
-                padding: '1rem',
-              }}
+            <Link
+              href="/geography-quiz"
+              legacyBehavior
             >
-              <strong>
-                🗺️ Geography
-              </strong>
-
-              <p
+              <a
                 style={{
-                  color: '#666',
-                  lineHeight: 1.5,
-                  marginBottom: 0,
+                  color: 'inherit',
+                  textDecoration:
+                    'none',
+                  display: 'block',
                 }}
               >
-                Countries, capitals,
-                landmarks, rivers,
-                mountains and world
-                geography.
-              </p>
-            </div>
+                <div
+                  style={{
+                    border:
+                      '1px solid #e6e6e6',
+                    borderRadius: 10,
+                    padding: '1rem',
+                    height: '100%',
+                    boxSizing:
+                      'border-box',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <strong>
+                    🗺️ Geography
+                  </strong>
+
+                  <p
+                    style={{
+                      color: '#666',
+                      lineHeight: 1.5,
+                      marginBottom: 0,
+                    }}
+                  >
+                    Countries, capitals,
+                    landmarks, rivers,
+                    mountains and world
+                    geography.
+                  </p>
+                </div>
+              </a>
+            </Link>
           </div>
         </section>
 
