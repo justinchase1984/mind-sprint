@@ -3,65 +3,66 @@
 
   <url>
     <loc>https://www.dailymindsprint.com/</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://www.dailymindsprint.com/general-knowledge-quiz</loc>
+  </url>
+
+  <url>
+    <loc>https://www.dailymindsprint.com/word-language-quiz</loc>
+  </url>
+
+  <url>
+    <loc>https://www.dailymindsprint.com/pop-culture-quiz</loc>
+  </url>
+
+  <url>
+    <loc>https://www.dailymindsprint.com/history-quiz</loc>
+  </url>
+
+  <url>
+    <loc>https://www.dailymindsprint.com/smart-numbers-quiz</loc>
+  </url>
+
+  <url>
+    <loc>https://www.dailymindsprint.com/science-quiz</loc>
+  </url>
+
+  <url>
+    <loc>https://www.dailymindsprint.com/geography-quiz</loc>
   </url>
 
   <url>
     <loc>https://www.dailymindsprint.com/how-it-works</loc>
-    <lastmod>2026-09-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://www.dailymindsprint.com/brain-training</loc>
-    <lastmod>2026-09-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://www.dailymindsprint.com/faq</loc>
-    <lastmod>2026-09-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://www.dailymindsprint.com/about</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.dailymindsprint.com/contact</loc>
-    <lastmod>2026-09-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.dailymindsprint.com/privacy</loc>
-    <lastmod>2026-09-26</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
   </url>
 
   <url>
     <loc>https://www.dailymindsprint.com/terms</loc>
-    <lastmod>2026-09-26</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
   </url>
 
   <url>
     <loc>https://www.dailymindsprint.com/weekly-prize-draw-terms</loc>
-    <lastmod>2026-09-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
 
 </urlset>
