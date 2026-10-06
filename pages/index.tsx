@@ -491,30 +491,48 @@ export default function Home() {
               </a>
             </Link>
 
-            <div
-              style={{
-                border:
-                  '1px solid #e6e6e6',
-                borderRadius: 10,
-                padding: '1rem',
-              }}
+            <Link
+              href="/pop-culture-quiz"
+              legacyBehavior
             >
-              <strong>
-                🎬 Pop Culture
-              </strong>
-
-              <p
+              <a
                 style={{
-                  color: '#666',
-                  lineHeight: 1.5,
-                  marginBottom: 0,
+                  color: 'inherit',
+                  textDecoration:
+                    'none',
+                  display: 'block',
                 }}
               >
-                Movies, television,
-                music and familiar
-                entertainment trivia.
-              </p>
-            </div>
+                <div
+                  style={{
+                    border:
+                      '1px solid #e6e6e6',
+                    borderRadius: 10,
+                    padding: '1rem',
+                    height: '100%',
+                    boxSizing:
+                      'border-box',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <strong>
+                    🎬 Pop Culture
+                  </strong>
+
+                  <p
+                    style={{
+                      color: '#666',
+                      lineHeight: 1.5,
+                      marginBottom: 0,
+                    }}
+                  >
+                    Movies, television,
+                    music and familiar
+                    entertainment trivia.
+                  </p>
+                </div>
+              </a>
+            </Link>
 
             <Link
               href="/history-quiz"
@@ -560,31 +578,49 @@ export default function Home() {
               </a>
             </Link>
 
-            <div
-              style={{
-                border:
-                  '1px solid #e6e6e6',
-                borderRadius: 10,
-                padding: '1rem',
-              }}
+            <Link
+              href="/smart-numbers-quiz"
+              legacyBehavior
             >
-              <strong>
-                🔢 Smart Numbers
-              </strong>
-
-              <p
+              <a
                 style={{
-                  color: '#666',
-                  lineHeight: 1.5,
-                  marginBottom: 0,
+                  color: 'inherit',
+                  textDecoration:
+                    'none',
+                  display: 'block',
                 }}
               >
-                Mental maths,
-                percentages,
-                sequences, ratios and
-                number problems.
-              </p>
-            </div>
+                <div
+                  style={{
+                    border:
+                      '1px solid #e6e6e6',
+                    borderRadius: 10,
+                    padding: '1rem',
+                    height: '100%',
+                    boxSizing:
+                      'border-box',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <strong>
+                    🔢 Smart Numbers
+                  </strong>
+
+                  <p
+                    style={{
+                      color: '#666',
+                      lineHeight: 1.5,
+                      marginBottom: 0,
+                    }}
+                  >
+                    Mental maths,
+                    percentages,
+                    sequences, ratios and
+                    number problems.
+                  </p>
+                </div>
+              </a>
+            </Link>
 
             <Link
               href="/science-quiz"
