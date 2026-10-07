@@ -2,15 +2,144 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
+const PAGE_URL =
+  'https://www.dailymindsprint.com/brain-training'
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id':
+        'https://www.dailymindsprint.com/#organization',
+      name: 'Mind Sprint',
+      url: 'https://www.dailymindsprint.com/',
+    },
+    {
+      '@type': 'WebSite',
+      '@id':
+        'https://www.dailymindsprint.com/#website',
+      url: 'https://www.dailymindsprint.com/',
+      name: 'Mind Sprint',
+      publisher: {
+        '@id':
+          'https://www.dailymindsprint.com/#organization',
+      },
+    },
+    {
+      '@type': 'WebPage',
+      '@id':
+        'https://www.dailymindsprint.com/brain-training#webpage',
+      url: PAGE_URL,
+      name:
+        'Brain Training Games & Mental Challenges | Mind Sprint',
+      description:
+        'Explore brain training games, trivia, word challenges, memory activities and problem-solving quizzes designed to encourage active thinking and curiosity.',
+      isPartOf: {
+        '@id':
+          'https://www.dailymindsprint.com/#website',
+      },
+      about: {
+        '@id':
+          'https://www.dailymindsprint.com/#organization',
+      },
+    },
+    {
+      '@type': 'Article',
+      '@id':
+        'https://www.dailymindsprint.com/brain-training#article',
+      headline:
+        'Brain Training with Mind Sprint',
+      description:
+        'Learn how Mind Sprint uses trivia, memory, word and problem-solving challenges to encourage active thinking, curiosity and regular mental engagement.',
+      mainEntityOfPage: {
+        '@id':
+          'https://www.dailymindsprint.com/brain-training#webpage',
+      },
+      author: {
+        '@id':
+          'https://www.dailymindsprint.com/#organization',
+      },
+      publisher: {
+        '@id':
+          'https://www.dailymindsprint.com/#organization',
+      },
+      dateModified: '2026-10-07',
+    },
+  ],
+}
+
 export default function BrainTraining() {
   return (
     <>
       <Head>
-        <title>Brain Training & Mental Challenges | Mind Sprint</title>
+        <title>
+          Brain Training Games &amp; Mental Challenges | Mind Sprint
+        </title>
 
         <meta
           name="description"
-          content="Learn how Mind Sprint uses trivia, memory, word and problem-solving challenges to encourage active thinking, curiosity and regular mental engagement."
+          content="Explore brain training games, trivia, word challenges, memory activities and problem-solving quizzes designed to encourage active thinking and curiosity."
+        />
+
+        <meta
+          name="robots"
+          content="index, follow"
+        />
+
+        <link
+          rel="canonical"
+          href={PAGE_URL}
+        />
+
+        <meta
+          property="og:type"
+          content="article"
+        />
+
+        <meta
+          property="og:site_name"
+          content="Mind Sprint"
+        />
+
+        <meta
+          property="og:title"
+          content="Brain Training Games & Mental Challenges | Mind Sprint"
+        />
+
+        <meta
+          property="og:description"
+          content="Explore trivia, memory, word and problem-solving challenges designed to encourage active thinking and curiosity."
+        />
+
+        <meta
+          property="og:url"
+          content={PAGE_URL}
+        />
+
+        <meta
+          name="twitter:card"
+          content="summary"
+        />
+
+        <meta
+          name="twitter:title"
+          content="Brain Training Games & Mental Challenges | Mind Sprint"
+        />
+
+        <meta
+          name="twitter:description"
+          content="Explore trivia, memory, word and problem-solving challenges designed to encourage active thinking and curiosity."
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html:
+              JSON.stringify(
+                structuredData
+              ),
+          }}
         />
       </Head>
 
@@ -22,7 +151,9 @@ export default function BrainTraining() {
           lineHeight: 1.7,
         }}
       >
-        <h1>Brain Training with Mind Sprint</h1>
+        <h1>
+          Brain Training with Mind Sprint
+        </h1>
 
         <p
           style={{
@@ -31,7 +162,7 @@ export default function BrainTraining() {
             marginTop: '-0.5rem',
           }}
         >
-          By Mind Sprint · Updated September 2026
+          By Mind Sprint · Updated October 2026
         </p>
 
         <p>
@@ -48,7 +179,9 @@ export default function BrainTraining() {
           study session.
         </p>
 
-        <h2>What Does “Brain Training” Mean?</h2>
+        <h2>
+          What Does “Brain Training” Mean?
+        </h2>
 
         <p>
           Brain training is a broad term used for activities that ask you to
@@ -70,7 +203,9 @@ export default function BrainTraining() {
           guaranteed way to improve cognitive performance.
         </p>
 
-        <h2>How Mind Sprint Keeps You Thinking</h2>
+        <h2>
+          How Mind Sprint Keeps You Thinking
+        </h2>
 
         <p>
           Mind Sprint mixes several types of challenges instead of asking you to
@@ -87,25 +222,37 @@ export default function BrainTraining() {
 
         <ul>
           <li>
-            <strong>Trivia:</strong> recall facts and general knowledge.
+            <strong>
+              Trivia:
+            </strong>{' '}
+            recall facts and general knowledge.
           </li>
 
           <li>
-            <strong>Memory:</strong> pay attention to information and try to
-            remember it later.
+            <strong>
+              Memory:
+            </strong>{' '}
+            pay attention to information and try to remember it later.
           </li>
 
           <li>
-            <strong>Words:</strong> work with language, meaning and vocabulary.
+            <strong>
+              Words:
+            </strong>{' '}
+            work with language, meaning and vocabulary.
           </li>
 
           <li>
-            <strong>Patterns and reasoning:</strong> look for relationships,
-            sequences or logical answers.
+            <strong>
+              Patterns and reasoning:
+            </strong>{' '}
+            look for relationships, sequences or logical answers.
           </li>
         </ul>
 
-        <h2>Why Short Challenges?</h2>
+        <h2>
+          Why Short Challenges?
+        </h2>
 
         <p>
           Mind Sprint is deliberately designed around short sessions. A quick
@@ -120,7 +267,9 @@ export default function BrainTraining() {
           can put together.
         </p>
 
-        <h2>Practice, Recall and Curiosity</h2>
+        <h2>
+          Practice, Recall and Curiosity
+        </h2>
 
         <p>
           One of the simplest benefits of quizzes is that they make you actively
@@ -135,7 +284,9 @@ export default function BrainTraining() {
           than simply choosing an answer and moving on.
         </p>
 
-        <h2>Fresh Question Sets</h2>
+        <h2>
+          Fresh Question Sets
+        </h2>
 
         <p>
           Repeating exactly the same questions would quickly become a test of
@@ -149,7 +300,9 @@ export default function BrainTraining() {
           expecting every session to be identical.
         </p>
 
-        <h2>What Mind Sprint Does Not Claim</h2>
+        <h2>
+          What Mind Sprint Does Not Claim
+        </h2>
 
         <p>
           Mind Sprint is an entertainment and general-knowledge experience. It
@@ -165,7 +318,9 @@ export default function BrainTraining() {
           currently supported by enough evidence.
         </p>
 
-        <h2>Make It Part of Your Routine</h2>
+        <h2>
+          Make It Part of Your Routine
+        </h2>
 
         <p>
           If you enjoy trivia and puzzles, the simplest approach is to treat
@@ -182,13 +337,170 @@ export default function BrainTraining() {
         <div
           style={{
             marginTop: '2.5rem',
-            paddingTop: '1.5rem',
-            borderTop: '1px solid #eee',
+            padding: '1.5rem',
+            border:
+              '1px solid #e6e6e6',
+            borderRadius: 10,
           }}
         >
-          <h2 style={{ fontSize: 20 }}>Further Reading</h2>
+          <h2
+            style={{
+              marginTop: 0,
+              textAlign: 'center',
+            }}
+          >
+            Explore Mind Sprint Quiz Challenges
+          </h2>
 
-          <p style={{ color: '#555' }}>
+          <p
+            style={{
+              color: '#555',
+              textAlign: 'center',
+              marginBottom:
+                '1.25rem',
+            }}
+          >
+            Try a category that matches the kind of knowledge or thinking you
+            want to test.
+          </p>
+
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent:
+                'center',
+              gap: '0.9rem 1.25rem',
+            }}
+          >
+            <Link
+              href="/general-knowledge-quiz"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                General Knowledge
+              </a>
+            </Link>
+
+            <Link
+              href="/word-language-quiz"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                Word &amp; Language
+              </a>
+            </Link>
+
+            <Link
+              href="/pop-culture-quiz"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                Pop Culture
+              </a>
+            </Link>
+
+            <Link
+              href="/history-quiz"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                History
+              </a>
+            </Link>
+
+            <Link
+              href="/smart-numbers-quiz"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                Smart Numbers
+              </a>
+            </Link>
+
+            <Link
+              href="/science-quiz"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                Science
+              </a>
+            </Link>
+
+            <Link
+              href="/geography-quiz"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                Geography
+              </a>
+            </Link>
+          </div>
+        </div>
+
+        <div
+          style={{
+            marginTop: '2.5rem',
+            paddingTop: '1.5rem',
+            borderTop:
+              '1px solid #eee',
+          }}
+        >
+          <h2
+            style={{
+              fontSize: 20,
+            }}
+          >
+            Further Reading
+          </h2>
+
+          <p
+            style={{
+              color: '#555',
+            }}
+          >
             For an evidence-based overview of cognitive health and cognitive
             training research, see the U.S. National Institute on Aging:
           </p>
@@ -200,7 +512,8 @@ export default function BrainTraining() {
               rel="noopener noreferrer"
               style={{
                 color: '#000',
-                textDecoration: 'underline',
+                textDecoration:
+                  'underline',
               }}
             >
               Cognitive Health and Older Adults — National Institute on Aging
@@ -214,21 +527,68 @@ export default function BrainTraining() {
             textAlign: 'center',
           }}
         >
-          <Link href="/puzzle/1?challenge=1" legacyBehavior>
+          <Link
+            href="/puzzle/1?challenge=1"
+            legacyBehavior
+          >
             <a
               style={{
-                display: 'inline-block',
-                padding: '12px 24px',
+                display:
+                  'inline-block',
+                padding:
+                  '12px 24px',
                 background: '#111',
                 color: '#fff',
                 borderRadius: 6,
-                textDecoration: 'none',
+                textDecoration:
+                  'none',
                 fontWeight: 600,
               }}
             >
-              Try a Mind Sprint Challenge
+              Start Today&apos;s Quiz
             </a>
           </Link>
+
+          <div
+            style={{
+              marginTop: '1.25rem',
+              display: 'flex',
+              justifyContent:
+                'center',
+              flexWrap: 'wrap',
+              gap: '1rem',
+            }}
+          >
+            <Link
+              href="/how-it-works"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                How Mind Sprint Works
+              </a>
+            </Link>
+
+            <Link
+              href="/faq"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                FAQ
+              </a>
+            </Link>
+          </div>
         </div>
       </main>
     </>
