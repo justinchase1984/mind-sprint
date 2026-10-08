@@ -21,6 +21,11 @@ export default function Results() {
           name="description"
           content="You completed all 7 Mind Sprint challenges. See your best streak and play again."
         />
+
+        <meta
+          name="robots"
+          content="noindex, follow"
+        />
       </Head>
 
       <main
