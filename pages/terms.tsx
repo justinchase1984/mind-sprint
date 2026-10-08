@@ -2,15 +2,125 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
+const PAGE_URL =
+  'https://www.dailymindsprint.com/terms'
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id':
+        'https://www.dailymindsprint.com/#organization',
+      name: 'Mind Sprint',
+      url: 'https://www.dailymindsprint.com/',
+      email: 'hello@dailymindsprint.com',
+    },
+    {
+      '@type': 'WebSite',
+      '@id':
+        'https://www.dailymindsprint.com/#website',
+      url: 'https://www.dailymindsprint.com/',
+      name: 'Mind Sprint',
+      publisher: {
+        '@id':
+          'https://www.dailymindsprint.com/#organization',
+      },
+    },
+    {
+      '@type': 'WebPage',
+      '@id':
+        'https://www.dailymindsprint.com/terms#webpage',
+      url: PAGE_URL,
+      name:
+        'Terms of Service | Mind Sprint',
+      description:
+        'Terms of Service for using Mind Sprint, including gameplay, scores, weekly prize draws, email communications and third-party services.',
+      isPartOf: {
+        '@id':
+          'https://www.dailymindsprint.com/#website',
+      },
+      about: {
+        '@id':
+          'https://www.dailymindsprint.com/#organization',
+      },
+      dateModified:
+        '2026-09-26',
+    },
+  ],
+}
+
 export default function Terms() {
   return (
     <>
       <Head>
-        <title>Terms of Service | Mind Sprint</title>
+        <title>
+          Terms of Service | Mind Sprint
+        </title>
 
         <meta
           name="description"
           content="Terms of Service for using Mind Sprint, including gameplay, scores, weekly prize draws, email communications and third-party services."
+        />
+
+        <meta
+          name="robots"
+          content="index, follow"
+        />
+
+        <link
+          rel="canonical"
+          href={PAGE_URL}
+        />
+
+        <meta
+          property="og:type"
+          content="website"
+        />
+
+        <meta
+          property="og:site_name"
+          content="Mind Sprint"
+        />
+
+        <meta
+          property="og:title"
+          content="Terms of Service | Mind Sprint"
+        />
+
+        <meta
+          property="og:description"
+          content="Read the Terms of Service for using Mind Sprint, including gameplay, promotions, email communications and third-party services."
+        />
+
+        <meta
+          property="og:url"
+          content={PAGE_URL}
+        />
+
+        <meta
+          name="twitter:card"
+          content="summary"
+        />
+
+        <meta
+          name="twitter:title"
+          content="Terms of Service | Mind Sprint"
+        />
+
+        <meta
+          name="twitter:description"
+          content="Read the Terms of Service for using Mind Sprint, including gameplay, promotions, email communications and third-party services."
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html:
+              JSON.stringify(
+                structuredData
+              ),
+          }}
         />
       </Head>
 
@@ -22,7 +132,9 @@ export default function Terms() {
           lineHeight: 1.7,
         }}
       >
-        <h1>Terms of Service</h1>
+        <h1>
+          Terms of Service
+        </h1>
 
         <p
           style={{
@@ -46,7 +158,13 @@ export default function Terms() {
           you should not use the website.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>1. About Mind Sprint</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          1. About Mind Sprint
+        </h2>
 
         <p>
           Mind Sprint is an independent trivia and brain-challenge website
@@ -59,26 +177,58 @@ export default function Terms() {
           knowledge and casual mental engagement.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>2. Using Mind Sprint</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          2. Using Mind Sprint
+        </h2>
 
         <p>
           You may use Mind Sprint for personal, lawful and non-commercial
           purposes.
         </p>
 
-        <p>You must not:</p>
+        <p>
+          You must not:
+        </p>
 
         <ul>
-          <li>interfere with or disrupt the website;</li>
-          <li>attempt to gain unauthorised access to private systems;</li>
-          <li>manipulate challenge results or challenge-verification systems;</li>
-          <li>create fraudulent or duplicate prize draw entries;</li>
-          <li>use automated methods to abuse gameplay or promotional systems;</li>
-          <li>attempt to bypass security or technical restrictions; or</li>
-          <li>use Mind Sprint for unlawful or harmful purposes.</li>
+          <li>
+            interfere with or disrupt the website;
+          </li>
+
+          <li>
+            attempt to gain unauthorised access to private systems;
+          </li>
+
+          <li>
+            manipulate challenge results or challenge-verification systems;
+          </li>
+
+          <li>
+            create fraudulent or duplicate prize draw entries;
+          </li>
+
+          <li>
+            use automated methods to abuse gameplay or promotional systems;
+          </li>
+
+          <li>
+            attempt to bypass security or technical restrictions; or
+          </li>
+
+          <li>
+            use Mind Sprint for unlawful or harmful purposes.
+          </li>
         </ul>
 
-        <h2 style={{ marginTop: '2rem' }}>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
           3. Challenges, Scores and Progress
         </h2>
 
@@ -103,7 +253,13 @@ export default function Terms() {
           entries.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>4. Challenge Content</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          4. Challenge Content
+        </h2>
 
         <p>
           Mind Sprint aims to keep questions, answers and explanatory content
@@ -120,7 +276,11 @@ export default function Terms() {
           Mind Sprint so it can be reviewed.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
           5. Entertainment and Health Information
         </h2>
 
@@ -136,7 +296,13 @@ export default function Terms() {
           improvements in intelligence, memory or concentration.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>6. Weekly Prize Draw</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          6. Weekly Prize Draw
+        </h2>
 
         <p>
           Mind Sprint is preparing a weekly promotional prize draw. The first
@@ -163,11 +329,15 @@ export default function Terms() {
         </p>
 
         <p>
-          <Link href="/weekly-prize-draw-terms" legacyBehavior>
+          <Link
+            href="/weekly-prize-draw-terms"
+            legacyBehavior
+          >
             <a
               style={{
                 color: '#000',
-                textDecoration: 'underline',
+                textDecoration:
+                  'underline',
               }}
             >
               Read the Weekly Prize Draw Terms
@@ -175,7 +345,11 @@ export default function Terms() {
           </Link>
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
           7. Prize Draw Entries and Verification
         </h2>
 
@@ -196,7 +370,13 @@ export default function Terms() {
           applicable prize draw terms.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>8. Email Communications</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          8. Email Communications
+        </h2>
 
         <p>
           You do not need to subscribe to ongoing Mind Sprint marketing emails
@@ -215,7 +395,11 @@ export default function Terms() {
           contact a selected entrant or deliver a prize.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
           9. Third-Party Services
         </h2>
 
@@ -240,7 +424,11 @@ export default function Terms() {
           eligibility requirements.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
           10. Links to Other Websites
         </h2>
 
@@ -255,7 +443,11 @@ export default function Terms() {
           responsible for their content, availability or privacy practices.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
           11. Intellectual Property
         </h2>
 
@@ -271,7 +463,11 @@ export default function Terms() {
           permitted by law.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
           12. Website Availability
         </h2>
 
@@ -286,7 +482,11 @@ export default function Terms() {
           removed from time to time.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
           13. No Guarantee of Results
         </h2>
 
@@ -296,7 +496,11 @@ export default function Terms() {
           result from using the website.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
           14. Limitation of Liability
         </h2>
 
@@ -312,7 +516,13 @@ export default function Terms() {
           protection law.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>15. Privacy</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          15. Privacy
+        </h2>
 
         <p>
           Information collected through Mind Sprint is handled in accordance
@@ -320,11 +530,15 @@ export default function Terms() {
         </p>
 
         <p>
-          <Link href="/privacy" legacyBehavior>
+          <Link
+            href="/privacy"
+            legacyBehavior
+          >
             <a
               style={{
                 color: '#000',
-                textDecoration: 'underline',
+                textDecoration:
+                  'underline',
               }}
             >
               Read the Privacy Policy
@@ -332,7 +546,11 @@ export default function Terms() {
           </Link>
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
           16. Changes to These Terms
         </h2>
 
@@ -347,7 +565,13 @@ export default function Terms() {
           page will be updated.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>17. Contact Mind Sprint</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          17. Contact Mind Sprint
+        </h2>
 
         <p>
           Questions about these Terms can be sent to:
@@ -362,8 +586,18 @@ export default function Terms() {
 
         <p>
           You can also learn more about Mind Sprint on the{' '}
-          <Link href="/about" legacyBehavior>
-            <a style={{ textDecoration: 'underline' }}>About page</a>
+          <Link
+            href="/about"
+            legacyBehavior
+          >
+            <a
+              style={{
+                textDecoration:
+                  'underline',
+              }}
+            >
+              About page
+            </a>
           </Link>
           .
         </p>
