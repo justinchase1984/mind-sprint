@@ -2,15 +2,123 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
+const PAGE_URL =
+  'https://www.dailymindsprint.com/privacy'
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id':
+        'https://www.dailymindsprint.com/#organization',
+      name: 'Mind Sprint',
+      url: 'https://www.dailymindsprint.com/',
+      email: 'hello@dailymindsprint.com',
+    },
+    {
+      '@type': 'WebSite',
+      '@id':
+        'https://www.dailymindsprint.com/#website',
+      url: 'https://www.dailymindsprint.com/',
+      name: 'Mind Sprint',
+      publisher: {
+        '@id':
+          'https://www.dailymindsprint.com/#organization',
+      },
+    },
+    {
+      '@type': 'WebPage',
+      '@id':
+        'https://www.dailymindsprint.com/privacy#webpage',
+      url: PAGE_URL,
+      name: 'Privacy Policy | Mind Sprint',
+      description:
+        'Learn how Mind Sprint collects, uses and protects information relating to gameplay, analytics, prize draw entries and optional email updates.',
+      isPartOf: {
+        '@id':
+          'https://www.dailymindsprint.com/#website',
+      },
+      about: {
+        '@id':
+          'https://www.dailymindsprint.com/#organization',
+      },
+      dateModified: '2026-09-26',
+    },
+  ],
+}
+
 export default function Privacy() {
   return (
     <>
       <Head>
-        <title>Privacy Policy | Mind Sprint</title>
+        <title>
+          Privacy Policy | Mind Sprint
+        </title>
 
         <meta
           name="description"
           content="Learn how Mind Sprint collects, uses and protects information relating to gameplay, analytics, prize draw entries and optional email updates."
+        />
+
+        <meta
+          name="robots"
+          content="index, follow"
+        />
+
+        <link
+          rel="canonical"
+          href={PAGE_URL}
+        />
+
+        <meta
+          property="og:type"
+          content="website"
+        />
+
+        <meta
+          property="og:site_name"
+          content="Mind Sprint"
+        />
+
+        <meta
+          property="og:title"
+          content="Privacy Policy | Mind Sprint"
+        />
+
+        <meta
+          property="og:description"
+          content="Learn how Mind Sprint handles information relating to gameplay, analytics, prize draw entries, email updates and website services."
+        />
+
+        <meta
+          property="og:url"
+          content={PAGE_URL}
+        />
+
+        <meta
+          name="twitter:card"
+          content="summary"
+        />
+
+        <meta
+          name="twitter:title"
+          content="Privacy Policy | Mind Sprint"
+        />
+
+        <meta
+          name="twitter:description"
+          content="Learn how Mind Sprint handles information relating to gameplay, analytics, prize draw entries, email updates and website services."
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html:
+              JSON.stringify(
+                structuredData
+              ),
+          }}
         />
       </Head>
 
@@ -22,7 +130,9 @@ export default function Privacy() {
           lineHeight: 1.7,
         }}
       >
-        <h1>Privacy Policy</h1>
+        <h1>
+          Privacy Policy
+        </h1>
 
         <p
           style={{
@@ -42,9 +152,17 @@ export default function Privacy() {
           email updates or contact us.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>1. Information We Collect</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          1. Information We Collect
+        </h2>
 
-        <h3>Website and device information</h3>
+        <h3>
+          Website and device information
+        </h3>
 
         <p>
           When you visit Mind Sprint, certain technical information may be
@@ -52,38 +170,82 @@ export default function Privacy() {
           services or other technology providers.
         </p>
 
-        <p>This may include information such as:</p>
+        <p>
+          This may include information such as:
+        </p>
 
         <ul>
-          <li>browser and device type;</li>
-          <li>operating system;</li>
-          <li>pages viewed and interactions with the website;</li>
-          <li>approximate location or region;</li>
-          <li>referring pages or websites;</li>
-          <li>technical identifiers; and</li>
+          <li>
+            browser and device type;
+          </li>
+
+          <li>
+            operating system;
+          </li>
+
+          <li>
+            pages viewed and interactions with the website;
+          </li>
+
+          <li>
+            approximate location or region;
+          </li>
+
+          <li>
+            referring pages or websites;
+          </li>
+
+          <li>
+            technical identifiers; and
+          </li>
+
           <li>
             IP address information used by service providers for functions such
             as security, routing, analytics or approximate geographic reporting.
           </li>
         </ul>
 
-        <h3>Challenge and gameplay information</h3>
+        <h3>
+          Challenge and gameplay information
+        </h3>
 
         <p>
           Mind Sprint uses browser storage and server-side challenge
           verification to operate the game.
         </p>
 
-        <p>This may include information such as:</p>
+        <p>
+          This may include information such as:
+        </p>
 
         <ul>
-          <li>challenge progress;</li>
-          <li>scores;</li>
-          <li>current and best streaks;</li>
-          <li>unlocked challenges;</li>
-          <li>completed questions;</li>
-          <li>temporary challenge-attempt identifiers; and</li>
-          <li>information needed to verify eligible challenge completions.</li>
+          <li>
+            challenge progress;
+          </li>
+
+          <li>
+            scores;
+          </li>
+
+          <li>
+            current and best streaks;
+          </li>
+
+          <li>
+            unlocked challenges;
+          </li>
+
+          <li>
+            completed questions;
+          </li>
+
+          <li>
+            temporary challenge-attempt identifiers; and
+          </li>
+
+          <li>
+            information needed to verify eligible challenge completions.
+          </li>
         </ul>
 
         <p>
@@ -92,7 +254,9 @@ export default function Privacy() {
           browsing or changing devices may remove this information.
         </p>
 
-        <h3>Weekly prize draw information</h3>
+        <h3>
+          Weekly prize draw information
+        </h3>
 
         <p>
           If you choose to participate in a Mind Sprint weekly prize draw, we
@@ -101,11 +265,26 @@ export default function Privacy() {
         </p>
 
         <ul>
-          <li>your email address;</li>
-          <li>eligible completed challenges;</li>
-          <li>weekly entry records;</li>
-          <li>challenge verification information;</li>
-          <li>entry and completion timestamps; and</li>
+          <li>
+            your email address;
+          </li>
+
+          <li>
+            eligible completed challenges;
+          </li>
+
+          <li>
+            weekly entry records;
+          </li>
+
+          <li>
+            challenge verification information;
+          </li>
+
+          <li>
+            entry and completion timestamps; and
+          </li>
+
           <li>
             information reasonably required to verify or contact a selected
             entrant.
@@ -119,7 +298,9 @@ export default function Privacy() {
           if your entry is selected.
         </p>
 
-        <h3>Optional email updates</h3>
+        <h3>
+          Optional email updates
+        </h3>
 
         <p>
           Mind Sprint email updates are separate from prize draw participation.
@@ -131,10 +312,21 @@ export default function Privacy() {
         </p>
 
         <ul>
-          <li>your email address;</li>
-          <li>the date and time you gave consent;</li>
-          <li>the wording of the consent you agreed to; and</li>
-          <li>a consent version or other record used to document your choice.</li>
+          <li>
+            your email address;
+          </li>
+
+          <li>
+            the date and time you gave consent;
+          </li>
+
+          <li>
+            the wording of the consent you agreed to; and
+          </li>
+
+          <li>
+            a consent version or other record used to document your choice.
+          </li>
         </ul>
 
         <p>
@@ -143,7 +335,9 @@ export default function Privacy() {
           unsubscribe link included in those emails.
         </p>
 
-        <h3>Information you send to us</h3>
+        <h3>
+          Information you send to us
+        </h3>
 
         <p>
           If you contact Mind Sprint by email, we may receive your email
@@ -151,29 +345,74 @@ export default function Privacy() {
           message.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>2. How We Use Information</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          2. How We Use Information
+        </h2>
 
-        <p>We may use information to:</p>
+        <p>
+          We may use information to:
+        </p>
 
         <ul>
-          <li>operate Mind Sprint challenges and website features;</li>
-          <li>calculate and display scores, streaks and progress;</li>
-          <li>verify challenge completions;</li>
-          <li>prevent duplicate or fraudulent prize draw entries;</li>
-          <li>administer eligible weekly prize draws;</li>
-          <li>contact a selected entrant or confirmed winner;</li>
-          <li>deliver a prize where applicable;</li>
+          <li>
+            operate Mind Sprint challenges and website features;
+          </li>
+
+          <li>
+            calculate and display scores, streaks and progress;
+          </li>
+
+          <li>
+            verify challenge completions;
+          </li>
+
+          <li>
+            prevent duplicate or fraudulent prize draw entries;
+          </li>
+
+          <li>
+            administer eligible weekly prize draws;
+          </li>
+
+          <li>
+            contact a selected entrant or confirmed winner;
+          </li>
+
+          <li>
+            deliver a prize where applicable;
+          </li>
+
           <li>
             send optional Mind Sprint emails where you have chosen to receive
             them;
           </li>
-          <li>understand website usage and improve Mind Sprint;</li>
-          <li>diagnose technical problems;</li>
-          <li>protect the website from misuse or security threats; and</li>
-          <li>comply with legal or regulatory obligations where applicable.</li>
+
+          <li>
+            understand website usage and improve Mind Sprint;
+          </li>
+
+          <li>
+            diagnose technical problems;
+          </li>
+
+          <li>
+            protect the website from misuse or security threats; and
+          </li>
+
+          <li>
+            comply with legal or regulatory obligations where applicable.
+          </li>
         </ul>
 
-        <h2 style={{ marginTop: '2rem' }}>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
           3. Cookies, Local Storage and Similar Technologies
         </h2>
 
@@ -199,7 +438,13 @@ export default function Privacy() {
           analytics or advertising technologies.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>4. Google Analytics</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          4. Google Analytics
+        </h2>
 
         <p>
           Mind Sprint uses Google Analytics 4 to understand how visitors use
@@ -233,7 +478,13 @@ export default function Privacy() {
           </a>
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>5. Email Services</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          5. Email Services
+        </h2>
 
         <p>
           Mind Sprint currently uses <strong>AWeber</strong> to manage optional
@@ -251,7 +502,11 @@ export default function Privacy() {
           ongoing Mind Sprint marketing emails.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
           6. Prize Draw and Data Storage Services
         </h2>
 
@@ -279,7 +534,13 @@ export default function Privacy() {
           reasonably necessary to deliver the reward.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>7. Hosting and Infrastructure</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          7. Hosting and Infrastructure
+        </h2>
 
         <p>
           Mind Sprint uses third-party hosting, infrastructure and technology
@@ -291,7 +552,11 @@ export default function Privacy() {
           secure and deliver the website and its services.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
           8. Advertising Services
         </h2>
 
@@ -343,7 +608,11 @@ export default function Privacy() {
           </a>
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
           9. Ezoic Privacy Disclosure
         </h2>
 
@@ -377,7 +646,13 @@ export default function Privacy() {
           <span id="ezoic-privacy-policy-embed"></span>
         </div>
 
-        <h2 style={{ marginTop: '2rem' }}>10. Sharing Information</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          10. Sharing Information
+        </h2>
 
         <p>
           Mind Sprint does not sell personal information to advertisers.
@@ -390,7 +665,11 @@ export default function Privacy() {
           maintain security or comply with legal requirements.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
           11. International Data Processing
         </h2>
 
@@ -405,7 +684,13 @@ export default function Privacy() {
           security and data-processing terms.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>12. Data Retention</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          12. Data Retention
+        </h2>
 
         <p>
           Mind Sprint aims to keep personal information only for as long as it
@@ -420,30 +705,58 @@ export default function Privacy() {
           where reasonably necessary.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>13. Your Choices</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          13. Your Choices
+        </h2>
 
-        <p>Depending on how you use Mind Sprint, you may be able to:</p>
+        <p>
+          Depending on how you use Mind Sprint, you may be able to:
+        </p>
 
         <ul>
-          <li>play without providing an email address;</li>
-          <li>choose whether to participate in a weekly prize draw;</li>
+          <li>
+            play without providing an email address;
+          </li>
+
+          <li>
+            choose whether to participate in a weekly prize draw;
+          </li>
+
           <li>
             choose separately whether to receive optional Mind Sprint email
             updates;
           </li>
-          <li>unsubscribe from marketing emails using the email unsubscribe link;</li>
-          <li>clear cookies or local browser storage through your browser;</li>
+
+          <li>
+            unsubscribe from marketing emails using the email unsubscribe link;
+          </li>
+
+          <li>
+            clear cookies or local browser storage through your browser;
+          </li>
+
           <li>
             use available consent controls for analytics or advertising where
             provided; and
           </li>
+
           <li>
             contact Mind Sprint with questions about personal information we
             hold.
           </li>
         </ul>
 
-        <h2 style={{ marginTop: '2rem' }}>14. Children</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          14. Children
+        </h2>
 
         <p>
           Mind Sprint is a general-audience trivia and challenge website.
@@ -460,7 +773,13 @@ export default function Privacy() {
           submitted to Mind Sprint inappropriately, please contact us.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>15. Security</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          15. Security
+        </h2>
 
         <p>
           Mind Sprint uses reasonable technical and organisational measures to
@@ -472,7 +791,11 @@ export default function Privacy() {
           be guaranteed to be completely secure.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
           16. Changes to This Privacy Policy
         </h2>
 
@@ -487,7 +810,13 @@ export default function Privacy() {
           page will be updated.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>17. Contact Mind Sprint</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          17. Contact Mind Sprint
+        </h2>
 
         <p>
           Questions or privacy requests can be sent to:
@@ -502,8 +831,18 @@ export default function Privacy() {
 
         <p>
           You can also learn more about Mind Sprint on the{' '}
-          <Link href="/about" legacyBehavior>
-            <a style={{ textDecoration: 'underline' }}>About page</a>
+          <Link
+            href="/about"
+            legacyBehavior
+          >
+            <a
+              style={{
+                textDecoration:
+                  'underline',
+              }}
+            >
+              About page
+            </a>
           </Link>
           .
         </p>
