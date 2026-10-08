@@ -1,15 +1,125 @@
 // pages/weekly-prize-draw-terms.tsx
 import Head from 'next/head'
 
+const PAGE_URL =
+  'https://www.dailymindsprint.com/weekly-prize-draw-terms'
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id':
+        'https://www.dailymindsprint.com/#organization',
+      name: 'Mind Sprint',
+      url: 'https://www.dailymindsprint.com/',
+      email: 'hello@dailymindsprint.com',
+    },
+    {
+      '@type': 'WebSite',
+      '@id':
+        'https://www.dailymindsprint.com/#website',
+      url: 'https://www.dailymindsprint.com/',
+      name: 'Mind Sprint',
+      publisher: {
+        '@id':
+          'https://www.dailymindsprint.com/#organization',
+      },
+    },
+    {
+      '@type': 'WebPage',
+      '@id':
+        'https://www.dailymindsprint.com/weekly-prize-draw-terms#webpage',
+      url: PAGE_URL,
+      name:
+        'Weekly Prize Draw Terms | Mind Sprint',
+      description:
+        'Terms and conditions for the planned Mind Sprint weekly digital reward prize draw.',
+      isPartOf: {
+        '@id':
+          'https://www.dailymindsprint.com/#website',
+      },
+      about: {
+        '@id':
+          'https://www.dailymindsprint.com/#organization',
+      },
+      dateModified:
+        '2026-09-26',
+    },
+  ],
+}
+
 export default function WeeklyPrizeDrawTerms() {
   return (
     <>
       <Head>
-        <title>Weekly Prize Draw Terms | Mind Sprint</title>
+        <title>
+          Weekly Prize Draw Terms | Mind Sprint
+        </title>
 
         <meta
           name="description"
           content="Terms and conditions for the planned Mind Sprint weekly digital reward prize draw."
+        />
+
+        <meta
+          name="robots"
+          content="index, follow"
+        />
+
+        <link
+          rel="canonical"
+          href={PAGE_URL}
+        />
+
+        <meta
+          property="og:type"
+          content="website"
+        />
+
+        <meta
+          property="og:site_name"
+          content="Mind Sprint"
+        />
+
+        <meta
+          property="og:title"
+          content="Weekly Prize Draw Terms | Mind Sprint"
+        />
+
+        <meta
+          property="og:description"
+          content="Read the planned terms for the Mind Sprint weekly digital reward prize draw, including eligibility, entries, prizes and winner selection."
+        />
+
+        <meta
+          property="og:url"
+          content={PAGE_URL}
+        />
+
+        <meta
+          name="twitter:card"
+          content="summary"
+        />
+
+        <meta
+          name="twitter:title"
+          content="Weekly Prize Draw Terms | Mind Sprint"
+        />
+
+        <meta
+          name="twitter:description"
+          content="Read the planned terms for the Mind Sprint weekly digital reward prize draw, including eligibility, entries, prizes and winner selection."
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html:
+              JSON.stringify(
+                structuredData
+              ),
+          }}
         />
       </Head>
 
@@ -21,7 +131,9 @@ export default function WeeklyPrizeDrawTerms() {
           lineHeight: 1.7,
         }}
       >
-        <h1>Mind Sprint Weekly Prize Draw Terms</h1>
+        <h1>
+          Mind Sprint Weekly Prize Draw Terms
+        </h1>
 
         <p
           style={{
@@ -42,10 +154,13 @@ export default function WeeklyPrizeDrawTerms() {
             background: '#fafafa',
           }}
         >
-          <strong>Pre-launch notice:</strong> The Mind Sprint weekly prize draw
-          is not currently live. These terms describe the planned operation of
-          the promotion. The first official weekly draw will begin only when
-          Mind Sprint announces on the website that the draw is live.
+          <strong>
+            Pre-launch notice:
+          </strong>{' '}
+          The Mind Sprint weekly prize draw is not currently live. These terms
+          describe the planned operation of the promotion. The first official
+          weekly draw will begin only when Mind Sprint announces on the website
+          that the draw is live.
         </div>
 
         <p>
@@ -54,10 +169,18 @@ export default function WeeklyPrizeDrawTerms() {
         </p>
 
         <p>
-          <strong>NO PURCHASE OR PAYMENT IS REQUIRED TO ENTER OR WIN.</strong>
+          <strong>
+            NO PURCHASE OR PAYMENT IS REQUIRED TO ENTER OR WIN.
+          </strong>
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>1. Promoter</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          1. Promoter
+        </h2>
 
         <p>
           The promoter is <strong>Mind Sprint</strong>, operated from
@@ -71,7 +194,13 @@ export default function WeeklyPrizeDrawTerms() {
           </a>
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>2. Planned Eligible Countries</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          2. Planned Eligible Countries
+        </h2>
 
         <p>
           Mind Sprint is currently planning the weekly prize draw for eligible
@@ -79,10 +208,21 @@ export default function WeeklyPrizeDrawTerms() {
         </p>
 
         <ul>
-          <li>Australia</li>
-          <li>United States</li>
-          <li>United Kingdom</li>
-          <li>Canada</li>
+          <li>
+            Australia
+          </li>
+
+          <li>
+            United States
+          </li>
+
+          <li>
+            United Kingdom
+          </li>
+
+          <li>
+            Canada
+          </li>
         </ul>
 
         <p>
@@ -101,7 +241,13 @@ export default function WeeklyPrizeDrawTerms() {
           Sprint or administering the prize draw are not eligible to win.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>3. Weekly Draw Period</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          3. Weekly Draw Period
+        </h2>
 
         <p>
           Once the promotion is live, each Mind Sprint weekly draw will be a
@@ -129,7 +275,13 @@ export default function WeeklyPrizeDrawTerms() {
           or testing before the official launch are not eligible for a prize.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>4. How to Enter</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          4. How to Enter
+        </h2>
 
         <p>
           Once the weekly draw is live, an eligible player must provide a valid
@@ -157,7 +309,13 @@ export default function WeeklyPrizeDrawTerms() {
           entries earned.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>5. No Purchase Necessary</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          5. No Purchase Necessary
+        </h2>
 
         <p>
           Mind Sprint is free to play. No purchase, payment or paid
@@ -174,7 +332,13 @@ export default function WeeklyPrizeDrawTerms() {
           chances of winning.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>6. Planned Prize</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          6. Planned Prize
+        </h2>
 
         <p>
           The planned promotion will have{' '}
@@ -209,7 +373,13 @@ export default function WeeklyPrizeDrawTerms() {
           applicable law.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>7. Chances of Winning</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          7. Chances of Winning
+        </h2>
 
         <p>
           Every valid entry included in a weekly draw will have an equal chance
@@ -228,7 +398,13 @@ export default function WeeklyPrizeDrawTerms() {
           will have 2.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>8. Winner Selection</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          8. Winner Selection
+        </h2>
 
         <p>
           After a weekly entry period closes, one winning entry is planned to
@@ -246,7 +422,13 @@ export default function WeeklyPrizeDrawTerms() {
           will not intentionally be redrawn merely to select a different winner.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>9. Canadian Entrants</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          9. Canadian Entrants
+        </h2>
 
         <p>
           If a resident of Canada is selected, the entrant may be required,
@@ -254,7 +436,13 @@ export default function WeeklyPrizeDrawTerms() {
           question without assistance before being confirmed as the winner.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>10. Winner Notification</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          10. Winner Notification
+        </h2>
 
         <p>
           The selected entrant will be contacted using the email address
@@ -281,7 +469,13 @@ export default function WeeklyPrizeDrawTerms() {
           applicable law.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>11. Prize Delivery</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          11. Prize Delivery
+        </h2>
 
         <p>
           Once a winner has been confirmed, Mind Sprint will arrange electronic
@@ -294,7 +488,13 @@ export default function WeeklyPrizeDrawTerms() {
           receive the prize.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>12. Entry Integrity</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          12. Entry Integrity
+        </h2>
 
         <p>
           Mind Sprint may reject or remove entries that are fraudulent,
@@ -308,7 +508,13 @@ export default function WeeklyPrizeDrawTerms() {
           disqualification.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>13. Technical Problems</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          13. Technical Problems
+        </h2>
 
         <p>
           Mind Sprint is not responsible for entries that cannot be recorded
@@ -325,7 +531,13 @@ export default function WeeklyPrizeDrawTerms() {
           .
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>14. Privacy and Email</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          14. Privacy and Email
+        </h2>
 
         <p>
           An email address will be required to associate prize draw entries with
@@ -349,10 +561,16 @@ export default function WeeklyPrizeDrawTerms() {
         </p>
 
         <p>
-          <a href="/privacy">Read the Mind Sprint Privacy Policy</a>
+          <a href="/privacy">
+            Read the Mind Sprint Privacy Policy
+          </a>
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
           15. Changes, Suspension or Cancellation
         </h2>
 
@@ -368,7 +586,11 @@ export default function WeeklyPrizeDrawTerms() {
           aim of treating valid entrants fairly.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
           16. Third-Party Reward Provider
         </h2>
 
@@ -388,7 +610,11 @@ export default function WeeklyPrizeDrawTerms() {
           expressly stated otherwise.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
           17. Local Laws and Availability
         </h2>
 
@@ -404,7 +630,13 @@ export default function WeeklyPrizeDrawTerms() {
           requirements or reward-delivery availability.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>18. Applicable Law</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          18. Applicable Law
+        </h2>
 
         <p>
           These terms are governed by the laws applicable in Queensland,
@@ -412,9 +644,17 @@ export default function WeeklyPrizeDrawTerms() {
           requirements that apply to participants in their place of residence.
         </p>
 
-        <h2 style={{ marginTop: '2rem' }}>19. Contact</h2>
+        <h2
+          style={{
+            marginTop: '2rem',
+          }}
+        >
+          19. Contact
+        </h2>
 
-        <p>Questions about the planned weekly prize draw can be sent to:</p>
+        <p>
+          Questions about the planned weekly prize draw can be sent to:
+        </p>
 
         <p>
           <strong>Email:</strong>{' '}
