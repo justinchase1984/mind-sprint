@@ -645,6 +645,11 @@ export default function PuzzlePage() {
             ? `Results | Challenge ${challengeIndex}`
             : `Challenge ${challengeIndex} – Puzzle ${idNum}`}
         </title>
+
+        <meta
+          name="robots"
+          content="noindex, follow"
+        />
       </Head>
 
       <main
