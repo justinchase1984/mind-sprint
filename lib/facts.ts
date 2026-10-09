@@ -1,13 +1,15 @@
 // lib/facts.ts
+import { ACTIVE_ROTATION_SET_COUNT } from './rotation'
 
 /*
 Did You Know Fact System
 ------------------------
-• 7 challenges
-• 3 rotating sets per challenge
+• 9 challenges
+• 4 question sets per challenge
 • 10 questions per set
-• 210 matching facts in total
+• 360 matching facts in total
 • Facts rotate daily at midnight Brisbane / AEST
+• Rotation uses the same active-set count as lib/rotation.ts
 • Compatible with the existing `${challengeIndex}-${idNum}` lookup
   used by pages/puzzle/[id].tsx
 */
@@ -40,6 +42,7 @@ function getRotationIndex(
   setCount: number
 ): number {
   const dayIndex = getDayIndex(date)
+
   const cycle = Math.floor(
     dayIndex / ROTATION_DAYS
   )
@@ -106,6 +109,23 @@ const FACT_SETS: Record<number, string[][]> = {
       'The ancient Olympic Games were held at Olympia in Greece.',
       'The ampere is named after French physicist André-Marie Ampère.',
       'Opposite compass directions are separated by 180 degrees.'
+    ],
+
+    /*
+    SET D
+    */
+
+    [
+      'Mercury has the chemical symbol Hg and is one of the few elements that is liquid at ordinary room temperature.',
+      'Lisbon lies near the mouth of the Tagus River on Portugal’s Atlantic coast.',
+      'The skin protects the body from the outside environment and is generally regarded as the body’s largest organ.',
+      'A standard deck contains four suits with 13 cards in each suit, giving 52 cards in total.',
+      'Vincent van Gogh painted "The Starry Night" in 1889 while staying in Saint-Rémy-de-Provence.',
+      'The South Korean won is issued by the Bank of Korea.',
+      'Water boils at 100°C at standard atmospheric pressure, but its boiling point changes with pressure.',
+      'J. R. R. Tolkien’s "The Hobbit" was first published in 1937.',
+      'Mars appears reddish because iron-bearing minerals on its surface have oxidised.',
+      'A standard chessboard is arranged as eight rows by eight columns, giving 64 squares.'
     ]
 
   ],
@@ -167,6 +187,23 @@ const FACT_SETS: Record<number, string[][]> = {
       'A conjunction connects words, phrases or clauses within a sentence.',
       'Analogies compare relationships between two pairs of ideas or concepts.',
       '"Separate" can function as both a verb and an adjective.'
+    ],
+
+    /*
+    SET D
+    */
+
+    [
+      '"Pragmatic" usually describes an approach focused on practical results rather than theory or ideals.',
+      '"Whom" is traditionally used as an object, while "who" is used as a subject.',
+      '"Contract" can mean to become smaller, making it an antonym of "expand".',
+      'To "hit the nail on the head" means to identify or describe something exactly.',
+      '"Conscientious" contains the letter sequence "scient", which is related to its Latin origins.',
+      '"Analyses" is the plural form of "analysis".',
+      '"Vivid" is an adjective that can describe something strikingly clear, bright or detailed.',
+      'The prefix "anti-" generally means against or opposed to something.',
+      'A semicolon can join two closely related independent clauses without a coordinating conjunction.',
+      '"Complement" refers to something that completes or enhances another thing, while "compliment" can mean praise.'
     ]
 
   ],
@@ -228,6 +265,23 @@ const FACT_SETS: Record<number, string[][]> = {
       'Pikachu is an Electric-type Pokémon and is number 25 in the National Pokédex.',
       'Greta Gerwig co-wrote "Barbie" with Noah Baumbach as well as directing the film.',
       'Indiana Jones first appeared in the 1981 film "Raiders of the Lost Ark".'
+    ],
+
+    /*
+    SET D
+    */
+
+    [
+      'Elijah Wood portrayed Frodo Baggins in all three films of Peter Jackson’s "The Lord of the Rings" trilogy.',
+      'Madonna’s album "Like a Prayer" was released in 1989.',
+      'Dunder Mifflin is the fictional paper company at the centre of the U.S. version of "The Office".',
+      'Steven Spielberg directed "Jaws", which was released in 1975.',
+      'Nirvana released "Smells Like Teen Spirit" in 1991 as part of the album "Nevermind".',
+      'Katniss Everdeen was created by author Suzanne Collins for "The Hunger Games" novels.',
+      'Tom Hanks won the Academy Award for Best Actor for his performance in "Forrest Gump".',
+      'Tatooine appeared in the original 1977 "Star Wars" film and became one of the franchise’s best-known planets.',
+      'Beyoncé released "Lemonade" in 2016 as both an album and a visual project.',
+      'Jim Parsons portrayed Sheldon Cooper in "The Big Bang Theory".'
     ]
 
   ],
@@ -289,6 +343,23 @@ const FACT_SETS: Record<number, string[][]> = {
       'Mansa Musa became famous beyond West Africa after his pilgrimage to Mecca in the 14th century.',
       'Despite its name, the Hundred Years’ War lasted for more than a century.',
       'The U.S. Declaration of Independence was adopted on 4 July 1776.'
+    ],
+
+    /*
+    SET D
+    */
+
+    [
+      'Augustus became Rome’s first emperor after the collapse of the Roman Republic and ruled until 14 CE.',
+      'Tenochtitlan was the capital of the Aztec Empire and stood on the site of present-day Mexico City.',
+      'Constantinople fell to Ottoman forces led by Sultan Mehmed II in 1453.',
+      'King John sealed Magna Carta at Runnymede in 1215.',
+      'Mahatma Gandhi became internationally known for campaigns based on nonviolent resistance.',
+      'The Taj Mahal was commissioned by Mughal emperor Shah Jahan in the 17th century.',
+      'The Black Death reached Europe in the 14th century and killed a substantial proportion of its population.',
+      'Amelia Earhart completed her solo transatlantic flight in 1932.',
+      'The Treaty of Versailles was signed in 1919 after World War I.',
+      'Suleiman the Magnificent ruled the Ottoman Empire from 1520 until 1566.'
     ]
 
   ],
@@ -350,6 +421,23 @@ const FACT_SETS: Record<number, string[][]> = {
       'Simple probability is calculated by dividing favourable outcomes by total possible outcomes.',
       'Standard order of operations performs multiplication before addition.',
       'A clock face contains 360 degrees, so adjacent hour marks are 30 degrees apart.'
+    ],
+
+    /*
+    SET D
+    */
+
+    [
+      'Thirty-five percent of 200 can be calculated as 0.35 × 200, which equals 70.',
+      'The perimeter of a rectangle is twice its length plus twice its width.',
+      'The sequence 5, 8, 13, 21, 34 follows a Fibonacci-style rule in which each term is the sum of the previous two.',
+      'Three fifths is equivalent to the decimal 0.6 and therefore 60%.',
+      'Dividing $240 equally among six people gives $40 per person.',
+      'Two to the fifth power means multiplying five twos together, giving 32.',
+      'One kilometre equals 1,000 metres, so 1.2 kilometres equals 1,200 metres.',
+      'Dividing both sides of 3x = 27 by 3 gives x = 9.',
+      'A fair coin has two equally likely outcomes, so the probability of heads is one half.',
+      'The five numbers 8, 10, 12, 14 and 16 have an arithmetic mean of 12.'
     ]
 
   ],
@@ -411,6 +499,23 @@ const FACT_SETS: Record<number, string[][]> = {
       'The earthquake focus is underground, while the epicentre lies directly above it at the surface.',
       'Mercury has the shortest orbital period of any planet in the Solar System.',
       'Covalent bonding is especially common between non-metal atoms.'
+    ],
+
+    /*
+    SET D
+    */
+
+    [
+      'Plants absorb carbon dioxide mainly through tiny openings in their leaves called stomata.',
+      'The cerebrum is the largest major region of the human brain.',
+      'Light travels through a vacuum at approximately 299,792 kilometres per second.',
+      'The chemical symbol Fe comes from the Latin word for iron, "ferrum".',
+      'The human heart has four chambers: two atria and two ventricles.',
+      'Condensation occurs when a gas loses energy and changes into a liquid.',
+      'The ohm is named after German physicist Georg Ohm.',
+      'In ordinary double-stranded DNA, adenine pairs with thymine.',
+      'Saturn’s rings are composed largely of countless particles of ice and rocky material.',
+      'During photosynthesis, oxygen is released as a by-product of reactions involving water.'
     ]
 
   ],
@@ -472,6 +577,179 @@ const FACT_SETS: Record<number, string[][]> = {
       'The Prime Meridian passes through Greenwich in London and is defined as 0 degrees longitude.',
       'Ecuador’s name comes from the Spanish word for Equator.',
       'The Tropic of Capricorn lies at roughly 23.5 degrees south latitude and crosses Australia.'
+    ],
+
+    /*
+    SET D
+    */
+
+    [
+      'Oslo sits at the head of the Oslofjord in southeastern Norway.',
+      'The River Thames flows through London before reaching the North Sea.',
+      'Russia spans eastern Europe and northern Asia and is the world’s largest country by area.',
+      'Denali is located in Alaska and is the highest mountain in North America.',
+      'Italy’s long peninsula is often compared to the shape of a boot.',
+      'Seoul is South Korea’s capital and largest metropolitan centre.',
+      'The Mediterranean Sea lies between Europe, Africa and Asia.',
+      'Antarctica has research stations but no permanent native human population.',
+      'Madagascar lies in the Indian Ocean off Africa’s southeastern coast.',
+      'The Volga flows through western Russia and is the longest river in Europe.'
+    ]
+
+  ],
+
+  /*
+  ---------------------------------------------------
+  CHALLENGE 8 — SPORTS
+  ---------------------------------------------------
+  */
+
+  8: [
+
+    /*
+    SET A
+    */
+
+    [
+      'A football team normally fields 11 players at once, including one goalkeeper.',
+      'In tennis scoring, "love" represents zero points.',
+      'An NBA regulation game consists of four 12-minute quarters.',
+      'A modern cricket over normally contains six legal deliveries; wides and no-balls do not count as legal balls.',
+      'The official marathon distance is 42.195 kilometres, or 26 miles and 385 yards.',
+      'A birdie means completing a golf hole in one stroke fewer than par.',
+      'A try in rugby union is worth five points.',
+      'A baseball batter is generally struck out after receiving three strikes.',
+      'The chequered flag is traditionally used to indicate that a motor race or session has finished.',
+      'Badminton games are normally played to 21 points, with special rules applying when the score reaches 20-all.'
+    ],
+
+    /*
+    SET B
+    */
+
+    [
+      'The FIFA World Cup is one of the world’s largest international association football tournaments.',
+      'The Ashes rivalry between England and Australia dates back to the 19th century.',
+      'Wimbledon is the only one of tennis’s four Grand Slam tournaments still played on grass.',
+      'A successful basketball free throw scores one point.',
+      'The Tour de France is a multi-stage road cycling race traditionally held largely in France.',
+      'A long-course Olympic swimming pool is 50 metres long.',
+      'A rugby league team fields 13 players during normal play.',
+      'The Masters Tournament has been held at Augusta National Golf Club in Georgia, United States, since 1934.',
+      'KO is short for knockout, a way in which a boxing contest can end.',
+      'Pole position usually gives a driver the front starting position on the Formula 1 grid.'
+    ],
+
+    /*
+    SET C
+    */
+
+    [
+      'The football penalty mark is 12 yards, or about 11 metres, from the goal line.',
+      'LBW means "leg before wicket" and is one of the ways a batter can be dismissed in cricket.',
+      'Tennis’s four Grand Slam tournaments are the Australian Open, French Open, Wimbledon and US Open.',
+      'A successful basketball shot from beyond the three-point line is worth three points.',
+      'A regulation Major League Baseball game is scheduled for nine innings, although extra innings may be needed.',
+      'A successful conversion after a try is worth two points in rugby union.',
+      'An eagle in golf means completing a hole two strokes under par.',
+      'A decathlon consists of ten athletics events.',
+      'An ice hockey team normally has six players on the ice, including the goaltender.',
+      'The Tour de France yellow jersey is worn by the rider leading the overall general classification.'
+    ],
+
+    /*
+    SET D
+    */
+
+    [
+      'An indoor volleyball team has six players on the court at one time.',
+      'A cricket century means a batter has scored at least 100 runs in an innings.',
+      'A tennis ace is a legal serve that wins the point without the receiver touching the ball.',
+      'In football, a hat-trick traditionally means one player scoring three goals in the same match.',
+      'A baseball player completing a home run touches first base, second base, third base and home plate.',
+      'Par represents the number of strokes a skilled golfer is expected to need to complete a hole or course.',
+      'A basketball rebound occurs when a player gains possession after a missed field goal or free throw.',
+      'A standard rugby union scrum contains eight forwards from each team.',
+      'A pentathlon consists of five events, as suggested by the Greek prefix "penta-".',
+      'Judo was developed in Japan by Jigoro Kano during the late 19th century.'
+    ]
+
+  ],
+
+  /*
+  ---------------------------------------------------
+  CHALLENGE 9 — NATURE & ANIMALS
+  ---------------------------------------------------
+  */
+
+  9: [
+
+    /*
+    SET A
+    */
+
+    [
+      'African elephants are the largest living land animals, with adult males capable of weighing several tonnes.',
+      'Bats are the only mammals capable of true sustained powered flight.',
+      'A social group of lions is commonly known as a pride.',
+      'Cheetahs can reach extremely high speeds over short distances, making them the fastest land animals.',
+      'Emperor penguins breed on Antarctic sea ice during the continent’s harsh winter.',
+      'Whales are mammals and breathe air through blowholes connected to their lungs.',
+      'A young kangaroo is called a joey and continues developing inside its mother’s pouch after birth.',
+      'An octopus has three hearts: two pump blood through the gills and one pumps it around the body.',
+      'Bamboo makes up the great majority of a wild giant panda’s diet.',
+      'Frogs are amphibians and typically undergo metamorphosis from aquatic tadpoles to adults.'
+    ],
+
+    /*
+    SET B
+    */
+
+    [
+      'Giraffes are the tallest living land animals and can reach heights of more than five metres.',
+      'Every zebra has a distinctive stripe pattern, rather like an individual visual signature.',
+      'Reef-building coral polyps produce calcium carbonate skeletons that accumulate over generations.',
+      'Transpiration is the loss of water vapour from plants, mainly through pores called stomata.',
+      'The tiger is the largest living species in the cat family.',
+      'A healthy honey bee queen’s main reproductive role is laying eggs for the colony.',
+      'Koalas occur naturally in eastern and southeastern Australia.',
+      'Sharks have skeletons made of cartilage rather than true bone.',
+      'Beaver dams can significantly alter streams and create wetland habitat.',
+      'The scientific study of tree rings is called dendrochronology.'
+    ],
+
+    /*
+    SET C
+    */
+
+    [
+      'Nocturnal animals are primarily active during the night rather than during daylight hours.',
+      'Saltwater crocodiles are the largest living reptiles and can exceed six metres in length.',
+      'Butterflies undergo complete metamorphosis through egg, larva, pupa and adult stages.',
+      'Dolphins are mammals, meaning they breathe air, are warm-blooded and nurse their young.',
+      'Deciduous trees shed their leaves seasonally, often in response to changing temperature or rainfall.',
+      'Kiwi are flightless birds found naturally only in New Zealand.',
+      'Nectar is a sugar-rich liquid produced by flowers and collected by many pollinating animals.',
+      'Polar bears live in the Arctic region, while wild penguins occur in the Southern Hemisphere.',
+      '"Murder" is a traditional collective noun used for a group of crows.',
+      'Cactus spines are modified leaves that help reduce water loss and discourage herbivores.'
+    ],
+
+    /*
+    SET D
+    */
+
+    [
+      'The Komodo dragon is the largest living species of lizard and occurs naturally on several Indonesian islands.',
+      'The platypus is a monotreme, an unusual group of mammals that reproduce by laying eggs.',
+      'The wandering albatross has the greatest wingspan of any living bird, reaching well over three metres.',
+      'Wolves commonly live and hunt in social groups known as packs.',
+      'Chameleons can change colour for communication, temperature regulation and other functions, not only camouflage.',
+      'Mangroves are specially adapted to saline and brackish environments along tropical and subtropical coastlines.',
+      'Acorns are the fruits of oak trees and contain the seeds from which new oaks can grow.',
+      'Herbivores are animals whose diets consist primarily of plant material.',
+      'Walrus tusks are elongated canine teeth and occur in both males and females.',
+      'Bottlenose dolphins use echolocation by producing sounds and interpreting returning echoes.'
     ]
 
   ]
@@ -479,11 +757,15 @@ const FACT_SETS: Record<number, string[][]> = {
 }
 
 /*
-The puzzle page currently asks for facts using keys such as:
-"1-1", "4-7", "7-10"
+The puzzle page asks for facts using keys such as:
+"1-1", "4-7", "9-10"
 
-This Proxy keeps that existing interface intact, but automatically
-selects the correct A, B or C fact set for the current Brisbane/AEST day.
+This Proxy keeps that existing interface intact and automatically
+selects the matching fact set for the current Brisbane / AEST day.
+
+ACTIVE_ROTATION_SET_COUNT is imported from lib/rotation.ts so the
+questions and facts can never accidentally rotate through a different
+number of active sets.
 */
 
 export const DID_YOU_KNOW: Record<string, string> =
@@ -494,12 +776,16 @@ export const DID_YOU_KNOW: Record<string, string> =
         _target,
         property: string | symbol
       ) {
-        if (typeof property !== 'string') {
+        if (
+          typeof property !== 'string'
+        ) {
           return undefined
         }
 
         const match =
-          /^(\d+)-(\d+)$/.exec(property)
+          /^(\d+)-(\d+)$/.exec(
+            property
+          )
 
         if (!match) {
           return undefined
@@ -512,7 +798,9 @@ export const DID_YOU_KNOW: Record<string, string> =
           Number(match[2]) - 1
 
         const challengeFacts =
-          FACT_SETS[challengeIndex]
+          FACT_SETS[
+            challengeIndex
+          ]
 
         if (
           !challengeFacts ||
@@ -522,10 +810,16 @@ export const DID_YOU_KNOW: Record<string, string> =
           return undefined
         }
 
+        const activeSetCount =
+          Math.min(
+            ACTIVE_ROTATION_SET_COUNT,
+            challengeFacts.length
+          )
+
         const setIndex =
           getRotationIndex(
             new Date(),
-            challengeFacts.length
+            activeSetCount
           )
 
         return challengeFacts[
