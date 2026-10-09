@@ -8,6 +8,7 @@ import { getRotatingPuzzlesByChallenge } from '../../lib/rotation'
 import { DID_YOU_KNOW } from '../../lib/facts'
 
 const PRIZE_DRAW_LIVE = false
+const TOTAL_CHALLENGES = 9
 
 export default function PuzzlePage() {
   const router = useRouter()
@@ -694,7 +695,8 @@ export default function PuzzlePage() {
 
               const nextHref =
                 passed &&
-                challengeIndex >= 7
+                challengeIndex >=
+                  TOTAL_CHALLENGES
                   ? '/results'
                   : passed
                   ? `/puzzle/1?challenge=${challengeIndex + 1}`
@@ -702,7 +704,8 @@ export default function PuzzlePage() {
 
               const nextLabel =
                 passed &&
-                challengeIndex >= 7
+                challengeIndex >=
+                  TOTAL_CHALLENGES
                   ? 'Finish →'
                   : passed
                   ? 'Continue →'
@@ -710,7 +713,8 @@ export default function PuzzlePage() {
 
               if (
                 passed &&
-                challengeIndex < 7
+                challengeIndex <
+                  TOTAL_CHALLENGES
               ) {
                 localStorage.setItem(
                   'unlockedChallenge',
