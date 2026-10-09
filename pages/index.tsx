@@ -34,7 +34,7 @@ const structuredData = {
       name:
         'Free Daily General Knowledge Quiz | Mind Sprint',
       description:
-        'Play a free daily general knowledge quiz with 7 challenges and 70 questions covering trivia, history, science, geography, words, numbers and pop culture.',
+        'Play a free daily general knowledge quiz with 9 challenges and 90 questions covering trivia, history, science, geography, words, numbers, pop culture, sports, nature and animals.',
       isPartOf: {
         '@id':
           'https://www.dailymindsprint.com/#website',
@@ -57,7 +57,7 @@ export default function Home() {
 
         <meta
           name="description"
-          content="Play a free daily general knowledge quiz with 7 challenges and 70 questions covering trivia, history, science, geography, words, numbers and pop culture."
+          content="Play a free daily general knowledge quiz with 9 challenges and 90 questions covering trivia, history, science, geography, words, numbers, pop culture, sports, nature and animals."
         />
 
         <meta
@@ -87,7 +87,7 @@ export default function Home() {
 
         <meta
           property="og:description"
-          content="Test yourself with 7 free daily quiz challenges covering general knowledge, history, science, geography, words, numbers and pop culture."
+          content="Test yourself with 9 free daily quiz challenges covering general knowledge, history, science, geography, words, numbers, pop culture, sports, nature and animals."
         />
 
         <meta
@@ -107,7 +107,7 @@ export default function Home() {
 
         <meta
           name="twitter:description"
-          content="Play 7 free daily quiz challenges and test your general knowledge, history, science, geography, words, numbers and pop culture."
+          content="Play 9 free daily quiz challenges and test your general knowledge, history, science, geography, words, numbers, pop culture, sports, nature and animals."
         />
 
         <script
@@ -170,14 +170,15 @@ export default function Home() {
                 '0 auto 1.75rem',
             }}
           >
-            Seven quick challenges.
-            70 questions. Test your
+            Nine quick challenges.
+            90 questions. Test your
             knowledge across general
             knowledge, words, pop
             culture, history, numbers,
-            science and geography —
-            with fresh question sets
-            every day.
+            science, geography, sports,
+            nature and animals — with
+            fresh question sets every
+            day.
           </p>
 
           <Link
@@ -256,7 +257,7 @@ export default function Home() {
                   marginBottom: 6,
                 }}
               >
-                7 Daily Quiz Challenges
+                9 Daily Quiz Challenges
               </h2>
 
               <p
@@ -266,7 +267,7 @@ export default function Home() {
                   lineHeight: 1.5,
                 }}
               >
-                Work through seven
+                Work through nine
                 different quiz
                 categories and test a
                 broad mix of knowledge
@@ -297,7 +298,7 @@ export default function Home() {
                   marginBottom: 6,
                 }}
               >
-                70 Questions
+                90 Questions
               </h2>
 
               <p
@@ -388,7 +389,7 @@ export default function Home() {
               textAlign: 'center',
             }}
           >
-            Mind Sprint combines seven
+            Mind Sprint combines nine
             different quiz categories
             so you are not answering
             the same type of question
@@ -709,6 +710,94 @@ export default function Home() {
                 </div>
               </a>
             </Link>
+
+            <Link
+              href="/puzzle/1?challenge=8"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: 'inherit',
+                  textDecoration:
+                    'none',
+                  display: 'block',
+                }}
+              >
+                <div
+                  style={{
+                    border:
+                      '1px solid #e6e6e6',
+                    borderRadius: 10,
+                    padding: '1rem',
+                    height: '100%',
+                    boxSizing:
+                      'border-box',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <strong>
+                    🏅 Sports
+                  </strong>
+
+                  <p
+                    style={{
+                      color: '#666',
+                      lineHeight: 1.5,
+                      marginBottom: 0,
+                    }}
+                  >
+                    Football, cricket,
+                    tennis, basketball,
+                    rugby, golf and
+                    sporting knowledge.
+                  </p>
+                </div>
+              </a>
+            </Link>
+
+            <Link
+              href="/puzzle/1?challenge=9"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: 'inherit',
+                  textDecoration:
+                    'none',
+                  display: 'block',
+                }}
+              >
+                <div
+                  style={{
+                    border:
+                      '1px solid #e6e6e6',
+                    borderRadius: 10,
+                    padding: '1rem',
+                    height: '100%',
+                    boxSizing:
+                      'border-box',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <strong>
+                    🐾 Nature &amp; Animals
+                  </strong>
+
+                  <p
+                    style={{
+                      color: '#666',
+                      lineHeight: 1.5,
+                      marginBottom: 0,
+                    }}
+                  >
+                    Animals, wildlife,
+                    plants, ecosystems
+                    and the natural
+                    world.
+                  </p>
+                </div>
+              </a>
+            </Link>
           </div>
         </section>
 
@@ -767,7 +856,7 @@ export default function Home() {
             </li>
 
             <li>
-              Complete all seven
+              Complete all nine
               challenges or return the
               next day for a fresh
               question rotation.
@@ -1023,10 +1112,10 @@ export default function Home() {
                 lineHeight: 1.7,
               }}
             >
-              There are seven
+              There are nine
               challenges with 10
               questions in each,
-              giving you up to 70
+              giving you up to 90
               questions across a full
               Mind Sprint run.
             </p>
@@ -1049,12 +1138,13 @@ export default function Home() {
                 lineHeight: 1.7,
               }}
             >
-              The seven categories are
+              The nine categories are
               General Knowledge, Word
               &amp; Language, Pop
               Culture, History, Smart
-              Numbers, Science and
-              Geography.
+              Numbers, Science,
+              Geography, Sports and
+              Nature &amp; Animals.
             </p>
           </div>
 
@@ -1100,121 +1190,4 @@ export default function Home() {
               </a>
             </Link>
           </p>
-        </section>
-
-        {/* Explore */}
-        <section
-          style={{
-            maxWidth: 760,
-            margin: '0 auto',
-            padding:
-              '2rem 1rem 4rem',
-            textAlign: 'center',
-          }}
-        >
-          <h2>
-            Explore Mind Sprint
-          </h2>
-
-          <p
-            style={{
-              color: '#555',
-              lineHeight: 1.7,
-              marginBottom:
-                '1.25rem',
-            }}
-          >
-            Learn more about the daily
-            quiz, brain challenges and
-            how Mind Sprint works.
-          </p>
-
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent:
-                'center',
-              gap: '1rem',
-            }}
-          >
-            <Link
-              href="/how-it-works"
-              legacyBehavior
-            >
-              <a
-                style={{
-                  color: '#000',
-                  textDecoration:
-                    'underline',
-                }}
-              >
-                How It Works
-              </a>
-            </Link>
-
-            <Link
-              href="/brain-training"
-              legacyBehavior
-            >
-              <a
-                style={{
-                  color: '#000',
-                  textDecoration:
-                    'underline',
-                }}
-              >
-                Brain Training
-              </a>
-            </Link>
-
-            <Link
-              href="/faq"
-              legacyBehavior
-            >
-              <a
-                style={{
-                  color: '#000',
-                  textDecoration:
-                    'underline',
-                }}
-              >
-                FAQ
-              </a>
-            </Link>
-
-            <Link
-              href="/about"
-              legacyBehavior
-            >
-              <a
-                style={{
-                  color: '#000',
-                  textDecoration:
-                    'underline',
-                }}
-              >
-                About Mind Sprint
-              </a>
-            </Link>
-
-            <Link
-              href="/contact"
-              legacyBehavior
-            >
-              <a
-                style={{
-                  color: '#000',
-                  textDecoration:
-                    'underline',
-                }}
-              >
-                Contact
-              </a>
-            </Link>
-          </div>
-        </section>
-      </main>
-    </>
-  )
-}
+        </
