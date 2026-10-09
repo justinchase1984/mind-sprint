@@ -5,12 +5,16 @@ import type { Puzzle } from './puzzles'
 Rotation System
 ---------------
 • Challenges rotate every day
-• Each challenge contains 3 question sets
+• Each challenge contains 4 question sets
 • Rotation changes at midnight Brisbane / AEST
 */
 
 const ROTATION_DAYS = 1
 const AEST_OFFSET_MS = 10 * 60 * 60 * 1000
+
+// Keep A/B/C live while the expanded question/fact bank is deployed.
+// Change this to 4 only after lib/facts.ts and the 9-challenge UI are ready.
+export const ACTIVE_ROTATION_SET_COUNT = 3
 
 function getDayIndex(date: Date = new Date()): number {
   const start = Date.UTC(2025, 0, 1)
@@ -333,6 +337,113 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
           'North'
         ],
         answer: 'Northeast'
+      }
+    ],
+
+    /*
+    SET D
+    */
+
+    [
+      {
+        question: 'Which metal is liquid at typical room temperature?',
+        options: [
+          'Mercury',
+          'Iron',
+          'Aluminium',
+          'Copper'
+        ],
+        answer: 'Mercury'
+      },
+      {
+        question: 'What is the capital city of Portugal?',
+        options: [
+          'Madrid',
+          'Porto',
+          'Lisbon',
+          'Barcelona'
+        ],
+        answer: 'Lisbon'
+      },
+      {
+        question: 'What is the largest organ of the human body?',
+        options: [
+          'Liver',
+          'Skin',
+          'Lungs',
+          'Heart'
+        ],
+        answer: 'Skin'
+      },
+      {
+        question: 'How many cards are in a standard deck of playing cards, excluding jokers?',
+        options: [
+          '48',
+          '50',
+          '54',
+          '52'
+        ],
+        answer: '52'
+      },
+      {
+        question: 'Who painted "The Starry Night"?',
+        options: [
+          'Vincent van Gogh',
+          'Claude Monet',
+          'Pablo Picasso',
+          'Salvador Dalí'
+        ],
+        answer: 'Vincent van Gogh'
+      },
+      {
+        question: 'What currency is used in South Korea?',
+        options: [
+          'Yen',
+          'South Korean won',
+          'Yuan',
+          'Baht'
+        ],
+        answer: 'South Korean won'
+      },
+      {
+        question: 'At standard atmospheric pressure, water boils at what temperature on the Celsius scale?',
+        options: [
+          '90°C',
+          '110°C',
+          '120°C',
+          '100°C'
+        ],
+        answer: '100°C'
+      },
+      {
+        question: 'Who wrote "The Hobbit"?',
+        options: [
+          'C. S. Lewis',
+          'George R. R. Martin',
+          'J. R. R. Tolkien',
+          'J. K. Rowling'
+        ],
+        answer: 'J. R. R. Tolkien'
+      },
+      {
+        question: 'Which planet is commonly known as the Red Planet?',
+        options: [
+          'Mars',
+          'Venus',
+          'Jupiter',
+          'Mercury'
+        ],
+        answer: 'Mars'
+      },
+      {
+        question: 'How many squares are on a standard chessboard?',
+        options: [
+          '56',
+          '64',
+          '72',
+          '81'
+        ],
+        answer: '64'
       }
     ]
 
@@ -665,6 +776,113 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         ],
         answer: 'Separate'
       }
+    ],
+
+    /*
+    SET D
+    */
+
+    [
+      {
+        question: 'Which word is closest in meaning to "pragmatic"?',
+        options: [
+          'Idealistic',
+          'Careless',
+          'Practical',
+          'Emotional'
+        ],
+        answer: 'Practical'
+      },
+      {
+        question: 'Which sentence uses "whom" correctly?',
+        options: [
+          'To whom did you speak?',
+          'Whom is coming to dinner?',
+          'Whom wrote this letter?',
+          'Whom will lead the team?'
+        ],
+        answer: 'To whom did you speak?'
+      },
+      {
+        question: 'Which word is an antonym of "expand"?',
+        options: [
+          'Extend',
+          'Increase',
+          'Enlarge',
+          'Contract'
+        ],
+        answer: 'Contract'
+      },
+      {
+        question: 'What does the idiom "hit the nail on the head" mean?',
+        options: [
+          'Avoid the main issue',
+          'Describe something exactly',
+          'Work very slowly',
+          'Make a careless mistake'
+        ],
+        answer: 'Describe something exactly'
+      },
+      {
+        question: 'Which word is spelled correctly?',
+        options: [
+          'Consciencious',
+          'Conscientous',
+          'Conscientious',
+          'Conscentious'
+        ],
+        answer: 'Conscientious'
+      },
+      {
+        question: 'What is the plural of "analysis"?',
+        options: [
+          'Analysises',
+          'Analysis',
+          'Analysies',
+          'Analyses'
+        ],
+        answer: 'Analyses'
+      },
+      {
+        question: 'Which of these words is an adjective?',
+        options: [
+          'Vividly',
+          'Vivid',
+          'Vividness',
+          'Envision'
+        ],
+        answer: 'Vivid'
+      },
+      {
+        question: 'What does the prefix "anti-" usually mean?',
+        options: [
+          'Against',
+          'Before',
+          'Together',
+          'Inside'
+        ],
+        answer: 'Against'
+      },
+      {
+        question: 'Which sentence uses a semicolon correctly?',
+        options: [
+          'The rain; stopped and we went outside.',
+          'The rain stopped; because we went outside.',
+          'The rain stopped; we went outside.',
+          'The rain stopped we; went outside.'
+        ],
+        answer: 'The rain stopped; we went outside.'
+      },
+      {
+        question: 'What does "complement" most commonly mean as a noun?',
+        options: [
+          'A spoken expression of praise',
+          'A formal complaint',
+          'A direct contradiction',
+          'Something that completes or enhances another thing'
+        ],
+        answer: 'Something that completes or enhances another thing'
+      }
     ]
 
   ],
@@ -995,6 +1213,113 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
           'Nathan Drake'
         ],
         answer: 'Indiana Jones'
+      }
+    ],
+
+    /*
+    SET D
+    */
+
+    [
+      {
+        question: 'Which actor played Frodo Baggins in Peter Jackson’s "The Lord of the Rings" film trilogy?',
+        options: [
+          'Elijah Wood',
+          'Daniel Radcliffe',
+          'Orlando Bloom',
+          'Tobey Maguire'
+        ],
+        answer: 'Elijah Wood'
+      },
+      {
+        question: 'Which singer released the 1989 album "Like a Prayer"?',
+        options: [
+          'Cyndi Lauper',
+          'Whitney Houston',
+          'Janet Jackson',
+          'Madonna'
+        ],
+        answer: 'Madonna'
+      },
+      {
+        question: 'In the U.S. version of "The Office", what company employs the main characters?',
+        options: [
+          'Sterling Cooper',
+          'Waystar Royco',
+          'Dunder Mifflin',
+          'Los Pollos Hermanos'
+        ],
+        answer: 'Dunder Mifflin'
+      },
+      {
+        question: 'Who directed the 1975 film "Jaws"?',
+        options: [
+          'George Lucas',
+          'Steven Spielberg',
+          'Francis Ford Coppola',
+          'Ridley Scott'
+        ],
+        answer: 'Steven Spielberg'
+      },
+      {
+        question: 'Which band released "Smells Like Teen Spirit"?',
+        options: [
+          'Nirvana',
+          'Pearl Jam',
+          'Soundgarden',
+          'Green Day'
+        ],
+        answer: 'Nirvana'
+      },
+      {
+        question: 'Katniss Everdeen is the central character of which franchise?',
+        options: [
+          'Divergent',
+          'Twilight',
+          'The Hunger Games',
+          'The Maze Runner'
+        ],
+        answer: 'The Hunger Games'
+      },
+      {
+        question: 'Which actor played the title character in the 1994 film "Forrest Gump"?',
+        options: [
+          'Robin Williams',
+          'Tom Hanks',
+          'Kevin Costner',
+          'Harrison Ford'
+        ],
+        answer: 'Tom Hanks'
+      },
+      {
+        question: 'The desert planet Tatooine belongs to which fictional universe?',
+        options: [
+          'Star Trek',
+          'Dune',
+          'Guardians of the Galaxy',
+          'Star Wars'
+        ],
+        answer: 'Star Wars'
+      },
+      {
+        question: 'Which singer released the visual album "Lemonade" in 2016?',
+        options: [
+          'Beyoncé',
+          'Adele',
+          'Rihanna',
+          'Lady Gaga'
+        ],
+        answer: 'Beyoncé'
+      },
+      {
+        question: 'Sheldon Cooper is a main character in which television sitcom?',
+        options: [
+          'How I Met Your Mother',
+          'Modern Family',
+          'The Big Bang Theory',
+          'Brooklyn Nine-Nine'
+        ],
+        answer: 'The Big Bang Theory'
       }
     ]
 
@@ -1327,6 +1652,113 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         ],
         answer: 'Declaration of Independence'
       }
+    ],
+
+    /*
+    SET D
+    */
+
+    [
+      {
+        question: 'Who is generally regarded as the first Roman emperor?',
+        options: [
+          'Julius Caesar',
+          'Augustus',
+          'Nero',
+          'Trajan'
+        ],
+        answer: 'Augustus'
+      },
+      {
+        question: 'Which civilization built the city of Tenochtitlan?',
+        options: [
+          'Aztec',
+          'Maya',
+          'Inca',
+          'Olmec'
+        ],
+        answer: 'Aztec'
+      },
+      {
+        question: 'In which year did Constantinople fall to the Ottoman Empire?',
+        options: [
+          '1415',
+          '1492',
+          '1517',
+          '1453'
+        ],
+        answer: '1453'
+      },
+      {
+        question: 'Which English king sealed Magna Carta in 1215?',
+        options: [
+          'Henry VIII',
+          'Richard III',
+          'King John',
+          'Edward I'
+        ],
+        answer: 'King John'
+      },
+      {
+        question: 'Which leader became internationally associated with nonviolent resistance during India’s independence movement?',
+        options: [
+          'Jawaharlal Nehru',
+          'Mahatma Gandhi',
+          'Subhas Chandra Bose',
+          'Muhammad Ali Jinnah'
+        ],
+        answer: 'Mahatma Gandhi'
+      },
+      {
+        question: 'The Taj Mahal was built during the rule of which empire?',
+        options: [
+          'Ottoman Empire',
+          'Maurya Empire',
+          'Gupta Empire',
+          'Mughal Empire'
+        ],
+        answer: 'Mughal Empire'
+      },
+      {
+        question: 'The Black Death devastated Europe most severely during which century?',
+        options: [
+          '12th century',
+          '13th century',
+          '14th century',
+          '16th century'
+        ],
+        answer: '14th century'
+      },
+      {
+        question: 'Who became the first woman to fly solo across the Atlantic Ocean?',
+        options: [
+          'Amelia Earhart',
+          'Bessie Coleman',
+          'Harriet Quimby',
+          'Jacqueline Cochran'
+        ],
+        answer: 'Amelia Earhart'
+      },
+      {
+        question: 'Which treaty formally ended the state of war between Germany and most Allied powers after World War I?',
+        options: [
+          'Treaty of Utrecht',
+          'Treaty of Versailles',
+          'Treaty of Paris',
+          'Treaty of Tordesillas'
+        ],
+        answer: 'Treaty of Versailles'
+      },
+      {
+        question: 'Suleiman the Magnificent ruled which empire?',
+        options: [
+          'Mughal Empire',
+          'Roman Empire',
+          'Austro-Hungarian Empire',
+          'Ottoman Empire'
+        ],
+        answer: 'Ottoman Empire'
+      }
     ]
 
   ],
@@ -1657,6 +2089,113 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
           '120°'
         ],
         answer: '90°'
+      }
+    ],
+
+    /*
+    SET D
+    */
+
+    [
+      {
+        question: 'What is 35% of 200?',
+        options: [
+          '70',
+          '60',
+          '75',
+          '80'
+        ],
+        answer: '70'
+      },
+      {
+        question: 'What is the perimeter of a rectangle 9 cm long and 5 cm wide?',
+        options: [
+          '18 cm',
+          '28 cm',
+          '45 cm',
+          '32 cm'
+        ],
+        answer: '28 cm'
+      },
+      {
+        question: 'What number comes next in the sequence: 5, 8, 13, 21, ...?',
+        options: [
+          '26',
+          '29',
+          '31',
+          '34'
+        ],
+        answer: '34'
+      },
+      {
+        question: 'What percentage is equivalent to 3/5?',
+        options: [
+          '30%',
+          '50%',
+          '60%',
+          '80%'
+        ],
+        answer: '60%'
+      },
+      {
+        question: 'If $240 is shared equally among 6 people, how much does each person receive?',
+        options: [
+          '$40',
+          '$30',
+          '$35',
+          '$45'
+        ],
+        answer: '$40'
+      },
+      {
+        question: 'What is 2 to the power of 5?',
+        options: [
+          '10',
+          '16',
+          '25',
+          '32'
+        ],
+        answer: '32'
+      },
+      {
+        question: 'How many metres are in 1.2 kilometres?',
+        options: [
+          '120 m',
+          '12,000 m',
+          '1,200 m',
+          '1,020 m'
+        ],
+        answer: '1,200 m'
+      },
+      {
+        question: 'Solve for x: 3x = 27',
+        options: [
+          '6',
+          '9',
+          '8',
+          '12'
+        ],
+        answer: '9'
+      },
+      {
+        question: 'What is the probability of getting heads on one toss of a fair coin?',
+        options: [
+          '1/2',
+          '1/3',
+          '1/4',
+          '2/3'
+        ],
+        answer: '1/2'
+      },
+      {
+        question: 'What is the average of 8, 10, 12, 14 and 16?',
+        options: [
+          '10',
+          '11',
+          '14',
+          '12'
+        ],
+        answer: '12'
       }
     ]
 
@@ -1989,6 +2528,113 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         ],
         answer: 'Covalent bond'
       }
+    ],
+
+    /*
+    SET D
+    */
+
+    [
+      {
+        question: 'Which gas do plants absorb from the atmosphere for photosynthesis?',
+        options: [
+          'Oxygen',
+          'Carbon dioxide',
+          'Nitrogen',
+          'Hydrogen'
+        ],
+        answer: 'Carbon dioxide'
+      },
+      {
+        question: 'Which part of the human brain makes up the largest portion by volume?',
+        options: [
+          'Cerebellum',
+          'Brain stem',
+          'Pituitary gland',
+          'Cerebrum'
+        ],
+        answer: 'Cerebrum'
+      },
+      {
+        question: 'Approximately how fast does light travel in a vacuum?',
+        options: [
+          '30,000 km/s',
+          '3,000 km/s',
+          '300,000 km/s',
+          '3,000,000 km/s'
+        ],
+        answer: '300,000 km/s'
+      },
+      {
+        question: 'Which element has the chemical symbol Fe?',
+        options: [
+          'Iron',
+          'Fluorine',
+          'Francium',
+          'Fermium'
+        ],
+        answer: 'Iron'
+      },
+      {
+        question: 'Which organ pumps blood through the human circulatory system?',
+        options: [
+          'Liver',
+          'Heart',
+          'Kidney',
+          'Lung'
+        ],
+        answer: 'Heart'
+      },
+      {
+        question: 'What is the change of state from a gas to a liquid called?',
+        options: [
+          'Evaporation',
+          'Sublimation',
+          'Condensation',
+          'Melting'
+        ],
+        answer: 'Condensation'
+      },
+      {
+        question: 'What is the SI-derived unit of electrical resistance?',
+        options: [
+          'Ohm',
+          'Volt',
+          'Ampere',
+          'Tesla'
+        ],
+        answer: 'Ohm'
+      },
+      {
+        question: 'In DNA, adenine pairs with which base?',
+        options: [
+          'Cytosine',
+          'Guanine',
+          'Uracil',
+          'Thymine'
+        ],
+        answer: 'Thymine'
+      },
+      {
+        question: 'Which planet is famous for its prominent ring system?',
+        options: [
+          'Mars',
+          'Saturn',
+          'Venus',
+          'Mercury'
+        ],
+        answer: 'Saturn'
+      },
+      {
+        question: 'Which gas is released as a by-product of photosynthesis?',
+        options: [
+          'Carbon dioxide',
+          'Methane',
+          'Oxygen',
+          'Nitrogen'
+        ],
+        answer: 'Oxygen'
+      }
     ]
 
   ],
@@ -2320,6 +2966,989 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         ],
         answer: 'Tropic of Capricorn'
       }
+    ],
+
+    /*
+    SET D
+    */
+
+    [
+      {
+        question: 'What is the capital city of Norway?',
+        options: [
+          'Bergen',
+          'Oslo',
+          'Stockholm',
+          'Copenhagen'
+        ],
+        answer: 'Oslo'
+      },
+      {
+        question: 'Which river flows through London?',
+        options: [
+          'Seine',
+          'Rhine',
+          'Danube',
+          'Thames'
+        ],
+        answer: 'Thames'
+      },
+      {
+        question: 'Which country is the largest in the world by total area?',
+        options: [
+          'Russia',
+          'Canada',
+          'China',
+          'United States'
+        ],
+        answer: 'Russia'
+      },
+      {
+        question: 'Denali, the highest mountain in North America, is located in which U.S. state?',
+        options: [
+          'Colorado',
+          'California',
+          'Alaska',
+          'Washington'
+        ],
+        answer: 'Alaska'
+      },
+      {
+        question: 'Which European country is often described as being shaped like a boot?',
+        options: [
+          'Greece',
+          'Italy',
+          'Portugal',
+          'Croatia'
+        ],
+        answer: 'Italy'
+      },
+      {
+        question: 'What is the capital city of South Korea?',
+        options: [
+          'Seoul',
+          'Busan',
+          'Incheon',
+          'Daegu'
+        ],
+        answer: 'Seoul'
+      },
+      {
+        question: 'Which sea lies between southern Europe and northern Africa?',
+        options: [
+          'Baltic Sea',
+          'Caribbean Sea',
+          'Mediterranean Sea',
+          'Arabian Sea'
+        ],
+        answer: 'Mediterranean Sea'
+      },
+      {
+        question: 'Which continent has no permanent native human population?',
+        options: [
+          'Asia',
+          'South America',
+          'Australia',
+          'Antarctica'
+        ],
+        answer: 'Antarctica'
+      },
+      {
+        question: 'Madagascar lies in which ocean?',
+        options: [
+          'Atlantic Ocean',
+          'Indian Ocean',
+          'Pacific Ocean',
+          'Arctic Ocean'
+        ],
+        answer: 'Indian Ocean'
+      },
+      {
+        question: 'What is the longest river in Europe?',
+        options: [
+          'Volga',
+          'Danube',
+          'Rhine',
+          'Dnieper'
+        ],
+        answer: 'Volga'
+      }
+    ]
+
+  ],
+
+  /*
+  ---------------------------------------------------
+  CHALLENGE 8 — SPORTS
+  ---------------------------------------------------
+  */
+
+  8: [
+
+    /*
+    SET A
+    */
+
+    [
+      {
+        question: 'How many players from one team are on the field at a time in association football?',
+        options: [
+          '9',
+          '10',
+          '12',
+          '11'
+        ],
+        answer: '11'
+      },
+      {
+        question: 'In tennis scoring, what word represents a score of zero?',
+        options: [
+          'Deuce',
+          'Love',
+          'Ace',
+          'Fault'
+        ],
+        answer: 'Love'
+      },
+      {
+        question: 'How many quarters are played in a regulation NBA game?',
+        options: [
+          '2',
+          '3',
+          '4',
+          '5'
+        ],
+        answer: '4'
+      },
+      {
+        question: 'How many legal deliveries are in a standard over in modern cricket?',
+        options: [
+          '6',
+          '4',
+          '5',
+          '8'
+        ],
+        answer: '6'
+      },
+      {
+        question: 'What is the official marathon distance?',
+        options: [
+          '40 km',
+          '41.5 km',
+          '45 km',
+          '42.195 km'
+        ],
+        answer: '42.195 km'
+      },
+      {
+        question: 'In golf, what is the term for a score of one under par on a hole?',
+        options: [
+          'Bogey',
+          'Eagle',
+          'Birdie',
+          'Par'
+        ],
+        answer: 'Birdie'
+      },
+      {
+        question: 'How many points is a try worth in rugby union?',
+        options: [
+          '5',
+          '3',
+          '4',
+          '6'
+        ],
+        answer: '5'
+      },
+      {
+        question: 'How many strikes normally make a strikeout in baseball?',
+        options: [
+          '2',
+          '3',
+          '4',
+          '5'
+        ],
+        answer: '3'
+      },
+      {
+        question: 'Which flag traditionally signals the end of a motor race?',
+        options: [
+          'Red flag',
+          'Yellow flag',
+          'Blue flag',
+          'Chequered flag'
+        ],
+        answer: 'Chequered flag'
+      },
+      {
+        question: 'In badminton, how many points normally win a game before deuce rules apply?',
+        options: [
+          '15',
+          '18',
+          '21',
+          '25'
+        ],
+        answer: '21'
+      }
+    ],
+
+    /*
+    SET B
+    */
+
+    [
+      {
+        question: 'The FIFA World Cup is the world championship for which sport?',
+        options: [
+          'Rugby union',
+          'Cricket',
+          'Association football',
+          'Basketball'
+        ],
+        answer: 'Association football'
+      },
+      {
+        question: 'The Ashes is a famous cricket series contested between which two countries?',
+        options: [
+          'India and Pakistan',
+          'England and Australia',
+          'South Africa and New Zealand',
+          'Australia and India'
+        ],
+        answer: 'England and Australia'
+      },
+      {
+        question: 'On what surface is the Wimbledon tennis tournament traditionally played?',
+        options: [
+          'Grass',
+          'Clay',
+          'Hard court',
+          'Carpet'
+        ],
+        answer: 'Grass'
+      },
+      {
+        question: 'How many points is a successful free throw worth in basketball?',
+        options: [
+          '2',
+          '3',
+          '4',
+          '1'
+        ],
+        answer: '1'
+      },
+      {
+        question: 'The Tour de France is primarily a competition in which sport?',
+        options: [
+          'Motor racing',
+          'Athletics',
+          'Road cycling',
+          'Rowing'
+        ],
+        answer: 'Road cycling'
+      },
+      {
+        question: 'How long is a standard Olympic-size long-course swimming pool?',
+        options: [
+          '50 metres',
+          '25 metres',
+          '40 metres',
+          '100 metres'
+        ],
+        answer: '50 metres'
+      },
+      {
+        question: 'How many players from each team are on the field in rugby league?',
+        options: [
+          '11',
+          '12',
+          '15',
+          '13'
+        ],
+        answer: '13'
+      },
+      {
+        question: 'The Masters Tournament in golf is played at which course?',
+        options: [
+          'St Andrews',
+          'Augusta National',
+          'Pebble Beach',
+          'Royal Melbourne'
+        ],
+        answer: 'Augusta National'
+      },
+      {
+        question: 'In boxing, what does the abbreviation KO stand for?',
+        options: [
+          'Kick out',
+          'Knock over',
+          'Knockout',
+          'Keep out'
+        ],
+        answer: 'Knockout'
+      },
+      {
+        question: 'In Formula 1, what does starting from pole position mean?',
+        options: [
+          'Starting from the front position on the grid',
+          'Starting from the pit lane',
+          'Starting at the back of the grid',
+          'Having the fastest race lap'
+        ],
+        answer: 'Starting from the front position on the grid'
+      }
+    ],
+
+    /*
+    SET C
+    */
+
+    [
+      {
+        question: 'How far is the penalty spot from the goal line in association football?',
+        options: [
+          '10 yards',
+          '11 yards',
+          '15 yards',
+          '12 yards'
+        ],
+        answer: '12 yards'
+      },
+      {
+        question: 'In cricket, what does LBW stand for?',
+        options: [
+          'Leg before wicket',
+          'Long ball wide',
+          'Left bat wicket',
+          'Leg behind wicket'
+        ],
+        answer: 'Leg before wicket'
+      },
+      {
+        question: 'How many tournaments make up tennis’s traditional Grand Slam in a calendar year?',
+        options: [
+          '3',
+          '4',
+          '5',
+          '6'
+        ],
+        answer: '4'
+      },
+      {
+        question: 'How many points is a successful shot from beyond the three-point line worth in basketball?',
+        options: [
+          '1',
+          '2',
+          '3',
+          '4'
+        ],
+        answer: '3'
+      },
+      {
+        question: 'How many innings are scheduled in a regulation Major League Baseball game?',
+        options: [
+          '7',
+          '8',
+          '10',
+          '9'
+        ],
+        answer: '9'
+      },
+      {
+        question: 'How many points is a successful conversion worth in rugby union?',
+        options: [
+          '1',
+          '2',
+          '3',
+          '5'
+        ],
+        answer: '2'
+      },
+      {
+        question: 'In golf, what is an eagle?',
+        options: [
+          'One stroke under par on a hole',
+          'One stroke over par on a hole',
+          'Two strokes under par on a hole',
+          'Exactly par on a hole'
+        ],
+        answer: 'Two strokes under par on a hole'
+      },
+      {
+        question: 'How many events are in a decathlon?',
+        options: [
+          '10',
+          '8',
+          '9',
+          '12'
+        ],
+        answer: '10'
+      },
+      {
+        question: 'How many players from one team are normally on the ice at once in ice hockey, including the goaltender?',
+        options: [
+          '5',
+          '7',
+          '8',
+          '6'
+        ],
+        answer: '6'
+      },
+      {
+        question: 'In the Tour de France, the yellow jersey is worn by the rider leading which classification?',
+        options: [
+          'Points classification',
+          'Overall general classification',
+          'Mountains classification',
+          'Young rider classification'
+        ],
+        answer: 'Overall general classification'
+      }
+    ],
+
+    /*
+    SET D
+    */
+
+    [
+      {
+        question: 'How many players from one team are on the court at a time in indoor volleyball?',
+        options: [
+          '5',
+          '7',
+          '8',
+          '6'
+        ],
+        answer: '6'
+      },
+      {
+        question: 'In cricket, how many runs does a batter score to make a century?',
+        options: [
+          '50',
+          '100',
+          '75',
+          '150'
+        ],
+        answer: '100'
+      },
+      {
+        question: 'In tennis, what is an "ace"?',
+        options: [
+          'A legal serve the receiver does not touch',
+          'A rally of exactly ten shots',
+          'A point won at the net',
+          'A serve that hits the net and lands in'
+        ],
+        answer: 'A legal serve the receiver does not touch'
+      },
+      {
+        question: 'In football, what is a hat-trick?',
+        options: [
+          'Two goals by one player in a game',
+          'Four goals by one player in a game',
+          'Three goals by one player in a game',
+          'Three assists by one player in a game'
+        ],
+        answer: 'Three goals by one player in a game'
+      },
+      {
+        question: 'How many bases must a batter touch to complete a home run in baseball?',
+        options: [
+          '2',
+          '3',
+          '5',
+          '4'
+        ],
+        answer: '4'
+      },
+      {
+        question: 'In golf, what does "par" represent for a hole?',
+        options: [
+          'The expected number of strokes for a skilled golfer',
+          'The maximum strokes allowed',
+          'A compulsory two-putt score',
+          'The average score of all spectators'
+        ],
+        answer: 'The expected number of strokes for a skilled golfer'
+      },
+      {
+        question: 'In basketball, what is a rebound?',
+        options: [
+          'Passing the ball behind the back',
+          'Scoring directly from a free throw',
+          'Gaining possession after a missed shot',
+          'Blocking a player without the ball'
+        ],
+        answer: 'Gaining possession after a missed shot'
+      },
+      {
+        question: 'How many forwards from each team normally take part in a rugby union scrum?',
+        options: [
+          '6',
+          '8',
+          '7',
+          '9'
+        ],
+        answer: '8'
+      },
+      {
+        question: 'How many events are in a traditional pentathlon?',
+        options: [
+          '4',
+          '6',
+          '7',
+          '5'
+        ],
+        answer: '5'
+      },
+      {
+        question: 'In which country did the sport of judo originate?',
+        options: [
+          'Japan',
+          'China',
+          'South Korea',
+          'Thailand'
+        ],
+        answer: 'Japan'
+      }
+    ]
+
+  ],
+
+  /*
+  ---------------------------------------------------
+  CHALLENGE 9 — NATURE & ANIMALS
+  ---------------------------------------------------
+  */
+
+  9: [
+
+    /*
+    SET A
+    */
+
+    [
+      {
+        question: 'What is the largest living land animal?',
+        options: [
+          'Giraffe',
+          'African elephant',
+          'White rhinoceros',
+          'Hippopotamus'
+        ],
+        answer: 'African elephant'
+      },
+      {
+        question: 'Which mammals are capable of true sustained flight?',
+        options: [
+          'Flying squirrels',
+          'Sugar gliders',
+          'Colugos',
+          'Bats'
+        ],
+        answer: 'Bats'
+      },
+      {
+        question: 'What is a group of lions commonly called?',
+        options: [
+          'Pack',
+          'Herd',
+          'Pride',
+          'Colony'
+        ],
+        answer: 'Pride'
+      },
+      {
+        question: 'What is the fastest land animal over short distances?',
+        options: [
+          'Cheetah',
+          'Pronghorn',
+          'Lion',
+          'Greyhound'
+        ],
+        answer: 'Cheetah'
+      },
+      {
+        question: 'Emperor penguins are native to which continent?',
+        options: [
+          'South America',
+          'Antarctica',
+          'Africa',
+          'Australia'
+        ],
+        answer: 'Antarctica'
+      },
+      {
+        question: 'Through what structure do whales breathe air?',
+        options: [
+          'Gills',
+          'Spiracles',
+          'Blowhole',
+          'Lateral line'
+        ],
+        answer: 'Blowhole'
+      },
+      {
+        question: 'What is a young kangaroo called?',
+        options: [
+          'Joey',
+          'Cub',
+          'Calf',
+          'Kit'
+        ],
+        answer: 'Joey'
+      },
+      {
+        question: 'How many hearts does an octopus have?',
+        options: [
+          '1',
+          '2',
+          '4',
+          '3'
+        ],
+        answer: '3'
+      },
+      {
+        question: 'What makes up most of a giant panda’s natural diet?',
+        options: [
+          'Fish',
+          'Bamboo',
+          'Fruit',
+          'Insects'
+        ],
+        answer: 'Bamboo'
+      },
+      {
+        question: 'A frog belongs to which class of vertebrate animals?',
+        options: [
+          'Reptiles',
+          'Mammals',
+          'Amphibians',
+          'Birds'
+        ],
+        answer: 'Amphibians'
+      }
+    ],
+
+    /*
+    SET B
+    */
+
+    [
+      {
+        question: 'What is the tallest living land animal?',
+        options: [
+          'Giraffe',
+          'African elephant',
+          'Moose',
+          'Camel'
+        ],
+        answer: 'Giraffe'
+      },
+      {
+        question: 'Which animal is famous for its black-and-white striped coat?',
+        options: [
+          'Okapi',
+          'Tapir',
+          'Wildebeest',
+          'Zebra'
+        ],
+        answer: 'Zebra'
+      },
+      {
+        question: 'Coral reefs are built mainly by colonies of which small animals?',
+        options: [
+          'Sea stars',
+          'Jellyfish',
+          'Coral polyps',
+          'Krill'
+        ],
+        answer: 'Coral polyps'
+      },
+      {
+        question: 'What is the process by which plants release water vapour mainly through their leaves?',
+        options: [
+          'Germination',
+          'Transpiration',
+          'Pollination',
+          'Respiration'
+        ],
+        answer: 'Transpiration'
+      },
+      {
+        question: 'What is the largest living species of cat?',
+        options: [
+          'Tiger',
+          'Lion',
+          'Jaguar',
+          'Leopard'
+        ],
+        answer: 'Tiger'
+      },
+      {
+        question: 'What is the main reproductive role of a queen honey bee in a healthy colony?',
+        options: [
+          'Collecting nectar',
+          'Building wax comb',
+          'Laying eggs',
+          'Guarding the hive entrance'
+        ],
+        answer: 'Laying eggs'
+      },
+      {
+        question: 'Koalas are native to which country?',
+        options: [
+          'New Zealand',
+          'Australia',
+          'Papua New Guinea',
+          'Indonesia'
+        ],
+        answer: 'Australia'
+      },
+      {
+        question: 'A shark’s skeleton is made primarily of what material?',
+        options: [
+          'Bone',
+          'Keratin',
+          'Chitin',
+          'Cartilage'
+        ],
+        answer: 'Cartilage'
+      },
+      {
+        question: 'Which animal is especially well known for building dams in streams and rivers?',
+        options: [
+          'Beaver',
+          'Otter',
+          'Mink',
+          'Muskrat'
+        ],
+        answer: 'Beaver'
+      },
+      {
+        question: 'The growth rings in a tree trunk can often be used to estimate what?',
+        options: [
+          'The tree’s exact height',
+          'The number of seeds it produced',
+          'The tree’s age',
+          'The depth of its roots'
+        ],
+        answer: 'The tree’s age'
+      }
+    ],
+
+    /*
+    SET C
+    */
+
+    [
+      {
+        question: 'What does it mean when an animal is described as nocturnal?',
+        options: [
+          'It lives only underground',
+          'It is mainly active at night',
+          'It migrates every winter',
+          'It eats only plants'
+        ],
+        answer: 'It is mainly active at night'
+      },
+      {
+        question: 'What is the largest living reptile species?',
+        options: [
+          'Saltwater crocodile',
+          'Komodo dragon',
+          'Green anaconda',
+          'Leatherback turtle'
+        ],
+        answer: 'Saltwater crocodile'
+      },
+      {
+        question: 'A caterpillar develops into an adult butterfly through which process?',
+        options: [
+          'Hibernation',
+          'Migration',
+          'Regeneration',
+          'Metamorphosis'
+        ],
+        answer: 'Metamorphosis'
+      },
+      {
+        question: 'Dolphins belong to which broad group of animals?',
+        options: [
+          'Fish',
+          'Reptiles',
+          'Mammals',
+          'Amphibians'
+        ],
+        answer: 'Mammals'
+      },
+      {
+        question: 'What does a deciduous tree typically do during part of each year?',
+        options: [
+          'Stops growing roots permanently',
+          'Sheds its leaves',
+          'Produces fruit every month',
+          'Changes into an evergreen'
+        ],
+        answer: 'Sheds its leaves'
+      },
+      {
+        question: 'Which flightless bird is native to New Zealand?',
+        options: [
+          'Emu',
+          'Cassowary',
+          'Ostrich',
+          'Kiwi'
+        ],
+        answer: 'Kiwi'
+      },
+      {
+        question: 'What sweet liquid do many bees collect from flowers?',
+        options: [
+          'Sap',
+          'Resin',
+          'Nectar',
+          'Dew'
+        ],
+        answer: 'Nectar'
+      },
+      {
+        question: 'Polar bears are native to which region?',
+        options: [
+          'Arctic',
+          'Antarctica',
+          'Patagonia',
+          'Himalayas'
+        ],
+        answer: 'Arctic'
+      },
+      {
+        question: 'What is a traditional collective noun for a group of crows?',
+        options: [
+          'Parliament',
+          'Murder',
+          'Pride',
+          'Crash'
+        ],
+        answer: 'Murder'
+      },
+      {
+        question: 'In a cactus, spines are modified versions of which plant structure?',
+        options: [
+          'Roots',
+          'Flowers',
+          'Fruit',
+          'Leaves'
+        ],
+        answer: 'Leaves'
+      }
+    ],
+
+    /*
+    SET D
+    */
+
+    [
+      {
+        question: 'What is the largest living species of lizard?',
+        options: [
+          'Green iguana',
+          'Gila monster',
+          'Komodo dragon',
+          'Perentie'
+        ],
+        answer: 'Komodo dragon'
+      },
+      {
+        question: 'Which egg-laying mammal has a broad, duck-like bill?',
+        options: [
+          'Platypus',
+          'Echidna',
+          'Otter',
+          'Beaver'
+        ],
+        answer: 'Platypus'
+      },
+      {
+        question: 'Which living bird is known for having the greatest wingspan?',
+        options: [
+          'Andean condor',
+          'Bald eagle',
+          'Mute swan',
+          'Wandering albatross'
+        ],
+        answer: 'Wandering albatross'
+      },
+      {
+        question: 'What is a group of wolves commonly called?',
+        options: [
+          'Pride',
+          'Pack',
+          'Herd',
+          'School'
+        ],
+        answer: 'Pack'
+      },
+      {
+        question: 'Which reptile is especially famous for changing its skin colour?',
+        options: [
+          'Crocodile',
+          'Tortoise',
+          'Chameleon',
+          'Gecko'
+        ],
+        answer: 'Chameleon'
+      },
+      {
+        question: 'Mangroves are especially adapted to grow in which type of environment?',
+        options: [
+          'Dry alpine slopes',
+          'Freshwater deserts',
+          'Permanent ice fields',
+          'Salty or brackish tidal coastlines'
+        ],
+        answer: 'Salty or brackish tidal coastlines'
+      },
+      {
+        question: 'Which type of tree produces acorns?',
+        options: [
+          'Pine',
+          'Oak',
+          'Maple',
+          'Birch'
+        ],
+        answer: 'Oak'
+      },
+      {
+        question: 'What do herbivores primarily eat?',
+        options: [
+          'Plants',
+          'Other animals',
+          'Fungi only',
+          'Minerals'
+        ],
+        answer: 'Plants'
+      },
+      {
+        question: 'Which Arctic marine mammal is famous for its long tusks?',
+        options: [
+          'Manatee',
+          'Dugong',
+          'Walrus',
+          'Sea otter'
+        ],
+        answer: 'Walrus'
+      },
+      {
+        question: 'Which marine mammal commonly uses echolocation to navigate and hunt?',
+        options: [
+          'Sea lion',
+          'Walrus',
+          'Manatee',
+          'Bottlenose dolphin'
+        ],
+        answer: 'Bottlenose dolphin'
+      }
     ]
 
   ]
@@ -2335,7 +3964,15 @@ export function getRotatingPuzzlesByChallenge(
 
   if (!sets.length) return []
 
-  const rotationIndex = getRotationIndex(today, sets.length)
+  const activeSetCount = Math.min(
+    ACTIVE_ROTATION_SET_COUNT,
+    sets.length
+  )
+
+  const rotationIndex = getRotationIndex(
+    today,
+    activeSetCount
+  )
 
   return sets[rotationIndex]
 }
