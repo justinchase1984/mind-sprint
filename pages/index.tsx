@@ -442,8 +442,7 @@ export default function Home() {
                     A broad mix of
                     facts, places,
                     people, culture and
-                    everyday
-                    knowledge.
+                    everyday knowledge.
                   </p>
                 </div>
               </a>
@@ -711,62 +710,92 @@ export default function Home() {
               </a>
             </Link>
 
-            <div
-              style={{
-                border:
-                  '1px solid #e6e6e6',
-                borderRadius: 10,
-                padding: '1rem',
-                height: '100%',
-                boxSizing:
-                  'border-box',
-              }}
+            <Link
+              href="/sports-quiz"
+              legacyBehavior
             >
-              <strong>
-                🏅 Sports
-              </strong>
-
-              <p
+              <a
                 style={{
-                  color: '#666',
-                  lineHeight: 1.5,
-                  marginBottom: 0,
+                  color: 'inherit',
+                  textDecoration:
+                    'none',
+                  display: 'block',
                 }}
               >
-                Teams, athletes,
-                tournaments, records
-                and sporting history
-                from around the world.
-              </p>
-            </div>
+                <div
+                  style={{
+                    border:
+                      '1px solid #e6e6e6',
+                    borderRadius: 10,
+                    padding: '1rem',
+                    height: '100%',
+                    boxSizing:
+                      'border-box',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <strong>
+                    🏅 Sports
+                  </strong>
 
-            <div
-              style={{
-                border:
-                  '1px solid #e6e6e6',
-                borderRadius: 10,
-                padding: '1rem',
-                height: '100%',
-                boxSizing:
-                  'border-box',
-              }}
+                  <p
+                    style={{
+                      color: '#666',
+                      lineHeight: 1.5,
+                      marginBottom: 0,
+                    }}
+                  >
+                    Teams, athletes,
+                    tournaments, records
+                    and sporting history
+                    from around the world.
+                  </p>
+                </div>
+              </a>
+            </Link>
+
+            <Link
+              href="/nature-animals-quiz"
+              legacyBehavior
             >
-              <strong>
-                🐾 Nature &amp; Animals
-              </strong>
-
-              <p
+              <a
                 style={{
-                  color: '#666',
-                  lineHeight: 1.5,
-                  marginBottom: 0,
+                  color: 'inherit',
+                  textDecoration:
+                    'none',
+                  display: 'block',
                 }}
               >
-                Wildlife, habitats,
-                plants, ecosystems and
-                the natural world.
-              </p>
-            </div>
+                <div
+                  style={{
+                    border:
+                      '1px solid #e6e6e6',
+                    borderRadius: 10,
+                    padding: '1rem',
+                    height: '100%',
+                    boxSizing:
+                      'border-box',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <strong>
+                    🐾 Nature &amp; Animals
+                  </strong>
+
+                  <p
+                    style={{
+                      color: '#666',
+                      lineHeight: 1.5,
+                      marginBottom: 0,
+                    }}
+                  >
+                    Wildlife, habitats,
+                    plants, ecosystems and
+                    the natural world.
+                  </p>
+                </div>
+              </a>
+            </Link>
           </div>
         </section>
 
