@@ -19,7 +19,7 @@ export default function Results() {
 
         <meta
           name="description"
-          content="You completed all 7 Mind Sprint challenges. See your best streak and play again."
+          content="You completed all 9 Mind Sprint challenges. See your best streak and play again."
         />
 
         <meta
@@ -37,12 +37,21 @@ export default function Results() {
           lineHeight: 1.7,
         }}
       >
-        <div style={{ fontSize: 42, marginBottom: '0.5rem' }}>
+        <div
+          style={{
+            fontSize: 42,
+            marginBottom: '0.5rem',
+          }}
+        >
           🏁
         </div>
 
-        <h1 style={{ marginBottom: '0.75rem' }}>
-          All 7 Challenges Complete
+        <h1
+          style={{
+            marginBottom: '0.75rem',
+          }}
+        >
+          All 9 Challenges Complete
         </h1>
 
         <p
@@ -105,7 +114,10 @@ export default function Results() {
             gap: '1rem',
           }}
         >
-          <Link href="/puzzle/1?challenge=1" legacyBehavior>
+          <Link
+            href="/puzzle/1?challenge=1"
+            legacyBehavior
+          >
             <a
               style={{
                 display: 'inline-block',
@@ -121,7 +133,10 @@ export default function Results() {
             </a>
           </Link>
 
-          <Link href="/" legacyBehavior>
+          <Link
+            href="/"
+            legacyBehavior
+          >
             <a
               style={{
                 display: 'inline-block',
