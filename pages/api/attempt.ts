@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { randomUUID } from 'crypto'
 import { getRotatingPuzzlesByChallenge } from '../../lib/rotation'
 
+const MAX_CHALLENGE = 9
 const ATTEMPT_TTL_SECONDS = 24 * 60 * 60
 
 type AttemptState = {
@@ -97,7 +98,7 @@ export default async function handler(
       if (
         !Number.isInteger(challenge) ||
         challenge < 1 ||
-        challenge > 7
+        challenge > MAX_CHALLENGE
       ) {
         return res.status(400).json({
           success: false,
