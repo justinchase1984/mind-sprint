@@ -34,7 +34,7 @@ const structuredData = {
       name:
         'Mind Sprint FAQ | Daily Quiz, Scores, Streaks & Prize Draw',
       description:
-        'Find answers to common Mind Sprint questions about the daily quiz, 7 challenges, scores, streaks, fresh questions, accounts and the planned weekly prize draw.',
+        'Find answers to common Mind Sprint questions about the daily quiz, 9 challenges, scores, streaks, fresh questions, accounts and the planned weekly prize draw.',
       isPartOf: {
         '@id':
           'https://www.dailymindsprint.com/#website',
@@ -44,7 +44,7 @@ const structuredData = {
           'https://www.dailymindsprint.com/#organization',
       },
       dateModified:
-        '2026-10-07',
+        '2026-10-10',
     },
   ],
 }
@@ -59,7 +59,7 @@ export default function FAQ() {
 
         <meta
           name="description"
-          content="Find answers to common Mind Sprint questions about the daily quiz, 7 challenges, scores, streaks, fresh questions, accounts and the planned weekly prize draw."
+          content="Find answers to common Mind Sprint questions about the daily quiz, 9 challenges, scores, streaks, fresh questions, accounts and the planned weekly prize draw."
         />
 
         <meta
@@ -165,9 +165,9 @@ export default function FAQ() {
 
         <p>
           Mind Sprint is a free daily trivia and brain-challenge website. It
-          currently includes <strong>7 challenges</strong>, with{' '}
+          currently includes <strong>9 challenges</strong>, with{' '}
           <strong>10 questions</strong> in each challenge, giving you up to{' '}
-          <strong>70 questions</strong> across a complete Mind Sprint run.
+          <strong>90 questions</strong> across a complete Mind Sprint run.
         </p>
 
         <p>
@@ -304,9 +304,9 @@ export default function FAQ() {
         </h2>
 
         <p>
-          Mind Sprint includes seven different quiz categories: General
+          Mind Sprint includes nine different quiz categories: General
           Knowledge, Word &amp; Language, Pop Culture, History, Smart Numbers,
-          Science and Geography.
+          Science, Geography, Sports and Nature &amp; Animals.
         </p>
 
         <p>
@@ -330,7 +330,7 @@ export default function FAQ() {
               fontSize: 22,
             }}
           >
-            Explore the 7 Quiz Categories
+            Explore the 9 Quiz Categories
           </h2>
 
           <div
@@ -446,6 +446,36 @@ export default function FAQ() {
                 Geography
               </a>
             </Link>
+
+            <Link
+              href="/sports-quiz"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                Sports
+              </a>
+            </Link>
+
+            <Link
+              href="/nature-animals-quiz"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                Nature &amp; Animals
+              </a>
+            </Link>
           </div>
         </div>
 
@@ -538,8 +568,8 @@ export default function FAQ() {
         </p>
 
         <p>
-          Because Mind Sprint has 7 challenges, the maximum will be{' '}
-          <strong>7 entries per weekly draw</strong>.
+          Because Mind Sprint has 9 challenges, the maximum will be{' '}
+          <strong>9 entries per weekly draw</strong>.
         </p>
 
         <h2
