@@ -1005,7 +1005,7 @@ export default function Home() {
             each different Mind Sprint
             challenge they complete
             during the weekly entry
-            period, up to seven
+            period, up to nine
             entries.
           </p>
 
