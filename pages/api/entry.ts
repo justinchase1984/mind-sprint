@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-const MAX_CHALLENGE = 7
+const MAX_CHALLENGE = 9
 const CLAIM_TTL_SECONDS = 2 * 24 * 60 * 60
 
 type AttemptState = {
