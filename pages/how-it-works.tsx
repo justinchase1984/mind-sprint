@@ -34,7 +34,7 @@ const structuredData = {
       name:
         'How Mind Sprint Works | Free Daily Quiz & Brain Challenges',
       description:
-        'Learn how Mind Sprint works: play 7 daily quiz challenges with 70 questions, track scores and streaks, unlock challenges and return for fresh question sets.',
+        'Learn how Mind Sprint works: play 9 daily quiz challenges with 90 questions, track scores and streaks, unlock challenges and return for fresh question sets.',
       isPartOf: {
         '@id':
           'https://www.dailymindsprint.com/#website',
@@ -44,7 +44,7 @@ const structuredData = {
           'https://www.dailymindsprint.com/#organization',
       },
       dateModified:
-        '2026-10-07',
+        '2026-10-10',
     },
   ],
 }
@@ -59,7 +59,7 @@ export default function HowItWorks() {
 
         <meta
           name="description"
-          content="Learn how Mind Sprint works: play 7 daily quiz challenges with 70 questions, track scores and streaks, unlock challenges and return for fresh question sets."
+          content="Learn how Mind Sprint works: play 9 daily quiz challenges with 90 questions, track scores and streaks, unlock challenges and return for fresh question sets."
         />
 
         <meta
@@ -89,7 +89,7 @@ export default function HowItWorks() {
 
         <meta
           property="og:description"
-          content="See how Mind Sprint's 7 daily quiz challenges, 70 questions, scores, streaks and fresh question sets work."
+          content="See how Mind Sprint's 9 daily quiz challenges, 90 questions, scores, streaks and fresh question sets work."
         />
 
         <meta
@@ -109,7 +109,7 @@ export default function HowItWorks() {
 
         <meta
           name="twitter:description"
-          content="See how Mind Sprint's 7 daily quiz challenges, 70 questions, scores, streaks and fresh question sets work."
+          content="See how Mind Sprint's 9 daily quiz challenges, 90 questions, scores, streaks and fresh question sets work."
         />
 
         <script
@@ -155,9 +155,9 @@ export default function HowItWorks() {
           }}
         >
           Mind Sprint is a free daily trivia and brain-challenge experience.
-          There are <strong>7 challenges</strong>, and each challenge contains{' '}
+          There are <strong>9 challenges</strong>, and each challenge contains{' '}
           <strong>10 questions</strong>, giving you up to{' '}
-          <strong>70 questions</strong> across a complete Mind Sprint run.
+          <strong>90 questions</strong> across a complete Mind Sprint run.
         </p>
 
         <p
@@ -293,8 +293,9 @@ export default function HowItWorks() {
             color: '#555',
           }}
         >
-          The seven quiz categories are General Knowledge, Word &amp; Language,
-          Pop Culture, History, Smart Numbers, Science and Geography.
+          The nine quiz categories are General Knowledge, Word &amp; Language,
+          Pop Culture, History, Smart Numbers, Science, Geography, Sports and
+          Nature &amp; Animals.
         </p>
 
         {/* Quiz category links */}
@@ -314,7 +315,7 @@ export default function HowItWorks() {
               fontSize: 22,
             }}
           >
-            Explore the 7 Daily Quiz Challenges
+            Explore the 9 Daily Quiz Challenges
           </h2>
 
           <div
@@ -430,6 +431,36 @@ export default function HowItWorks() {
                 Geography
               </a>
             </Link>
+
+            <Link
+              href="/sports-quiz"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                Sports
+              </a>
+            </Link>
+
+            <Link
+              href="/nature-animals-quiz"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                Nature &amp; Animals
+              </a>
+            </Link>
           </div>
         </div>
 
@@ -467,9 +498,9 @@ export default function HowItWorks() {
           }}
         >
           Each <strong>different challenge</strong> completed during the weekly
-          draw period will earn <strong>1 entry</strong>. Because there are 7
+          draw period will earn <strong>1 entry</strong>. Because there are 9
           challenges, the maximum will be{' '}
-          <strong>7 entries per week</strong>.
+          <strong>9 entries per week</strong>.
         </p>
 
         <p
