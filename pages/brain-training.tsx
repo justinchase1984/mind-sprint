@@ -64,7 +64,7 @@ const structuredData = {
         '@id':
           'https://www.dailymindsprint.com/#organization',
       },
-      dateModified: '2026-10-07',
+      dateModified: '2026-10-10',
     },
   ],
 }
@@ -475,6 +475,36 @@ export default function BrainTraining() {
                 }}
               >
                 Geography
+              </a>
+            </Link>
+
+            <Link
+              href="/sports-quiz"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                Sports
+              </a>
+            </Link>
+
+            <Link
+              href="/nature-animals-quiz"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                Nature &amp; Animals
               </a>
             </Link>
           </div>
