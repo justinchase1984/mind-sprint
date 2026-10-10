@@ -45,7 +45,7 @@ const structuredData = {
           'https://www.dailymindsprint.com/#organization',
       },
       dateModified:
-        '2026-09-26',
+        '2026-10-10',
     },
   ],
 }
@@ -143,7 +143,7 @@ export default function Terms() {
             marginTop: '-0.5rem',
           }}
         >
-          Last updated: September 26, 2026
+          Last updated: October 10, 2026
         </p>
 
         <p>
@@ -233,7 +233,7 @@ export default function Terms() {
         </h2>
 
         <p>
-          Mind Sprint currently includes 7 challenges with 10 questions in each
+          Mind Sprint currently includes 9 challenges with 10 questions in each
           challenge.
         </p>
 
@@ -357,6 +357,17 @@ export default function Terms() {
           When the weekly draw is active, Mind Sprint may use server-side
           systems to verify eligible challenge completions and prevent duplicate
           or fraudulent entries.
+        </p>
+
+        <p>
+          Each different eligible challenge can create a maximum of one valid
+          entry for a participant during the same weekly draw period.
+        </p>
+
+        <p>
+          With 9 Mind Sprint challenges, a participant can therefore earn up to{' '}
+          <strong>9 entries per weekly draw</strong>, subject to the Weekly
+          Prize Draw Terms.
         </p>
 
         <p>
