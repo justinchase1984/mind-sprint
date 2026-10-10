@@ -44,7 +44,7 @@ const structuredData = {
           'https://www.dailymindsprint.com/#organization',
       },
       dateModified:
-        '2026-09-26',
+        '2026-10-10',
     },
   ],
 }
@@ -142,7 +142,7 @@ export default function WeeklyPrizeDrawTerms() {
             marginTop: '-0.5rem',
           }}
         >
-          Last updated: September 26, 2026
+          Last updated: October 10, 2026
         </p>
 
         <div
@@ -295,8 +295,8 @@ export default function WeeklyPrizeDrawTerms() {
         </p>
 
         <p>
-          There are currently 7 challenges, so a player can earn a maximum of{' '}
-          <strong>7 entries per weekly draw</strong>.
+          There are currently 9 challenges, so a player can earn a maximum of{' '}
+          <strong>9 entries per weekly draw</strong>.
         </p>
 
         <p>
@@ -393,7 +393,7 @@ export default function WeeklyPrizeDrawTerms() {
         </p>
 
         <p>
-          For example, a player with 7 valid entries will have 7 entries
+          For example, a player with 9 valid entries will have 9 entries
           included in the random selection, while a player with 2 valid entries
           will have 2.
         </p>
