@@ -45,7 +45,7 @@ const structuredData = {
           'https://www.dailymindsprint.com/#organization',
       },
       dateModified:
-        '2026-10-07',
+        '2026-10-11',
     },
   ],
 }
@@ -210,9 +210,9 @@ export default function Contact() {
         </p>
 
         <p>
-          Mind Sprint includes seven quiz categories: General Knowledge, Word
-          &amp; Language, Pop Culture, History, Smart Numbers, Science and
-          Geography.
+          Mind Sprint includes nine quiz categories: General Knowledge, Word
+          &amp; Language, Pop Culture, History, Smart Numbers, Science,
+          Geography, Sports and Nature &amp; Animals.
         </p>
 
         <h2>
@@ -257,9 +257,9 @@ export default function Contact() {
         </p>
 
         <p>
-          The site offers seven short quiz challenges covering general
-          knowledge, words, pop culture, history, numbers, science and
-          geography, with question sets that rotate daily.
+          The site offers nine short quiz challenges covering general
+          knowledge, words, pop culture, history, numbers, science, geography,
+          sports, nature and animals, with question sets that rotate daily.
         </p>
 
         <p>
