@@ -35,7 +35,7 @@ const structuredData = {
       name:
         'About Mind Sprint | Daily Quiz & Brain Challenges',
       description:
-        'Learn about Mind Sprint, a free daily quiz with 7 trivia and brain challenges covering general knowledge, words, pop culture, history, numbers, science and geography.',
+        'Learn about Mind Sprint, a free daily quiz with 9 trivia and brain challenges covering general knowledge, words, pop culture, history, numbers, science, geography, sports, nature and animals.',
       isPartOf: {
         '@id':
           'https://www.dailymindsprint.com/#website',
@@ -45,7 +45,7 @@ const structuredData = {
           'https://www.dailymindsprint.com/#organization',
       },
       dateModified:
-        '2026-10-07',
+        '2026-10-11',
     },
   ],
 }
@@ -60,7 +60,7 @@ export default function About() {
 
         <meta
           name="description"
-          content="Learn about Mind Sprint, a free daily quiz with 7 trivia and brain challenges covering general knowledge, words, pop culture, history, numbers, science and geography."
+          content="Learn about Mind Sprint, a free daily quiz with 9 trivia and brain challenges covering general knowledge, words, pop culture, history, numbers, science, geography, sports, nature and animals."
         />
 
         <meta
@@ -90,7 +90,7 @@ export default function About() {
 
         <meta
           property="og:description"
-          content="Learn about Mind Sprint, our free daily quiz, 7 challenge categories, fresh question sets and how the site works."
+          content="Learn about Mind Sprint, our free daily quiz, 9 challenge categories, fresh question sets and how the site works."
         />
 
         <meta
@@ -110,7 +110,7 @@ export default function About() {
 
         <meta
           name="twitter:description"
-          content="Learn about Mind Sprint, our free daily quiz, 7 challenge categories, fresh question sets and how the site works."
+          content="Learn about Mind Sprint, our free daily quiz, 9 challenge categories, fresh question sets and how the site works."
         />
 
         <script
@@ -148,8 +148,8 @@ export default function About() {
         <p>
           Mind Sprint is an independent, free daily trivia and brain-challenge
           website designed around short, easy-to-play challenges covering
-          general knowledge, language, pop culture, history, numbers, science
-          and geography.
+          general knowledge, language, pop culture, history, numbers, science,
+          geography, sports, nature and animals.
         </p>
 
         <p>
@@ -164,9 +164,9 @@ export default function About() {
         </h2>
 
         <p>
-          Mind Sprint currently includes <strong>7 different challenges</strong>{' '}
+          Mind Sprint currently includes <strong>9 different challenges</strong>{' '}
           with <strong>10 questions in each</strong>, giving players up to{' '}
-          <strong>70 questions</strong> across a complete Mind Sprint run.
+          <strong>90 questions</strong> across a complete Mind Sprint run.
         </p>
 
         <p>
@@ -175,8 +175,9 @@ export default function About() {
         </p>
 
         <p>
-          The seven quiz categories are General Knowledge, Word &amp; Language,
-          Pop Culture, History, Smart Numbers, Science and Geography.
+          The nine quiz categories are General Knowledge, Word &amp; Language,
+          Pop Culture, History, Smart Numbers, Science, Geography, Sports and
+          Nature &amp; Animals.
         </p>
 
         <div
@@ -195,7 +196,7 @@ export default function About() {
               fontSize: 22,
             }}
           >
-            Explore the 7 Quiz Categories
+            Explore the 9 Quiz Categories
           </h2>
 
           <div
@@ -309,6 +310,36 @@ export default function About() {
                 }}
               >
                 Geography
+              </a>
+            </Link>
+
+            <Link
+              href="/sports-quiz"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                Sports
+              </a>
+            </Link>
+
+            <Link
+              href="/nature-animals-quiz"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                Nature &amp; Animals
               </a>
             </Link>
           </div>
