@@ -487,13 +487,14 @@ export default function ScienceQuizPage() {
               lineHeight: 1.8,
             }}
           >
-            Science is one of seven
+            Science is one of nine
             Mind Sprint categories,
             alongside General
             Knowledge, Word &amp;
             Language, Pop Culture,
-            History, Smart Numbers and
-            Geography.
+            History, Smart Numbers,
+            Geography, Sports and
+            Nature &amp; Animals.
           </p>
         </section>
 
