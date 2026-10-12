@@ -495,7 +495,8 @@ export default function GeneralKnowledgeQuizPage() {
             through Word &amp;
             Language, Pop Culture,
             History, Smart Numbers,
-            Science and Geography.
+            Science, Geography, Sports
+            and Nature &amp; Animals.
           </p>
         </section>
 
