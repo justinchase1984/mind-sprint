@@ -488,12 +488,13 @@ export default function SmartNumbersQuizPage() {
             }}
           >
             Smart Numbers is one of
-            seven Mind Sprint
+            nine Mind Sprint
             categories, alongside
             General Knowledge, Word
             &amp; Language, Pop
-            Culture, History, Science
-            and Geography.
+            Culture, History, Science,
+            Geography, Sports and
+            Nature &amp; Animals.
           </p>
         </section>
 
