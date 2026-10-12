@@ -393,9 +393,10 @@ export default function GeographyQuizPage() {
           >
             Score at least 8 out of 10
             to pass the Geography
-            Challenge and complete the
-            final stage of the Mind
-            Sprint daily quiz.
+            Challenge and continue to
+            Sports and Nature &amp;
+            Animals in the Mind Sprint
+            daily quiz.
           </p>
         </section>
 
@@ -490,13 +491,14 @@ export default function GeographyQuizPage() {
               lineHeight: 1.8,
             }}
           >
-            Geography is one of seven
+            Geography is one of nine
             Mind Sprint categories,
             alongside General
             Knowledge, Word &amp;
             Language, Pop Culture,
-            History, Smart Numbers and
-            Science.
+            History, Smart Numbers,
+            Science, Sports and
+            Nature &amp; Animals.
           </p>
         </section>
 
