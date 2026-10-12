@@ -490,12 +490,13 @@ export default function WordLanguageQuizPage() {
             }}
           >
             Word &amp; Language is one
-            of seven Mind Sprint
+            of nine Mind Sprint
             categories, alongside
             General Knowledge, Pop
             Culture, History, Smart
-            Numbers, Science and
-            Geography.
+            Numbers, Science,
+            Geography, Sports and
+            Nature &amp; Animals.
           </p>
         </section>
 
