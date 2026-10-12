@@ -487,12 +487,13 @@ export default function PopCultureQuizPage() {
             }}
           >
             Pop Culture is one of
-            seven Mind Sprint
+            nine Mind Sprint
             categories, alongside
             General Knowledge, Word
             &amp; Language, History,
-            Smart Numbers, Science and
-            Geography.
+            Smart Numbers, Science,
+            Geography, Sports and
+            Nature &amp; Animals.
           </p>
         </section>
 
