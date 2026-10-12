@@ -487,13 +487,14 @@ export default function HistoryQuizPage() {
               lineHeight: 1.8,
             }}
           >
-            History is one of seven
+            History is one of nine
             Mind Sprint categories,
             alongside General
             Knowledge, Word &amp;
             Language, Pop Culture,
-            Smart Numbers, Science and
-            Geography.
+            Smart Numbers, Science,
+            Geography, Sports and
+            Nature &amp; Animals.
           </p>
         </section>
 
