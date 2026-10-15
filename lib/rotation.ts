@@ -12,8 +12,8 @@ Rotation System
 const ROTATION_DAYS = 1
 const AEST_OFFSET_MS = 10 * 60 * 60 * 1000
 
-// Keep A/B/C live while the expanded question/fact bank is deployed.
-// Change this to 4 only after lib/facts.ts and the 9-challenge UI are ready.
+// All four question sets (A/B/C/D) are active.
+// Questions and facts rotate together using the same set count.
 export const ACTIVE_ROTATION_SET_COUNT = 4
 
 function getDayIndex(date: Date = new Date()): number {
