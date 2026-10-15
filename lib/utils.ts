@@ -6,16 +6,16 @@ import { getRotatingPuzzlesByChallenge } from './rotation'
 /*
 Daily Puzzle System
 ------------------
-• There are 7 challenges
-• Each challenge returns 10 puzzles (Set A or B via rotation)
+• There are 9 challenges
+• Each challenge returns 10 puzzles from the active rotating question set
 • We take ONE puzzle from each challenge (position-based)
-• Result = 7 puzzles per day
+• Result = 9 puzzles per day
 
-• UI expects 10 → we pad remaining slots
+• UI expects 10 → we pad the remaining slot
 */
 
 export function getDailyPuzzles(date: Date = new Date()): Puzzle[] {
-  const TOTAL_CHALLENGES = 7
+  const TOTAL_CHALLENGES = 9
   const puzzles: Puzzle[] = []
 
   // Anchor date (same as rotation.ts)
@@ -43,7 +43,7 @@ export function getDailyPuzzles(date: Date = new Date()): Puzzle[] {
 
   /*
   UI expects 10 puzzles
-  If we have less (e.g. 7), repeat from start
+  If we have less (e.g. 9), repeat from start
   */
 
   let i = 0
