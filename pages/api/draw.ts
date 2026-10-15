@@ -172,7 +172,7 @@ function parseEntries(
         email &&
         Number.isInteger(challenge) &&
         challenge >= 1 &&
-        challenge <= 7
+        challenge <= 9
       ) {
         entries.push({
           email,
@@ -373,8 +373,8 @@ export default async function handler(
       Every challenge completion is stored
       as one entry.
 
-      Therefore someone with 7 entries has
-      seven chances in this random selection.
+      Therefore someone with 9 entries has
+      nine chances in this random selection.
     */
     const winningIndex =
       randomInt(
