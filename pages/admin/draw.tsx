@@ -405,7 +405,7 @@ export default function WeeklyDrawAdmin() {
                       status
                         .drawWeek
                         .entries ===
-                        0
+                      0
                         ? 0.5
                         : 1,
                   }}
@@ -473,8 +473,8 @@ export default function WeeklyDrawAdmin() {
             >
               Next step: send this
               winner their Mind Sprint
-              digital reward through
-              Tremendous.
+              digital reward using the
+              selected reward provider.
             </p>
           </section>
         )}
