@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+const PRIZE_DRAW_LIVE = false
 const MAX_CHALLENGE = 9
 const CLAIM_TTL_SECONDS = 2 * 24 * 60 * 60
 
@@ -100,6 +101,23 @@ export default async function handler(
     return res.status(405).json({
       success: false,
       error: 'Method not allowed',
+    })
+  }
+
+  /*
+    The public weekly prize draw is
+    currently switched off.
+
+    This server-side check prevents
+    prize entries from being created
+    even if someone calls this API
+    directly while the draw is not live.
+  */
+  if (!PRIZE_DRAW_LIVE) {
+    return res.status(403).json({
+      success: false,
+      error:
+        'The weekly prize draw is not currently live',
     })
   }
 
