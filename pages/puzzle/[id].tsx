@@ -1,1230 +1,321 @@
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
-import type { Puzzle } from '../../lib/puzzles'
-import { getStreaks, saveStreaks } from '../../lib/streak'
-import { getRotatingPuzzlesByChallenge } from '../../lib/rotation'
-import { DID_YOU_KNOW } from '../../lib/facts'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
-const PRIZE_DRAW_LIVE = false
-const TOTAL_CHALLENGES = 9
+const MAX_CHALLENGE = 9
+const TEST_CLAIM_TTL_SECONDS = 2 * 24 * 60 * 60
+const TEST_DATA_TTL_SECONDS = 7 * 24 * 60 * 60
 
-export default function PuzzlePage() {
-  const router = useRouter()
-  const { query } = router
+type AttemptState = {
+  challenge: number
+  startedAt: string
+  nextQuestion: number
+  totalQuestions: number
+  completed: boolean
+}
 
-  const challengeIndex = (() => {
-    const q = query.challenge as string | undefined
+async function redisCommand<T = any>(
+  command: Array<string | number>
+): Promise<T> {
+  const redisUrl = process.env.KV_REST_API_URL
+  const redisToken = process.env.KV_REST_API_TOKEN
 
-    if (q && !isNaN(+q)) {
-      return +q
-    }
+  if (!redisUrl || !redisToken) {
+    throw new Error('Redis environment variables are missing')
+  }
 
-    if (typeof window !== 'undefined') {
-      return parseInt(
-        localStorage.getItem('unlockedChallenge') || '1',
-        10
-      )
-    }
+  const response = await fetch(redisUrl, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${redisToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(command),
+  })
 
-    return 1
-  })()
+  const data = await response.json()
 
-  const puzzles: Puzzle[] =
-    getRotatingPuzzlesByChallenge(challengeIndex)
+  if (!response.ok || data.error) {
+    throw new Error(
+      data.error || 'Redis request failed'
+    )
+  }
 
-  const idNum = parseInt(
-    (query.id as string) || '1',
-    10
+  return data.result
+}
+
+function getWeekKey(): string {
+  const AEST_OFFSET_MS =
+    10 * 60 * 60 * 1000
+
+  const nowAest = new Date(
+    Date.now() + AEST_OFFSET_MS
   )
 
-  const puzzle = puzzles[idNum - 1]
+  const day =
+    nowAest.getUTCDay()
 
-  const total = puzzles.length
-  const isResults = idNum > total
+  const daysSinceMonday =
+    (day + 6) % 7
 
-  const [selected, setSelected] =
-    useState<string | null>(null)
-
-  const [locked, setLocked] =
-    useState(false)
-
-  const [answerProcessed, setAnswerProcessed] =
-    useState(false)
-
-  const [autoAdvance, setAutoAdvance] =
-    useState(false)
-
-  const [hasJoined, setHasJoined] =
-    useState(false)
-
-  const [email, setEmail] =
-    useState('')
-
-  const [isJoining, setIsJoining] =
-    useState(false)
-
-  const [joinError, setJoinError] =
-    useState('')
-
-  const [marketingConsent, setMarketingConsent] =
-    useState(false)
-
-  const [marketingNotice, setMarketingNotice] =
-    useState('')
-
-  const [entriesThisWeek, setEntriesThisWeek] =
-    useState<number | null>(null)
-
-  useEffect(() => {
-    const savedEmail =
-      localStorage.getItem('mindSprintEmail')
-
-    if (savedEmail) {
-      setHasJoined(true)
-    } else {
-      setHasJoined(false)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (idNum !== 1) {
-      return
-    }
-
-    const resetRequested =
-      query.reset === '1'
-
-    const firstQuestionKey =
-      `challenge${challengeIndex}_q1`
-
-    const firstQuestionAnswered =
-      sessionStorage.getItem(
-        firstQuestionKey
-      )
-
-    if (
-      !resetRequested &&
-      firstQuestionAnswered
-    ) {
-      return
-    }
-
-    sessionStorage.setItem(
-      'dailyCorrect',
-      '0'
+  const monday = new Date(
+    Date.UTC(
+      nowAest.getUTCFullYear(),
+      nowAest.getUTCMonth(),
+      nowAest.getUTCDate() -
+        daysSinceMonday
     )
+  )
 
-    puzzles.forEach((_p, idx) =>
-      sessionStorage.removeItem(
-        `challenge${challengeIndex}_q${idx + 1}`
-      )
-    )
+  const year =
+    monday.getUTCFullYear()
 
-    sessionStorage.removeItem(
-      `mindSprintAttempt:${challengeIndex}`
-    )
+  const month =
+    String(
+      monday.getUTCMonth() + 1
+    ).padStart(2, '0')
 
-    if (resetRequested) {
-      router.replace(
-        `/puzzle/1?challenge=${challengeIndex}`,
-        undefined,
-        { shallow: true }
-      )
-    }
-  }, [
-    idNum,
-    challengeIndex,
-    puzzles,
-    query.reset,
-    router,
-  ])
+  const date =
+    String(
+      monday.getUTCDate()
+    ).padStart(2, '0')
 
-  useEffect(() => {
-    const key =
-      `challenge${challengeIndex}_q${idNum}`
+  return `${year}-${month}-${date}`
+}
 
-    const savedAnswer =
-      sessionStorage.getItem(key)
+function getAttemptKey(
+  attemptId: string
+) {
+  return `mind-sprint:attempt:${attemptId}`
+}
 
-    setAutoAdvance(false)
+function getTestClaimKey(
+  attemptId: string
+) {
+  return `mind-sprint:test-attempt:${attemptId}:claimed`
+}
 
-    if (!savedAnswer) {
-      setSelected(null)
-      setLocked(false)
-      setAnswerProcessed(false)
-      return
-    }
-
-    if (
-      savedAnswer === '1' &&
-      puzzle
-    ) {
-      setSelected(puzzle.answer)
-      setLocked(true)
-      setAnswerProcessed(true)
-      return
-    }
-
-    try {
-      const parsed =
-        JSON.parse(savedAnswer)
-
-      if (
-        parsed &&
-        typeof parsed.answer ===
-          'string'
-      ) {
-        setSelected(parsed.answer)
-        setLocked(true)
-        setAnswerProcessed(true)
-        return
-      }
-    } catch (error) {
-      console.error(
-        'Unable to restore saved answer:',
-        error
-      )
-    }
-
-    setSelected(null)
-    setLocked(false)
-    setAnswerProcessed(false)
-  }, [
-    idNum,
-    challengeIndex,
-    puzzle,
-  ])
-
-  useEffect(() => {
-    if (
-      !answerProcessed ||
-      !autoAdvance
-    ) {
-      return
-    }
-
-    const timer = window.setTimeout(() => {
-      router.push(
-        `/puzzle/${idNum + 1}?challenge=${challengeIndex}`
-      )
-    }, 1500)
-
-    return () => {
-      window.clearTimeout(timer)
-    }
-  }, [
-    answerProcessed,
-    autoAdvance,
-    idNum,
-    challengeIndex,
-    router,
-  ])
-
-  useEffect(() => {
-    if (!PRIZE_DRAW_LIVE) return
-    if (!isResults) return
-
-    const savedEmail =
-      localStorage.getItem('mindSprintEmail')
-
-    if (!savedEmail) return
-
-    claimPrizeEntry(savedEmail)
-  }, [isResults, challengeIndex])
-
-  function afterAnswer(
-    isCorrect: boolean,
-    answer: string
-  ) {
-    const key =
-      `challenge${challengeIndex}_q${idNum}`
-
-    const already =
-      sessionStorage.getItem(key)
-
-    if (already) {
-      return
-    }
-
-    let { current, max } =
-      getStreaks()
-
-    if (isCorrect) {
-      current += 1
-    } else {
-      current = 0
-    }
-
-    if (current > max) {
-      max = current
-    }
-
-    saveStreaks(current, max)
-
-    let cnt = parseInt(
-      sessionStorage.getItem(
-        'dailyCorrect'
-      ) || '0',
-      10
-    )
-
-    if (isCorrect) {
-      cnt += 1
-    }
-
-    sessionStorage.setItem(
-      key,
-      JSON.stringify({
-        answer,
-        isCorrect,
-      })
-    )
-
-    sessionStorage.setItem(
-      'dailyCorrect',
-      cnt.toString()
-    )
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({
+      success: false,
+      error: 'Method not allowed',
+    })
   }
 
-  async function getOrStartAttempt():
-    Promise<string | null> {
-    const storageKey =
-      `mindSprintAttempt:${challengeIndex}`
-
-    const existingAttempt =
-      sessionStorage.getItem(
-        storageKey
-      )
-
-    if (existingAttempt) {
-      return existingAttempt
-    }
-
-    try {
-      const res = await fetch(
-        '/api/attempt',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type':
-              'application/json',
-          },
-          body: JSON.stringify({
-            action: 'start',
-            challenge:
-              challengeIndex,
-          }),
-        }
-      )
-
-      const data = await res
-        .json()
-        .catch(() => ({
-          success: false,
-        }))
-
-      if (
-        !data.success ||
-        !data.attemptId
-      ) {
-        console.error(
-          'Unable to start challenge attempt:',
-          data
-        )
-
-        return null
-      }
-
-      sessionStorage.setItem(
-        storageKey,
-        data.attemptId
-      )
-
-      return data.attemptId
-    } catch (error) {
-      console.error(
-        'Unable to start challenge attempt:',
-        error
-      )
-
-      return null
-    }
-  }
-
-  async function recordAttemptAnswer(
-    answer: string
-  ) {
-    const attemptId =
-      await getOrStartAttempt()
-
-    if (!attemptId) {
-      return false
-    }
-
-    try {
-      const res = await fetch(
-        '/api/attempt',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type':
-              'application/json',
-          },
-          body: JSON.stringify({
-            action: 'answer',
-            attemptId,
-            question: idNum,
-            answer,
-          }),
-        }
-      )
-
-      const data = await res
-        .json()
-        .catch(() => ({
-          success: false,
-        }))
-
-      if (!data.success) {
-        console.error(
-          'Unable to record challenge answer:',
-          data
-        )
-
-        return false
-      }
-
-      return true
-    } catch (error) {
-      console.error(
-        'Unable to record challenge answer:',
-        error
-      )
-
-      return false
-    }
-  }
-
-  async function handleAnswer(
-    answer: string
-  ) {
-    if (locked || !puzzle) {
-      return
-    }
-
-    setSelected(answer)
-    setLocked(true)
-
-    await recordAttemptAnswer(
-      answer
-    )
-
-    afterAnswer(
-      answer === puzzle.answer,
-      answer
-    )
-
-    setAnswerProcessed(true)
-    setAutoAdvance(true)
-  }
-
-  async function claimPrizeEntry(
-    emailAddress: string
-  ): Promise<boolean> {
-    if (!PRIZE_DRAW_LIVE) {
-      return false
-    }
+  try {
+    const email =
+      typeof req.body?.email === 'string'
+        ? req.body.email
+            .trim()
+            .toLowerCase()
+        : ''
 
     const attemptId =
-      sessionStorage.getItem(
-        `mindSprintAttempt:${challengeIndex}`
-      )
+      typeof req.body?.attemptId === 'string'
+        ? req.body.attemptId.trim()
+        : ''
 
-    if (!attemptId) {
-      console.error(
-        'No completed challenge attempt was found'
-      )
-
-      return false
-    }
-
-    try {
-      const res = await fetch(
-        '/api/entry',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type':
-              'application/json',
-          },
-          body: JSON.stringify({
-            email: emailAddress,
-            attemptId,
-          }),
-        }
-      )
-
-      const data = await res
-        .json()
-        .catch(() => ({
-          success: false,
-        }))
-
-      if (data.success) {
-        setEntriesThisWeek(
-          data.entriesThisWeek
-        )
-
-        return true
-      }
-
-      console.error(
-        'Prize entry error:',
-        data
-      )
-
-      return false
-    } catch (error) {
-      console.error(
-        'Prize entry error:',
-        error
-      )
-
-      return false
-    }
-  }
-
-  async function handleSubmit() {
-    if (isJoining) return
-
-    if (!PRIZE_DRAW_LIVE) {
-      setJoinError(
-        'The weekly prize draw is not live yet.'
-      )
-
-      return
-    }
-
-    const cleanEmail =
-      email.trim().toLowerCase()
-
-    const validEmail =
+    const emailLooksValid =
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-        cleanEmail
+        email
       )
 
-    if (!validEmail) {
-      setJoinError(
-        'Please enter a valid email address.'
-      )
-
-      return
+    if (
+      !email ||
+      !emailLooksValid ||
+      email.length > 254
+    ) {
+      return res.status(400).json({
+        success: false,
+        error:
+          'A valid email address is required',
+      })
     }
 
-    setIsJoining(true)
-    setJoinError('')
-    setMarketingNotice('')
+    if (
+      !attemptId ||
+      attemptId.length > 100
+    ) {
+      return res.status(400).json({
+        success: false,
+        error:
+          'A valid challenge attempt is required',
+      })
+    }
+
+    /*
+      Load the REAL challenge attempt.
+
+      This lets test mode verify the same
+      completed challenge that the live
+      prize system would verify.
+    */
+    const attemptValue =
+      await redisCommand<string | null>([
+        'GET',
+        getAttemptKey(attemptId),
+      ])
+
+    if (!attemptValue) {
+      return res.status(404).json({
+        success: false,
+        error:
+          'Challenge attempt has expired or does not exist',
+      })
+    }
+
+    let attempt: AttemptState
 
     try {
-      const entryRecorded =
-        await claimPrizeEntry(
-          cleanEmail
-        )
-
-      if (!entryRecorded) {
-        setJoinError(
-          'We couldn’t record your prize entry. Please try again.'
-        )
-
-        return
-      }
-
-      localStorage.setItem(
-        'joined',
-        'true'
-      )
-
-      localStorage.setItem(
-        'mindSprintEmail',
-        cleanEmail
-      )
-
-      setHasJoined(true)
-      setEmail('')
-
-      if (marketingConsent) {
-        try {
-          const subscribeRes =
-            await fetch(
-              '/api/subscribe',
-              {
-                method: 'POST',
-                headers: {
-                  'Content-Type':
-                    'application/json',
-                },
-                body: JSON.stringify({
-                  email:
-                    cleanEmail,
-                  marketingConsent:
-                    true,
-                }),
-              }
-            )
-
-          const subscribeData =
-            await subscribeRes
-              .json()
-              .catch(() => ({
-                success: false,
-              }))
-
-          if (
-            subscribeData.success
-          ) {
-            localStorage.setItem(
-              'mindSprintMarketingConsent',
-              'true'
-            )
-          } else {
-            console.error(
-              'Marketing signup error:',
-              subscribeData
-            )
-
-            setMarketingNotice(
-              'Your prize entry is saved, but email updates could not be enabled.'
-            )
-          }
-        } catch (error) {
-          console.error(
-            'Marketing signup error:',
-            error
-          )
-
-          setMarketingNotice(
-            'Your prize entry is saved, but email updates could not be enabled.'
-          )
-        }
-      }
-
-      setMarketingConsent(false)
-    } catch (error) {
-      console.error(
-        'Entry error:',
-        error
-      )
-
-      setJoinError(
-        'We couldn’t complete your entry. Please try again.'
-      )
-    } finally {
-      setIsJoining(false)
+      attempt =
+        JSON.parse(attemptValue)
+    } catch {
+      return res.status(500).json({
+        success: false,
+        error:
+          'Challenge attempt could not be verified',
+      })
     }
+
+    if (!attempt.completed) {
+      return res.status(403).json({
+        success: false,
+        error:
+          'Challenge has not been completed',
+      })
+    }
+
+    const challenge =
+      Number(attempt.challenge)
+
+    if (
+      !Number.isInteger(challenge) ||
+      challenge < 1 ||
+      challenge > MAX_CHALLENGE
+    ) {
+      return res.status(400).json({
+        success: false,
+        error:
+          'Invalid completed challenge',
+      })
+    }
+
+    /*
+      TEST claim protection.
+
+      This uses a completely separate key
+      from the real prize-draw claim key.
+    */
+    const claimKey =
+      getTestClaimKey(attemptId)
+
+    const claimResult =
+      await redisCommand<string | null>([
+        'SET',
+        claimKey,
+        email,
+        'NX',
+        'EX',
+        TEST_CLAIM_TTL_SECONDS,
+      ])
+
+    if (!claimResult) {
+      const existingClaim =
+        await redisCommand<string | null>([
+          'GET',
+          claimKey,
+        ])
+
+      if (
+        existingClaim &&
+        existingClaim !== email
+      ) {
+        return res.status(409).json({
+          success: false,
+          error:
+            'This test challenge completion has already been claimed',
+        })
+      }
+    }
+
+    const weekKey =
+      getWeekKey()
+
+    /*
+      IMPORTANT:
+      These are TEST keys only.
+
+      They cannot appear in the real
+      weekly prize draw.
+    */
+    const weeklyEntriesKey =
+      `mind-sprint:test-weekly-draw:${weekKey}:entries`
+
+    const playerEntriesKey =
+      `mind-sprint:test-weekly-draw:${weekKey}:player:${encodeURIComponent(
+        email
+      )}`
+
+    const entryMember =
+      JSON.stringify({
+        email,
+        challenge,
+      })
+
+    const added =
+      Number(
+        await redisCommand<number>([
+          'SADD',
+          weeklyEntriesKey,
+          entryMember,
+        ])
+      )
+
+    await redisCommand([
+      'EXPIRE',
+      weeklyEntriesKey,
+      TEST_DATA_TTL_SECONDS,
+    ])
+
+    await redisCommand([
+      'SADD',
+      playerEntriesKey,
+      String(challenge),
+    ])
+
+    await redisCommand([
+      'EXPIRE',
+      playerEntriesKey,
+      TEST_DATA_TTL_SECONDS,
+    ])
+
+    const entriesThisWeek =
+      Number(
+        await redisCommand<number>([
+          'SCARD',
+          playerEntriesKey,
+        ])
+      )
+
+    return res.status(200).json({
+      success: true,
+      testMode: true,
+      awarded: added === 1,
+      challenge,
+      entriesThisWeek,
+    })
+  } catch (error) {
+    console.error(
+      'Mind Sprint test entry error:',
+      error
+    )
+
+    return res.status(500).json({
+      success: false,
+      error:
+        'Unable to record test prize entry',
+    })
   }
-
-  const factKey =
-    `${challengeIndex}-${idNum}`
-
-  return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        background: '#fff',
-        minHeight: '100vh',
-        paddingTop: '1rem',
-        paddingBottom: '2rem',
-      }}
-    >
-      <Head>
-        <title>
-          {isResults
-            ? `Results | Challenge ${challengeIndex}`
-            : `Challenge ${challengeIndex} – Puzzle ${idNum}`}
-        </title>
-
-        <meta
-          name="robots"
-          content="noindex, follow"
-        />
-      </Head>
-
-      <main
-        style={{
-          width: '100%',
-          maxWidth: 800,
-          padding: '1rem',
-          textAlign: 'center',
-        }}
-      >
-        {isResults ? (
-          <>
-            {(() => {
-              const score =
-                parseInt(
-                  sessionStorage.getItem(
-                    'dailyCorrect'
-                  ) || '0',
-                  10
-                )
-
-              let label =
-                '😅 Needs Work'
-
-              if (score >= 9) {
-                label =
-                  '🧠 Genius'
-              } else if (
-                score >= 7
-              ) {
-                label =
-                  '🔥 Strong'
-              } else if (
-                score >= 5
-              ) {
-                label =
-                  '👍 Solid'
-              }
-
-              const passed =
-                score >= 8
-
-              const nextHref =
-                passed &&
-                challengeIndex >=
-                  TOTAL_CHALLENGES
-                  ? '/results'
-                  : passed
-                  ? `/puzzle/1?challenge=${challengeIndex + 1}`
-                  : `/puzzle/1?challenge=${challengeIndex}&reset=1`
-
-              const nextLabel =
-                passed &&
-                challengeIndex >=
-                  TOTAL_CHALLENGES
-                  ? 'Finish →'
-                  : passed
-                  ? 'Continue →'
-                  : 'Try Again'
-
-              if (
-                passed &&
-                challengeIndex <
-                  TOTAL_CHALLENGES
-              ) {
-                localStorage.setItem(
-                  'unlockedChallenge',
-                  String(
-                    challengeIndex + 1
-                  )
-                )
-              }
-
-              return (
-                <>
-                  <h1>
-                    🎯 Challenge Complete
-                  </h1>
-
-                  <p
-                    style={{
-                      fontSize: 20,
-                    }}
-                  >
-                    You scored{' '}
-                    <strong>
-                      {score}/{total}
-                    </strong>
-                  </p>
-
-                  <p
-                    style={{
-                      fontSize: 18,
-                    }}
-                  >
-                    {label}
-                  </p>
-
-                  <div
-                    style={{
-                      marginTop:
-                        '1rem',
-                    }}
-                  >
-                    <Link
-                      href={nextHref}
-                    >
-                      <button>
-                        {nextLabel}
-                      </button>
-                    </Link>
-                  </div>
-                </>
-              )
-            })()}
-
-            {!PRIZE_DRAW_LIVE ? (
-              <div
-                style={{
-                  marginTop: '2rem',
-                  maxWidth: 400,
-                  marginInline: 'auto',
-                }}
-              >
-                <p
-                  style={{
-                    marginBottom: 5,
-                    fontSize: 17,
-                    fontWeight: 600,
-                  }}
-                >
-                  🎁 Weekly Prize Draw
-                </p>
-
-                <p
-                  style={{
-                    marginTop: 0,
-                    marginBottom: 10,
-                    color: '#666',
-                    fontSize: 14,
-                  }}
-                >
-                  Coming soon — entries will open when the official weekly prize draw launches.
-                </p>
-
-                <p
-                  style={{
-                    marginTop: 0,
-                    marginBottom: 0,
-                    fontSize: 12,
-                    color: '#777',
-                  }}
-                >
-                  18+ ·{' '}
-                  <Link
-                    href="/weekly-prize-draw-terms"
-                    legacyBehavior
-                  >
-                    <a
-                      style={{
-                        color: '#666',
-                        textDecoration:
-                          'underline',
-                      }}
-                    >
-                      Prize Draw Terms
-                    </a>
-                  </Link>
-                </p>
-              </div>
-            ) : !hasJoined ? (
-              <div
-                style={{
-                  marginTop: '2rem',
-                  maxWidth: 400,
-                  marginInline: 'auto',
-                }}
-              >
-                <p
-                  style={{
-                    marginBottom: 5,
-                    fontSize: 17,
-                    fontWeight: 600,
-                  }}
-                >
-                  🎁 Weekly Prize Draw
-                </p>
-
-                <p
-                  style={{
-                    marginTop: 0,
-                    marginBottom: 14,
-                    color: '#666',
-                    fontSize: 14,
-                  }}
-                >
-                  Enter your email to claim this challenge entry.
-                </p>
-
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault()
-                    handleSubmit()
-                  }}
-                >
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    disabled={
-                      isJoining
-                    }
-                    autoComplete="email"
-                    onChange={(e) => {
-                      setEmail(
-                        e.target.value
-                      )
-
-                      if (
-                        joinError
-                      ) {
-                        setJoinError(
-                          ''
-                        )
-                      }
-                    }}
-                    style={{
-                      width: '100%',
-                      padding: '12px',
-                      borderRadius: 6,
-                      border:
-                        '1px solid #ccc',
-                      boxSizing:
-                        'border-box',
-                    }}
-                  />
-
-                  <label
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 8,
-                      textAlign: 'left',
-                      marginTop: 12,
-                      fontSize: 13,
-                      color: '#555',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={
-                        marketingConsent
-                      }
-                      disabled={
-                        isJoining
-                      }
-                      onChange={(e) =>
-                        setMarketingConsent(
-                          e.target.checked
-                        )
-                      }
-                    />
-
-                    <span>
-                      Send me weekly prize draw reminders & new Mind Sprint challenges (optional)
-                    </span>
-                  </label>
-
-                  <button
-                    type="submit"
-                    disabled={
-                      isJoining
-                    }
-                    style={{
-                      width: '100%',
-                      marginTop: 14,
-                      padding: '12px',
-                      background:
-                        '#111',
-                      color: '#fff',
-                      border: 'none',
-                      borderRadius: 6,
-                      cursor:
-                        isJoining
-                          ? 'default'
-                          : 'pointer',
-                      opacity:
-                        isJoining
-                          ? 0.7
-                          : 1,
-                    }}
-                  >
-                    {isJoining
-                      ? 'Claiming...'
-                      : 'Claim Entry'}
-                  </button>
-                </form>
-
-                <p
-                  style={{
-                    marginTop: 10,
-                    marginBottom: 0,
-                    fontSize: 12,
-                    color: '#777',
-                  }}
-                >
-                  18+ ·{' '}
-                  <Link
-                    href="/weekly-prize-draw-terms"
-                    legacyBehavior
-                  >
-                    <a
-                      style={{
-                        color: '#666',
-                        textDecoration:
-                          'underline',
-                      }}
-                    >
-                      Prize Draw Terms
-                    </a>
-                  </Link>
-                  {' · '}
-                  <Link
-                    href="/privacy"
-                    legacyBehavior
-                  >
-                    <a
-                      style={{
-                        color: '#666',
-                        textDecoration:
-                          'underline',
-                      }}
-                    >
-                      Privacy
-                    </a>
-                  </Link>
-                </p>
-
-                {joinError && (
-                  <p
-                    role="alert"
-                    style={{
-                      marginTop: 10,
-                      marginBottom: 0,
-                      fontSize: 14,
-                      color:
-                        '#b00020',
-                    }}
-                  >
-                    {joinError}
-                  </p>
-                )}
-              </div>
-            ) : (
-              <div
-                style={{
-                  marginTop:
-                    '2rem',
-                }}
-              >
-                <p
-                  role="status"
-                  style={{
-                    color: '#555',
-                    marginBottom: 8,
-                  }}
-                >
-                  🎯 You're entered in
-                  the weekly draw —
-                  keep playing to earn
-                  more entries
-                </p>
-
-                {entriesThisWeek !==
-                  null && (
-                  <p
-                    style={{
-                      marginTop: 0,
-                      fontWeight: 600,
-                    }}
-                  >
-                    🎟️ You have{' '}
-                    <strong>
-                      {
-                        entriesThisWeek
-                      }
-                    </strong>{' '}
-                    {entriesThisWeek ===
-                    1
-                      ? 'entry'
-                      : 'entries'}{' '}
-                    in this
-                    week&apos;s draw
-                  </p>
-                )}
-
-                {marketingNotice && (
-                  <p
-                    style={{
-                      marginTop: 10,
-                      fontSize: 14,
-                      color:
-                        '#b00020',
-                    }}
-                  >
-                    {marketingNotice}
-                  </p>
-                )}
-              </div>
-            )}
-          </>
-        ) : (
-          <>
-            <h2>
-              Challenge{' '}
-              {challengeIndex}
-            </h2>
-
-            <div
-              style={{
-                marginBottom:
-                  '1rem',
-              }}
-            >
-              <div
-                style={{
-                  fontSize: 14,
-                  marginBottom: 4,
-                }}
-              >
-                Question {idNum} of{' '}
-                {total}
-              </div>
-
-              <div
-                style={{
-                  height: 8,
-                  background: '#eee',
-                  borderRadius: 4,
-                  overflow: 'hidden',
-                }}
-              >
-                <div
-                  style={{
-                    width: `${
-                      (idNum /
-                        total) *
-                      100
-                    }%`,
-                    background:
-                      '#4caf50',
-                    height: '100%',
-                  }}
-                />
-              </div>
-            </div>
-
-            <p>
-              {puzzle?.question}
-            </p>
-
-            {puzzle?.options.map(
-              (opt) => (
-                <button
-                  key={opt}
-                  onClick={() =>
-                    handleAnswer(
-                      opt
-                    )
-                  }
-                  style={{
-                    display:
-                      'block',
-                    margin:
-                      '10px auto',
-                    padding:
-                      '12px 16px',
-                    width: '85%',
-                    borderRadius: 8,
-                    border:
-                      '1px solid #ddd',
-                    fontSize: 16,
-                    cursor: locked
-                      ? 'default'
-                      : 'pointer',
-                    background:
-                      locked &&
-                      opt ===
-                        puzzle.answer
-                        ? '#4caf50'
-                        : locked &&
-                          opt ===
-                            selected
-                        ? '#f44336'
-                        : '#fff',
-                    color:
-                      locked &&
-                      (opt ===
-                        puzzle.answer ||
-                        opt ===
-                          selected)
-                        ? '#fff'
-                        : '#000',
-                  }}
-                >
-                  {opt}
-                </button>
-              )
-            )}
-
-            {locked && (
-              <p
-                style={{
-                  marginTop: 10,
-                  fontWeight: 500,
-                }}
-              >
-                {selected ===
-                puzzle.answer
-                  ? 'Correct ✅'
-                  : 'Incorrect ❌'}
-              </p>
-            )}
-
-            {answerProcessed &&
-              DID_YOU_KNOW[
-                factKey
-              ] && (
-                <p
-                  style={{
-                    fontStyle:
-                      'italic',
-                    marginTop:
-                      '1rem',
-                    color: '#555',
-                  }}
-                >
-                  {
-                    DID_YOU_KNOW[
-                      factKey
-                    ]
-                  }
-                </p>
-              )}
-
-            {answerProcessed &&
-              !autoAdvance && (
-                <button
-                  onClick={() =>
-                    router.push(
-                      `/puzzle/${idNum + 1}?challenge=${challengeIndex}`
-                    )
-                  }
-                  style={{
-                    marginTop: '1rem',
-                    padding:
-                      '12px 18px',
-                    borderRadius: 8,
-                    border: 'none',
-                    background: '#111',
-                    color: '#fff',
-                    fontSize: 16,
-                    cursor: 'pointer',
-                  }}
-                >
-                  {idNum >= total
-                    ? 'See Results →'
-                    : 'Continue →'}
-                </button>
-              )}
-          </>
-        )}
-      </main>
-    </div>
-  )
 }
