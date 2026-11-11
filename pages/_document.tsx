@@ -20,6 +20,12 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          {/* GOOGLE ADSENSE ACCOUNT VERIFICATION */}
+          <meta
+            name="google-adsense-account"
+            content="ca-pub-9372563823272898"
+          />
+
           {/* GOOGLE ANALYTICS (GA4) */}
           {process.env.NEXT_PUBLIC_GA4_ID ? (
             <>
