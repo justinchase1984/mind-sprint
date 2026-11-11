@@ -26,6 +26,13 @@ class MyDocument extends Document {
             content="ca-pub-9372563823272898"
           />
 
+          {/* GOOGLE ADSENSE SITE CODE */}
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9372563823272898"
+            crossOrigin="anonymous"
+          ></script>
+
           {/* GOOGLE ANALYTICS (GA4) */}
           {process.env.NEXT_PUBLIC_GA4_ID ? (
             <>
