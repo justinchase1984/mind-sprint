@@ -44,7 +44,7 @@ const structuredData = {
           'https://www.dailymindsprint.com/#organization',
       },
       dateModified:
-        '2026-10-10',
+        '2026-11-12',
     },
   ],
 }
@@ -142,7 +142,7 @@ export default function FAQ() {
             marginTop: '-0.5rem',
           }}
         >
-          By Mind Sprint · Updated October 2026
+          By Mind Sprint · Updated November 2026
         </p>
 
         <p
@@ -627,8 +627,8 @@ export default function FAQ() {
 
         <p>
           Mind Sprint is currently planning the weekly draw around eligible
-          players in Australia, the United States, the United Kingdom and
-          Canada.
+          players in Australia, the United States, the United Kingdom, New
+          Zealand and Ireland.
         </p>
 
         <p>
