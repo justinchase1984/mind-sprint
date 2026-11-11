@@ -44,7 +44,7 @@ const structuredData = {
           'https://www.dailymindsprint.com/#organization',
       },
       dateModified:
-        '2026-10-10',
+        '2026-11-12',
     },
   ],
 }
@@ -142,7 +142,7 @@ export default function WeeklyPrizeDrawTerms() {
             marginTop: '-0.5rem',
           }}
         >
-          Last updated: October 10, 2026
+          Last updated: November 12, 2026
         </p>
 
         <div
@@ -221,7 +221,11 @@ export default function WeeklyPrizeDrawTerms() {
           </li>
 
           <li>
-            Canada
+            New Zealand
+          </li>
+
+          <li>
+            Ireland
           </li>
         </ul>
 
@@ -427,21 +431,7 @@ export default function WeeklyPrizeDrawTerms() {
             marginTop: '2rem',
           }}
         >
-          9. Canadian Entrants
-        </h2>
-
-        <p>
-          If a resident of Canada is selected, the entrant may be required,
-          where applicable, to correctly answer a mathematical skill-testing
-          question without assistance before being confirmed as the winner.
-        </p>
-
-        <h2
-          style={{
-            marginTop: '2rem',
-          }}
-        >
-          10. Winner Notification
+          9. Winner Notification
         </h2>
 
         <p>
@@ -474,7 +464,7 @@ export default function WeeklyPrizeDrawTerms() {
             marginTop: '2rem',
           }}
         >
-          11. Prize Delivery
+          10. Prize Delivery
         </h2>
 
         <p>
@@ -493,7 +483,7 @@ export default function WeeklyPrizeDrawTerms() {
             marginTop: '2rem',
           }}
         >
-          12. Entry Integrity
+          11. Entry Integrity
         </h2>
 
         <p>
@@ -513,7 +503,7 @@ export default function WeeklyPrizeDrawTerms() {
             marginTop: '2rem',
           }}
         >
-          13. Technical Problems
+          12. Technical Problems
         </h2>
 
         <p>
@@ -536,7 +526,7 @@ export default function WeeklyPrizeDrawTerms() {
             marginTop: '2rem',
           }}
         >
-          14. Privacy and Email
+          13. Privacy and Email
         </h2>
 
         <p>
@@ -571,7 +561,7 @@ export default function WeeklyPrizeDrawTerms() {
             marginTop: '2rem',
           }}
         >
-          15. Changes, Suspension or Cancellation
+          14. Changes, Suspension or Cancellation
         </h2>
 
         <p>
@@ -591,7 +581,7 @@ export default function WeeklyPrizeDrawTerms() {
             marginTop: '2rem',
           }}
         >
-          16. Third-Party Reward Provider
+          15. Third-Party Reward Provider
         </h2>
 
         <p>
@@ -615,7 +605,7 @@ export default function WeeklyPrizeDrawTerms() {
             marginTop: '2rem',
           }}
         >
-          17. Local Laws and Availability
+          16. Local Laws and Availability
         </h2>
 
         <p>
@@ -635,7 +625,7 @@ export default function WeeklyPrizeDrawTerms() {
             marginTop: '2rem',
           }}
         >
-          18. Applicable Law
+          17. Applicable Law
         </h2>
 
         <p>
@@ -649,7 +639,7 @@ export default function WeeklyPrizeDrawTerms() {
             marginTop: '2rem',
           }}
         >
-          19. Contact
+          18. Contact
         </h2>
 
         <p>
