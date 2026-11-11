@@ -34,7 +34,7 @@ const structuredData = {
       url: PAGE_URL,
       name: 'Privacy Policy | Mind Sprint',
       description:
-        'Learn how Mind Sprint collects, uses and protects information relating to gameplay, analytics, prize draw entries and optional email updates.',
+        'Learn how Mind Sprint collects, uses and protects information relating to gameplay, analytics, prize draw entries, advertising and optional email updates.',
       isPartOf: {
         '@id':
           'https://www.dailymindsprint.com/#website',
@@ -43,7 +43,7 @@ const structuredData = {
         '@id':
           'https://www.dailymindsprint.com/#organization',
       },
-      dateModified: '2026-09-26',
+      dateModified: '2026-11-12',
     },
   ],
 }
@@ -58,7 +58,7 @@ export default function Privacy() {
 
         <meta
           name="description"
-          content="Learn how Mind Sprint collects, uses and protects information relating to gameplay, analytics, prize draw entries and optional email updates."
+          content="Learn how Mind Sprint collects, uses and protects information relating to gameplay, analytics, prize draw entries, advertising and optional email updates."
         />
 
         <meta
@@ -88,7 +88,7 @@ export default function Privacy() {
 
         <meta
           property="og:description"
-          content="Learn how Mind Sprint handles information relating to gameplay, analytics, prize draw entries, email updates and website services."
+          content="Learn how Mind Sprint handles information relating to gameplay, analytics, prize draw entries, advertising, email updates and website services."
         />
 
         <meta
@@ -108,7 +108,7 @@ export default function Privacy() {
 
         <meta
           name="twitter:description"
-          content="Learn how Mind Sprint handles information relating to gameplay, analytics, prize draw entries, email updates and website services."
+          content="Learn how Mind Sprint handles information relating to gameplay, analytics, prize draw entries, advertising, email updates and website services."
         />
 
         <script
@@ -141,7 +141,7 @@ export default function Privacy() {
             marginTop: '-0.5rem',
           }}
         >
-          Last updated: September 26, 2026
+          Last updated: November 12, 2026
         </p>
 
         <p>
@@ -149,7 +149,7 @@ export default function Privacy() {
           handles information when you visit{' '}
           <strong>dailymindsprint.com</strong>, play Mind Sprint challenges,
           choose to participate in a weekly prize draw, subscribe to optional
-          email updates or contact us.
+          email updates, view advertising or contact us.
         </p>
 
         <h2
@@ -167,7 +167,7 @@ export default function Privacy() {
         <p>
           When you visit Mind Sprint, certain technical information may be
           collected automatically by the website, hosting providers, analytics
-          services or other technology providers.
+          services, advertising services or other technology providers.
         </p>
 
         <p>
@@ -201,7 +201,8 @@ export default function Privacy() {
 
           <li>
             IP address information used by service providers for functions such
-            as security, routing, analytics or approximate geographic reporting.
+            as security, routing, analytics, advertising or approximate
+            geographic reporting.
           </li>
         </ul>
 
@@ -396,6 +397,11 @@ export default function Privacy() {
           </li>
 
           <li>
+            provide, measure and manage advertising where advertising services
+            are enabled;
+          </li>
+
+          <li>
             diagnose technical problems;
           </li>
 
@@ -429,13 +435,14 @@ export default function Privacy() {
         </p>
 
         <p>
-          Analytics and advertising providers may also use cookies or similar
-          technologies where those services are enabled.
+          Analytics and advertising providers may also use cookies, web beacons,
+          pixels or similar technologies where those services are enabled.
         </p>
 
         <p>
-          Where required, visitors may be provided with consent controls for
-          analytics or advertising technologies.
+          Where required by applicable law or platform requirements, visitors
+          may be provided with consent controls for analytics or advertising
+          technologies.
         </p>
 
         <h2
@@ -557,26 +564,58 @@ export default function Privacy() {
             marginTop: '2rem',
           }}
         >
-          8. Advertising Services
+          8. Advertising and Google AdSense
         </h2>
 
         <p>
-          Mind Sprint is currently preparing the website for possible
-          advertising monetisation.
+          Mind Sprint may use <strong>Google AdSense</strong> to display
+          advertising if the website is approved and Google advertising is
+          activated.
         </p>
 
         <p>
-          If advertising services such as <strong>Ezoic</strong>,{' '}
-          <strong>Google AdSense</strong> or another advertising provider are
-          approved and activated, those providers may use cookies, web beacons,
-          IP addresses or other identifiers to provide, measure and personalise
-          advertising where permitted.
+          Third-party vendors, including Google, may use cookies to serve ads
+          based on a visitor&apos;s previous visits to Mind Sprint or other
+          websites.
         </p>
 
         <p>
-          Third-party advertising vendors, including Google where Google ads
-          are activated, may use cookies to serve ads based on a visitor&apos;s
-          visits to Mind Sprint or other websites.
+          Google&apos;s use of advertising cookies enables Google and its
+          partners to serve advertisements to users based on visits to Mind
+          Sprint and/or other websites on the Internet.
+        </p>
+
+        <p>
+          Depending on consent choices, applicable law, location and Google
+          advertising settings, advertisements may be personalised,
+          non-personalised or otherwise limited.
+        </p>
+
+        <p>
+          Google and other advertising providers may use cookies, web beacons,
+          IP addresses and other identifiers to provide, measure, limit and
+          personalise advertising where permitted.
+        </p>
+
+        <p>
+          Users can manage or opt out of personalised advertising through:
+        </p>
+
+        <p>
+          <a
+            href="https://adssettings.google.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Google Ads Settings
+          </a>
+        </p>
+
+        <p>
+          Where other third-party advertising vendors or ad networks are used,
+          their cookies may also be used to serve advertising. Where available,
+          visitors may use the privacy or advertising preference controls
+          provided by those vendors.
         </p>
 
         <p>
@@ -594,57 +633,37 @@ export default function Privacy() {
           </a>
         </p>
 
-        <p>
-          Google also provides advertising preference controls through:
-        </p>
-
-        <p>
-          <a
-            href="https://adssettings.google.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Google Ads Settings
-          </a>
-        </p>
-
         <h2
           style={{
             marginTop: '2rem',
           }}
         >
-          9. Ezoic Privacy Disclosure
+          9. Advertising Consent Controls
         </h2>
 
         <p>
-          Mind Sprint may use Ezoic advertising and consent-management services
-          if the site is approved and those services are activated.
+          When Google advertising is activated, Mind Sprint will provide
+          advertising consent controls where required by applicable law or
+          Google&apos;s publisher requirements.
         </p>
 
         <p>
-          Ezoic&apos;s privacy information for dailymindsprint.com can be
-          viewed here:
+          For visitors in regions where consent requirements apply, such as the
+          European Economic Area, the United Kingdom and Switzerland, Mind
+          Sprint will use an appropriate consent-management solution for Google
+          advertising.
         </p>
 
         <p>
-          <a
-            href="https://g.ezoic.net/privacy/dailymindsprint.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Ezoic Privacy Policy for dailymindsprint.com
-          </a>
+          Depending on the visitor&apos;s location and consent choices,
+          advertising technologies may be restricted until the required choices
+          have been made.
         </p>
 
-        <div
-          style={{
-            fontSize: '0.9rem',
-            color: '#444',
-            marginTop: '1rem',
-          }}
-        >
-          <span id="ezoic-privacy-policy-embed"></span>
-        </div>
+        <p>
+          Visitors may also be able to review or change advertising choices
+          through consent controls made available on the website.
+        </p>
 
         <h2
           style={{
@@ -660,9 +679,10 @@ export default function Privacy() {
 
         <p>
           Information may be shared with service providers where reasonably
-          necessary to operate the website, provide analytics, send requested
-          email communications, administer prize draws, deliver prizes,
-          maintain security or comply with legal requirements.
+          necessary to operate the website, provide analytics, provide or
+          measure advertising, send requested email communications, administer
+          prize draws, deliver prizes, maintain security or comply with legal
+          requirements.
         </p>
 
         <h2
@@ -741,7 +761,12 @@ export default function Privacy() {
 
           <li>
             use available consent controls for analytics or advertising where
-            provided; and
+            provided;
+          </li>
+
+          <li>
+            manage personalised advertising through Google Ads Settings where
+            applicable; and
           </li>
 
           <li>
