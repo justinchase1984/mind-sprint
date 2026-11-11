@@ -44,7 +44,7 @@ const structuredData = {
           'https://www.dailymindsprint.com/#organization',
       },
       dateModified:
-        '2026-10-10',
+        '2026-11-12',
     },
   ],
 }
@@ -146,7 +146,7 @@ export default function HowItWorks() {
             marginTop: 0,
           }}
         >
-          By Mind Sprint · Updated October 2026
+          By Mind Sprint · Updated November 2026
         </p>
 
         <p
@@ -169,15 +169,11 @@ export default function HowItWorks() {
           progressing through several challenges in the same session.
         </p>
 
-        {/* Optional Ezoic ad slot */}
+        {/* AdSense-ready slot: top content */}
         <div
-          style={{
-            margin: '1.25rem 0',
-            textAlign: 'center',
-          }}
-        >
-          <div id="ezoic-pub-ad-placeholder-200" />
-        </div>
+          id="adsense-slot-how-it-works-top"
+          data-ad-position="how-it-works-top"
+        />
 
         <h2
           style={{
@@ -464,15 +460,11 @@ export default function HowItWorks() {
           </div>
         </div>
 
-        {/* Optional Ezoic ad slot */}
+        {/* AdSense-ready slot: middle content */}
         <div
-          style={{
-            margin: '1.25rem 0',
-            textAlign: 'center',
-          }}
-        >
-          <div id="ezoic-pub-ad-placeholder-201" />
-        </div>
+          id="adsense-slot-how-it-works-middle"
+          data-ad-position="how-it-works-middle"
+        />
 
         <h2
           style={{
@@ -653,15 +645,11 @@ export default function HowItWorks() {
           </Link>
         </p>
 
-        {/* Optional Ezoic ad slot */}
+        {/* AdSense-ready slot: lower content */}
         <div
-          style={{
-            margin: '1.5rem 0',
-            textAlign: 'center',
-          }}
-        >
-          <div id="ezoic-pub-ad-placeholder-202" />
-        </div>
+          id="adsense-slot-how-it-works-bottom"
+          data-ad-position="how-it-works-bottom"
+        />
 
         <div
           style={{
