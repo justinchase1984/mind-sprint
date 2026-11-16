@@ -509,7 +509,7 @@ export default function HowItWorks() {
             color: '#555',
           }}
         >
-          The planned weekly digital reward is worth approximately{' '}
+          The weekly digital reward is worth approximately{' '}
           <strong>A$25 or the local-currency equivalent</strong>. One eligible
           entry will be randomly selected after the completed weekly draw
           period.
