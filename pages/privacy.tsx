@@ -788,7 +788,7 @@ export default function Privacy() {
         </p>
 
         <p>
-          The planned weekly prize draw is intended only for entrants aged{' '}
+          The weekly prize draw is intended only for entrants aged{' '}
           <strong>18 or older</strong>, subject to the final Weekly Prize Draw
           Terms.
         </p>
