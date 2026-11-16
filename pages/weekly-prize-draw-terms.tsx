@@ -155,12 +155,10 @@ export default function WeeklyPrizeDrawTerms() {
           }}
         >
           <strong>
-            Pre-launch notice:
-          </strong>{' '}
-          The Mind Sprint weekly prize draw is not currently live. These terms
-          describe the planned operation of the promotion. The first official
-          weekly draw will begin only when Mind Sprint announces on the website
-          that the draw is live.
+  Weekly Prize Draw:
+</strong>{' '}
+The Mind Sprint weekly promotional prize draw is now live and operates
+in accordance with these terms.
         </div>
 
         <p>
