@@ -984,8 +984,7 @@ export default function Home() {
           }}
         >
           <h2>
-            🎁 Weekly Prize Draw —
-            Coming Soon
+            🎁 Weekly Prize Draw
           </h2>
 
           <p
