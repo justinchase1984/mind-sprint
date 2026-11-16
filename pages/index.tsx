@@ -1034,7 +1034,7 @@ export default function Home() {
                     'underline',
                 }}
               >
-                View Planned Prize
+                View Weekly Prize
                 Draw Terms
               </a>
             </Link>
