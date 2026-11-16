@@ -471,7 +471,7 @@ export default function HowItWorks() {
             marginTop: '1.75rem',
           }}
         >
-          Weekly Prize Draw — Coming Soon
+          Weekly Prize Draw
         </h2>
 
         <p
