@@ -483,7 +483,7 @@ export default function About() {
                   'underline',
               }}
             >
-              Read the Planned Weekly Prize Draw Terms
+              Read the Weekly Prize Draw Terms
             </a>
           </Link>
         </p>
@@ -526,8 +526,8 @@ export default function About() {
         </p>
 
         <p>
-          We welcome feedback about questions, website issues, planned prize
-          draws and the general Mind Sprint experience.
+          We welcome feedback about questions, website issues, the weekly prize
+draw and the general Mind Sprint experience.
         </p>
 
         <p>
