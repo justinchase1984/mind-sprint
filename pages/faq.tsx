@@ -626,9 +626,8 @@ export default function FAQ() {
         </h2>
 
         <p>
-          Mind Sprint is currently planning the weekly draw around eligible
-          players in Australia, the United States, the United Kingdom, New
-          Zealand and Ireland.
+          The weekly prize draw is available to eligible players in Australia,
+  the United States, the United Kingdom, New Zealand and Ireland.
         </p>
 
         <p>
