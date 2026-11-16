@@ -20,6 +20,9 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          {/* MIND SPRINT FAVICON */}
+          <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
           {/* GOOGLE ADSENSE ACCOUNT VERIFICATION */}
           <meta
             name="google-adsense-account"
