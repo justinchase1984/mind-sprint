@@ -539,8 +539,8 @@ export default function FAQ() {
         </h2>
 
         <p>
-          Mind Sprint is preparing a weekly promotional prize draw. The prize
-          draw is <strong>not live yet</strong>.
+          Mind Sprint runs a weekly promotional prize draw. Eligible players can
+  earn up to 9 entries each week by completing different challenges.
         </p>
 
         <p>
