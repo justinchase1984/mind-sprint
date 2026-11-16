@@ -1008,14 +1008,8 @@ export default function Home() {
                 '1rem auto 0',
             }}
           >
-            The first official weekly
-            draw will begin only when
-            Mind Sprint announces on
-            the website that entries
-            are open. Challenge
-            completions made before
-            that launch will not count
-            as prize draw entries.
+            Entries are now open for the weekly prize draw. Complete different daily challenges
+during the weekly draw period to earn up to 9 eligible entries each week.
           </p>
 
           <p
