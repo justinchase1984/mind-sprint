@@ -995,17 +995,8 @@ export default function Home() {
               margin: '0 auto',
             }}
           >
-            Mind Sprint is preparing a
-            weekly promotional prize
-            draw. When the draw
-            officially launches,
-            eligible players will be
-            able to earn one entry for
-            each different Mind Sprint
-            challenge they complete
-            during the weekly entry
-            period, up to nine
-            entries.
+            Mind Sprint runs a weekly promotional prize draw. Complete different
+  daily challenges to earn up to 9 entries each week.
           </p>
 
           <p
