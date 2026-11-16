@@ -7,7 +7,7 @@ import { getStreaks, saveStreaks } from '../../lib/streak'
 import { getRotatingPuzzlesByChallenge } from '../../lib/rotation'
 import { DID_YOU_KNOW } from '../../lib/facts'
 
-const PRIZE_DRAW_LIVE = false
+const PRIZE_DRAW_LIVE = true
 const TOTAL_CHALLENGES = 9
 
 export default function PuzzlePage() {
