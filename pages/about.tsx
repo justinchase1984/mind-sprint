@@ -454,8 +454,8 @@ export default function About() {
         </h2>
 
         <p>
-          Mind Sprint is preparing a weekly promotional prize draw. The prize
-          draw is <strong>not currently live</strong>.
+          Mind Sprint runs a weekly promotional prize draw. Eligible players can
+  earn entries by completing different daily challenges.
         </p>
 
         <p>
