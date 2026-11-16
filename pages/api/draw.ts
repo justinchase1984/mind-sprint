@@ -140,6 +140,32 @@ function isAuthorized(
   )
 }
 
+/*
+  Internal/test emails can be excluded
+  from all eligible draw counts and
+  winner selection.
+
+  Vercel example:
+
+  DRAW_EXCLUDED_EMAILS=
+  test@example.com,another@example.com
+*/
+function getExcludedEmails(): Set<string> {
+  const value =
+    process.env.DRAW_EXCLUDED_EMAILS || ''
+
+  return new Set(
+    value
+      .split(',')
+      .map((email) =>
+        email
+          .trim()
+          .toLowerCase()
+      )
+      .filter(Boolean)
+  )
+}
+
 function parseEntries(
   members: unknown
 ): PrizeEntry[] {
@@ -304,17 +330,49 @@ export default async function handler(
         drawEntryMembers
       )
 
+    /*
+      Remove internal/test entries from
+      eligible counts and winner selection.
+    */
+    const excludedEmails =
+      getExcludedEmails()
+
+    const currentEligibleEntries =
+      currentEntries.filter(
+        (entry) =>
+          !excludedEmails.has(
+            entry.email
+          )
+      )
+
+    const drawEligibleEntries =
+      drawEntries.filter(
+        (entry) =>
+          !excludedEmails.has(
+            entry.email
+          )
+      )
+
+    const currentExcludedEntries =
+      currentEntries.length -
+      currentEligibleEntries.length
+
+    const drawExcludedEntries =
+      drawEntries.length -
+      drawEligibleEntries.length
+
     const uniquePlayers =
       new Set(
-        drawEntries.map(
+        drawEligibleEntries.map(
           (entry) => entry.email
         )
       ).size
 
     /*
       STATUS:
-      Used by the future admin page
-      to show you what is waiting.
+      Used by the admin page to show
+      eligible entries waiting for
+      current and completed weeks.
     */
     if (action === 'status') {
       return res.status(200).json({
@@ -323,23 +381,34 @@ export default async function handler(
         currentWeek: {
           weekKey:
             currentWeekKey,
+
           entries:
-            currentEntries.length,
+            currentEligibleEntries.length,
+
           uniquePlayers:
             new Set(
-              currentEntries.map(
+              currentEligibleEntries.map(
                 (entry) =>
                   entry.email
               )
             ).size,
+
+          excludedEntries:
+            currentExcludedEntries,
         },
 
         drawWeek: {
           weekKey:
             drawWeekKey,
+
           entries:
-            drawEntries.length,
+            drawEligibleEntries.length,
+
           uniquePlayers,
+
+          excludedEntries:
+            drawExcludedEntries,
+
           winner:
             existingWinner,
         },
@@ -359,30 +428,34 @@ export default async function handler(
       })
     }
 
+    /*
+      Only eligible entries are considered
+      when drawing a winner.
+    */
     if (
-      drawEntries.length === 0
+      drawEligibleEntries.length === 0
     ) {
       return res.status(400).json({
         success: false,
         error:
-          'There are no entries for the completed week',
+          'There are no eligible entries for the completed week',
       })
     }
 
     /*
-      Every challenge completion is stored
-      as one entry.
+      Every eligible challenge completion
+      is stored as one entry.
 
       Therefore someone with 9 entries has
       nine chances in this random selection.
     */
     const winningIndex =
       randomInt(
-        drawEntries.length
+        drawEligibleEntries.length
       )
 
     const winningEntry =
-      drawEntries[
+      drawEligibleEntries[
         winningIndex
       ]
 
@@ -400,7 +473,7 @@ export default async function handler(
         new Date().toISOString(),
 
       totalEntries:
-        drawEntries.length,
+        drawEligibleEntries.length,
 
       uniquePlayers,
     }
