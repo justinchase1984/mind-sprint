@@ -822,7 +822,7 @@ export default function PuzzlePage() {
                     fontSize: 14,
                   }}
                 >
-                  Coming soon — entries will open when the official weekly prize draw launches.
+                  Weekly Prize Draw — complete different challenges to earn up to 9 entries each week.
                 </p>
 
                 <p
