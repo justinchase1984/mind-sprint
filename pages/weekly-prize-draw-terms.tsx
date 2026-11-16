@@ -34,7 +34,7 @@ const structuredData = {
       name:
         'Weekly Prize Draw Terms | Mind Sprint',
       description:
-        'Terms and conditions for the planned Mind Sprint weekly digital reward prize draw.',
+        'Terms and conditions for the Mind Sprint weekly digital reward prize draw.',
       isPartOf: {
         '@id':
           'https://www.dailymindsprint.com/#website',
@@ -44,7 +44,7 @@ const structuredData = {
           'https://www.dailymindsprint.com/#organization',
       },
       dateModified:
-        '2026-11-12',
+        '2026-11-16',
     },
   ],
 }
@@ -59,7 +59,7 @@ export default function WeeklyPrizeDrawTerms() {
 
         <meta
           name="description"
-          content="Terms and conditions for the planned Mind Sprint weekly digital reward prize draw."
+          content="Terms and conditions for the Mind Sprint weekly digital reward prize draw."
         />
 
         <meta
@@ -89,7 +89,7 @@ export default function WeeklyPrizeDrawTerms() {
 
         <meta
           property="og:description"
-          content="Read the planned terms for the Mind Sprint weekly digital reward prize draw, including eligibility, entries, prizes and winner selection."
+          content="Read the terms for the Mind Sprint weekly digital reward prize draw, including eligibility, entries, prizes and winner selection."
         />
 
         <meta
@@ -109,7 +109,7 @@ export default function WeeklyPrizeDrawTerms() {
 
         <meta
           name="twitter:description"
-          content="Read the planned terms for the Mind Sprint weekly digital reward prize draw, including eligibility, entries, prizes and winner selection."
+          content="Read the terms for the Mind Sprint weekly digital reward prize draw, including eligibility, entries, prizes and winner selection."
         />
 
         <script
@@ -142,7 +142,7 @@ export default function WeeklyPrizeDrawTerms() {
             marginTop: '-0.5rem',
           }}
         >
-          Last updated: November 12, 2026
+          Last updated: November 16, 2026
         </p>
 
         <div
@@ -155,15 +155,15 @@ export default function WeeklyPrizeDrawTerms() {
           }}
         >
           <strong>
-  Weekly Prize Draw:
-</strong>{' '}
-The Mind Sprint weekly promotional prize draw is now live and operates
-in accordance with these terms.
+            Weekly Prize Draw:
+          </strong>{' '}
+          The Mind Sprint weekly promotional prize draw is now live and operates
+          in accordance with these terms.
         </div>
 
         <p>
-          Once the weekly prize draw is officially launched, these terms will
-          apply to eligible entries unless an updated version is published.
+          These terms apply to eligible entries unless an updated version is
+          published.
         </p>
 
         <p>
@@ -197,12 +197,11 @@ in accordance with these terms.
             marginTop: '2rem',
           }}
         >
-          2. Planned Eligible Countries
+          2. Eligible Countries
         </h2>
 
         <p>
-          Mind Sprint is currently planning the weekly prize draw for eligible
-          residents of:
+          The weekly prize draw is available to eligible residents of:
         </p>
 
         <ul>
@@ -228,9 +227,8 @@ in accordance with these terms.
         </ul>
 
         <p>
-          Final country availability will depend on applicable laws, official
-          launch terms and supported digital reward-delivery options at the time
-          the promotion begins.
+          Eligibility is subject to applicable laws, these terms and supported
+          digital reward-delivery options in each eligible country.
         </p>
 
         <p>
@@ -252,13 +250,12 @@ in accordance with these terms.
         </h2>
 
         <p>
-          Once the promotion is live, each Mind Sprint weekly draw will be a
-          separate promotional draw.
+          Each Mind Sprint weekly draw is a separate promotional draw.
         </p>
 
         <p>
-          Each weekly entry period is planned to begin at{' '}
-          <strong>12:00 am AEST on Monday</strong> and close at{' '}
+          Each weekly entry period begins at{' '}
+          <strong>12:00 am AEST on Monday</strong> and closes at{' '}
           <strong>11:59:59 pm AEST on Sunday</strong>.
         </p>
 
@@ -268,8 +265,8 @@ in accordance with these terms.
         </p>
 
         <p>
-          The first official weekly entry period will begin when Mind Sprint
-          announces on the website that the weekly prize draw is live.
+          Entries are accepted only while the weekly prize draw entry
+          functionality is active on the Mind Sprint website.
         </p>
 
         <p>
@@ -286,9 +283,9 @@ in accordance with these terms.
         </h2>
 
         <p>
-          Once the weekly draw is live, an eligible player must provide a valid
-          email address and complete eligible Mind Sprint challenges during the
-          applicable weekly entry period.
+          To enter, an eligible player must provide a valid email address and
+          complete eligible Mind Sprint challenges during the applicable weekly
+          entry period.
         </p>
 
         <p>
@@ -321,7 +318,7 @@ in accordance with these terms.
 
         <p>
           Mind Sprint is free to play. No purchase, payment or paid
-          subscription is required to enter the planned weekly prize draw.
+          subscription is required to enter the weekly prize draw.
         </p>
 
         <p>
@@ -339,16 +336,16 @@ in accordance with these terms.
             marginTop: '2rem',
           }}
         >
-          6. Planned Prize
+          6. Prize
         </h2>
 
         <p>
-          The planned promotion will have{' '}
+          The promotion has{' '}
           <strong>1 winner per weekly draw</strong>.
         </p>
 
         <p>
-          The planned weekly prize is a digital reward worth approximately{' '}
+          The weekly prize is a digital reward worth approximately{' '}
           <strong>A$25 or the local-currency equivalent</strong>.
         </p>
 
@@ -409,9 +406,9 @@ in accordance with these terms.
         </h2>
 
         <p>
-          After a weekly entry period closes, one winning entry is planned to
-          be selected at random from all valid entries for that completed week
-          using an electronic random-selection process.
+          After a weekly entry period closes, one winning entry is selected at
+          random from all valid entries for that completed week using an
+          electronic random-selection process.
         </p>
 
         <p>
@@ -445,8 +442,8 @@ in accordance with these terms.
 
         <p>
           A selected entrant should respond within <strong>30 days</strong> of
-          the winner notification unless a shorter period is required by the
-          final official rules or applicable law.
+          the winner notification unless a shorter period is required by
+          applicable law.
         </p>
 
         <p>
@@ -583,13 +580,13 @@ in accordance with these terms.
         </h2>
 
         <p>
-          Mind Sprint intends to use an independent digital reward provider to
-          deliver prizes to confirmed winners.
+          Mind Sprint uses a supported digital reward provider to deliver prizes
+          to confirmed winners.
         </p>
 
         <p>
-          The final provider will be selected before the official weekly prize
-          draw launches.
+          The reward provider used may vary by country or change where
+          reasonably necessary due to availability or operational requirements.
         </p>
 
         <p>
@@ -607,15 +604,15 @@ in accordance with these terms.
         </h2>
 
         <p>
-          The weekly prize draw will only be offered in locations where Mind
-          Sprint determines that the planned promotion and available prize
-          delivery arrangements can be operated.
+          The weekly prize draw is only offered in locations where Mind Sprint
+          determines that the promotion and available prize-delivery
+          arrangements can be operated.
         </p>
 
         <p>
-          Country or regional eligibility may therefore be changed before the
-          official launch if required by applicable law, regulatory
-          requirements or reward-delivery availability.
+          Country or regional eligibility may be changed where required by
+          applicable law, regulatory requirements or reward-delivery
+          availability.
         </p>
 
         <h2
@@ -641,7 +638,7 @@ in accordance with these terms.
         </h2>
 
         <p>
-          Questions about the planned weekly prize draw can be sent to:
+          Questions about the weekly prize draw can be sent to:
         </p>
 
         <p>
