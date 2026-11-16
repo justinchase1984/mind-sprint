@@ -34,7 +34,7 @@ const structuredData = {
       name:
         'Mind Sprint FAQ | Daily Quiz, Scores, Streaks & Prize Draw',
       description:
-        'Find answers to common Mind Sprint questions about the daily quiz, 9 challenges, scores, streaks, fresh questions, accounts and the planned weekly prize draw.',
+        'Find answers to common Mind Sprint questions about the daily quiz, 9 challenges, scores, streaks, fresh questions, accounts and the weekly prize draw.',
       isPartOf: {
         '@id':
           'https://www.dailymindsprint.com/#website',
@@ -44,7 +44,7 @@ const structuredData = {
           'https://www.dailymindsprint.com/#organization',
       },
       dateModified:
-        '2026-11-12',
+        '2026-11-16',
     },
   ],
 }
@@ -59,7 +59,7 @@ export default function FAQ() {
 
         <meta
           name="description"
-          content="Find answers to common Mind Sprint questions about the daily quiz, 9 challenges, scores, streaks, fresh questions, accounts and the planned weekly prize draw."
+          content="Find answers to common Mind Sprint questions about the daily quiz, 9 challenges, scores, streaks, fresh questions, accounts and the weekly prize draw."
         />
 
         <meta
@@ -89,7 +89,7 @@ export default function FAQ() {
 
         <meta
           property="og:description"
-          content="Answers to common questions about Mind Sprint's daily quiz, challenges, scores, streaks, fresh questions and planned weekly prize draw."
+          content="Answers to common questions about Mind Sprint's daily quiz, challenges, scores, streaks, fresh questions and weekly prize draw."
         />
 
         <meta
@@ -109,7 +109,7 @@ export default function FAQ() {
 
         <meta
           name="twitter:description"
-          content="Answers to common questions about Mind Sprint's daily quiz, challenges, scores, streaks, fresh questions and planned weekly prize draw."
+          content="Answers to common questions about Mind Sprint's daily quiz, challenges, scores, streaks, fresh questions and weekly prize draw."
         />
 
         <script
@@ -152,7 +152,7 @@ export default function FAQ() {
         >
           Answers to some of the most common questions about Mind Sprint,
           the daily quiz, challenges, scores, streaks, fresh question sets
-          and the planned weekly prize draw.
+          and the weekly prize draw.
         </p>
 
         <h2
@@ -237,10 +237,9 @@ export default function FAQ() {
         </p>
 
         <p>
-          An email address will only be required if you choose to participate
-          in the weekly prize draw once it officially launches, so your entries
-          can be associated with you and you can be contacted if your entry is
-          selected.
+          An email address is only required if you choose to participate in the
+          weekly prize draw, so your entries can be associated with you and you
+          can be contacted if your entry is selected.
         </p>
 
         <h2
@@ -258,8 +257,7 @@ export default function FAQ() {
 
         <p>
           Your score determines whether you pass the challenge, but it does not
-          increase the number of weekly prize draw entries you receive once the
-          draw is live.
+          increase the number of weekly prize draw entries you receive.
         </p>
 
         <h2
@@ -540,12 +538,12 @@ export default function FAQ() {
 
         <p>
           Mind Sprint runs a weekly promotional prize draw. Eligible players can
-  earn up to 9 entries each week by completing different challenges.
+          earn up to 9 entries each week by completing different challenges.
         </p>
 
         <p>
-          The first official weekly draw will begin only when Mind Sprint
-          announces on the website that entries are open.
+          Entries are open for the weekly prize draw in accordance with the
+          Weekly Prize Draw Terms.
         </p>
 
         <p>
@@ -558,17 +556,17 @@ export default function FAQ() {
             marginTop: '2rem',
           }}
         >
-          How will weekly prize draw entries work?
+          How do weekly prize draw entries work?
         </h2>
 
         <p>
-          Once the weekly draw is live, each{' '}
+          Each{' '}
           <strong>different challenge</strong> you complete during the weekly
-          draw period will earn <strong>1 entry</strong>.
+          draw period earns <strong>1 entry</strong>.
         </p>
 
         <p>
-          Because Mind Sprint has 9 challenges, the maximum will be{' '}
+          Because Mind Sprint has 9 challenges, the maximum is{' '}
           <strong>9 entries per weekly draw</strong>.
         </p>
 
@@ -595,8 +593,7 @@ export default function FAQ() {
 
         <p>
           No. Your score does not increase the number of entries you receive.
-          Completing an eligible different challenge earns one entry once the
-          weekly draw is live.
+          Completing an eligible different challenge earns one entry.
         </p>
 
         <h2
@@ -604,11 +601,11 @@ export default function FAQ() {
             marginTop: '2rem',
           }}
         >
-          What is the planned weekly prize?
+          What is the weekly prize?
         </h2>
 
         <p>
-          The planned weekly digital reward is worth approximately{' '}
+          The weekly digital reward is worth approximately{' '}
           <strong>A$25 or the local-currency equivalent</strong>.
         </p>
 
@@ -622,17 +619,17 @@ export default function FAQ() {
             marginTop: '2rem',
           }}
         >
-          Which countries is Mind Sprint planning to support?
+          Which countries are eligible for the weekly prize draw?
         </h2>
 
         <p>
           The weekly prize draw is available to eligible players in Australia,
-  the United States, the United Kingdom, New Zealand and Ireland.
+          the United States, the United Kingdom, New Zealand and Ireland.
         </p>
 
         <p>
-          Final availability will depend on the official prize draw terms and
-          supported reward-delivery options when the draw launches.
+          Eligibility and prize delivery are subject to the Weekly Prize Draw
+          Terms and supported reward-delivery options in each eligible country.
         </p>
 
         <h2
@@ -640,12 +637,12 @@ export default function FAQ() {
             marginTop: '2rem',
           }}
         >
-          How will a winner be selected?
+          How is a winner selected?
         </h2>
 
         <p>
-          Once the weekly draw is live, one eligible entry will be selected at
-          random after the completed weekly draw period.
+          One eligible entry is selected at random after the completed weekly
+          draw period.
         </p>
 
         <p>
