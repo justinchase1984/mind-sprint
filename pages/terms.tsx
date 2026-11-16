@@ -305,9 +305,8 @@ export default function Terms() {
         </h2>
 
         <p>
-          Mind Sprint is preparing a weekly promotional prize draw. The first
-          official prize draw will begin only when Mind Sprint announces that
-          the draw is live.
+          Mind Sprint runs a weekly promotional prize draw. Entry is available
+  to eligible players in accordance with the Weekly Prize Draw Terms.
         </p>
 
         <p>
