@@ -995,8 +995,8 @@ export default function Home() {
               margin: '0 auto',
             }}
           >
-            Mind Sprint runs a weekly promotional prize draw. Complete different
-  daily challenges to earn up to 9 entries each week.
+            Mind Sprint runs a weekly promotional prize draw with one digital
+            reward available each week.
           </p>
 
           <p
@@ -1008,8 +1008,9 @@ export default function Home() {
                 '1rem auto 0',
             }}
           >
-            Entries are now open for the weekly prize draw. Complete different daily challenges
-during the weekly draw period to earn up to 9 eligible entries each week.
+            Entries are now open. Complete each different daily challenge during
+            the weekly draw period to earn 1 entry, up to a maximum of 9 entries
+            each week.
           </p>
 
           <p
