@@ -35,7 +35,7 @@ const structuredData = {
       name:
         'Contact Mind Sprint | Support, Feedback & Quiz Corrections',
       description:
-        'Contact Mind Sprint with questions, quiz corrections, feedback, technical issues, privacy enquiries or questions about the planned weekly prize draw.',
+        'Contact Mind Sprint with questions, quiz corrections, feedback, technical issues, privacy enquiries or questions about the weekly prize draw.',
       isPartOf: {
         '@id':
           'https://www.dailymindsprint.com/#website',
@@ -60,7 +60,7 @@ export default function Contact() {
 
         <meta
           name="description"
-          content="Contact Mind Sprint with questions, quiz corrections, feedback, technical issues, privacy enquiries or questions about the planned weekly prize draw."
+          content="Contact Mind Sprint with questions, quiz corrections, feedback, technical issues, privacy enquiries or questions about the weekly prize draw."
         />
 
         <meta
@@ -90,7 +90,7 @@ export default function Contact() {
 
         <meta
           property="og:description"
-          content="Get in touch with Mind Sprint about quiz questions, feedback, website issues, privacy enquiries or the planned weekly prize draw."
+          content="Get in touch with Mind Sprint about quiz questions, feedback, website issues, privacy enquiries or the weekly prize draw."
         />
 
         <meta
@@ -110,7 +110,7 @@ export default function Contact() {
 
         <meta
           name="twitter:description"
-          content="Get in touch with Mind Sprint about quiz questions, feedback, website issues, privacy enquiries or the planned weekly prize draw."
+          content="Get in touch with Mind Sprint about quiz questions, feedback, website issues, privacy enquiries or the weekly prize draw."
         />
 
         <script
@@ -191,7 +191,7 @@ export default function Contact() {
           </li>
 
           <li>
-            the planned weekly prize draw; or
+            the weekly prize draw; or
           </li>
 
           <li>
@@ -221,13 +221,13 @@ export default function Contact() {
 
         <p>
           Mind Sprint runs a weekly promotional prize draw. Eligible players can
-  earn entries by completing different daily challenges.
+          earn entries by completing different daily challenges.
         </p>
 
         <p>
-          If you have a question about the planned draw, eligibility or how
-          entries are intended to work, you can contact us using the email
-          address above or read the planned prize draw terms.
+          If you have a question about the weekly prize draw, eligibility or how
+          entries work, you can contact us using the email address above or read
+          the Weekly Prize Draw Terms.
         </p>
 
         <p>
@@ -242,7 +242,7 @@ export default function Contact() {
                   'underline',
               }}
             >
-              Read the Planned Weekly Prize Draw Terms
+              Read the Weekly Prize Draw Terms
             </a>
           </Link>
         </p>
