@@ -479,9 +479,8 @@ export default function HowItWorks() {
             color: '#555',
           }}
         >
-          Mind Sprint is preparing a weekly promotional prize draw. When the
-          prize draw is officially active, eligible players will be able to
-          choose to enter by providing an email address.
+          Mind Sprint runs a weekly promotional prize draw. Eligible players can
+  choose to enter by providing an email address after completing a challenge.
         </p>
 
         <p
