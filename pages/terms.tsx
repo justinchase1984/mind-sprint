@@ -322,7 +322,7 @@ export default function Terms() {
         </p>
 
         <p>
-          Participation in the planned weekly prize draw is intended for
+          Participation in the weekly prize draw is intended for
           eligible entrants aged <strong>18 or older</strong>, subject to the
           final Weekly Prize Draw Terms.
         </p>
