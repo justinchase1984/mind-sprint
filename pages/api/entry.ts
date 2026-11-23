@@ -1,4 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import {
+  MAX_FAST_ANSWER_GAPS,
+  MIN_COMPLETION_MS,
+  allowEntryEmailForIp,
+  getClientIp,
+  isSaneEmail,
+} from '../../lib/abuse'
 
 const PRIZE_DRAW_LIVE = true
 const MAX_CHALLENGE = 9
@@ -10,6 +17,9 @@ type AttemptState = {
   nextQuestion: number
   totalQuestions: number
   completed: boolean
+  lastAnswerAt?: string
+  fastAnswerGaps?: number
+  completedAt?: string
 }
 
 async function redisCommand<T = any>(
@@ -139,7 +149,8 @@ export default async function handler(
     if (
       !email ||
       !emailLooksValid ||
-      email.length > 254
+      email.length > 254 ||
+      !isSaneEmail(email)
     ) {
       return res.status(400).json({
         success: false,
@@ -216,6 +227,59 @@ export default async function handler(
         success: false,
         error:
           'Invalid completed challenge',
+      })
+    }
+
+    /*
+      STEP 2b:
+      Reject challenges completed faster
+      than a real player possibly could.
+      Attempts created before these timing
+      markers existed have no completedAt
+      and are allowed, as before.
+    */
+    if (attempt.completedAt) {
+      const durationMs =
+        new Date(
+          attempt.completedAt
+        ).getTime() -
+        new Date(
+          attempt.startedAt
+        ).getTime()
+
+      const tooFast =
+        !Number.isFinite(durationMs) ||
+        durationMs < MIN_COMPLETION_MS ||
+        (attempt.fastAnswerGaps || 0) >
+          MAX_FAST_ANSWER_GAPS
+
+      if (tooFast) {
+        return res.status(403).json({
+          success: false,
+          error:
+            'This challenge was completed too quickly to qualify for a prize entry',
+        })
+      }
+    }
+
+    /*
+      STEP 2c:
+      Limit how many different email
+      addresses can claim entries from
+      one network per day.
+    */
+    const emailAllowed =
+      await allowEntryEmailForIp(
+        redisCommand,
+        getClientIp(req),
+        email
+      )
+
+    if (!emailAllowed) {
+      return res.status(429).json({
+        success: false,
+        error:
+          'Too many different email addresses have entered from this network today. Please try again tomorrow.',
       })
     }
 

@@ -1,6 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { randomUUID } from 'crypto'
 import { getRotatingPuzzlesByChallenge } from '../../lib/rotation'
+import {
+  MIN_ANSWER_GAP_MS,
+  allowCompletionForIp,
+  getClientIp,
+} from '../../lib/abuse'
 
 const MAX_CHALLENGE = 9
 const ATTEMPT_TTL_SECONDS = 24 * 60 * 60
@@ -11,6 +16,11 @@ type AttemptState = {
   nextQuestion: number
   totalQuestions: number
   completed: boolean
+  // Server timing markers (added for prize-entry abuse checks).
+  // Optional so attempts created before this change still load.
+  lastAnswerAt?: string
+  fastAnswerGaps?: number
+  completedAt?: string
 }
 
 async function redisCommand<T = any>(
@@ -250,11 +260,63 @@ export default async function handler(
         question ===
         state.totalQuestions
 
+      /*
+        Generous per-IP cap on completed
+        challenges. Fails open if Redis
+        has a problem. When the cap is hit
+        the attempt simply isn't marked
+        complete, so no prize entry can be
+        claimed; the game itself carries on.
+      */
+      if (isLastQuestion) {
+        const allowed =
+          await allowCompletionForIp(
+            redisCommand,
+            getClientIp(req)
+          )
+
+        if (!allowed) {
+          return res.status(429).json({
+            success: false,
+            error:
+              'Too many challenges completed from this network. Please try again later.',
+          })
+        }
+      }
+
+      /*
+        Record server-side answer timing.
+        A real player can't answer faster
+        than the 1.5s auto-advance allows.
+      */
+      const nowMs = Date.now()
+
+      if (state.lastAnswerAt) {
+        const gap =
+          nowMs -
+          new Date(
+            state.lastAnswerAt
+          ).getTime()
+
+        if (gap < MIN_ANSWER_GAP_MS) {
+          state.fastAnswerGaps =
+            (state.fastAnswerGaps || 0) + 1
+        }
+      }
+
+      state.lastAnswerAt =
+        new Date(nowMs).toISOString()
+
       state.nextQuestion =
         question + 1
 
       state.completed =
         isLastQuestion
+
+      if (isLastQuestion) {
+        state.completedAt =
+          new Date(nowMs).toISOString()
+      }
 
       await saveAttempt(
         attemptId,
