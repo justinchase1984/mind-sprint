@@ -19,6 +19,7 @@ export default function Archive() {
       <Head>
         <title>Archive | Mind Sprint</title>
         <meta name="description" content="Browse past Mind Sprint puzzles." />
+        <meta name="robots" content="noindex, follow" />
       </Head>
       <main style={{ maxWidth: 600, margin: '2rem auto' }}>
         <h1>Past Puzzles</h1>
