@@ -29,13 +29,20 @@ export default function DailyPuzzlePage() {
     setAnswer('')
   }, [idNum])
 
-  if (!isReady || puzzles.length === 0) return null
+  if (!isReady || puzzles.length === 0) {
+    return (
+      <Head>
+        <meta name="robots" content="noindex, follow" />
+      </Head>
+    )
+  }
 
   if (!puzzle) {
     return (
       <>
         <Head>
           <title>Daily Done! | Mind Sprint</title>
+          <meta name="robots" content="noindex, follow" />
         </Head>
         <main style={{ textAlign: 'center', padding: '2rem' }}>
           <h1>🎉 You’ve completed today’s challenge!</h1>
@@ -89,6 +96,7 @@ export default function DailyPuzzlePage() {
         <Head>
           <title>Daily Puzzle {idNum} | Mind Sprint</title>
           <meta name="description" content={puzzle.question} />
+          <meta name="robots" content="noindex, follow" />
         </Head>
 
         <h2>Puzzle {idNum}</h2>

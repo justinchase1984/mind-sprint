@@ -1,5 +1,6 @@
 // pages/thanks.tsx
 import Link from 'next/link'
+import Head from 'next/head'
 
 export default function ThanksPage() {
   return (
@@ -13,6 +14,10 @@ export default function ThanksPage() {
       textAlign: 'center',
       background: '#fff',
     }}>
+      <Head>
+        <title>Thanks for subscribing | Mind Sprint</title>
+        <meta name="robots" content="noindex, follow" />
+      </Head>
       <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>
         🎉 Thanks for subscribing!
       </h1>
