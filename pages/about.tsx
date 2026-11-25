@@ -459,10 +459,9 @@ export default function About() {
         </p>
 
         <p>
-          When the draw officially launches, eligible players will be able to
-          earn one entry for each different Mind Sprint challenge they complete
-          during the applicable weekly entry period, up to the weekly limit
-          described in the prize draw terms.
+          Eligible players can earn one entry for each different Mind Sprint
+          challenge they complete during the applicable weekly entry period, up
+          to the weekly limit described in the prize draw terms.
         </p>
 
         <p>
