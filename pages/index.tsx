@@ -974,6 +974,62 @@ export default function Home() {
           </p>
         </section>
 
+        {/* 100 General Knowledge Questions */}
+        <section
+          style={{
+            maxWidth: 760,
+            margin: '0 auto',
+            padding: '2rem 1rem',
+          }}
+        >
+          <h2
+            style={{
+              textAlign: 'center',
+            }}
+          >
+            100 General Knowledge Questions
+            &amp; Answers
+          </h2>
+
+          <p
+            style={{
+              color: '#555',
+              lineHeight: 1.7,
+            }}
+          >
+            Looking for a longer read? Mind
+            Sprint has 100 original general
+            knowledge questions, with answers
+            and short explanations, covering
+            geography, language, science,
+            space, history, the arts, food,
+            nature and sport.
+          </p>
+
+          <p
+            style={{
+              textAlign: 'center',
+              marginTop: '1.5rem',
+            }}
+          >
+            <Link
+              href="/general-knowledge-questions-and-answers"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                Read 100 General Knowledge
+                Questions &amp; Answers
+              </a>
+            </Link>
+          </p>
+        </section>
+
         {/* Weekly draw */}
         <section
           style={{

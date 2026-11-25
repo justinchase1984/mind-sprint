@@ -420,8 +420,8 @@ export default function Terms() {
         </p>
 
         <p>
-          If the weekly prize draw launches, Mind Sprint may also use a
-          third-party digital reward provider to deliver prizes.
+          Mind Sprint may also use a third-party digital reward provider to
+          deliver prizes.
         </p>
 
         <p>

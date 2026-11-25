@@ -530,9 +530,8 @@ export default function Privacy() {
         </p>
 
         <p>
-          If the weekly prize draw launches, Mind Sprint may also use a
-          third-party digital reward provider to deliver prizes to confirmed
-          winners.
+          Mind Sprint may also use a third-party digital reward provider to
+          deliver prizes to confirmed winners.
         </p>
 
         <p>
