@@ -828,3 +828,33 @@ export const DID_YOU_KNOW: Record<string, string> =
       }
     }
   )
+
+/*
+Server-side lookup used by lib/questions.ts so facts are only sent to
+the browser after a question has been answered.
+*/
+export function getFactFor(
+  challengeIndex: number,
+  questionNumber: number,
+  date: Date = new Date()
+): string | undefined {
+  const challengeFacts = FACT_SETS[challengeIndex]
+  const questionIndex = questionNumber - 1
+
+  if (
+    !challengeFacts ||
+    questionIndex < 0 ||
+    questionIndex >= 10
+  ) {
+    return undefined
+  }
+
+  const activeSetCount = Math.min(
+    ACTIVE_ROTATION_SET_COUNT,
+    challengeFacts.length
+  )
+
+  return challengeFacts[
+    getRotationIndex(date, activeSetCount)
+  ]?.[questionIndex]
+}

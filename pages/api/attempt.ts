@@ -6,6 +6,10 @@ import {
   allowCompletionForIp,
   getClientIp,
 } from '../../lib/abuse'
+import {
+  gradeAnswer,
+  parseServedAt,
+} from '../../lib/questions'
 
 const MAX_CHALLENGE = 9
 const ATTEMPT_TTL_SECONDS = 24 * 60 * 60
@@ -158,6 +162,38 @@ export default async function handler(
     }
 
     /*
+      CHECK ONE ANSWER (no attempt needed)
+      Fallback so the game still works if
+      an attempt can't be started/loaded.
+      Never touches Redis and never records
+      progress, so it can't create or help
+      a prize entry.
+    */
+    if (action === 'check') {
+      const grading = gradeAnswer(
+        Number(req.body?.challenge),
+        Number(req.body?.question),
+        typeof req.body?.answer === 'string'
+          ? req.body.answer
+          : '',
+        parseServedAt(req.body?.servedAt) ||
+          new Date()
+      )
+
+      if (!grading) {
+        return res.status(400).json({
+          success: false,
+          error: 'Invalid answer',
+        })
+      }
+
+      return res.status(200).json({
+        success: true,
+        ...grading,
+      })
+    }
+
+    /*
       RECORD ONE ANSWER
     */
     if (action === 'answer') {
@@ -196,10 +232,28 @@ export default async function handler(
         })
       }
 
+      /*
+        Grade against the questions the
+        player was actually shown. The
+        correct answer is only revealed
+        after this question is answered.
+      */
+      const grading =
+        gradeAnswer(
+          state.challenge,
+          question,
+          answer,
+          parseServedAt(
+            req.body?.servedAt
+          ) ||
+            new Date(state.startedAt)
+        ) || {}
+
       if (state.completed) {
         return res.status(200).json({
           success: true,
           completed: true,
+          ...grading,
         })
       }
 
@@ -215,6 +269,7 @@ export default async function handler(
           success: false,
           error:
             'Question answered out of order',
+          ...grading,
         })
       }
 
@@ -253,6 +308,7 @@ export default async function handler(
         return res.status(400).json({
           success: false,
           error: 'Invalid answer',
+          ...grading,
         })
       }
 
@@ -280,6 +336,7 @@ export default async function handler(
             success: false,
             error:
               'Too many challenges completed from this network. Please try again later.',
+            ...grading,
           })
         }
       }
@@ -329,6 +386,7 @@ export default async function handler(
           state.completed,
         nextQuestion:
           state.nextQuestion,
+        ...grading,
       })
     }
 

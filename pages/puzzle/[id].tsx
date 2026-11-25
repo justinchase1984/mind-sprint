@@ -2,15 +2,33 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import type { Puzzle } from '../../lib/puzzles'
+import type { GetServerSideProps } from 'next'
 import { getStreaks, saveStreaks } from '../../lib/streak'
-import { getRotatingPuzzlesByChallenge } from '../../lib/rotation'
-import { DID_YOU_KNOW } from '../../lib/facts'
+// Type-only import: lib/questions itself is only used inside
+// getServerSideProps, so answers never reach the browser bundle.
+import type {
+  PublicChallengeSets,
+  PublicPuzzle,
+} from '../../lib/questions'
 
 const PRIZE_DRAW_LIVE = true
 const TOTAL_CHALLENGES = 9
 
-export default function PuzzlePage() {
+type PuzzlePageProps = {
+  publicSets: PublicChallengeSets
+  servedAt: number
+}
+
+type AnswerGrading = {
+  correct: boolean
+  correctAnswer: string
+  fact: string | null
+}
+
+export default function PuzzlePage({
+  publicSets,
+  servedAt,
+}: PuzzlePageProps) {
   const router = useRouter()
   const { query } = router
 
@@ -31,8 +49,8 @@ export default function PuzzlePage() {
     return 1
   })()
 
-  const puzzles: Puzzle[] =
-    getRotatingPuzzlesByChallenge(challengeIndex)
+  const puzzles: PublicPuzzle[] =
+    publicSets?.[challengeIndex] || []
 
   const idNum = parseInt(
     (query.id as string) || '1',
@@ -52,6 +70,17 @@ export default function PuzzlePage() {
 
   const [answerProcessed, setAnswerProcessed] =
     useState(false)
+
+  // Filled in from the server only after
+  // the player has answered this question.
+  const [correctAnswer, setCorrectAnswer] =
+    useState<string | null>(null)
+
+  const [isCorrect, setIsCorrect] =
+    useState<boolean | null>(null)
+
+  const [fact, setFact] =
+    useState<string | null>(null)
 
   const [autoAdvance, setAutoAdvance] =
     useState(false)
@@ -152,6 +181,9 @@ export default function PuzzlePage() {
       sessionStorage.getItem(key)
 
     setAutoAdvance(false)
+    setCorrectAnswer(null)
+    setIsCorrect(null)
+    setFact(null)
 
     if (!savedAnswer) {
       setSelected(null)
@@ -164,7 +196,9 @@ export default function PuzzlePage() {
       savedAnswer === '1' &&
       puzzle
     ) {
-      setSelected(puzzle.answer)
+      // Old saved format: answered correctly.
+      setSelected(null)
+      setIsCorrect(true)
       setLocked(true)
       setAnswerProcessed(true)
       return
@@ -180,6 +214,24 @@ export default function PuzzlePage() {
           'string'
       ) {
         setSelected(parsed.answer)
+        setIsCorrect(
+          typeof parsed.isCorrect ===
+            'boolean'
+            ? parsed.isCorrect
+            : null
+        )
+        setCorrectAnswer(
+          typeof parsed.correctAnswer ===
+            'string'
+            ? parsed.correctAnswer
+            : null
+        )
+        setFact(
+          typeof parsed.fact ===
+            'string'
+            ? parsed.fact
+            : null
+        )
         setLocked(true)
         setAnswerProcessed(true)
         return
@@ -275,7 +327,8 @@ export default function PuzzlePage() {
 
   function afterAnswer(
     isCorrect: boolean,
-    answer: string
+    answer: string,
+    grading: AnswerGrading | null
   ) {
     const key =
       `challenge${challengeIndex}_q${idNum}`
@@ -318,6 +371,9 @@ export default function PuzzlePage() {
       JSON.stringify({
         answer,
         isCorrect,
+        correctAnswer:
+          grading?.correctAnswer ?? null,
+        fact: grading?.fact ?? null,
       })
     )
 
@@ -392,14 +448,80 @@ export default function PuzzlePage() {
     }
   }
 
+  function readGrading(
+    data: any
+  ): AnswerGrading | null {
+    if (
+      data &&
+      typeof data.correct ===
+        'boolean' &&
+      typeof data.correctAnswer ===
+        'string'
+    ) {
+      return {
+        correct: data.correct,
+        correctAnswer:
+          data.correctAnswer,
+        fact:
+          typeof data.fact ===
+          'string'
+            ? data.fact
+            : null,
+      }
+    }
+
+    return null
+  }
+
+  // Fallback: ask the server to check the
+  // answer without an attempt (never counts
+  // towards a prize entry).
+  async function checkAnswer(
+    answer: string
+  ): Promise<AnswerGrading | null> {
+    try {
+      const res = await fetch(
+        '/api/attempt',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type':
+              'application/json',
+          },
+          body: JSON.stringify({
+            action: 'check',
+            challenge:
+              challengeIndex,
+            question: idNum,
+            answer,
+            servedAt,
+          }),
+        }
+      )
+
+      const data = await res
+        .json()
+        .catch(() => null)
+
+      return readGrading(data)
+    } catch (error) {
+      console.error(
+        'Unable to check answer:',
+        error
+      )
+
+      return null
+    }
+  }
+
   async function recordAttemptAnswer(
     answer: string
-  ) {
+  ): Promise<AnswerGrading | null> {
     const attemptId =
       await getOrStartAttempt()
 
     if (!attemptId) {
-      return false
+      return checkAnswer(answer)
     }
 
     try {
@@ -416,6 +538,7 @@ export default function PuzzlePage() {
             attemptId,
             question: idNum,
             answer,
+            servedAt,
           }),
         }
       )
@@ -431,18 +554,19 @@ export default function PuzzlePage() {
           'Unable to record challenge answer:',
           data
         )
-
-        return false
       }
 
-      return true
+      return (
+        readGrading(data) ||
+        (await checkAnswer(answer))
+      )
     } catch (error) {
       console.error(
         'Unable to record challenge answer:',
         error
       )
 
-      return false
+      return checkAnswer(answer)
     }
   }
 
@@ -456,13 +580,26 @@ export default function PuzzlePage() {
     setSelected(answer)
     setLocked(true)
 
-    await recordAttemptAnswer(
-      answer
+    const grading =
+      await recordAttemptAnswer(
+        answer
+      )
+
+    const correct =
+      grading?.correct === true
+
+    setIsCorrect(
+      grading ? correct : null
     )
+    setCorrectAnswer(
+      grading?.correctAnswer ?? null
+    )
+    setFact(grading?.fact ?? null)
 
     afterAnswer(
-      answer === puzzle.answer,
-      answer
+      correct,
+      answer,
+      grading
     )
 
     setAnswerProcessed(true)
@@ -663,9 +800,6 @@ export default function PuzzlePage() {
       setIsJoining(false)
     }
   }
-
-  const factKey =
-    `${challengeIndex}-${idNum}`
 
   return (
     <div
@@ -1169,7 +1303,7 @@ export default function PuzzlePage() {
                     background:
                       locked &&
                       opt ===
-                        puzzle.answer
+                        correctAnswer
                         ? '#4caf50'
                         : locked &&
                           opt ===
@@ -1179,7 +1313,7 @@ export default function PuzzlePage() {
                     color:
                       locked &&
                       (opt ===
-                        puzzle.answer ||
+                        correctAnswer ||
                         opt ===
                           selected)
                         ? '#fff'
@@ -1198,17 +1332,18 @@ export default function PuzzlePage() {
                   fontWeight: 500,
                 }}
               >
-                {selected ===
-                puzzle.answer
+                {isCorrect === null
+                  ? answerProcessed
+                    ? 'We couldn’t check that answer right now.'
+                    : 'Checking…'
+                  : isCorrect
                   ? 'Correct ✅'
                   : 'Incorrect ❌'}
               </p>
             )}
 
             {answerProcessed &&
-              DID_YOU_KNOW[
-                factKey
-              ] && (
+              fact && (
                 <p
                   style={{
                     fontStyle:
@@ -1218,11 +1353,7 @@ export default function PuzzlePage() {
                     color: '#555',
                   }}
                 >
-                  {
-                    DID_YOU_KNOW[
-                      factKey
-                    ]
-                  }
+                  {fact}
                 </p>
               )}
 
@@ -1256,4 +1387,26 @@ export default function PuzzlePage() {
       </main>
     </div>
   )
+}
+
+/*
+  Today's questions and options are sent
+  from the server WITHOUT the answers.
+  Answers are checked by /api/attempt.
+*/
+export const getServerSideProps: GetServerSideProps<
+  PuzzlePageProps
+> = async () => {
+  const { getPublicChallengeSets } =
+    await import('../../lib/questions')
+
+  const now = new Date()
+
+  return {
+    props: {
+      publicSets:
+        getPublicChallengeSets(now),
+      servedAt: now.getTime(),
+    },
+  }
 }
