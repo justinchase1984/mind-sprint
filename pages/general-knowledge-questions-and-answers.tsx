@@ -515,7 +515,17 @@ export default function GeneralKnowledgeQuestionsPage() {
                 General Knowledge Quiz
               </a>
             </Link>{' '}
-            page, see{' '}
+            page, browse{' '}
+            <Link
+              href="/history-trivia-questions-and-answers"
+              legacyBehavior
+            >
+              <a style={linkStyle}>
+                80 History Trivia Questions
+                &amp; Answers
+              </a>
+            </Link>
+            , see{' '}
             <Link
               href="/how-it-works"
               legacyBehavior

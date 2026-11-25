@@ -987,8 +987,7 @@ export default function Home() {
               textAlign: 'center',
             }}
           >
-            100 General Knowledge Questions
-            &amp; Answers
+            Trivia Questions &amp; Answers
           </h2>
 
           <p
@@ -1003,7 +1002,12 @@ export default function Home() {
             and short explanations, covering
             geography, language, science,
             space, history, the arts, food,
-            nature and sport.
+            nature and sport. There is also a
+            separate history collection, with
+            80 original questions on the
+            ancient world, exploration,
+            Australian history and the 20th
+            century.
           </p>
 
           <p
@@ -1024,6 +1028,29 @@ export default function Home() {
                 }}
               >
                 Read 100 General Knowledge
+                Questions &amp; Answers
+              </a>
+            </Link>
+          </p>
+
+          <p
+            style={{
+              textAlign: 'center',
+              marginTop: '0.75rem',
+            }}
+          >
+            <Link
+              href="/history-trivia-questions-and-answers"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                Read 80 History Trivia
                 Questions &amp; Answers
               </a>
             </Link>
