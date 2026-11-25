@@ -22,7 +22,7 @@ export default function ThanksPage() {
         🎉 Thanks for subscribing!
       </h1>
       <p style={{ fontSize: '1.1rem', maxWidth: 400 }}>
-        Check your inbox for the bonus reward we just sent you. If you don’t see it right away, be sure to check your spam/junk folder.
+        Thanks for subscribing to Mind Sprint email updates. If you don’t see a confirmation email right away, check your spam or junk folder.
       </p>
       <Link href="/">
         <button style={{
