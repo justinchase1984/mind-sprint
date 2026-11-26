@@ -525,6 +525,17 @@ export default function GeneralKnowledgeQuestionsPage() {
                 &amp; Answers
               </a>
             </Link>
+            {' '}
+            or{' '}
+            <Link
+              href="/geography-trivia-questions-and-answers"
+              legacyBehavior
+            >
+              <a style={linkStyle}>
+                80 Geography Trivia Questions
+                &amp; Answers
+              </a>
+            </Link>
             , see{' '}
             <Link
               href="/how-it-works"

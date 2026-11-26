@@ -558,6 +558,44 @@ export default function GeographyQuizPage() {
           </Link>
         </section>
 
+        {/* Practice questions */}
+        <section
+          style={{
+            maxWidth: 760,
+            margin: '0 auto',
+            padding:
+              '1rem 1rem 1.5rem',
+            textAlign: 'center',
+          }}
+        >
+          <p
+            style={{
+              color: '#555',
+              lineHeight: 1.7,
+            }}
+          >
+            Want more to practise with?
+            Browse our{' '}
+            <Link
+              href="/geography-trivia-questions-and-answers"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                80 Geography Trivia
+                Questions &amp; Answers
+              </a>
+            </Link>
+            , each with a short
+            explanation.
+          </p>
+        </section>
+
         {/* Internal links */}
         <section
           style={{
