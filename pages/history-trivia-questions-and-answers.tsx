@@ -542,6 +542,17 @@ export default function HistoryTriviaQuestionsPage() {
                 &amp; Answers
               </a>
             </Link>
+            {' '}
+            or{' '}
+            <Link
+              href="/science-trivia-questions-and-answers"
+              legacyBehavior
+            >
+              <a style={linkStyle}>
+                80 Science Trivia Questions
+                &amp; Answers
+              </a>
+            </Link>
             , see{' '}
             <Link
               href="/how-it-works"

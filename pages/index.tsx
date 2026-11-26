@@ -1003,13 +1003,13 @@ export default function Home() {
             geography, language, science,
             space, history, the arts, food,
             nature and sport. There is also a
-            history collection, with 80
-            original questions on the ancient
-            world, exploration, Australian
-            history and the 20th century, and
-            a geography collection covering
-            capitals, rivers, mountains,
-            flags, Australia and the Pacific.
+            history collection, a geography
+            collection covering capitals,
+            rivers, mountains and the Pacific,
+            and a science collection on space,
+            the human body, chemistry, physics
+            and some of the stranger facts in
+            science.
           </p>
 
           <p
@@ -1076,6 +1076,29 @@ export default function Home() {
                 }}
               >
                 Read 80 Geography Trivia
+                Questions &amp; Answers
+              </a>
+            </Link>
+          </p>
+
+          <p
+            style={{
+              textAlign: 'center',
+              marginTop: '0.75rem',
+            }}
+          >
+            <Link
+              href="/science-trivia-questions-and-answers"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                Read 80 Science Trivia
                 Questions &amp; Answers
               </a>
             </Link>
