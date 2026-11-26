@@ -136,6 +136,12 @@ export default function Layout({ children, hideHeader = false }: LayoutProps) {
             </a>
           </Link>
 
+          <Link href="/science-trivia-questions-and-answers" legacyBehavior>
+            <a className="ms-navlink" style={{ color: '#000' }}>
+              Science Q&amp;A
+            </a>
+          </Link>
+
           <Link href="/faq" legacyBehavior>
             <a className="ms-navlink" style={{ color: '#000' }}>
               FAQ
