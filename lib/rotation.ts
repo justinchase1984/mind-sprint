@@ -304,9 +304,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Portuguese'
       },
       {
-        question: 'How many items are in a dozen?',
-        options: ['10', '20', '12', '24'],
-        answer: '12'
+        question: 'How many strings does a standard violin have?',
+        options: ['3', '5', '4', '6'],
+        answer: '4'
       },
       {
         question: 'In which country did the ancient Olympic Games originate?',
@@ -314,7 +314,7 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
           'Greece',
           'Italy',
           'Egypt',
-          'Turkey'
+          'Türkiye'
         ],
         answer: 'Greece'
       },
@@ -1409,14 +1409,14 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Italian city-states'
       },
       {
-        question: 'Which major Cold War barrier was opened in November 1989?',
+        question: 'The Berlin Airlift of 1948–49 was organised to supply which divided city?',
         options: [
-          'Hadrian’s Wall',
-          'Great Wall of China',
-          'Berlin Wall',
-          'Western Wall'
+          'Hamburg',
+          'Vienna',
+          'Berlin',
+          'Warsaw'
         ],
-        answer: 'Berlin Wall'
+        answer: 'Berlin'
       },
       {
         question: 'Julius Caesar was a leading political and military figure of which Roman period?',
@@ -1924,14 +1924,14 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: '$7.50'
       },
       {
-        question: 'How many minutes are in 1.5 hours?',
+        question: 'How many centimetres are in 2.4 metres?',
         options: [
-          '75',
-          '80',
-          '90',
-          '100'
+          '24 cm',
+          '2,400 cm',
+          '240 cm',
+          '204 cm'
         ],
-        answer: '90'
+        answer: '240 cm'
       },
       {
         question: 'A square has a perimeter of 36 cm. What is its area?',
@@ -2168,24 +2168,24 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: '1,200 m'
       },
       {
-        question: 'Solve for x: 3x = 27',
+        question: 'Solve for x: 5x - 8 = 27',
         options: [
+          '5',
           '6',
-          '9',
-          '8',
-          '12'
+          '7',
+          '8'
         ],
-        answer: '9'
+        answer: '7'
       },
       {
-        question: 'What is the probability of getting heads on one toss of a fair coin?',
+        question: 'A fair six-sided die is rolled once. What is the probability of rolling a 4?',
         options: [
-          '1/2',
-          '1/3',
           '1/4',
-          '2/3'
+          '1/6',
+          '1/2',
+          '1/3'
         ],
-        answer: '1/2'
+        answer: '1/6'
       },
       {
         question: 'What is the average of 8, 10, 12, 14 and 16?',
@@ -2509,14 +2509,14 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Epicentre'
       },
       {
-        question: 'Which planet has the shortest year in our Solar System?',
+        question: 'Which is the most abundant state of matter in the visible universe?',
         options: [
-          'Venus',
-          'Mercury',
-          'Mars',
-          'Jupiter'
+          'Solid',
+          'Liquid',
+          'Gas',
+          'Plasma'
         ],
-        answer: 'Mercury'
+        answer: 'Plasma'
       },
       {
         question: 'Which type of bond involves atoms sharing pairs of electrons?',
@@ -2576,14 +2576,14 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Iron'
       },
       {
-        question: 'Which organ pumps blood through the human circulatory system?',
+        question: 'What is the name of the tiny blood cells that help blood to clot?',
         options: [
-          'Liver',
-          'Heart',
-          'Kidney',
-          'Lung'
+          'Red blood cells',
+          'White blood cells',
+          'Platelets',
+          'Plasma'
         ],
-        answer: 'Heart'
+        answer: 'Platelets'
       },
       {
         question: 'What is the change of state from a gas to a liquid called?',
@@ -2825,9 +2825,9 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
           'Slovakia',
           'Hungary',
           'Austria',
-          'Czechia'
+          'Czech Republic'
         ],
-        answer: 'Czechia'
+        answer: 'Czech Republic'
       },
       {
         question: 'Which river flows through Paris?',
@@ -2897,14 +2897,14 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Ural Mountains'
       },
       {
-        question: 'Madagascar lies off the southeastern coast of which continent?',
+        question: 'Cape Horn lies at the southern tip of which continent?',
         options: [
-          'Asia',
-          'South America',
+          'Africa',
           'Australia',
-          'Africa'
+          'Antarctica',
+          'South America'
         ],
-        answer: 'Africa'
+        answer: 'South America'
       },
       {
         question: 'What is the capital city of Argentina?',
@@ -3014,14 +3014,14 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Alaska'
       },
       {
-        question: 'Which European country is often described as being shaped like a boot?',
+        question: 'Which major mountain range extends through the western United States and Canada?',
         options: [
-          'Greece',
-          'Italy',
-          'Portugal',
-          'Croatia'
+          'Andes',
+          'Alps',
+          'Himalayas',
+          'Rockies'
         ],
-        answer: 'Italy'
+        answer: 'Rockies'
       },
       {
         question: 'What is the capital city of South Korea?',
@@ -3198,12 +3198,12 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
 
     [
       {
-        question: 'The FIFA World Cup is the world championship for which sport?',
+        question: "The Ballon d'Or is an annual award mainly associated with which sport?",
         options: [
-          'Rugby union',
-          'Cricket',
+          'Tennis',
+          'Golf',
           'Association football',
-          'Basketball'
+          'Athletics'
         ],
         answer: 'Association football'
       },
@@ -3278,14 +3278,14 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Augusta National'
       },
       {
-        question: 'In boxing, what does the abbreviation KO stand for?',
+        question: 'Which swimming stroke is performed on the back?',
         options: [
-          'Kick out',
-          'Knock over',
-          'Knockout',
-          'Keep out'
+          'Butterfly',
+          'Breaststroke',
+          'Backstroke',
+          'Freestyle'
         ],
-        answer: 'Knockout'
+        answer: 'Backstroke'
       },
       {
         question: 'In Formula 1, what does starting from pole position mean?',
@@ -3646,14 +3646,14 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Giraffe'
       },
       {
-        question: 'Which animal is famous for its black-and-white striped coat?',
+        question: 'A group of fish is commonly called a what?',
         options: [
-          'Okapi',
-          'Tapir',
-          'Wildebeest',
-          'Zebra'
+          'Pride',
+          'Herd',
+          'Flock',
+          'School'
         ],
-        answer: 'Zebra'
+        answer: 'School'
       },
       {
         question: 'Coral reefs are built mainly by colonies of which small animals?',
@@ -3920,14 +3920,14 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         answer: 'Oak'
       },
       {
-        question: 'What do herbivores primarily eat?',
+        question: 'Animals that eat both plants and other animals are called what?',
         options: [
-          'Plants',
-          'Other animals',
-          'Fungi only',
-          'Minerals'
+          'Herbivores',
+          'Omnivores',
+          'Carnivores',
+          'Parasites'
         ],
-        answer: 'Plants'
+        answer: 'Omnivores'
       },
       {
         question: 'Which Arctic marine mammal is famous for its long tusks?',
