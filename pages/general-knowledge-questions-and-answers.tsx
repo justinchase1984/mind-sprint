@@ -547,6 +547,17 @@ export default function GeneralKnowledgeQuestionsPage() {
                 &amp; Answers
               </a>
             </Link>
+            {' '}
+            or{' '}
+            <Link
+              href="/sports-trivia-questions-and-answers"
+              legacyBehavior
+            >
+              <a style={linkStyle}>
+                80 Sports Trivia Questions
+                &amp; Answers
+              </a>
+            </Link>
             , see{' '}
             <Link
               href="/how-it-works"

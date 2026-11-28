@@ -1009,7 +1009,11 @@ export default function Home() {
             and a science collection on space,
             the human body, chemistry, physics
             and some of the stranger facts in
-            science.
+            science. There is also a sports
+            collection on the Olympics,
+            football, cricket, AFL and rugby,
+            tennis and golf, and Australian
+            sporting legends.
           </p>
 
           <p
@@ -1099,6 +1103,29 @@ export default function Home() {
                 }}
               >
                 Read 80 Science Trivia
+                Questions &amp; Answers
+              </a>
+            </Link>
+          </p>
+
+          <p
+            style={{
+              textAlign: 'center',
+              marginTop: '0.75rem',
+            }}
+          >
+            <Link
+              href="/sports-trivia-questions-and-answers"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                Read 80 Sports Trivia
                 Questions &amp; Answers
               </a>
             </Link>

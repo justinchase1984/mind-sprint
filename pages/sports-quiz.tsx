@@ -533,6 +533,45 @@ export default function SportsQuiz() {
             </a>
           </Link>
         </section>
+
+        {/* Practice questions */}
+        <section
+          style={{
+            maxWidth: 760,
+            margin: '0 auto',
+            padding:
+              '1rem 1rem 1.5rem',
+            textAlign: 'center',
+          }}
+        >
+          <p
+            style={{
+              color: '#555',
+              lineHeight: 1.7,
+            }}
+          >
+            Want more to practise with?
+            Browse our{' '}
+            <Link
+              href="/sports-trivia-questions-and-answers"
+              legacyBehavior
+            >
+              <a
+                style={{
+                  color: '#000',
+                  textDecoration:
+                    'underline',
+                }}
+              >
+                80 Sports Trivia
+                Questions &amp; Answers
+              </a>
+            </Link>
+            , each with a short
+            explanation.
+          </p>
+        </section>
+
       </main>
     </>
   )
