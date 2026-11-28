@@ -105,7 +105,7 @@ const FACT_SETS: Record<number, string[][]> = {
       'Jane Austen’s "Pride and Prejudice" was first published in 1813.',
       'Diamond ranks 10 on the Mohs scale of mineral hardness.',
       'Brazil is the most populous Portuguese-speaking country in the world.',
-      'Twelve dozen items make one gross, which equals 144 items.',
+      'A standard violin has four strings, usually tuned to G, D, A and E.',
       'The ancient Olympic Games were held at Olympia in Greece.',
       'The ampere is named after French physicist André-Marie Ampère.',
       'Opposite compass directions are separated by 180 degrees.'
@@ -306,7 +306,7 @@ const FACT_SETS: Record<number, string[][]> = {
       'Winston Churchill became British Prime Minister on 10 May 1940.',
       'Titanic was on its maiden voyage from Southampton to New York when it sank.',
       'Florence was one of the most important early centres of the Italian Renaissance.',
-      'The Berlin Wall was constructed in 1961 and opened in November 1989.',
+      'After the Soviet Union blocked land access to West Berlin in 1948, Western countries supplied the city by air for almost a year.',
       'Julius Caesar died in 44 BCE, decades before Augustus became the first Roman emperor.',
       'The World War I armistice took effect at 11 a.m. on 11 November 1918.'
     ],
@@ -398,7 +398,7 @@ const FACT_SETS: Record<number, string[][]> = {
       'Increasing a value by 15% is equivalent to multiplying it by 1.15.',
       'The sequence 2, 5, 11, 23 follows the rule "multiply by two, then add one".',
       'A unit price is found by dividing the total price by the number of items.',
-      'One and a half hours is the same as 90 minutes.',
+      'There are 100 centimetres in a metre, so 2.4 metres equals 240 centimetres.',
       'A square’s four sides are equal, so its side length is one quarter of its perimeter.',
       'The fraction 7/10 is equivalent to 0.7 and 70%.',
       'Solving an equation involves performing operations that preserve equality on both sides.',
@@ -435,8 +435,8 @@ const FACT_SETS: Record<number, string[][]> = {
       'Dividing $240 equally among six people gives $40 per person.',
       'Two to the fifth power means multiplying five twos together, giving 32.',
       'One kilometre equals 1,000 metres, so 1.2 kilometres equals 1,200 metres.',
-      'Dividing both sides of 3x = 27 by 3 gives x = 9.',
-      'A fair coin has two equally likely outcomes, so the probability of heads is one half.',
+      'Adding 8 to both sides gives 5x = 35, so x = 7.',
+      'A fair six-sided die has six equally likely faces, so the probability of any one numbered face is 1/6.',
       'The five numbers 8, 10, 12, 14 and 16 have an arithmetic mean of 12.'
     ]
 
@@ -497,7 +497,7 @@ const FACT_SETS: Record<number, string[][]> = {
       'Muscles in the iris alter the size of the pupil in response to light levels.',
       'Photosynthesis takes place mainly in chloroplasts within plant cells.',
       'The earthquake focus is underground, while the epicentre lies directly above it at the surface.',
-      'Mercury has the shortest orbital period of any planet in the Solar System.',
+      'Stars are made largely of plasma, a hot ionised gas, which is why plasma is the most abundant state of matter in the visible universe.',
       'Covalent bonding is especially common between non-metal atoms.'
     ],
 
@@ -510,7 +510,7 @@ const FACT_SETS: Record<number, string[][]> = {
       'The cerebrum is the largest major region of the human brain.',
       'Light travels through a vacuum at approximately 299,792 kilometres per second.',
       'The chemical symbol Fe comes from the Latin word for iron, "ferrum".',
-      'The human heart has four chambers: two atria and two ventricles.',
+      'Platelets, also called thrombocytes, clump together to help form a clot when a blood vessel is damaged.',
       'Condensation occurs when a gas loses energy and changes into a liquid.',
       'The ohm is named after German physicist Georg Ohm.',
       'In ordinary double-stranded DNA, adenine pairs with thymine.',
@@ -556,7 +556,7 @@ const FACT_SETS: Record<number, string[][]> = {
       'Patagonia includes landscapes on both the Argentine and Chilean sides of the Andes.',
       'Bass Strait was named after explorer George Bass.',
       'Kilimanjaro is the highest mountain in Africa.',
-      'Prague stands on the Vltava River.',
+      'Prague, the capital of the Czech Republic, stands on the Vltava River.',
       'The Seine eventually flows into the English Channel.',
       'Despite its name, the Caspian Sea is an enclosed inland body of water.',
       'The international border between Nepal and China passes across the summit of Mount Everest.'
@@ -570,7 +570,7 @@ const FACT_SETS: Record<number, string[][]> = {
       'The Panama Canal uses locks to raise ships to the level of Gatun Lake before lowering them again.',
       'Reykjavík is one of the world’s northernmost national capitals.',
       'The Ural Mountains extend for roughly 2,500 kilometres through Russia and Kazakhstan.',
-      'Madagascar is the world’s fourth-largest island.',
+      'Cape Horn is the southern headland of Chile’s Tierra del Fuego archipelago, near where the Atlantic and Pacific oceans meet.',
       'Buenos Aires lies beside the Río de la Plata estuary.',
       'Petra was an important city of the ancient Nabataean kingdom.',
       'Many Norwegian fjords were carved by glaciers during past ice ages.',
@@ -588,7 +588,7 @@ const FACT_SETS: Record<number, string[][]> = {
       'The River Thames flows through London before reaching the North Sea.',
       'Russia spans eastern Europe and northern Asia and is the world’s largest country by area.',
       'Denali is located in Alaska and is the highest mountain in North America.',
-      'Italy’s long peninsula is often compared to the shape of a boot.',
+      'The Rocky Mountains run from western Canada as far south as New Mexico in the United States.',
       'Seoul is South Korea’s capital and largest metropolitan centre.',
       'The Mediterranean Sea lies between Europe, Africa and Asia.',
       'Antarctica has research stations but no permanent native human population.',
@@ -628,7 +628,7 @@ const FACT_SETS: Record<number, string[][]> = {
     */
 
     [
-      'The FIFA World Cup is one of the world’s largest international association football tournaments.',
+      "The Ballon d'Or has been awarded since 1956 to an outstanding footballer, usually from the previous season.",
       'The Ashes rivalry between England and Australia dates back to the 19th century.',
       'Wimbledon is the only one of tennis’s four Grand Slam tournaments still played on grass.',
       'A successful basketball free throw scores one point.',
@@ -636,7 +636,7 @@ const FACT_SETS: Record<number, string[][]> = {
       'A long-course Olympic swimming pool is 50 metres long.',
       'A rugby league team fields 13 players during normal play.',
       'The Masters Tournament has been held at Augusta National Golf Club in Georgia, United States, since 1934.',
-      'KO is short for knockout, a way in which a boxing contest can end.',
+      'Backstroke is the only one of the four competitive swimming strokes performed on the back.',
       'Pole position usually gives a driver the front starting position on the Formula 1 grid.'
     ],
 
@@ -707,7 +707,7 @@ const FACT_SETS: Record<number, string[][]> = {
 
     [
       'Giraffes are the tallest living land animals and can reach heights of more than five metres.',
-      'Every zebra has a distinctive stripe pattern, rather like an individual visual signature.',
+      'A group of fish is commonly called a school, or sometimes a shoal.',
       'Reef-building coral polyps produce calcium carbonate skeletons that accumulate over generations.',
       'Transpiration is the loss of water vapour from plants, mainly through pores called stomata.',
       'The tiger is the largest living species in the cat family.',
@@ -747,7 +747,7 @@ const FACT_SETS: Record<number, string[][]> = {
       'Chameleons can change colour for communication, temperature regulation and other functions, not only camouflage.',
       'Mangroves are specially adapted to saline and brackish environments along tropical and subtropical coastlines.',
       'Acorns are the fruits of oak trees and contain the seeds from which new oaks can grow.',
-      'Herbivores are animals whose diets consist primarily of plant material.',
+      'Humans, bears and pigs are well-known examples of omnivores, whose natural diets can include both plant and animal matter.',
       'Walrus tusks are elongated canine teeth and occur in both males and females.',
       'Bottlenose dolphins use echolocation by producing sounds and interpreting returning echoes.'
     ]
