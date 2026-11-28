@@ -148,7 +148,7 @@ const FACT_SETS: Record<number, string[][]> = {
       '"Scarce" describes something in short supply, while "abundant" means plentiful.',
       'To "break the ice" means to ease tension or begin a comfortable social interaction.',
       'A useful spelling reminder is that "accommodate" contains two c’s and two m’s.',
-      'A comma is commonly used after an introductory phrase such as "After dinner".',
+      'A comma separates the introductory phrase "After dinner" from the main clause that follows.',
       '"Effect" is commonly used as a noun, while "affect" is commonly used as a verb.',
       'An adjective describes or modifies a noun or pronoun.',
       'The prefix "pre-" generally means before, as in "preview" and "prehistoric".',

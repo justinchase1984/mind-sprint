@@ -515,7 +515,7 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
       {
         question: 'Which sentence is punctuated correctly?',
         options: [
-          'After dinner we watched a movie.',
+          'After dinner we watched, a movie.',
           'After, dinner we watched a movie.',
           'After dinner we, watched a movie.',
           'After dinner, we watched a movie.'
@@ -721,7 +721,7 @@ const CHALLENGE_SETS: Record<number, Puzzle[][]> = {
         options: [
           'The dogs collar was red.',
           "The dog's collar was red.",
-          "The dogs' collar was red.",
+          "The dogs' were barking.",
           "The dog,s collar was red."
         ],
         answer: "The dog's collar was red."
